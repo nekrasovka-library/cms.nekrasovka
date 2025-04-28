@@ -10,7 +10,7 @@ function App() {
       <Menu />
       {block.data.length > 0 ? (
         block.data.map(({ id, items }, index) => (
-          <BlankBlock key={id} blockIndex={index} items={items} />
+          <BlankBlock key={id} id={id} blockIndex={index} items={items} />
         ))
       ) : (
         <BlankBlock blockIndex={0} />

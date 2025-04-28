@@ -25,8 +25,8 @@ const insertNewBlock = (blocks, index, newBlock) => [
 ];
 
 // Удаление блока
-const deleteBlock = ({ data }, { blockIndex }) => {
-  return data.filter((_, index) => index !== blockIndex);
+const deleteBlock = ({ data }, { id }) => {
+  return data.filter((item) => item.id !== id);
 };
 
 // Основной редьюсер

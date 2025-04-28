@@ -9,7 +9,7 @@ import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import Editor from "../Editor/editor.jsx";
 
-const BlankBlock = ({ blockIndex, items }) => {
+const BlankBlock = ({ blockIndex, id, items }) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(true);
@@ -25,7 +25,7 @@ const BlankBlock = ({ blockIndex, items }) => {
   };
 
   const handleDelete = () => {
-    dispatch({ type: "DELETE_BLOCK", payload: { blockIndex } });
+    dispatch({ type: "DELETE_BLOCK", payload: { id } });
   };
 
   const handleCopy = () => {
