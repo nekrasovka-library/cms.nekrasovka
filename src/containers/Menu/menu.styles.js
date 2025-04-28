@@ -44,7 +44,7 @@ const Main = styled.div`
   align-content: center;
 `;
 
-const MainItemVariant = styled.div`
+const MainItem2 = styled.div`
   padding: 20px 10px;
   border-bottom: 1px solid;
   border-bottom-color: #eee;
@@ -66,7 +66,7 @@ const MainItemVariant = styled.div`
   }
 `;
 
-const MainItem = styled.div`
+const MainItem1 = styled.div`
   display: flex;
   align-items: center;
   font-weight: 600;
@@ -103,9 +103,9 @@ const CloseMenuButton = styled.div`
 export {
   Header,
   Main,
-  MainItem,
+  MainItem1,
   CloseMenuButton,
   Container1,
   Container2,
-  MainItemVariant,
+  MainItem2,
 };

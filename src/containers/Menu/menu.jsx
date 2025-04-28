@@ -5,8 +5,8 @@ import {
   Container2,
   Header,
   Main,
-  MainItem,
-  MainItemVariant,
+  MainItem1,
+  MainItem2,
 } from "./menu.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
@@ -50,13 +50,13 @@ const Menu = () => {
             const isMenuItemActive = id === selectedMenuId;
 
             return (
-              <MainItem
+              <MainItem1
                 $isMenuItemActive={isMenuItemActive}
                 key={index}
                 onClick={() => handleActive(id)}
               >
                 {name}
-              </MainItem>
+              </MainItem1>
             );
           })}
         </Main>
@@ -65,9 +65,9 @@ const Menu = () => {
         <Main>
           {variant.map(({ id, image }, index) => {
             return (
-              <MainItemVariant key={index} onClick={() => handleVariant(id)}>
+              <MainItem2 key={index} onClick={() => handleVariant(id)}>
                 <img src={image} alt="preview" />
-              </MainItemVariant>
+              </MainItem2>
             );
           })}
         </Main>
