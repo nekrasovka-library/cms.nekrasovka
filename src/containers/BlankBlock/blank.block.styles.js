@@ -7,11 +7,11 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const AddBlankPageButton = styled.div`
+const AddBlankBlockButton = styled.div`
   transition-duration: 0.3s;
   transition-property: opacity;
   transition-timing-function: ease-in-out;
-  opacity: ${({ $isBlankPageFocused }) => ($isBlankPageFocused ? "1" : "0")};
+  opacity: ${({ $isBlankBlockFocused }) => ($isBlankBlockFocused ? "1" : "0")};
 `;
 
-export { Container, AddBlankPageButton };
+export { Container, AddBlankBlockButton };

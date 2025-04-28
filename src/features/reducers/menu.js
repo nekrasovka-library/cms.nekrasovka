@@ -1,6 +1,43 @@
 const initialState = {
   isMenuOpen: false,
-  selectedMenu: null,
+  selectedMenuId: null,
+  variant: [],
+  data: [
+    {
+      id: 1,
+      name: "Заголовок",
+      variant: [
+        {
+          id: 1,
+          text: "<p>Test text in the editor</p>",
+          image: "tpl_60.png",
+          menuId: 1,
+        },
+        {
+          id: 2,
+          text: "",
+          image: "tpl_60.png",
+          menuId: 1,
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: "Текстовый блок",
+      variant: [
+        {
+          id: 3,
+          text: "",
+          image: "",
+          menuId: 2,
+        },
+      ],
+    },
+  ],
+};
+
+const getVariant = (data, id) => {
+  return data.find((item) => item.id === id).variant;
 };
 
 const menu = (state = initialState, action) => {
@@ -13,7 +50,8 @@ const menu = (state = initialState, action) => {
     case "SELECT_MENU":
       return {
         ...state,
-        selectedMenu: action.payload,
+        selectedMenuId: action.payload.id,
+        variant: getVariant(state.data, action.payload.id),
       };
     case "RESET_MENU":
       return initialState;

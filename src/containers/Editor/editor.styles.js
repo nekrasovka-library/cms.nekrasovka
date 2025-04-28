@@ -16,12 +16,6 @@ const Container = styled.div`
       $isEditorFocused ? "rgba(0, 0, 0, 0.05)" : "#fff"};
     padding: 0;
     font-size: 14px;
-
-    p {
-      &:last-child {
-        display: none;
-      }
-    }
   }
 
   .ql-toolbar {

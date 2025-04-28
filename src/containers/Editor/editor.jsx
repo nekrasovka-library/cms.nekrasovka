@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { Container } from "./editor.styles.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const FONT_SIZE_ARR = [
   "14px",
@@ -28,16 +29,17 @@ const FONT_SIZE_ARR = [
   "102px",
 ];
 
-const Editor = ({ isMenuOpen }) => {
+const Editor = ({ text, blockIndex, elementIndex }) => {
   const editorRef = useRef(null);
-  const [editorContent, setEditorContent] = useState("");
   const [isEditorFocused, setIsEditorFocused] = useState(false);
+  const { isMenuOpen } = useSelector((state) => state.menu);
+  const dispatch = useDispatch();
 
   const Size = Quill.import("attributors/style/size");
   Size.whitelist = FONT_SIZE_ARR;
   Quill.register(Size, true);
 
-  const toolbarOptions = [
+  const toolbar = [
     ["bold", "italic", "underline", "strike"], // toggled buttons
     ["link"],
     [{ list: "ordered" }, { list: "bullet" }],
@@ -49,21 +51,32 @@ const Editor = ({ isMenuOpen }) => {
     [{ align: [] }],
   ];
 
+  const options = {
+    theme: "snow",
+    modules: { toolbar },
+    readOnly: true,
+  };
+
   useEffect(() => {
-    const quill = new Quill(editorRef.current, {
-      theme: "snow",
-      modules: { toolbar: toolbarOptions },
-    });
+    const quill = new Quill(editorRef.current, options);
 
-    // Событие на изменение содержимого редактора
+    quill.clipboard.dangerouslyPasteHTML(text);
+    quill.enable(true); // Снова включаем активность
+
     quill.on("text-change", () => {
-      setEditorContent(quill.root.innerHTML); // Сохраняем содержимое редактора
+      dispatch({
+        type: "UPD_BLOCK",
+        payload: { elementIndex, text: quill.root.innerHTML },
+      });
     });
 
-    return () => {
-      quill.off();
-    };
+    return () => quill.off();
   }, []);
+
+  const handleActive = () => {
+    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
+    setIsEditorFocused(true);
+  };
 
   return (
     <Container
@@ -71,7 +84,7 @@ const Editor = ({ isMenuOpen }) => {
       $isMenuOpen={isMenuOpen}
       onBlur={() => setIsEditorFocused(false)}
     >
-      <div ref={editorRef} onClick={() => setIsEditorFocused(true)} />
+      <div ref={editorRef} onClick={handleActive} />
     </Container>
   );
 };

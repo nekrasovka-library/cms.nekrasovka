@@ -1,56 +1,78 @@
 import React from "react";
 import {
   CloseMenuButton,
-  Container,
+  Container1,
+  Container2,
   Header,
   Main,
   MainItem,
+  MainItemVariant,
 } from "./menu.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 
-const dataMenu = [
-  {
-    id: 1,
-    name: "Заголовок",
-  },
-  {
-    id: 2,
-    name: "Текстовый блок",
-  },
-];
-
 const Menu = () => {
   const dispatch = useDispatch();
-  const { isMenuOpen, selectedMenu } = useSelector((state) => state.menu);
+  const { isMenuOpen, data, selectedMenuId, variant } = useSelector(
+    (state) => state.menu,
+  );
+  const isVariantOpen = variant.length > 0;
 
   const handleClose = () => {
     dispatch({ type: "RESET_MENU" });
   };
 
-  const handleSelect = (id) => {
-    dispatch({ type: "SELECT_MENU", payload: id });
+  const handleActive = (id) => {
+    dispatch({ type: "SELECT_MENU", payload: { id } });
+  };
+
+  const handleVariant = (id) => {
+    const text = variant.find((item) => item.id === id).text;
+
+    dispatch({
+      type: "ADD_BLOCK",
+      payload: { items: [{ text, type: "text" }] },
+    });
+
+    handleClose();
   };
 
   return (
-    <Container $isMenuOpen={isMenuOpen}>
-      <Header>
-        <CloseMenuButton>
-          <Icon icon="close_menu" type="button" onClick={handleClose} />
-        </CloseMenuButton>
-      </Header>
-      <Main>
-        {dataMenu.map(({ id, name }) => (
-          <MainItem
-            $isMenuItemActive={selectedMenu === id}
-            key={id}
-            onClick={() => handleSelect(id)}
-          >
-            {name}
-          </MainItem>
-        ))}
-      </Main>
-    </Container>
+    <>
+      <Container1 $isMenuOpen={isMenuOpen} $isVariantOpen={isVariantOpen}>
+        <Header>
+          <CloseMenuButton>
+            <Icon icon="close_menu" type="button" onClick={handleClose} />
+          </CloseMenuButton>
+        </Header>
+        <Main>
+          {data.map(({ id, name }, index) => {
+            const isMenuItemActive = id === selectedMenuId;
+
+            return (
+              <MainItem
+                $isMenuItemActive={isMenuItemActive}
+                key={index}
+                onClick={() => handleActive(id)}
+              >
+                {name}
+              </MainItem>
+            );
+          })}
+        </Main>
+      </Container1>
+      <Container2 $isMenuOpen={isVariantOpen && isMenuOpen}>
+        <Main>
+          {variant.map(({ id, image }, index) => {
+            return (
+              <MainItemVariant key={index} onClick={() => handleVariant(id)}>
+                <img src={image} alt="preview" />
+              </MainItemVariant>
+            );
+          })}
+        </Main>
+      </Container2>
+    </>
   );
 };
 

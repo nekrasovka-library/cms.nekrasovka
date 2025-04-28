@@ -4,19 +4,29 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 240px;
   position: fixed;
-  left: 0;
   top: 0;
   transition-duration: 0.3s;
   transition-property: opacity, transform;
   transition-timing-function: ease-in-out;
-  z-index: 1120;
   color: #333;
-  background-color: #fff;
-
   opacity: ${({ $isMenuOpen }) => ($isMenuOpen ? "1" : "0")};
   transform: translateX(${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-100%")});
+`;
+
+const Container1 = styled(Container)`
+  width: 240px;
+  left: 0;
+  z-index: 1120;
+  background-color: ${({ $isVariantOpen }) =>
+    $isVariantOpen ? "rgb(242, 242, 242)" : "#fff"};
+`;
+
+const Container2 = styled(Container)`
+  left: 240px;
+  z-index: 1119;
+  padding: 0 10px;
+  background-color: #fff;
 `;
 
 const Header = styled.div`
@@ -32,6 +42,28 @@ const Main = styled.div`
   flex-direction: column;
   justify-content: start;
   align-content: center;
+`;
+
+const MainItemVariant = styled.div`
+  padding: 20px 10px;
+  border-bottom: 1px solid;
+  border-bottom-color: #eee;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  transition-property: border, scale;
+  transition-timing-function: cubic-bezier(0, 0, 0.8, 1);
+
+  img {
+    max-width: 320px;
+    width: auto;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-bottom-color: #ff855d !important;
+      scale: 0.95;
+    }
+  }
 `;
 
 const MainItem = styled.div`
@@ -68,4 +100,12 @@ const CloseMenuButton = styled.div`
   }
 `;
 
-export { Container, Header, Main, MainItem, CloseMenuButton };
+export {
+  Header,
+  Main,
+  MainItem,
+  CloseMenuButton,
+  Container1,
+  Container2,
+  MainItemVariant,
+};

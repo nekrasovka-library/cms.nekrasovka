@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-import init from "./init"; // Импортируем редьюсер для HomePage
-import menu from "./menu"; // Импортируем редьюсер для HomePage
+import menu from "./menu";
+import block from "./block";
 
 // Объединяем редьюсеры
 const rootReducer = combineReducers({
-  home: init,
   menu: menu,
+  block: block,
 });
 
 export default rootReducer;
