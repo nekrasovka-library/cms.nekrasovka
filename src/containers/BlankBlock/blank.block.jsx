@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { AddBlankBlockButton, Container } from "./blank.block.styles.js";
+import {
+  BlankBlockActionButtons,
+  BlankBlockButtons,
+  Container,
+} from "./blank.block.styles.js";
 import Tooltip from "../../nekrasovka-ui/Tooltip/tooltip.jsx";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +12,7 @@ import Editor from "../Editor/editor.jsx";
 const BlankBlock = ({ blockIndex, items }) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
-  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
+  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(true);
 
   const CONSTRUCTOR_TYPES = {
     text: Editor,
@@ -18,6 +22,22 @@ const BlankBlock = ({ blockIndex, items }) => {
     dispatch({ type: "RESET_MENU" });
     dispatch({ type: "TOGGLE_MENU" });
     dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
+  };
+
+  const handleDelete = () => {
+    dispatch({ type: "DELETE_BLOCK", payload: { blockIndex } });
+  };
+
+  const handleCopy = () => {
+    dispatch({ type: "COPY_BLOCK", payload: { items, blockIndex } });
+  };
+
+  const handleMouseOut = () => {
+    setIsBlankBlockFocused(false);
+  };
+
+  const handleMouseOver = () => {
+    setIsBlankBlockFocused(true);
   };
 
   const renderElements = () => {
@@ -36,18 +56,25 @@ const BlankBlock = ({ blockIndex, items }) => {
   };
 
   return (
-    <Container
-      onMouseOut={() => setIsBlankBlockFocused(false)}
-      onMouseOver={() => setIsBlankBlockFocused(true)}
-    >
+    <Container onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
       {!!items && renderElements()}
-      <AddBlankBlockButton
+      <BlankBlockButtons
         $isBlankBlockFocused={isBlankBlockFocused && !isMenuOpen}
       >
         <Tooltip text="Добавить блок">
           <Icon icon="add" type="button" onClick={handleAdd} />
         </Tooltip>
-      </AddBlankBlockButton>
+      </BlankBlockButtons>
+      <BlankBlockActionButtons
+        $isBlankBlockFocused={isBlankBlockFocused && !isMenuOpen}
+      >
+        <Tooltip text="Копировать блок">
+          <Icon icon="copy" type="button" onClick={handleCopy} />
+        </Tooltip>
+        <Tooltip text="Удалить блок">
+          <Icon icon="trash" type="button" onClick={handleDelete} />
+        </Tooltip>
+      </BlankBlockActionButtons>
     </Container>
   );
 };

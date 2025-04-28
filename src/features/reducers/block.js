@@ -5,53 +5,57 @@ const initialState = {
 };
 
 // Обновление элементов блока
-const updateBlockItems = ({ data }, { elementIndex, ...payload }) => {
-  return data.map((block) => ({
-    ...block,
-    items: block.items.map((item, index) =>
-      index === elementIndex ? { ...item, ...payload } : item,
-    ),
-  }));
+const updateBlockItems = ({ data }, { elementIndex, blockIndex, text }) => {
+  return data.map((block, index) => {
+    if (index === blockIndex) {
+      return {
+        ...block,
+        items: block.items.map((item, index) =>
+          index === elementIndex ? { ...item, text } : item,
+        ),
+      };
+    } else return block;
+  });
 };
+
+const insertNewBlock = (blocks, index, newBlock) => [
+  ...blocks.slice(0, index + 1),
+  newBlock,
+  ...blocks.slice(index + 1),
+];
 
 // Удаление блока
 const deleteBlock = ({ data }, { blockIndex }) => {
   return data.filter((_, index) => index !== blockIndex);
 };
 
-// Создание нового блока
-const createBlock = (id, payload) => ({ id, ...payload });
-
-// Добавление блока
-const addBlock = (state, payload) => {
-  const { data, total, selectedBlockIndex } = state;
-  const newBlock = createBlock(total + 1, payload);
-
-  return total > 0
-    ? [
-        ...data.slice(0, selectedBlockIndex + 1),
-        newBlock,
-        ...data.slice(selectedBlockIndex + 1),
-      ]
-    : [newBlock];
-};
-
 // Основной редьюсер
 const block = (state = initialState, action) => {
   switch (action.type) {
-    case "UPD_BLOCK":
+    case "COPY_BLOCK":
       return {
         ...state,
-        data: updateBlockItems(state, action.payload),
+        total: state.total + 1,
+        data: insertNewBlock(state.data, action.payload.blockIndex, {
+          id: state.total + 1,
+          items: action.payload.items,
+        }),
       };
     case "ADD_BLOCK":
       return {
         ...state,
-        data: addBlock(state, action.payload),
         total: state.total + 1,
-        selectedBlockIndex: null,
+        data: insertNewBlock(state.data, state.selectedBlockIndex, {
+          id: state.total + 1,
+          items: action.payload.items,
+        }),
       };
-    case "DEL_BLOCK":
+    case "UPDATE_BLOCK":
+      return {
+        ...state,
+        data: updateBlockItems(state, action.payload),
+      };
+    case "DELETE_BLOCK":
       return {
         ...state,
         data: deleteBlock(state, action.payload),
