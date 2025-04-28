@@ -49,6 +49,7 @@ const block = (state = initialState, action) => {
         ...state,
         data: addBlock(state, action.payload),
         total: state.total + 1,
+        selectedBlockIndex: null,
       };
     case "DEL_BLOCK":
       return {

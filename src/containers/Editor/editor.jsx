@@ -73,18 +73,23 @@ const Editor = ({ text, blockIndex, elementIndex }) => {
     return () => quill.off();
   }, []);
 
-  const handleActive = () => {
+  const handleClick = () => {
     dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
     setIsEditorFocused(true);
+  };
+
+  const handleBlur = () => {
+    dispatch({ type: "SET_BLOCK", payload: { blockIndex: null } });
+    setIsEditorFocused(false);
   };
 
   return (
     <Container
       $isEditorFocused={isEditorFocused}
       $isMenuOpen={isMenuOpen}
-      onBlur={() => setIsEditorFocused(false)}
+      onBlur={handleBlur}
     >
-      <div ref={editorRef} onClick={handleActive} />
+      <div ref={editorRef} onClick={handleClick} />
     </Container>
   );
 };
