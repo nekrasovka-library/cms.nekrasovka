@@ -5,7 +5,6 @@ import { Container } from "./editor.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { TOOLBAR_OPTIONS, FONT_SIZE_ARRAY } from "./editor.constants.js";
 
-// Register font size attribute globally (only once)
 const QuillSizeAttr = Quill.import("attributors/style/size");
 QuillSizeAttr.whitelist = FONT_SIZE_ARRAY;
 Quill.register(QuillSizeAttr, true);
