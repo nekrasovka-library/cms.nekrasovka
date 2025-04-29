@@ -6,6 +6,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  cursor: pointer;
 `;
 
 const BlankBlockButtons = styled.div`
@@ -15,20 +16,30 @@ const BlankBlockButtons = styled.div`
   opacity: ${({ $isBlankBlockFocused }) => ($isBlankBlockFocused ? "1" : "0")};
 `;
 
+const BlankBlockDots = styled(BlankBlockButtons)`
+  border-bottom: 1px dashed #ccc;
+  position: relative;
+  bottom: calc(37px / 2);
+  width: 100vw;
+  z-index: -1;
+`;
+
 const BlankBlockActionButtons = styled(BlankBlockButtons)`
   display: flex;
   position: absolute;
   top: 0;
   right: 10px;
+  z-index: 1;
+  background-color: #fff;
 
   > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border: 1px solid #ccc;
-    height: 35px;
-    width: 35px;
     transition: background-color 0.2s ease-in-out;
+
+    button {
+      height: 35px;
+      width: 35px;
+    }
 
     &:not(:first-child) {
       border-left-width: 0;
@@ -52,4 +63,9 @@ const BlankBlockActionButtons = styled(BlankBlockButtons)`
   }
 `;
 
-export { Container, BlankBlockButtons, BlankBlockActionButtons };
+export {
+  Container,
+  BlankBlockButtons,
+  BlankBlockActionButtons,
+  BlankBlockDots,
+};

@@ -3,7 +3,15 @@ import icons from "./icons";
 
 const Button = ({ children, onClick }) => {
   return (
-    <button style={{ cursor: "pointer" }} onClick={onClick}>
+    <button
+      style={{
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

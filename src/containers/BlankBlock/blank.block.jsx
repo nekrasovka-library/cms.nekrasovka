@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   BlankBlockActionButtons,
   BlankBlockButtons,
+  BlankBlockDots,
   Container,
 } from "./blank.block.styles.js";
 import Tooltip from "../../nekrasovka-ui/Tooltip/tooltip.jsx";
@@ -12,7 +13,7 @@ import Editor from "../Editor/editor.jsx";
 const BlankBlock = ({ blockIndex, id, items }) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
-  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(true);
+  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
 
   const CONSTRUCTOR_TYPES = {
     text: Editor,
@@ -75,6 +76,9 @@ const BlankBlock = ({ blockIndex, id, items }) => {
           <Icon icon="trash" type="button" onClick={handleDelete} />
         </Tooltip>
       </BlankBlockActionButtons>
+      <BlankBlockDots
+        $isBlankBlockFocused={isBlankBlockFocused && !isMenuOpen}
+      />
     </Container>
   );
 };
