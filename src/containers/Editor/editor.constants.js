@@ -1,4 +1,3 @@
-// editor.constants.js
 export const FONT_SIZE_ARRAY = [
   "14px",
   "16px",

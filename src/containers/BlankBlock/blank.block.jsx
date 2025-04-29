@@ -8,16 +8,19 @@ import {
 import Tooltip from "../../nekrasovka-ui/Tooltip/tooltip.jsx";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import Editor from "../Editor/editor.jsx";
+import TypeBlock from "./type.block.jsx";
 
-const BlankBlock = ({ blockIndex, id, items }) => {
+const BlankBlock = ({
+  blockIndex,
+  id,
+  items,
+  isItems,
+  setEditorFocused,
+  editorFocused,
+}) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
-
-  const CONSTRUCTOR_TYPES = {
-    text: Editor,
-  };
 
   const handleAdd = () => {
     dispatch({ type: "RESET_MENU" });
@@ -41,24 +44,15 @@ const BlankBlock = ({ blockIndex, id, items }) => {
     setIsBlankBlockFocused(true);
   };
 
-  const renderElements = () => {
-    return items.map(({ text, type }, elementIndex) => {
-      const Element = CONSTRUCTOR_TYPES[type];
-
-      return (
-        <Element
-          key={elementIndex}
-          text={text}
-          blockIndex={blockIndex}
-          elementIndex={elementIndex}
-        />
-      );
-    });
-  };
-
   return (
     <Container onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-      {!!items && renderElements()}
+      <TypeBlock
+        isItems={isItems}
+        items={items}
+        editorFocused={editorFocused}
+        blockIndex={blockIndex}
+        setEditorFocused={setEditorFocused}
+      />
       <BlankBlockButtons
         $isBlankBlockFocused={isBlankBlockFocused && !isMenuOpen}
       >

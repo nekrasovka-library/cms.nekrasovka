@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { Container } from "./editor.styles.js";
@@ -29,12 +29,18 @@ const initializeQuill = (
       payload: { blockIndex, elementIndex, text: quill.root.innerHTML },
     });
   });
+
   return quill;
 };
 
-const Editor = ({ text, blockIndex, elementIndex }) => {
+const Editor = ({
+  text,
+  blockIndex,
+  elementIndex,
+  setEditorFocused,
+  isEditorFocused,
+}) => {
   const editorRef = useRef(null);
-  const [isEditorFocused, setIsEditorFocused] = useState(false);
   const { isMenuOpen } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
 
@@ -46,24 +52,17 @@ const Editor = ({ text, blockIndex, elementIndex }) => {
       blockIndex,
       elementIndex,
     );
+
     return () => quill.off("text-change");
   }, []);
 
-  const handleEditorFocus = () => {
-    setIsEditorFocused(true);
-  };
-
-  const handleEditorBlur = () => {
-    setIsEditorFocused(false);
+  const handleEditorFocused = () => {
+    setEditorFocused(`${blockIndex}-${elementIndex}`);
   };
 
   return (
-    <Container
-      $isEditorFocused={isEditorFocused}
-      $isMenuOpen={isMenuOpen}
-      onBlur={handleEditorBlur}
-    >
-      <div ref={editorRef} onClick={handleEditorFocus} />
+    <Container $isEditorFocused={isEditorFocused} $isMenuOpen={isMenuOpen}>
+      <div ref={editorRef} onClick={handleEditorFocused} />
     </Container>
   );
 };

@@ -1,20 +1,11 @@
 import Menu from "./containers/Menu/menu.jsx";
-import BlankBlock from "./containers/BlankBlock/blank.block.jsx";
-import { useSelector } from "react-redux";
+import Main from "./containers/Main/main.jsx";
 
 function App() {
-  const block = useSelector((state) => state.block);
-
   return (
     <>
       <Menu />
-      {block.data.length > 0 ? (
-        block.data.map(({ id, items }, index) => (
-          <BlankBlock key={id} id={id} blockIndex={index} items={items} />
-        ))
-      ) : (
-        <BlankBlock blockIndex={0} />
-      )}
+      <Main />
     </>
   );
 }
