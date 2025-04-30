@@ -21,7 +21,7 @@ const Container1 = styled(Container)`
   background-color: #fff;
 `;
 
-const Header = styled.div`
+const HeaderContainer = styled.div`
   margin-bottom: 30px;
 `;
 
@@ -64,13 +64,6 @@ const HeaderButtonSaveAndExit = styled(HeaderButton)`
   background-color: #ff855d;
 `;
 
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-content: center;
-`;
-
 const PaddingContainer = styled.div`
   align-items: flex-end;
   display: flex;
@@ -108,8 +101,7 @@ const PaddingSelect = styled.select`
 export {
   Container,
   Container1,
-  Header,
-  Main,
+  HeaderContainer,
   HeaderButtons,
   HeaderButtonSave,
   HeaderButtonSaveAndExit,
