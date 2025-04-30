@@ -16,6 +16,7 @@ const initialState = {
             maxWidth: "1160px",
             paddingTop: "45px",
             paddingBottom: "45px",
+            backgroundColor: "#fff",
           },
         },
         {
@@ -27,6 +28,7 @@ const initialState = {
             maxWidth: "1160px",
             paddingTop: "45px",
             paddingBottom: "45px",
+            backgroundColor: "#fff",
           },
         },
       ],
@@ -44,6 +46,7 @@ const initialState = {
             maxWidth: "1160px",
             paddingTop: "45px",
             paddingBottom: "45px",
+            backgroundColor: "#fff",
           },
         },
       ],

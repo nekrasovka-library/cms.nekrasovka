@@ -46,7 +46,7 @@ const PaddingSelectField = ({ label, name, value, onChange }) => (
 const Settings = () => {
   const dispatch = useDispatch();
   const { isSettingsOpen } = useSelector((state) => state.settings);
-  const blocks = useSelector((state) => state.blocks);
+  const { selectedBlockIndex, blocks } = useSelector((state) => state.blocks);
   const [settings, setSettings] = useState(null);
 
   const saveSettings = () => {
@@ -68,8 +68,10 @@ const Settings = () => {
   };
 
   useEffect(() => {
-    setSettings(blocks.data[blocks.selectedBlockIndex]?.styles);
-  }, [blocks.selectedBlockIndex]);
+    if (blocks[selectedBlockIndex]) {
+      setSettings(blocks[selectedBlockIndex]?.styles);
+    }
+  }, [selectedBlockIndex, blocks]);
 
   return (
     <Container1 $isMenuOpen={isSettingsOpen}>

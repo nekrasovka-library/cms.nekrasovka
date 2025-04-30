@@ -41,8 +41,8 @@ const BlankBlock = ({
   };
 
   const handleBlockSettings = () => {
-    dispatch({ type: "TOGGLE_SETTINGS" });
     dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
+    dispatch({ type: "TOGGLE_SETTINGS" });
   };
 
   const handleMouseOut = () => {
@@ -68,17 +68,19 @@ const BlankBlock = ({
           <Icon icon="add" type="button" onClick={handleAddBlock} />
         </Tooltip>
       </BlankBlockAddButton>
-      <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
-        <Tooltip text="Настройки">
-          <Icon icon="settings" type="button" onClick={handleBlockSettings} />
-        </Tooltip>
-        <Tooltip text="Копировать блок">
-          <Icon icon="copy" type="button" onClick={handleCopyBlock} />
-        </Tooltip>
-        <Tooltip text="Удалить блок">
-          <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
-        </Tooltip>
-      </BlankBlockActionButtons>
+      {isItems && (
+        <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
+          <Tooltip text="Настройки">
+            <Icon icon="settings" type="button" onClick={handleBlockSettings} />
+          </Tooltip>
+          <Tooltip text="Копировать блок">
+            <Icon icon="copy" type="button" onClick={handleCopyBlock} />
+          </Tooltip>
+          <Tooltip text="Удалить блок">
+            <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
+          </Tooltip>
+        </BlankBlockActionButtons>
+      )}
       <BlankBlockDots $isBlankBlockFocused={isBlankBlockActive} />
     </Container>
   );

@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { Container } from "./main.styles.js";
 
 const Main = () => {
-  const { data, total } = useSelector((state) => state.blocks);
+  const { blocks, totalBlocks } = useSelector((state) => state.blocks);
   const [editorFocused, setEditorFocused] = useState(null);
-  const isTotal = total > 0;
+  const isTotal = totalBlocks > 0;
 
   const handleContainerClick = ({ target }) => {
     if (!target.parentNode?.parentNode?.classList.value?.includes("ql-")) {
@@ -17,7 +17,7 @@ const Main = () => {
   return (
     <Container onClick={handleContainerClick}>
       {isTotal ? (
-        data.map(({ id, items, styles }, index) => {
+        blocks.map(({ id, items, styles }, index) => {
           const isItems = !!items;
 
           return (

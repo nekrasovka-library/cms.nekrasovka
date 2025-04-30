@@ -14,27 +14,29 @@ const TypeBlock = ({
   blockIndex,
   setEditorFocused,
 }) => {
-  const typeBlockStyles = `width: 100%; max-width: ${styles?.maxWidth}; padding-top: ${styles?.paddingTop}; padding-bottom: ${styles?.paddingBottom};`;
+  const typeBlockStyles = `background-color: ${styles?.backgroundColor}; width: 100%; > div {margin: 0 auto; max-width: ${styles?.maxWidth}; padding-top: ${styles?.paddingTop}; padding-bottom: ${styles?.paddingBottom};}`;
 
   return (
     isItems && (
       <TypeBlockContainer $typeBlockStyles={typeBlockStyles}>
-        {items.map(({ text, type }, elementIndex) => {
-          const ItemComponent = CONSTRUCTOR_TYPES[type];
-          const isEditorFocused =
-            editorFocused === `${blockIndex}-${elementIndex}`;
+        <div>
+          {items.map(({ text, type }, elementIndex) => {
+            const ItemComponent = CONSTRUCTOR_TYPES[type];
+            const isEditorFocused =
+              editorFocused === `${blockIndex}-${elementIndex}`;
 
-          return (
-            <ItemComponent
-              key={elementIndex}
-              text={text}
-              blockIndex={blockIndex}
-              elementIndex={elementIndex}
-              isEditorFocused={isEditorFocused}
-              setEditorFocused={setEditorFocused}
-            />
-          );
-        })}
+            return (
+              <ItemComponent
+                key={elementIndex}
+                text={text}
+                blockIndex={blockIndex}
+                elementIndex={elementIndex}
+                isEditorFocused={isEditorFocused}
+                setEditorFocused={setEditorFocused}
+              />
+            );
+          })}
+        </div>
       </TypeBlockContainer>
     )
   );

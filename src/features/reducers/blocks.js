@@ -1,12 +1,12 @@
 const initialState = {
-  data: [],
-  total: 0,
+  blocks: [],
+  totalBlocks: 0,
   selectedBlockIndex: null,
 };
 
 // Обновление элементов блока
-const updateBlockItems = ({ data }, { elementIndex, blockIndex, text }) => {
-  return data.map((block, index) => {
+const updateBlockItems = ({ blocks }, { elementIndex, blockIndex, text }) => {
+  return blocks.map((block, index) => {
     if (index === blockIndex) {
       return {
         ...block,
@@ -18,8 +18,8 @@ const updateBlockItems = ({ data }, { elementIndex, blockIndex, text }) => {
   });
 };
 
-const updateBlockStyles = ({ data, selectedBlockIndex }, payload) => {
-  return data.map((block, index) => {
+const updateBlockStyles = ({ blocks, selectedBlockIndex }, payload) => {
+  return blocks.map((block, index) => {
     if (index === selectedBlockIndex) {
       return {
         ...block,
@@ -36,8 +36,8 @@ const insertNewBlock = (blocks, index, newBlock) => [
 ];
 
 // Удаление блока
-const deleteBlock = ({ data }, { id }) => {
-  return data.filter((item) => item.id !== id);
+const deleteBlock = ({ blocks }, { id }) => {
+  return blocks.filter((item) => item.id !== id);
 };
 
 // Основной редьюсер
@@ -46,9 +46,9 @@ const blocks = (state = initialState, action) => {
     case "COPY_BLOCK":
       return {
         ...state,
-        total: state.total + 1,
-        data: insertNewBlock(state.data, action.payload.blockIndex, {
-          id: state.total + 1,
+        totalBlocks: state.totalBlocks + 1,
+        blocks: insertNewBlock(state.blocks, action.payload.blockIndex, {
+          id: state.totalBlocks + 1,
           items: action.payload.items,
           styles: action.payload.styles,
         }),
@@ -56,27 +56,27 @@ const blocks = (state = initialState, action) => {
     case "ADD_BLOCK":
       return {
         ...state,
-        total: state.total + 1,
-        data: insertNewBlock(state.data, state.selectedBlockIndex, {
+        totalBlocks: state.totalBlocks + 1,
+        blocks: insertNewBlock(state.blocks, state.selectedBlockIndex, {
           ...action.payload,
-          id: state.total + 1,
+          id: state.totalBlocks + 1,
         }),
       };
     case "UPDATE_BLOCK":
       return {
         ...state,
-        data: updateBlockItems(state, action.payload),
+        blocks: updateBlockItems(state, action.payload),
       };
     case "UPDATE_BLOCK_STYLES":
       return {
         ...state,
-        data: updateBlockStyles(state, action.payload),
+        blocks: updateBlockStyles(state, action.payload),
       };
     case "DELETE_BLOCK":
       return {
         ...state,
-        data: deleteBlock(state, action.payload),
-        total: state.total - 1,
+        blocks: deleteBlock(state, action.payload),
+        totalBlocks: state.totalBlocks - 1,
       };
     case "SET_BLOCK":
       return {
