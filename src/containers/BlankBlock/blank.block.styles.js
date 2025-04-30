@@ -63,9 +63,14 @@ const BlankBlockActionButtons = styled(BlankBlockButtons)`
   }
 `;
 
+const TypeBlockContainer = styled.div`
+  ${({ $typeBlockStyles }) => $typeBlockStyles};
+`;
+
 export {
   Container,
   BlankBlockButtons,
   BlankBlockActionButtons,
   BlankBlockDots,
+  TypeBlockContainer,
 };

@@ -62,7 +62,7 @@ const Editor = ({
 
   return (
     <Container $isEditorFocused={isEditorFocused} $isMenuOpen={isMenuOpen}>
-      <div ref={editorRef} onClick={handleEditorFocused} />
+      <div id="ed-1s" ref={editorRef} onClick={handleEditorFocused} />
     </Container>
   );
 };

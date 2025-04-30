@@ -71,6 +71,40 @@ const Main = styled.div`
   align-content: center;
 `;
 
+const PaddingContainer = styled.div`
+  align-items: flex-end;
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  padding: 0 15px;
+
+  > div {
+    width: 100%;
+  }
+`;
+
+const PaddingLabel = styled.label`
+  align-items: flex-start;
+  color: #000;
+  display: flex;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+`;
+
+const PaddingSelect = styled.select`
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000;
+  font-size: 16px;
+  font-weight: 300;
+  height: 40px;
+  outline: none !important;
+  padding: 0;
+`;
+
 export {
   Container,
   Container1,
@@ -79,4 +113,7 @@ export {
   HeaderButtons,
   HeaderButtonSave,
   HeaderButtonSaveAndExit,
+  PaddingLabel,
+  PaddingSelect,
+  PaddingContainer,
 };

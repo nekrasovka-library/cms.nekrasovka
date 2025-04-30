@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Container } from "./main.styles.js";
 
 const Main = () => {
-  const { data, total } = useSelector((state) => state.block);
+  const { data, total } = useSelector((state) => state.blocks);
   const [editorFocused, setEditorFocused] = useState(null);
   const isTotal = total > 0;
 
@@ -17,7 +17,7 @@ const Main = () => {
   return (
     <Container onClick={handleContainerClick}>
       {isTotal ? (
-        data.map(({ id, items }, index) => {
+        data.map(({ id, items, styles }, index) => {
           const isItems = !!items;
 
           return (
@@ -26,6 +26,7 @@ const Main = () => {
               id={id}
               blockIndex={index}
               items={items}
+              styles={styles}
               isItems={isItems}
               editorFocused={editorFocused}
               setEditorFocused={setEditorFocused}

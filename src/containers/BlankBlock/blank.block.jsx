@@ -14,6 +14,7 @@ const BlankBlock = ({
   blockIndex,
   id,
   items,
+  styles,
   isItems,
   setEditorFocused,
   editorFocused,
@@ -36,7 +37,7 @@ const BlankBlock = ({
   };
 
   const handleCopyBlock = () => {
-    dispatch({ type: "COPY_BLOCK", payload: { items, blockIndex } });
+    dispatch({ type: "COPY_BLOCK", payload: { items, styles, blockIndex } });
   };
 
   const handleBlockSettings = () => {
@@ -60,6 +61,7 @@ const BlankBlock = ({
         editorFocused={editorFocused}
         blockIndex={blockIndex}
         setEditorFocused={setEditorFocused}
+        styles={styles}
       />
       <BlankBlockButtons $isBlankBlockFocused={isBlankBlockActive}>
         <Tooltip text="Добавить блок">

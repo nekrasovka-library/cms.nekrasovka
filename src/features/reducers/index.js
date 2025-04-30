@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import menu from "./menu";
-import block from "./block";
+import blocks from "./blocks";
 import settings from "./settings";
 
 // Объединяем редьюсеры
 const rootReducer = combineReducers({
   menu: menu,
-  block: block,
+  blocks: blocks,
   settings: settings,
 });
 

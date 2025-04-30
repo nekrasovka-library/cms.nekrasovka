@@ -16,6 +16,7 @@ const Menu = () => {
   const { isMenuOpen, data, selectedMenuId, variant } = useSelector(
     (state) => state.menu,
   );
+  const { defaultStyles } = useSelector((state) => state.settings);
   const isVariantOpen = variant.length > 0;
 
   const handleClose = () => {
@@ -31,7 +32,7 @@ const Menu = () => {
 
     dispatch({
       type: "ADD_BLOCK",
-      payload: { items: [{ text, type: "text" }] },
+      payload: { items: [{ text, type: "text" }], styles: defaultStyles },
     });
 
     handleClose();

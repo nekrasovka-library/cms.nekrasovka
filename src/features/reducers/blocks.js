@@ -18,6 +18,17 @@ const updateBlockItems = ({ data }, { elementIndex, blockIndex, text }) => {
   });
 };
 
+const updateBlockStyles = ({ data, selectedBlockIndex }, payload) => {
+  return data.map((block, index) => {
+    if (index === selectedBlockIndex) {
+      return {
+        ...block,
+        styles: payload,
+      };
+    } else return block;
+  });
+};
+
 const insertNewBlock = (blocks, index, newBlock) => [
   ...blocks.slice(0, index + 1),
   newBlock,
@@ -30,7 +41,7 @@ const deleteBlock = ({ data }, { id }) => {
 };
 
 // Основной редьюсер
-const block = (state = initialState, action) => {
+const blocks = (state = initialState, action) => {
   switch (action.type) {
     case "COPY_BLOCK":
       return {
@@ -39,6 +50,7 @@ const block = (state = initialState, action) => {
         data: insertNewBlock(state.data, action.payload.blockIndex, {
           id: state.total + 1,
           items: action.payload.items,
+          styles: action.payload.styles,
         }),
       };
     case "ADD_BLOCK":
@@ -48,12 +60,18 @@ const block = (state = initialState, action) => {
         data: insertNewBlock(state.data, state.selectedBlockIndex, {
           id: state.total + 1,
           items: action.payload.items,
+          styles: action.payload.styles,
         }),
       };
     case "UPDATE_BLOCK":
       return {
         ...state,
         data: updateBlockItems(state, action.payload),
+      };
+    case "UPDATE_BLOCK_STYLES":
+      return {
+        ...state,
+        data: updateBlockStyles(state, action.payload),
       };
     case "DELETE_BLOCK":
       return {
@@ -73,4 +91,4 @@ const block = (state = initialState, action) => {
   }
 };
 
-export default block;
+export default blocks;

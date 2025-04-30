@@ -1,6 +1,10 @@
 const initialState = {
   isSettingsOpen: false,
-  data: [],
+  defaultStyles: {
+    maxWidth: "1160px",
+    paddingTop: "45px",
+    paddingBottom: "45px",
+  },
 };
 
 const settings = (state = initialState, action) => {
@@ -9,10 +13,6 @@ const settings = (state = initialState, action) => {
       return {
         ...state,
         isSettingsOpen: !state.isSettingsOpen,
-      };
-    case "SAVE_SETTINGS":
-      return {
-        ...state,
       };
     case "RESET_SETTINGS":
       return initialState;
