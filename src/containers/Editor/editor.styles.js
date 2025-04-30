@@ -25,6 +25,7 @@ const Container = styled.div`
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1000;
     height: 60px;
     width: 100%;
     background-color: #fff;

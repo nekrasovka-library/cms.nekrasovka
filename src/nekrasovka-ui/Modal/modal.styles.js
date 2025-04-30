@@ -6,7 +6,7 @@ const Container = styled.div`
 
   ${({ $isModal }) =>
     $isModal &&
-    "background-color: rgb(242, 242, 242); position: fixed; top: 0; z-index: 1;"}
+    "background-color: rgba(0,0,0,0.05); position: fixed; top: 0; z-index: 1;"}
 `;
 
 export { Container };

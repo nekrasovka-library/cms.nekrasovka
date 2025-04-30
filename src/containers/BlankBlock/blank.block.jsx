@@ -20,20 +20,28 @@ const BlankBlock = ({
 }) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
+  const { isSettingsOpen } = useSelector((state) => state.settings);
   const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
+  const isBlankBlockActive =
+    isBlankBlockFocused && !isMenuOpen && !isSettingsOpen;
 
-  const handleAdd = () => {
+  const handleAddBlock = () => {
     dispatch({ type: "RESET_MENU" });
     dispatch({ type: "TOGGLE_MENU" });
     dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
   };
 
-  const handleDelete = () => {
+  const handleDeleteBlock = () => {
     dispatch({ type: "DELETE_BLOCK", payload: { id } });
   };
 
-  const handleCopy = () => {
+  const handleCopyBlock = () => {
     dispatch({ type: "COPY_BLOCK", payload: { items, blockIndex } });
+  };
+
+  const handleBlockSettings = () => {
+    dispatch({ type: "TOGGLE_SETTINGS" });
+    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
   };
 
   const handleMouseOut = () => {
@@ -53,26 +61,23 @@ const BlankBlock = ({
         blockIndex={blockIndex}
         setEditorFocused={setEditorFocused}
       />
-      <BlankBlockButtons
-        $isBlankBlockFocused={isBlankBlockFocused && !isMenuOpen}
-      >
+      <BlankBlockButtons $isBlankBlockFocused={isBlankBlockActive}>
         <Tooltip text="Добавить блок">
-          <Icon icon="add" type="button" onClick={handleAdd} />
+          <Icon icon="add" type="button" onClick={handleAddBlock} />
         </Tooltip>
       </BlankBlockButtons>
-      <BlankBlockActionButtons
-        $isBlankBlockFocused={isBlankBlockFocused && !isMenuOpen}
-      >
+      <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
+        <Tooltip text="Настройки">
+          <Icon icon="settings" type="button" onClick={handleBlockSettings} />
+        </Tooltip>
         <Tooltip text="Копировать блок">
-          <Icon icon="copy" type="button" onClick={handleCopy} />
+          <Icon icon="copy" type="button" onClick={handleCopyBlock} />
         </Tooltip>
         <Tooltip text="Удалить блок">
-          <Icon icon="trash" type="button" onClick={handleDelete} />
+          <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
         </Tooltip>
       </BlankBlockActionButtons>
-      <BlankBlockDots
-        $isBlankBlockFocused={isBlankBlockFocused && !isMenuOpen}
-      />
+      <BlankBlockDots $isBlankBlockFocused={isBlankBlockActive} />
     </Container>
   );
 };
