@@ -68,10 +68,8 @@ const Settings = () => {
   };
 
   useEffect(() => {
-    if (!settings) {
-      setSettings(blocks.data[blocks.selectedBlockIndex]?.styles);
-    }
-  }, [blocks.data, blocks.selectedBlockIndex, settings]);
+    setSettings(blocks.data[blocks.selectedBlockIndex]?.styles);
+  }, [blocks.selectedBlockIndex]);
 
   return (
     <Container1 $isMenuOpen={isSettingsOpen}>
