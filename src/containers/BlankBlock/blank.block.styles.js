@@ -16,10 +16,18 @@ const BlankBlockButtons = styled.div`
   opacity: ${({ $isBlankBlockFocused }) => ($isBlankBlockFocused ? "1" : "0")};
 `;
 
+const BlankBlockAddButton = styled(BlankBlockButtons)`
+  position: absolute;
+  bottom: calc(-37px / 2);
+  left: calc(100% / 2 - 37px / 2);
+  z-index: 1;
+  background-color: #fff;
+`;
+
 const BlankBlockDots = styled(BlankBlockButtons)`
   border-bottom: 1px dashed #ccc;
   position: relative;
-  bottom: calc(37px / 2);
+  bottom: 0;
   width: 100vw;
   z-index: -1;
 `;
@@ -69,8 +77,8 @@ const TypeBlockContainer = styled.div`
 
 export {
   Container,
-  BlankBlockButtons,
   BlankBlockActionButtons,
   BlankBlockDots,
   TypeBlockContainer,
+  BlankBlockAddButton,
 };

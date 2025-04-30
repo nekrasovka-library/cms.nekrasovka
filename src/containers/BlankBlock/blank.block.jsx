@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   BlankBlockActionButtons,
-  BlankBlockButtons,
+  BlankBlockAddButton,
   BlankBlockDots,
   Container,
 } from "./blank.block.styles.js";
@@ -63,11 +63,11 @@ const BlankBlock = ({
         setEditorFocused={setEditorFocused}
         styles={styles}
       />
-      <BlankBlockButtons $isBlankBlockFocused={isBlankBlockActive}>
+      <BlankBlockAddButton $isBlankBlockFocused={isBlankBlockActive}>
         <Tooltip text="Добавить блок">
           <Icon icon="add" type="button" onClick={handleAddBlock} />
         </Tooltip>
-      </BlankBlockButtons>
+      </BlankBlockAddButton>
       <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
         <Tooltip text="Настройки">
           <Icon icon="settings" type="button" onClick={handleBlockSettings} />
