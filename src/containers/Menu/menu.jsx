@@ -16,7 +16,6 @@ const Menu = () => {
   const { isMenuOpen, data, selectedMenuId, variant } = useSelector(
     (state) => state.menu,
   );
-  const { defaultStyles } = useSelector((state) => state.settings);
   const isVariantOpen = variant.length > 0;
 
   const handleClose = () => {
@@ -28,11 +27,14 @@ const Menu = () => {
   };
 
   const handleVariant = (id) => {
-    const text = variant.find((item) => item.id === id).text;
+    const item = variant.find((item) => item.id === id);
 
     dispatch({
       type: "ADD_BLOCK",
-      payload: { items: [{ text, type: "text" }], styles: defaultStyles },
+      payload: {
+        items: [{ text: item.text, type: "text" }],
+        styles: item.styles,
+      },
     });
 
     handleClose();

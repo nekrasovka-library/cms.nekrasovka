@@ -1,7 +1,6 @@
 import React from "react";
 import Editor from "../Editor/editor.jsx";
 import { TypeBlockContainer } from "./blank.block.styles.js";
-import { useSelector } from "react-redux";
 
 const CONSTRUCTOR_TYPES = {
   text: Editor,
@@ -15,8 +14,7 @@ const TypeBlock = ({
   blockIndex,
   setEditorFocused,
 }) => {
-  const { defaultStyles } = useSelector((state) => state.settings);
-  const typeBlockStyles = `width: 100%; max-width: ${styles?.maxWidth || defaultStyles.maxWidth}; padding-top: ${styles?.paddingTop || defaultStyles.paddingTop}; padding-bottom: ${styles?.paddingBottom || defaultStyles.paddingBottom};`;
+  const typeBlockStyles = `width: 100%; max-width: ${styles?.maxWidth}; padding-top: ${styles?.paddingTop}; padding-bottom: ${styles?.paddingBottom};`;
 
   return (
     isItems && (

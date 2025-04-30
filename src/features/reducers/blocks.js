@@ -58,9 +58,8 @@ const blocks = (state = initialState, action) => {
         ...state,
         total: state.total + 1,
         data: insertNewBlock(state.data, state.selectedBlockIndex, {
+          ...action.payload,
           id: state.total + 1,
-          items: action.payload.items,
-          styles: action.payload.styles,
         }),
       };
     case "UPDATE_BLOCK":

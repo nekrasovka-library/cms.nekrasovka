@@ -1,10 +1,5 @@
 const initialState = {
   isSettingsOpen: false,
-  defaultStyles: {
-    maxWidth: "1160px",
-    paddingTop: "45px",
-    paddingBottom: "45px",
-  },
 };
 
 const settings = (state = initialState, action) => {
