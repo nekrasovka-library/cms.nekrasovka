@@ -41,7 +41,8 @@ const Settings = () => {
         saveAndExitSettings={saveAndExitSettings}
       />
       <Padding
-        settings={settings}
+        paddingTop={settings?.paddingTop}
+        paddingBottom={settings?.paddingBottom}
         handleSettingsChange={handleSettingsChange}
       />
     </Container1>

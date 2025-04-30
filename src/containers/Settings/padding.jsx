@@ -37,19 +37,19 @@ const PaddingSelectField = ({ label, name, value, onChange }) => (
   </div>
 );
 
-const Padding = ({ settings, handleSettingsChange }) => {
+const Padding = ({ paddingBottom, paddingTop, handleSettingsChange }) => {
   return (
     <PaddingContainer>
       <PaddingSelectField
         label="Отступ сверху"
         name="paddingTop"
-        value={settings?.paddingTop}
+        value={paddingTop}
         onChange={handleSettingsChange}
       />
       <PaddingSelectField
         label="Отступ снизу"
         name="paddingBottom"
-        value={settings?.paddingBottom}
+        value={paddingBottom}
         onChange={handleSettingsChange}
       />
     </PaddingContainer>
