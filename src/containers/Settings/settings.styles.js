@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 30px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -97,6 +97,7 @@ const PaddingSelect = styled.select`
   height: 40px;
   outline: none !important;
   padding: 0;
+  width: 100%;
 `;
 
 const GridContainer = styled.div`
