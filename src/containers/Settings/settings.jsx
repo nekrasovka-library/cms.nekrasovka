@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Padding from "./padding.jsx";
 import Header from "./header.jsx";
 import Columns from "./columns.jsx";
+import Color from "./color.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Settings = () => {
         handleSettingsChange={handleSettingsChange}
       />
       <Columns />
+      <Color />
     </Container1>
   );
 };

@@ -89,8 +89,11 @@ const SettingsLabel = styled.label`
 `;
 
 const PaddingSelect = styled.select`
-  border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid;
+  border-color: rgba(0, 0, 0, 0.2);
   color: #000;
   font-size: 16px;
   font-weight: 300;
@@ -98,6 +101,16 @@ const PaddingSelect = styled.select`
   outline: none !important;
   padding: 0;
   width: 100%;
+
+  transition-duration: 0.3s;
+  transition-property: border-color;
+  transition-timing-function: cubic-bezier(0, 0, 0.8, 1);
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: #ff855d;
+    }
+  }
 `;
 
 const GridContainer = styled.div`
@@ -137,6 +150,59 @@ const ColumnsContainer = styled.div`
   }
 `;
 
+const ColorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 15px;
+`;
+
+const ColorChange = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid;
+  border-color: rgba(0, 0, 0, 0.2);
+  padding-bottom: 5px;
+
+  transition-duration: 0.3s;
+  transition-property: border-color;
+  transition-timing-function: cubic-bezier(0, 0, 0.8, 1);
+
+  button {
+    margin-left: auto;
+    visibility: hidden;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: #ff855d;
+
+      button {
+        visibility: visible;
+      }
+    }
+  }
+`;
+
+const ColorCircle = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  ${({ $backgroundColor }) =>
+    $backgroundColor === "transparent"
+      ? `background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath fill='%23CCC' d='M0 0h5v5H0zM5 5h5v5H5z'/%3E%3Cpath fill='%23fff' d='M5 0h5v5H5zM0 5h5v5H0z'/%3E%3C/svg%3E")`
+      : `background-color: ${$backgroundColor}`}
+`;
+
+const ColorInput = styled.input`
+  padding: 5px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+`;
+
 export {
   Container,
   Container1,
@@ -150,4 +216,8 @@ export {
   GridContainer,
   GridColumn,
   ColumnsContainer,
+  ColorContainer,
+  ColorChange,
+  ColorCircle,
+  ColorInput,
 };
