@@ -8,9 +8,14 @@ import {
 
 const Columns = () => {
   const [selectedColumns, setSelectedColumns] = useState(12); // Количество колонок по умолчанию
+  const [hoveredColumns, setHoveredColumns] = useState(null); // Отслеживание колонок при наведении
 
   const handleColumnClick = (colIndex) => {
     setSelectedColumns(colIndex + 1); // Установить количество колонок в зависимости от клика
+  };
+
+  const handleMouseEnter = (colIndex) => {
+    setHoveredColumns(colIndex + 1); // Установить количество колонок при наведении
   };
 
   return (
@@ -18,15 +23,16 @@ const Columns = () => {
       <div>
         <SettingsLabel>Ширина блока</SettingsLabel>
         <SettingsLabel>
-          {selectedColumns} <span>колонок</span>
+          {hoveredColumns || selectedColumns} <span>колонок</span>
         </SettingsLabel>
       </div>
-      <GridContainer>
+      <GridContainer onMouseLeave={() => setHoveredColumns(null)}>
         {Array.from({ length: 12 }, (_, index) => (
           <GridColumn
             key={index}
             isSelected={index < selectedColumns}
             onClick={() => handleColumnClick(index)}
+            onMouseEnter={() => handleMouseEnter(index)}
           />
         ))}
       </GridContainer>
