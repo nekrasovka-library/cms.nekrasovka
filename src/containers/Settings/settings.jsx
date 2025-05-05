@@ -3,6 +3,7 @@ import { Container1 } from "./settings.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import Padding from "./padding.jsx";
 import Header from "./header.jsx";
+import Columns from "./columns.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const Settings = () => {
         paddingBottom={settings?.paddingBottom}
         handleSettingsChange={handleSettingsChange}
       />
+      <Columns />
     </Container1>
   );
 };

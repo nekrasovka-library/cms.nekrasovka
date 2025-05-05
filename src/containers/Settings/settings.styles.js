@@ -76,7 +76,7 @@ const PaddingContainer = styled.div`
   }
 `;
 
-const PaddingLabel = styled.label`
+const SettingsLabel = styled.label`
   align-items: flex-start;
   color: #000;
   display: flex;
@@ -98,6 +98,39 @@ const PaddingSelect = styled.select`
   padding: 0;
 `;
 
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 5px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+`;
+
+const GridColumn = styled.div`
+  height: 40px;
+  background-color: ${({ isSelected }) => (isSelected ? "#ff855d" : "#d4d4d4")};
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+const ColumnsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  padding: 0 15px;
+  margin-top: 20px;
+
+  label:last-child {
+    justify-content: center;
+  }
+`;
+
 export {
   Container,
   Container1,
@@ -105,7 +138,10 @@ export {
   HeaderButtons,
   HeaderButtonSave,
   HeaderButtonSaveAndExit,
-  PaddingLabel,
+  SettingsLabel,
   PaddingSelect,
   PaddingContainer,
+  GridContainer,
+  GridColumn,
+  ColumnsContainer,
 };

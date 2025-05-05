@@ -1,7 +1,7 @@
 import React from "react";
 import {
   PaddingContainer,
-  PaddingLabel,
+  SettingsLabel,
   PaddingSelect,
 } from "./settings.styles.js";
 
@@ -26,7 +26,7 @@ const PADDING_OPTIONS = [
 
 const PaddingSelectField = ({ label, name, value, onChange }) => (
   <div>
-    <PaddingLabel>{label}</PaddingLabel>
+    <SettingsLabel>{label}</SettingsLabel>
     <PaddingSelect name={name} onChange={onChange} value={value}>
       {PADDING_OPTIONS.map((option) => (
         <option key={option.value} value={option.value}>

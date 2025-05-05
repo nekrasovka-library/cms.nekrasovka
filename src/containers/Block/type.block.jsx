@@ -1,6 +1,6 @@
 import React from "react";
 import Editor from "../Editor/editor.jsx";
-import { TypeBlockContainer } from "./blank.block.styles.js";
+import { TypeBlockContainer } from "./block.styles.js";
 
 const CONSTRUCTOR_TYPES = {
   text: Editor,

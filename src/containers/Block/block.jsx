@@ -4,13 +4,13 @@ import {
   BlankBlockAddButton,
   BlankBlockDots,
   Container,
-} from "./blank.block.styles.js";
+} from "./block.styles.js";
 import Tooltip from "../../nekrasovka-ui/Tooltip/tooltip.jsx";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import TypeBlock from "./type.block.jsx";
 
-const BlankBlock = ({
+const Block = ({
   blockIndex,
   id,
   items,
@@ -86,4 +86,4 @@ const BlankBlock = ({
   );
 };
 
-export default BlankBlock;
+export default Block;

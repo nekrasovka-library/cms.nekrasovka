@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BlankBlock from "../BlankBlock/blank.block.jsx";
+import Block from "../Block/block.jsx";
 import { useSelector } from "react-redux";
 import { Container } from "./main.styles.js";
 
@@ -21,7 +21,7 @@ const Main = () => {
           const isItems = !!items;
 
           return (
-            <BlankBlock
+            <Block
               key={id}
               id={id}
               blockIndex={index}
@@ -34,7 +34,7 @@ const Main = () => {
           );
         })
       ) : (
-        <BlankBlock blockIndex={0} />
+        <Block blockIndex={0} />
       )}
     </Container>
   );
