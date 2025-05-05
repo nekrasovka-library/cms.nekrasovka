@@ -17,18 +17,7 @@ const initialState = {
             paddingTop: "45px",
             paddingBottom: "45px",
             backgroundColor: "#ffffff",
-          },
-        },
-        {
-          id: 2,
-          text: "",
-          image: "tpl_60.png",
-          menuId: 1,
-          styles: {
-            maxWidth: "12",
-            paddingTop: "45px",
-            paddingBottom: "45px",
-            backgroundColor: "#ffffff",
+            textAlign: "left",
           },
         },
       ],
@@ -38,15 +27,16 @@ const initialState = {
       name: "Текстовый блок",
       variant: [
         {
-          id: 3,
+          id: 2,
           text: "",
-          image: "",
+          image: "tpl_60.png",
           menuId: 2,
           styles: {
             maxWidth: "12",
             paddingTop: "45px",
             paddingBottom: "45px",
             backgroundColor: "#ffffff",
+            textAlign: "left",
           },
         },
       ],

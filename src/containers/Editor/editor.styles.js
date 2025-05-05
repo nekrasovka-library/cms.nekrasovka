@@ -10,10 +10,10 @@ const Container = styled.div`
   }
 
   .ql-editor {
-    background: ${({ $isEditorFocused }) =>
-      $isEditorFocused ? "rgba(0, 0, 0, 0.05)" : "#fff"};
     padding: 0;
     font-size: 14px;
+    ${({ $isEditorFocused }) =>
+      $isEditorFocused && "background-color: rgba(0, 0, 0, 0.05) !important"};
   }
 
   .ql-toolbar {
