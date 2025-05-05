@@ -27,7 +27,7 @@ const TypeBlock = ({
     maxWidth = calculateBlockWidth(styles.maxWidth);
   }
 
-  const typeBlockStyles = `background-color: ${styles?.backgroundColor}; width: 100%; > div {margin: 0 auto; max-width: ${maxWidth}px; padding-top: ${styles?.paddingTop}; padding-bottom: ${styles?.paddingBottom};}`;
+  const typeBlockStyles = `&, * {background-color: ${styles?.backgroundColor};} .ql-toolbar * {background-color: #fff;} width: 100%; > div {margin: 0 auto; max-width: ${maxWidth}px; padding-top: ${styles?.paddingTop}; padding-bottom: ${styles?.paddingBottom};}`;
 
   return (
     isItems && (

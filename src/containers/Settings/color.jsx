@@ -16,11 +16,20 @@ const Color = ({ backgroundColor, handleSettingsChange }) => {
         <ColorCircle $backgroundColor={backgroundColor} />
         <ColorInput
           type="text"
+          name="backgroundColor"
           value={backgroundColor === "transparent" ? "" : backgroundColor}
           onChange={handleSettingsChange}
           placeholder="#ffffff"
         />
-        <Icon icon="close_menu" type="button" onClick={handleSettingsChange} />
+        <Icon
+          icon="close_menu"
+          type="button"
+          onClick={() =>
+            handleSettingsChange({
+              target: { name: "backgroundColor", value: "" },
+            })
+          }
+        />
       </ColorChange>
     </ColorContainer>
   );
