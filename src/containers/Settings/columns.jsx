@@ -15,7 +15,10 @@ const Columns = () => {
 
   return (
     <ColumnsContainer>
-      <SettingsLabel>Ширина блока</SettingsLabel>
+      <div>
+        <SettingsLabel>Ширина блока</SettingsLabel>
+        <SettingsLabel>{selectedColumns}</SettingsLabel>
+      </div>
       <GridContainer>
         {Array.from({ length: 12 }, (_, index) => (
           <GridColumn
@@ -25,7 +28,6 @@ const Columns = () => {
           />
         ))}
       </GridContainer>
-      <SettingsLabel>{selectedColumns}</SettingsLabel>
     </ColumnsContainer>
   );
 };

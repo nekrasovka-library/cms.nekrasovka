@@ -3,6 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  row-gap: 20px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -22,7 +23,7 @@ const Container1 = styled(Container)`
 `;
 
 const HeaderContainer = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 `;
 
 const HeaderButtons = styled.div`
@@ -101,7 +102,7 @@ const PaddingSelect = styled.select`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 5px;
+  column-gap: 5px;
   background-color: #fff;
   padding: 10px;
   border-radius: 5px;
@@ -109,7 +110,7 @@ const GridContainer = styled.div`
 `;
 
 const GridColumn = styled.div`
-  height: 40px;
+  height: 60px;
   background-color: ${({ isSelected }) => (isSelected ? "#ff855d" : "#d4d4d4")};
   cursor: pointer;
   transition: background-color 0.2s;
@@ -124,10 +125,10 @@ const ColumnsContainer = styled.div`
   flex-direction: column;
   row-gap: 5px;
   padding: 0 15px;
-  margin-top: 20px;
 
-  label:last-child {
-    justify-content: center;
+  > div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
   }
 `;
 
