@@ -6,7 +6,6 @@ import {
 } from "./settings.styles.js";
 
 const PADDING_OPTIONS = [
-  { value: "", label: "Не задан" },
   { value: "0px", label: "0" },
   { value: "15px", label: "0.5 line (15px)" },
   { value: "30px", label: "1 line (30px)" },

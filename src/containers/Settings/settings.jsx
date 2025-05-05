@@ -5,6 +5,7 @@ import Padding from "./padding.jsx";
 import Header from "./header.jsx";
 import Columns from "./columns.jsx";
 import Color from "./color.jsx";
+import Align from "./align.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -42,13 +43,23 @@ const Settings = () => {
         saveSettings={saveSettings}
         saveAndExitSettings={saveAndExitSettings}
       />
+      <Columns
+        maxWidth={settings?.maxWidth}
+        handleSettingsChange={handleSettingsChange}
+      />
+      <Align
+        textAlign={settings?.textAlign}
+        handleSettingsChange={handleSettingsChange}
+      />
       <Padding
         paddingTop={settings?.paddingTop}
         paddingBottom={settings?.paddingBottom}
         handleSettingsChange={handleSettingsChange}
       />
-      <Columns />
-      <Color />
+      <Color
+        backgroundColor={settings?.backgroundColor}
+        handleSettingsChange={handleSettingsChange}
+      />
     </Container1>
   );
 };

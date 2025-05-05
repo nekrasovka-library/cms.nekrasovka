@@ -13,10 +13,10 @@ const initialState = {
           image: "tpl_60.png",
           menuId: 1,
           styles: {
-            maxWidth: "1160px",
+            maxWidth: "12",
             paddingTop: "45px",
             paddingBottom: "45px",
-            backgroundColor: "#fff",
+            backgroundColor: "#ffffff",
           },
         },
         {
@@ -25,10 +25,10 @@ const initialState = {
           image: "tpl_60.png",
           menuId: 1,
           styles: {
-            maxWidth: "1160px",
+            maxWidth: "12",
             paddingTop: "45px",
             paddingBottom: "45px",
-            backgroundColor: "#fff",
+            backgroundColor: "#ffffff",
           },
         },
       ],
@@ -43,10 +43,10 @@ const initialState = {
           image: "",
           menuId: 2,
           styles: {
-            maxWidth: "1160px",
+            maxWidth: "12",
             paddingTop: "45px",
             paddingBottom: "45px",
-            backgroundColor: "#fff",
+            backgroundColor: "#ffffff",
           },
         },
       ],

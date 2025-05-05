@@ -14,7 +14,20 @@ const TypeBlock = ({
   blockIndex,
   setEditorFocused,
 }) => {
-  const typeBlockStyles = `background-color: ${styles?.backgroundColor}; width: 100%; > div {margin: 0 auto; max-width: ${styles?.maxWidth}; padding-top: ${styles?.paddingTop}; padding-bottom: ${styles?.paddingBottom};}`;
+  let maxWidth = 0;
+
+  const calculateBlockWidth = (columns) => {
+    const minWidth = 60;
+    const maxWidth = 1160;
+    const columnBaseWidth = (maxWidth - minWidth) / 11;
+    return minWidth + columnBaseWidth * (columns - 1);
+  };
+
+  if (styles?.maxWidth) {
+    maxWidth = calculateBlockWidth(styles.maxWidth);
+  }
+
+  const typeBlockStyles = `background-color: ${styles?.backgroundColor}; width: 100%; > div {margin: 0 auto; max-width: ${maxWidth}px; padding-top: ${styles?.paddingTop}; padding-bottom: ${styles?.paddingBottom};}`;
 
   return (
     isItems && (

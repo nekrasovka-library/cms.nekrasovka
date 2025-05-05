@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ColorChange,
   ColorCircle,
@@ -8,29 +8,19 @@ import {
 } from "./settings.styles.js";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 
-const Color = () => {
-  const [color, setColor] = useState("transparent"); // Начальный цвет по умолчанию
-
-  const handleColorChange = (e) => {
-    setColor(e.target.value); // Обновляем состояние при изменении цвета
-  };
-
+const Color = ({ backgroundColor, handleSettingsChange }) => {
   return (
     <ColorContainer>
       <SettingsLabel>Цвет фона для всего блока</SettingsLabel>
       <ColorChange>
-        <ColorCircle $backgroundColor={color} />
+        <ColorCircle $backgroundColor={backgroundColor} />
         <ColorInput
           type="text"
-          value={color === "transparent" ? "" : color}
-          onChange={handleColorChange}
+          value={backgroundColor === "transparent" ? "" : backgroundColor}
+          onChange={handleSettingsChange}
           placeholder="#ffffff"
         />
-        <Icon
-          icon="close_menu"
-          type="button"
-          onClick={() => setColor("transparent")}
-        />
+        <Icon icon="close_menu" type="button" onClick={handleSettingsChange} />
       </ColorChange>
     </ColorContainer>
   );

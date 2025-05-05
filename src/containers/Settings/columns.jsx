@@ -6,12 +6,16 @@ import {
   SettingsLabel,
 } from "./settings.styles.js";
 
-const Columns = () => {
-  const [selectedColumns, setSelectedColumns] = useState(12); // Количество колонок по умолчанию
+const Columns = ({ maxWidth, handleSettingsChange }) => {
   const [hoveredColumns, setHoveredColumns] = useState(null); // Отслеживание колонок при наведении
 
   const handleColumnClick = (colIndex) => {
-    setSelectedColumns(colIndex + 1); // Установить количество колонок в зависимости от клика
+    handleSettingsChange({
+      target: {
+        name: "maxWidth",
+        value: colIndex + 1,
+      },
+    });
   };
 
   const handleMouseEnter = (colIndex) => {
@@ -23,14 +27,14 @@ const Columns = () => {
       <div>
         <SettingsLabel>Ширина блока</SettingsLabel>
         <SettingsLabel>
-          {hoveredColumns || selectedColumns} <span>колонок</span>
+          {hoveredColumns || maxWidth} <span>колонок</span>
         </SettingsLabel>
       </div>
       <GridContainer onMouseLeave={() => setHoveredColumns(null)}>
         {Array.from({ length: 12 }, (_, index) => (
           <GridColumn
             key={index}
-            isSelected={index < selectedColumns}
+            $isSelected={index < maxWidth}
             onClick={() => handleColumnClick(index)}
             onMouseEnter={() => handleMouseEnter(index)}
           />

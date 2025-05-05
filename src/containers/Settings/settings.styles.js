@@ -125,7 +125,8 @@ const GridContainer = styled.div`
 
 const GridColumn = styled.div`
   height: 60px;
-  background-color: ${({ isSelected }) => (isSelected ? "#ff855d" : "#d4d4d4")};
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? "#ff855d" : "#d4d4d4"};
   cursor: pointer;
   transition: background-color 0.2s;
 
@@ -211,6 +212,13 @@ const ColorInput = styled.input`
   }
 `;
 
+const AlignContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 15px;
+`;
+
 export {
   Container,
   Container1,
@@ -228,4 +236,5 @@ export {
   ColorChange,
   ColorCircle,
   ColorInput,
+  AlignContainer,
 };
