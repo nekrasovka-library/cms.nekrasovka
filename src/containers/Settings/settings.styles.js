@@ -166,7 +166,7 @@ const ColorChange = styled.div`
   padding-bottom: 5px;
 
   transition-duration: 0.3s;
-  transition-property: border-color;
+  transition-property: border-color, scale;
   transition-timing-function: cubic-bezier(0, 0, 0.8, 1);
 
   button {
@@ -181,6 +181,10 @@ const ColorChange = styled.div`
       button {
         visibility: visible;
       }
+    }
+
+    button:hover {
+      scale: 0.9;
     }
   }
 `;
