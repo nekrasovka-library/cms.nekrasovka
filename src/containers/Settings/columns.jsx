@@ -17,7 +17,9 @@ const Columns = () => {
     <ColumnsContainer>
       <div>
         <SettingsLabel>Ширина блока</SettingsLabel>
-        <SettingsLabel>{selectedColumns}</SettingsLabel>
+        <SettingsLabel>
+          {selectedColumns} <span>колонок</span>
+        </SettingsLabel>
       </div>
       <GridContainer>
         {Array.from({ length: 12 }, (_, index) => (

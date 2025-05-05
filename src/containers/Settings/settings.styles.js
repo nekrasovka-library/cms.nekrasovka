@@ -123,12 +123,16 @@ const GridColumn = styled.div`
 const ColumnsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
   padding: 0 15px;
 
   > div:nth-child(1) {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 9.5px;
+
+    label:last-child span {
+      text-transform: lowercase;
+    }
   }
 `;
 
