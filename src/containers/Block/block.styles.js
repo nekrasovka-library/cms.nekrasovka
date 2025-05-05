@@ -34,10 +34,11 @@ const BlankBlockDots = styled(BlankBlockButtons)`
 const BlankBlockActionButtons = styled(BlankBlockButtons)`
   display: flex;
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 10px;
   z-index: 1;
   background-color: #fff;
+  border-radius: 3px;
 
   > div {
     border: 1px solid #ccc;
