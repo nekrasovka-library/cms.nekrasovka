@@ -198,9 +198,13 @@ const ColorCircle = styled.div`
 
 const ColorInput = styled.input`
   padding: 5px;
-  font-size: 14px;
+  font-size: 16px;
   border: none;
   outline: none;
+
+  &::placeholder {
+    opacity: 0.6;
+  }
 `;
 
 export {

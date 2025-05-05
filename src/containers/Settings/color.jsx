@@ -20,7 +20,12 @@ const Color = () => {
       <SettingsLabel>Цвет фона для всего блока</SettingsLabel>
       <ColorChange>
         <ColorCircle $backgroundColor={color} />
-        <ColorInput type="text" value={color} onChange={handleColorChange} />
+        <ColorInput
+          type="text"
+          value={color === "transparent" ? "" : color}
+          onChange={handleColorChange}
+          placeholder="#ffffff"
+        />
         <Icon
           icon="close_menu"
           type="button"
