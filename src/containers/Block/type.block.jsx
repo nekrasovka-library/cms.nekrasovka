@@ -12,8 +12,7 @@ const calculateBlockWidth = (columns) => {
 const generateBlockStyles = (styles) => {
   const maxWidth = styles?.maxWidth ? calculateBlockWidth(styles.maxWidth) : 0;
 
-  return `& {background-color: ${styles?.backgroundColor};} 
-   width: 100%; 
+  return `width: 100%; & {background-color: ${styles?.backgroundColor};} 
    > div {margin: 0 auto; 
    max-width: ${maxWidth}px; 
    padding-top: ${styles?.paddingTop}; 
