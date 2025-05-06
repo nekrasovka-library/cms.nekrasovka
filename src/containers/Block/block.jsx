@@ -67,7 +67,6 @@ const Block = ({
         isItems={isItems}
         items={items}
         editorFocused={editorFocused}
-        blockIndex={blockIndex}
         setEditorFocused={setEditorFocused}
         styles={styles}
       />
