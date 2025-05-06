@@ -16,6 +16,7 @@ const initializeQuill = (
   blockIndex,
   elementIndex,
 ) => {
+  console.log("❗", { blockIndex });
   const quill = new Quill(editorRef.current, {
     theme: "snow",
     modules: { toolbar: TOOLBAR_OPTIONS },
@@ -54,7 +55,7 @@ const Editor = ({
     );
 
     return () => quill.off("text-change");
-  }, []);
+  }, [blockIndex]);
 
   const handleEditorFocused = () => {
     setEditorFocused(`${blockIndex}-${elementIndex}`);

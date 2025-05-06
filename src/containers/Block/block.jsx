@@ -54,11 +54,11 @@ const Block = ({
   };
 
   const handleBlockDown = () => {
-    dispatch({ type: "MOVE_BLOCK_DOWN", payload: { index: blockIndex } });
+    dispatch({ type: "MOVE_BLOCK_DOWN", payload: { blockIndex } });
   };
 
   const handleBlockUp = () => {
-    dispatch({ type: "MOVE_BLOCK_UP", payload: { index: blockIndex } });
+    dispatch({ type: "MOVE_BLOCK_UP", payload: { blockIndex } });
   };
 
   return (

@@ -4,14 +4,13 @@ const initialState = {
   selectedBlockIndex: null,
 };
 
-// Обновление элементов блока
 const updateBlockItems = ({ blocks }, { elementIndex, blockIndex, text }) => {
   return blocks.map((block, index) => {
     if (index === blockIndex) {
       return {
         ...block,
-        items: block.items.map((item, index) =>
-          index === elementIndex ? { ...item, text } : item,
+        items: block.items.map((item, itemIndex) =>
+          itemIndex === elementIndex ? { ...item, text } : item,
         ),
       };
     } else return block;
@@ -35,25 +34,22 @@ const insertNewBlock = (blocks, index, newBlock) => [
   ...blocks.slice(index + 1),
 ];
 
-// Удаление блока
 const deleteBlock = ({ blocks }, { id }) => {
   return blocks.filter((item) => item.id !== id);
 };
 
 const moveBlock = (blocks, fromIndex, toIndex) => {
-  // Проверяем, чтобы индексы не выходили за границы массива
   if (toIndex < 0 || toIndex >= blocks.length) {
     return blocks; // Возвращаем массив без изменений
   }
 
   const updatedBlocks = [...blocks];
-  const [movedBlock] = updatedBlocks.splice(fromIndex, 1); // Удаляем блок с текущего индекса
-  updatedBlocks.splice(toIndex, 0, movedBlock); // Вставляем его на новый индекс
+  const [movedBlock] = updatedBlocks.splice(fromIndex, 1);
+  updatedBlocks.splice(toIndex, 0, movedBlock);
 
   return updatedBlocks;
 };
 
-// Основной редьюсер
 const blocks = (state = initialState, action) => {
   switch (action.type) {
     case "COPY_BLOCK":
@@ -85,8 +81,8 @@ const blocks = (state = initialState, action) => {
         ...state,
         blocks: moveBlock(
           state.blocks,
-          action.payload.index,
-          action.payload.index - 1,
+          action.payload.blockIndex,
+          action.payload.blockIndex - 1,
         ),
       };
     case "MOVE_BLOCK_DOWN":
@@ -94,11 +90,10 @@ const blocks = (state = initialState, action) => {
         ...state,
         blocks: moveBlock(
           state.blocks,
-          action.payload.index,
-          action.payload.index + 1,
+          action.payload.blockIndex,
+          action.payload.blockIndex + 1,
         ),
       };
-
     case "UPDATE_BLOCK_STYLES":
       return {
         ...state,
