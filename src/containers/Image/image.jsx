@@ -2,7 +2,7 @@ import React, { useMemo, useRef } from "react";
 import { ImageContainer, ImageFile } from "./image.styles.js";
 import { useDispatch } from "react-redux";
 
-const Image = ({ text, blockIndex, elementIndex }) => {
+const Image = ({ text, blockId, itemId }) => {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
 
@@ -20,11 +20,7 @@ const Image = ({ text, blockIndex, elementIndex }) => {
 
       dispatch({
         type: "UPDATE_BLOCK",
-        payload: {
-          blockIndex,
-          elementIndex,
-          text: `<img src="${fileName}" alt="" />`,
-        },
+        payload: { blockId, itemId, text: `<img src="${fileName}" alt="" />` },
       });
     }
   };

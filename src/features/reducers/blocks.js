@@ -4,13 +4,13 @@ const initialState = {
   selectedBlockIndex: null,
 };
 
-const updateBlockItems = ({ blocks }, { elementIndex, blockIndex, text }) => {
-  return blocks.map((block, index) => {
-    if (index === blockIndex) {
+const updateBlockItems = ({ blocks }, { itemId, blockId, text }) => {
+  return blocks.map((block) => {
+    if (block.id === blockId) {
       return {
         ...block,
-        items: block.items.map((item, itemIndex) =>
-          itemIndex === elementIndex ? { ...item, text } : item,
+        items: block.items.map((item) =>
+          item.id === itemId ? { ...item, text } : item,
         ),
       };
     } else return block;

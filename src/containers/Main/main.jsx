@@ -17,14 +17,14 @@ const Main = () => {
   return (
     <Container onClick={handleContainerClick}>
       {isTotal ? (
-        blocks.map(({ id, items, styles }, index) => {
+        blocks.map(({ id, items, styles }, blockIndex) => {
           const isItems = !!items;
 
           return (
             <Block
               key={id}
               id={id}
-              blockIndex={index}
+              blockIndex={blockIndex}
               items={items}
               styles={styles}
               isItems={isItems}

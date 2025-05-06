@@ -9,14 +9,7 @@ const QuillSizeAttr = Quill.import("attributors/style/size");
 QuillSizeAttr.whitelist = FONT_SIZE_ARRAY;
 Quill.register(QuillSizeAttr, true);
 
-const initializeQuill = (
-  editorRef,
-  text,
-  dispatch,
-  blockIndex,
-  elementIndex,
-) => {
-  console.log("❗", { blockIndex });
+const initializeQuill = (editorRef, text, dispatch, itemId, blockId) => {
   const quill = new Quill(editorRef.current, {
     theme: "snow",
     modules: { toolbar: TOOLBAR_OPTIONS },
@@ -27,7 +20,7 @@ const initializeQuill = (
   quill.on("text-change", () => {
     dispatch({
       type: "UPDATE_BLOCK",
-      payload: { blockIndex, elementIndex, text: quill.root.innerHTML },
+      payload: { blockId, itemId, text: quill.root.innerHTML },
     });
   });
 
@@ -36,8 +29,8 @@ const initializeQuill = (
 
 const Editor = ({
   text,
-  blockIndex,
-  elementIndex,
+  itemId,
+  blockId,
   setEditorFocused,
   isEditorFocused,
 }) => {
@@ -46,19 +39,13 @@ const Editor = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const quill = initializeQuill(
-      editorRef,
-      text,
-      dispatch,
-      blockIndex,
-      elementIndex,
-    );
+    const quill = initializeQuill(editorRef, text, dispatch, itemId, blockId);
 
     return () => quill.off("text-change");
-  }, [blockIndex]);
+  }, []);
 
   const handleEditorFocused = () => {
-    setEditorFocused(`${blockIndex}-${elementIndex}`);
+    setEditorFocused(`${blockId}-${itemId}`);
   };
 
   return (

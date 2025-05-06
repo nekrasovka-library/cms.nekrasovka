@@ -29,7 +29,6 @@ const Block = ({
   const handleAddBlock = () => {
     dispatch({ type: "RESET_MENU" });
     dispatch({ type: "TOGGLE_MENU" });
-    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
   };
 
   const handleDeleteBlock = () => {
@@ -41,7 +40,6 @@ const Block = ({
   };
 
   const handleBlockSettings = () => {
-    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
     dispatch({ type: "TOGGLE_SETTINGS" });
   };
 
@@ -51,6 +49,7 @@ const Block = ({
 
   const handleMouseOver = () => {
     setIsBlankBlockFocused(true);
+    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
   };
 
   const handleBlockDown = () => {
@@ -64,6 +63,7 @@ const Block = ({
   return (
     <Container onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
       <TypeBlock
+        blockId={id}
         isItems={isItems}
         items={items}
         editorFocused={editorFocused}

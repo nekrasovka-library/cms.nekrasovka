@@ -36,21 +36,21 @@ const generateBlockStyles = ({
 
 const getComponentParams = ({
   type,
-  blockIndex,
-  elementIndex,
+  blockId,
+  itemId,
   editorFocused,
   setEditorFocused,
 }) => {
   if (type === "text") {
     return {
-      blockIndex,
-      elementIndex,
+      blockId,
+      itemId,
       setEditorFocused,
-      isEditorFocused: editorFocused === `${blockIndex}-${elementIndex}`,
+      isEditorFocused: editorFocused === `${blockId}-${itemId}`,
     };
   }
   if (type === "image") {
-    return { blockIndex, elementIndex };
+    return { blockId, itemId };
   }
 
   return {};
@@ -66,8 +66,8 @@ const TypeBlock = ({
   items,
   styles,
   editorFocused,
-  blockIndex,
   setEditorFocused,
+  blockId,
 }) => {
   const computedBlockStyles = styles ? generateBlockStyles(styles) : "";
 
@@ -75,12 +75,12 @@ const TypeBlock = ({
     isItems && (
       <TypeBlockContainer $typeBlockStyles={computedBlockStyles}>
         <div>
-          {items.map(({ text, type }, elementIndex) => {
+          {items.map(({ text, type, id }, elementIndex) => {
             const ItemComponent = CONSTRUCTOR_COMPONENTS[type];
             const params = getComponentParams({
               type,
-              blockIndex,
-              elementIndex,
+              blockId,
+              itemId: id,
               editorFocused,
               setEditorFocused,
             });
