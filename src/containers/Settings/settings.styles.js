@@ -219,6 +219,40 @@ const AlignContainer = styled.div`
   padding: 0 15px;
 `;
 
+const RadiusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 15px;
+`;
+
+const RadiusInput = styled.input`
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid;
+  border-color: rgba(0, 0, 0, 0.2);
+
+  transition-duration: 0.3s;
+  transition-property: border-color, scale;
+  transition-timing-function: cubic-bezier(0, 0, 0.8, 1);
+
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+
+  &::placeholder {
+    opacity: 0.6;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: #ff855d;
+    }
+  }
+`;
+
 export {
   Container,
   Container1,
@@ -237,4 +271,6 @@ export {
   ColorCircle,
   ColorInput,
   AlignContainer,
+  RadiusContainer,
+  RadiusInput,
 };

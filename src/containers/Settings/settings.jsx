@@ -6,6 +6,7 @@ import Header from "./header.jsx";
 import Columns from "./columns.jsx";
 import Color from "./color.jsx";
 import Align from "./align.jsx";
+import Radius from "./radius.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,10 @@ const Settings = () => {
       />
       <Color
         backgroundColor={settings?.backgroundColor}
+        handleSettingsChange={handleSettingsChange}
+      />
+      <Radius
+        borderRadius={settings?.borderRadius}
         handleSettingsChange={handleSettingsChange}
       />
     </Container1>
