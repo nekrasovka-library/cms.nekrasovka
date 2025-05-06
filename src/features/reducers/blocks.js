@@ -40,6 +40,19 @@ const deleteBlock = ({ blocks }, { id }) => {
   return blocks.filter((item) => item.id !== id);
 };
 
+const moveBlock = (blocks, fromIndex, toIndex) => {
+  // Проверяем, чтобы индексы не выходили за границы массива
+  if (toIndex < 0 || toIndex >= blocks.length) {
+    return blocks; // Возвращаем массив без изменений
+  }
+
+  const updatedBlocks = [...blocks];
+  const [movedBlock] = updatedBlocks.splice(fromIndex, 1); // Удаляем блок с текущего индекса
+  updatedBlocks.splice(toIndex, 0, movedBlock); // Вставляем его на новый индекс
+
+  return updatedBlocks;
+};
+
 // Основной редьюсер
 const blocks = (state = initialState, action) => {
   switch (action.type) {
@@ -67,6 +80,25 @@ const blocks = (state = initialState, action) => {
         ...state,
         blocks: updateBlockItems(state, action.payload),
       };
+    case "MOVE_BLOCK_UP":
+      return {
+        ...state,
+        blocks: moveBlock(
+          state.blocks,
+          action.payload.index,
+          action.payload.index - 1,
+        ),
+      };
+    case "MOVE_BLOCK_DOWN":
+      return {
+        ...state,
+        blocks: moveBlock(
+          state.blocks,
+          action.payload.index,
+          action.payload.index + 1,
+        ),
+      };
+
     case "UPDATE_BLOCK_STYLES":
       return {
         ...state,

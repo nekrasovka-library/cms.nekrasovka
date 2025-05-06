@@ -8,7 +8,7 @@ const Image = ({ text, blockIndex, elementIndex }) => {
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); // открытие меню загрузки файла
+      fileInputRef.current.click();
     }
   };
 

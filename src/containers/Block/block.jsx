@@ -53,6 +53,14 @@ const Block = ({
     setIsBlankBlockFocused(true);
   };
 
+  const handleBlockDown = () => {
+    dispatch({ type: "MOVE_BLOCK_DOWN", payload: { index: blockIndex } });
+  };
+
+  const handleBlockUp = () => {
+    dispatch({ type: "MOVE_BLOCK_UP", payload: { index: blockIndex } });
+  };
+
   return (
     <Container onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
       <TypeBlock
@@ -78,6 +86,12 @@ const Block = ({
           </Tooltip>
           <Tooltip text="Удалить блок">
             <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
+          </Tooltip>
+          <Tooltip text="Переместить вверх">
+            <Icon icon="arrowUp" type="button" onClick={handleBlockUp} />
+          </Tooltip>
+          <Tooltip text="Переместить вниз">
+            <Icon icon="arrowDown" type="button" onClick={handleBlockDown} />
           </Tooltip>
         </BlankBlockActionButtons>
       )}
