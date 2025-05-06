@@ -10,6 +10,7 @@ const initialState = {
         {
           id: 1,
           text: "<p>Test text in the editor</p>",
+          type: "text",
           image: "tpl_60.png",
           menuId: 1,
           styles: {
@@ -29,6 +30,7 @@ const initialState = {
         {
           id: 2,
           text: "<p>Test text in the editor</p>",
+          type: "text",
           image: "tpl_60.png",
           menuId: 2,
           styles: {
@@ -37,6 +39,26 @@ const initialState = {
             paddingBottom: "45px",
             backgroundColor: "#ffffff",
             textAlign: "left",
+          },
+        },
+      ],
+    },
+    {
+      id: 3,
+      name: "Изображение",
+      variant: [
+        {
+          id: 3,
+          image: "tpl_3.png",
+          type: "image",
+          text: '<img src="imgfish.jpg" alt="" />',
+          menuId: 3,
+          styles: {
+            maxWidth: "12",
+            paddingTop: "75px",
+            paddingBottom: "75px",
+            backgroundColor: "#ffffff",
+            textAlign: "center",
           },
         },
       ],

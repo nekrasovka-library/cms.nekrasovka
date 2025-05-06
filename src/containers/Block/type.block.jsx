@@ -1,5 +1,6 @@
 import React from "react";
 import Editor from "../Editor/editor.jsx";
+import Image from "../Image/image.jsx";
 import { TypeBlockContainer } from "./block.styles.js";
 
 const calculateBlockWidth = (columns) => {
@@ -17,7 +18,7 @@ const generateBlockStyles = ({
   textAlign,
 }) => {
   const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
-  const computedTextAlign = textAlign ? `p {text-align: ${textAlign};}` : "";
+  const computedTextAlign = textAlign ? `* {text-align: ${textAlign};}` : "";
 
   return `
   width: 100%; 
@@ -48,12 +49,16 @@ const getComponentParams = ({
       isEditorFocused: editorFocused === `${blockIndex}-${elementIndex}`,
     };
   }
+  if (type === "image") {
+    return { blockIndex, elementIndex };
+  }
+
   return {};
 };
 
 const CONSTRUCTOR_COMPONENTS = {
   text: Editor,
-  image: null,
+  image: Image,
 };
 
 const TypeBlock = ({
@@ -64,7 +69,7 @@ const TypeBlock = ({
   blockIndex,
   setEditorFocused,
 }) => {
-  const computedBlockStyles = generateBlockStyles(styles);
+  const computedBlockStyles = styles ? generateBlockStyles(styles) : "";
 
   return (
     isItems && (
