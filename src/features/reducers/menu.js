@@ -28,7 +28,7 @@ const initialState = {
       variant: [
         {
           id: 2,
-          text: "",
+          text: "<p>Test text in the editor</p>",
           image: "tpl_60.png",
           menuId: 2,
           styles: {

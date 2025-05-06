@@ -9,15 +9,28 @@ const calculateBlockWidth = (columns) => {
   return MIN_WIDTH + COLUMN_BASE_WIDTH * (columns - 1);
 };
 
-const generateBlockStyles = (styles) => {
-  const maxWidth = styles?.maxWidth ? calculateBlockWidth(styles.maxWidth) : 0;
+const generateBlockStyles = ({
+  maxWidth,
+  backgroundColor,
+  paddingTop,
+  paddingBottom,
+  textAlign,
+}) => {
+  const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
+  const computedTextAlign = textAlign ? `p {text-align: ${textAlign};}` : "";
 
-  return `width: 100%; & {background-color: ${styles?.backgroundColor};} 
-   > div {margin: 0 auto; 
-   max-width: ${maxWidth}px; 
-   padding-top: ${styles?.paddingTop}; 
-   padding-bottom: ${styles?.paddingBottom}; 
-   p {text-align: ${styles?.textAlign};}}`;
+  return `
+  width: 100%; 
+  & {
+    background-color: ${backgroundColor};
+  } 
+  > div {
+    margin: 0 auto; 
+    max-width: ${computedMaxWidth}px; 
+    padding-top: ${paddingTop}; 
+    padding-bottom: ${paddingBottom}; 
+    ${computedTextAlign}
+  }`;
 };
 
 const getComponentParams = ({
