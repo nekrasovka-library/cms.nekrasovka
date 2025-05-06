@@ -2,8 +2,46 @@ import React from "react";
 import Editor from "../Editor/editor.jsx";
 import { TypeBlockContainer } from "./block.styles.js";
 
-const CONSTRUCTOR_TYPES = {
+const calculateBlockWidth = (columns) => {
+  const MIN_WIDTH = 60;
+  const MAX_WIDTH = 1160;
+  const COLUMN_BASE_WIDTH = (MAX_WIDTH - MIN_WIDTH) / 11;
+  return MIN_WIDTH + COLUMN_BASE_WIDTH * (columns - 1);
+};
+
+const generateBlockStyles = (styles) => {
+  const maxWidth = styles?.maxWidth ? calculateBlockWidth(styles.maxWidth) : 0;
+
+  return `& {background-color: ${styles?.backgroundColor};} 
+   width: 100%; 
+   > div {margin: 0 auto; 
+   max-width: ${maxWidth}px; 
+   padding-top: ${styles?.paddingTop}; 
+   padding-bottom: ${styles?.paddingBottom}; 
+   p {text-align: ${styles?.textAlign};}}`;
+};
+
+const getComponentParams = ({
+  type,
+  blockIndex,
+  elementIndex,
+  editorFocused,
+  setEditorFocused,
+}) => {
+  if (type === "text") {
+    return {
+      blockIndex,
+      elementIndex,
+      setEditorFocused,
+      isEditorFocused: editorFocused === `${blockIndex}-${elementIndex}`,
+    };
+  }
+  return {};
+};
+
+const CONSTRUCTOR_COMPONENTS = {
   text: Editor,
+  image: null,
 };
 
 const TypeBlock = ({
@@ -14,40 +52,23 @@ const TypeBlock = ({
   blockIndex,
   setEditorFocused,
 }) => {
-  let maxWidth = 0;
-
-  const calculateBlockWidth = (columns) => {
-    const minWidth = 60;
-    const maxWidth = 1160;
-    const columnBaseWidth = (maxWidth - minWidth) / 11;
-    return minWidth + columnBaseWidth * (columns - 1);
-  };
-
-  if (styles?.maxWidth) {
-    maxWidth = calculateBlockWidth(styles.maxWidth);
-  }
-
-  const typeBlockStyles = `& {background-color: ${styles?.backgroundColor};} width: 100%; > div {margin: 0 auto; max-width: ${maxWidth}px; padding-top: ${styles?.paddingTop}; padding-bottom: ${styles?.paddingBottom}; p {text-align: ${styles?.textAlign};}`;
+  const computedBlockStyles = generateBlockStyles(styles);
 
   return (
     isItems && (
-      <TypeBlockContainer $typeBlockStyles={typeBlockStyles}>
+      <TypeBlockContainer $typeBlockStyles={computedBlockStyles}>
         <div>
           {items.map(({ text, type }, elementIndex) => {
-            const ItemComponent = CONSTRUCTOR_TYPES[type];
-            const isEditorFocused =
-              editorFocused === `${blockIndex}-${elementIndex}`;
+            const ItemComponent = CONSTRUCTOR_COMPONENTS[type];
+            const params = getComponentParams({
+              type,
+              blockIndex,
+              elementIndex,
+              editorFocused,
+              setEditorFocused,
+            });
 
-            return (
-              <ItemComponent
-                key={elementIndex}
-                text={text}
-                blockIndex={blockIndex}
-                elementIndex={elementIndex}
-                isEditorFocused={isEditorFocused}
-                setEditorFocused={setEditorFocused}
-              />
-            );
+            return <ItemComponent key={elementIndex} text={text} {...params} />;
           })}
         </div>
       </TypeBlockContainer>
