@@ -48,10 +48,10 @@ const Settings = () => {
         maxWidth={settings?.maxWidth}
         handleSettingsChange={handleSettingsChange}
       />
-      <Align
-        textAlign={settings?.textAlign}
-        handleSettingsChange={handleSettingsChange}
-      />
+      {/*<Align*/}
+      {/*  textAlign={settings?.textAlign}*/}
+      {/*  handleSettingsChange={handleSettingsChange}*/}
+      {/*/>*/}
       <Padding
         paddingTop={settings?.paddingTop}
         paddingBottom={settings?.paddingBottom}

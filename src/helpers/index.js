@@ -102,14 +102,7 @@ const calculateBlockWidth = (columns) => {
 };
 
 const generateBlockStyles = (
-  {
-    maxWidth,
-    backgroundColor,
-    paddingTop,
-    paddingBottom,
-    textAlign,
-    borderRadius,
-  },
+  { maxWidth, backgroundColor, paddingTop, paddingBottom, borderRadius },
   id,
 ) => {
   const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
@@ -121,14 +114,13 @@ const generateBlockStyles = (
     .dynamic-preview-${id} {
       width: 100%; 
       background-color: ${backgroundColor};
+      padding-top: ${paddingTop};
+      padding-bottom: ${paddingBottom};
     }
    
     .dynamic-preview-${id} > div {
       margin: 0 auto;
       max-width: ${computedMaxWidth}px;
-      padding-top: ${paddingTop};
-      padding-bottom: ${paddingBottom};
-      text-align: ${textAlign};
       ${computedBorderRadius};
     }
   `;

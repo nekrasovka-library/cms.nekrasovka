@@ -68,7 +68,7 @@ const Main = () => {
           key={id}
           className={`dynamic-preview-${id}`}
           dangerouslySetInnerHTML={{
-            __html: items.map((item) => item.text).join(""),
+            __html: items.map((item) => item.text),
           }}
         />
       );
