@@ -94,4 +94,50 @@ const useIsMobile = (breakpoint = 700) => {
   return isMobile;
 };
 
-export { useWindowDimensions, copyToClipboard, useIsMobile };
+const calculateBlockWidth = (columns) => {
+  const MIN_WIDTH = 60;
+  const MAX_WIDTH = 1160;
+  const COLUMN_BASE_WIDTH = (MAX_WIDTH - MIN_WIDTH) / 11;
+  return MIN_WIDTH + COLUMN_BASE_WIDTH * (columns - 1);
+};
+
+const generateBlockStyles = (
+  {
+    maxWidth,
+    backgroundColor,
+    paddingTop,
+    paddingBottom,
+    textAlign,
+    borderRadius,
+  },
+  id,
+) => {
+  const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
+  const computedBorderRadius = borderRadius
+    ? `img {border-radius: ${borderRadius}px;width: 100%;}`
+    : "";
+
+  return `
+    .dynamic-preview-${id} {
+      width: 100%; 
+      background-color: ${backgroundColor};
+    }
+   
+    .dynamic-preview-${id} > div {
+      margin: 0 auto;
+      max-width: ${computedMaxWidth}px;
+      padding-top: ${paddingTop};
+      padding-bottom: ${paddingBottom};
+      text-align: ${textAlign};
+      ${computedBorderRadius};
+    }
+  `;
+};
+
+export {
+  useWindowDimensions,
+  copyToClipboard,
+  useIsMobile,
+  generateBlockStyles,
+  calculateBlockWidth,
+};

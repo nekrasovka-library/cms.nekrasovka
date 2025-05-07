@@ -9,7 +9,7 @@ const initialState = {
       variant: [
         {
           id: 1,
-          text: "<p>Test text in the editor</p>",
+          text: "<div>Test text in the editor</div>",
           type: "text",
           image: "tpl_60.png",
           menuId: 1,
@@ -29,7 +29,7 @@ const initialState = {
       variant: [
         {
           id: 2,
-          text: "<p>Test text in the editor</p>",
+          text: "<div>Test text in the editor</div>",
           type: "text",
           image: "tpl_60.png",
           menuId: 2,
@@ -51,7 +51,7 @@ const initialState = {
           id: 3,
           image: "tpl_3.png",
           type: "image",
-          text: '<img src="imgfish.jpg" alt="" />',
+          text: '<div><img src="imgfish.jpg" alt="" /></div>',
           menuId: 3,
           styles: {
             maxWidth: "12",

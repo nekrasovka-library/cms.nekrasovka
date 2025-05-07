@@ -2,13 +2,7 @@ import React from "react";
 import Editor from "../Editor/editor.jsx";
 import Image from "../Image/image.jsx";
 import { TypeBlockContainer } from "./block.styles.js";
-
-const calculateBlockWidth = (columns) => {
-  const MIN_WIDTH = 60;
-  const MAX_WIDTH = 1160;
-  const COLUMN_BASE_WIDTH = (MAX_WIDTH - MIN_WIDTH) / 11;
-  return MIN_WIDTH + COLUMN_BASE_WIDTH * (columns - 1);
-};
+import { calculateBlockWidth } from "../../helpers/index.js";
 
 const generateBlockStyles = ({
   maxWidth,

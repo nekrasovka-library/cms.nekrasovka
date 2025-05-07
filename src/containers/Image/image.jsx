@@ -20,7 +20,11 @@ const Image = ({ text, blockId, itemId }) => {
 
       dispatch({
         type: "UPDATE_BLOCK",
-        payload: { blockId, itemId, text: `<img src="${fileName}" alt="" />` },
+        payload: {
+          blockId,
+          itemId,
+          text: `<div><img src="${fileName}" alt="${fileName}" /></div>`,
+        },
       });
     }
   };

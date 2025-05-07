@@ -4,6 +4,7 @@ import Modal from "./nekrasovka-ui/Modal/modal.jsx";
 import React from "react";
 import { useSelector } from "react-redux";
 import Settings from "./containers/Settings/settings.jsx";
+import Header from "./containers/Header/header.jsx";
 
 function App() {
   const { isMenuOpen } = useSelector((state) => state.menu);
@@ -14,6 +15,7 @@ function App() {
       <Modal isModal={isMenuOpen || isSettingsOpen} />
       <Menu />
       <Settings />
+      <Header />
       <Main />
     </>
   );
