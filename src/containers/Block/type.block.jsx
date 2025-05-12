@@ -20,8 +20,8 @@ const generateBlockStyles = ({
 
   return `
   width: 100%; 
-  & {
-    background-color: ${backgroundColor};
+  &, .sun-editor-editable {
+    background-color: ${backgroundColor} !important;
   } 
   > div {
     margin: 0 auto; 

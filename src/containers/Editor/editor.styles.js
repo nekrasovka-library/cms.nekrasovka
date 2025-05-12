@@ -13,7 +13,7 @@ const Container = styled.div`
 
     ${({ $isEditorFocused }) =>
       $isEditorFocused
-        ? " > div {background-color: rgba(0, 0, 0, 0.05);}"
+        ? "> div {background-color: rgba(0, 0, 0, 0.05);}"
         : "background-color: transparent;"};
   }
 

@@ -10,14 +10,18 @@ const Main = () => {
   const hasBlocks = totalBlocks > 0;
   const exportableRef = useRef(null);
 
-  const handleContainerClick = ({ target }) => {
-    const cl = target.parentNode?.parentNode?.parentNode;
-    console.log("❗", cl.classList.value);
+  const EXCLUDED_CLASSES = ["se-container", "se-btn-module", "se-wrapper"];
 
-    if (
-      !cl.classList.value.includes("se-container") &&
-      !cl.classList.value.includes("se-btn-module")
-    ) {
+  const isExcludedClass = (classList) => {
+    return EXCLUDED_CLASSES.some((excludedClass) =>
+      classList.value.includes(excludedClass),
+    );
+  };
+
+  const handleContainerClick = ({ target }) => {
+    const containerElement = target.parentNode?.parentNode?.parentNode;
+
+    if (!isExcludedClass(containerElement.classList)) {
       setEditorFocused(null);
     }
   };
