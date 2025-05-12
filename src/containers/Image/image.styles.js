@@ -8,8 +8,7 @@ const ImageContainer = styled.div`
   }
 
   img {
-    max-width: 100%;
-    height: auto;
+    width: 100%;
   }
 `;
 

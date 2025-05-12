@@ -35,12 +35,14 @@ const Container = styled.div`
     );
   }
 
-  .ql-size .ql-picker-label[data-value]::before {
-    content: attr(data-value);
-  }
+  .ql-size {
+    .ql-picker-label[data-value]::before {
+      content: attr(data-value);
+    }
 
-  .ql-size .ql-picker-item[data-value]::before {
-    content: attr(data-value);
+    .ql-picker-item[data-value]::before {
+      content: attr(data-value);
+    }
   }
 `;
 

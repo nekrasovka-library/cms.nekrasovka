@@ -24,26 +24,6 @@ const initialState = {
       ],
     },
     {
-      id: 2,
-      name: "Текстовый блок",
-      variant: [
-        {
-          id: 2,
-          text: "<div>Test text in the editor</div>",
-          type: "text",
-          image: "tpl_60.png",
-          menuId: 2,
-          styles: {
-            maxWidth: "12",
-            paddingTop: "45px",
-            paddingBottom: "45px",
-            backgroundColor: "#ffffff",
-            textAlign: "left",
-          },
-        },
-      ],
-    },
-    {
       id: 3,
       name: "Изображение",
       variant: [

@@ -108,7 +108,7 @@ const generateBlockStyles = (
   const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
   const computedBorderRadius = borderRadius
     ? `img {border-radius: ${borderRadius}px;width: 100%;}`
-    : "";
+    : "img {width: 100%;}";
 
   return `
     .dynamic-preview-${id} {
@@ -121,7 +121,7 @@ const generateBlockStyles = (
     .dynamic-preview-${id} > div {
       margin: 0 auto;
       max-width: ${computedMaxWidth}px;
-      ${computedBorderRadius};
+      ${computedBorderRadius}
     }
   `;
 };
