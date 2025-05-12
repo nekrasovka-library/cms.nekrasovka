@@ -4,19 +4,20 @@ const Container = styled.div`
   width: 100%;
   margin: 0 auto;
 
-  .ql-container,
-  .ql-toolbar {
+  .sun-editor {
     border: none;
   }
 
-  .ql-editor {
+  .sun-editor-editable {
     padding: 0;
-    font-size: 14px;
+
     ${({ $isEditorFocused }) =>
-      $isEditorFocused && "background-color: rgba(0, 0, 0, 0.05) !important"};
+      $isEditorFocused
+        ? " > div {background-color: rgba(0, 0, 0, 0.05);}"
+        : "background-color: transparent;"};
   }
 
-  .ql-toolbar {
+  .se-toolbar {
     display: ${({ $isMenuOpen }) => ($isMenuOpen ? "none" : "flex")};
     align-content: center;
     justify-content: center;
@@ -35,14 +36,18 @@ const Container = styled.div`
     );
   }
 
-  .ql-size {
-    .ql-picker-label[data-value]::before {
-      content: attr(data-value);
-    }
+  .se-btn-module,
+  .se-menu-list,
+  .se-menu-list li,
+  .se-menu-list li button {
+    height: 100%;
+  }
 
-    .ql-picker-item[data-value]::before {
-      content: attr(data-value);
-    }
+  .se-menu-list li button {
+    display: flex;
+    align-items: center;
+    min-width: 60px;
+    margin: 0 !important;
   }
 `;
 

@@ -11,7 +11,13 @@ const Main = () => {
   const exportableRef = useRef(null);
 
   const handleContainerClick = ({ target }) => {
-    if (!target.parentNode?.parentNode?.classList.value?.includes("ql-")) {
+    const cl = target.parentNode?.parentNode?.parentNode;
+    console.log("❗", cl.classList.value);
+
+    if (
+      !cl.classList.value.includes("se-container") &&
+      !cl.classList.value.includes("se-btn-module")
+    ) {
       setEditorFocused(null);
     }
   };

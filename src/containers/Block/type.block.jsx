@@ -10,8 +10,10 @@ const generateBlockStyles = ({
   paddingTop,
   paddingBottom,
   borderRadius,
+  textAlign,
 }) => {
   const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
+  const computedTextAlign = textAlign ? `* {text-align: ${textAlign};}` : "";
   const computedBorderRadius = borderRadius
     ? `* {border-radius: ${borderRadius}px;}`
     : "";
@@ -27,6 +29,7 @@ const generateBlockStyles = ({
     padding-top: ${paddingTop}; 
     padding-bottom: ${paddingBottom}; 
     ${computedBorderRadius}
+    ${computedTextAlign}
   }`;
 };
 

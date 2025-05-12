@@ -9,16 +9,16 @@ const initialState = {
       variant: [
         {
           id: 1,
-          text: "<div>Test text in the editor</div>",
+          text: "<div style='padding-bottom: 20px;font-size: 16px;font-weight: 600;letter-spacing: 2.5px;'>BASICS</div><div style='font-size: 36px;font-weight: 600;line-height: 1.23;'>Why typography matters?</div>",
           type: "text",
           image: "tpl_60.png",
           menuId: 1,
           styles: {
-            maxWidth: "12",
-            paddingTop: "45px",
-            paddingBottom: "45px",
+            maxWidth: "10",
+            paddingTop: "135px",
+            paddingBottom: "90px",
             backgroundColor: "#ffffff",
-            textAlign: "left",
+            textAlign: "center",
           },
         },
       ],
