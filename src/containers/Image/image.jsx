@@ -2,7 +2,7 @@ import React, { useMemo, useRef } from "react";
 import { ImageContainer, ImageFile } from "./image.styles.js";
 import { useDispatch } from "react-redux";
 
-const Image = ({ text, blockId, itemId }) => {
+const Image = ({ text, blockId, itemId, borderRadius = 0 }) => {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
 
@@ -32,7 +32,7 @@ const Image = ({ text, blockId, itemId }) => {
   const memoizedInnerHTML = useMemo(() => ({ __html: text }), [text]);
 
   return (
-    <ImageContainer>
+    <ImageContainer $borderRadius={borderRadius}>
       <div
         onClick={handleFileClick}
         dangerouslySetInnerHTML={memoizedInnerHTML}

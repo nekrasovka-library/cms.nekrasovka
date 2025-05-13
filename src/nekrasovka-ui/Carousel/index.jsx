@@ -18,6 +18,7 @@ const Carousel = ({
   isDots = true,
   blockId,
   itemId,
+  borderRadius = 0,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -128,7 +129,12 @@ const Carousel = ({
       >
         {children.map((child, index) => {
           return (
-            <CarouselItem key={index} $gap={gap} $overhang={overhang}>
+            <CarouselItem
+              key={index}
+              $gap={gap}
+              $overhang={overhang}
+              $borderRadius={borderRadius}
+            >
               <img src={child} alt="картинка" onClick={handleFileClick} />
               <ImageFile
                 type="file"

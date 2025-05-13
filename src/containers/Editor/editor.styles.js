@@ -11,6 +11,7 @@ const Container = styled.div`
   .sun-editor-editable {
     padding: 0;
     background-color: ${({ $backgroundColor }) => $backgroundColor};
+    text-align: ${({ $textAlign }) => $textAlign};
 
     ${({ $isEditorFocused }) =>
       $isEditorFocused && " > div {background-color: rgba(0, 0, 0, 0.05);}"};

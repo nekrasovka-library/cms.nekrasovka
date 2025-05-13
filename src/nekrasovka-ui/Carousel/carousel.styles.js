@@ -22,6 +22,7 @@ const CarouselItem = styled.div`
 
   img {
     width: calc(100% - ${calculateTotalWidth}px);
+    border-radius: ${({ $borderRadius }) => $borderRadius}px;
   }
 
   &:first-child {

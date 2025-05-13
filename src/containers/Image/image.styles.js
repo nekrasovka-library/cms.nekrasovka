@@ -9,6 +9,7 @@ const ImageContainer = styled.div`
 
   img {
     width: 100%;
+    border-radius: ${({ $borderRadius }) => $borderRadius}px;
   }
 `;
 

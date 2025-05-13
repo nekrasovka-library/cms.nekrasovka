@@ -10,16 +10,8 @@ const generateBlockStyles = ({
   backgroundColor,
   paddingTop,
   paddingBottom,
-  borderRadius,
-  textAlign,
 }) => {
   const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
-  const computedTextAlign = textAlign
-    ? `.sun-editor-editable {text-align: ${textAlign};}`
-    : "";
-  const computedBorderRadius = borderRadius
-    ? `img {border-radius: ${borderRadius}px;}`
-    : "";
 
   return `
   width: 100%; 
@@ -31,8 +23,6 @@ const generateBlockStyles = ({
     max-width: ${computedMaxWidth}px; 
     padding-top: ${paddingTop}; 
     padding-bottom: ${paddingBottom}; 
-    ${computedBorderRadius}
-    ${computedTextAlign}
   }`;
 };
 
@@ -42,17 +32,19 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
       blockId,
       itemId,
       backgroundColor: styles.backgroundColor,
+      textAlign: styles.textAlign,
     };
   }
 
   if (type === "image") {
-    return { blockId, itemId };
+    return { blockId, itemId, borderRadius: styles.borderRadius };
   }
 
   if (type === "carousel") {
     return {
       children: text,
       maxWidth: calculateBlockWidth(styles.maxWidth),
+      borderRadius: styles.borderRadius,
       blockId,
       itemId,
     };

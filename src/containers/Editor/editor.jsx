@@ -5,7 +5,7 @@ import { Container } from "./editor.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { TOOLBAR_OPTIONS } from "./editor.constants.js";
 
-const Editor = ({ text, itemId, blockId, backgroundColor }) => {
+const Editor = ({ text, itemId, blockId, backgroundColor, textAlign }) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
@@ -34,6 +34,7 @@ const Editor = ({ text, itemId, blockId, backgroundColor }) => {
       $isEditorFocused={editorFocused === `${blockId}-${itemId}`}
       $isModal={isModal}
       $backgroundColor={backgroundColor}
+      $textAlign={textAlign}
     >
       <SunEditor
         setContents={text}
