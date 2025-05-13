@@ -12,44 +12,67 @@ const Settings = () => {
   const dispatch = useDispatch();
   const { isSettingsOpen } = useSelector((state) => state.settings);
   const { selectedBlockIndex, blocks } = useSelector((state) => state.blocks);
-  const [settings, setSettings] = useState(null);
+  const [blockSettings, setBlockSettings] = useState(null);
 
-  const saveSettings = () => {
-    dispatch({ type: "UPDATE_BLOCK_STYLES", payload: settings });
-  };
+  const updateBlockStyles = (payload) =>
+    dispatch({ type: "UPDATE_BLOCK_STYLES", payload });
+
+  const toggleSettings = () => dispatch({ type: "TOGGLE_SETTINGS" });
+
+  const resetBlockSelection = () =>
+    dispatch({ type: "SET_BLOCK", payload: { blockIndex: null } });
+
+  const saveSettings = () => updateBlockStyles(blockSettings);
 
   const saveAndExitSettings = () => {
-    dispatch({ type: "UPDATE_BLOCK_STYLES", payload: settings });
-    dispatch({ type: "TOGGLE_SETTINGS" });
-    dispatch({ type: "SET_BLOCK", payload: { blockIndex: null } });
+    saveSettings();
+    toggleSettings();
+    resetBlockSelection();
   };
 
-  const handleSettingsChange = (e) => {
-    const { name, value } = e.target;
-    setSettings((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const handleSettingsChange = ({ target: { name, value } }) => {
+    setBlockSettings((prev) => ({ ...prev, [name]: value }));
   };
 
   useEffect(() => {
-    if (blocks[selectedBlockIndex]) {
-      setSettings(blocks[selectedBlockIndex]?.styles);
-    }
+    setBlockSettings(blocks?.[selectedBlockIndex]?.styles || null);
   }, [selectedBlockIndex, blocks]);
 
-  if (!settings) {
+  const renderSettingsComponent = (
+    Component,
+    propKey,
+    additionalProps = {},
+  ) => {
+    if (Array.isArray(propKey)) {
+      const propsAreDefined = propKey.every(
+        (key) => blockSettings?.[key] !== undefined,
+      );
+      if (!propsAreDefined) return null;
+      const extractedProps = propKey.reduce(
+        (acc, key) => ({ ...acc, [key]: blockSettings[key] }),
+        {},
+      );
+      return (
+        <Component
+          {...extractedProps}
+          {...additionalProps}
+          handleSettingsChange={handleSettingsChange}
+        />
+      );
+    }
+    if (blockSettings?.[propKey] !== undefined) {
+      return (
+        <Component
+          {...{ [propKey]: blockSettings[propKey] }}
+          {...additionalProps}
+          handleSettingsChange={handleSettingsChange}
+        />
+      );
+    }
     return null;
-  }
+  };
 
-  const {
-    maxWidth,
-    textAlign,
-    paddingTop,
-    paddingBottom,
-    backgroundColor,
-    borderRadius,
-  } = settings;
+  if (!blockSettings) return null;
 
   return (
     <Container1 $isMenuOpen={isSettingsOpen}>
@@ -57,37 +80,11 @@ const Settings = () => {
         saveSettings={saveSettings}
         saveAndExitSettings={saveAndExitSettings}
       />
-      {maxWidth && (
-        <Columns
-          maxWidth={maxWidth}
-          handleSettingsChange={handleSettingsChange}
-        />
-      )}
-      {textAlign && (
-        <Align
-          textAlign={textAlign}
-          handleSettingsChange={handleSettingsChange}
-        />
-      )}
-      {paddingTop && paddingBottom && (
-        <Padding
-          paddingTop={paddingTop}
-          paddingBottom={paddingBottom}
-          handleSettingsChange={handleSettingsChange}
-        />
-      )}
-      {backgroundColor && (
-        <Color
-          backgroundColor={backgroundColor}
-          handleSettingsChange={handleSettingsChange}
-        />
-      )}
-      {borderRadius && (
-        <Radius
-          borderRadius={borderRadius}
-          handleSettingsChange={handleSettingsChange}
-        />
-      )}
+      {renderSettingsComponent(Columns, "maxWidth")}
+      {renderSettingsComponent(Align, "textAlign")}
+      {renderSettingsComponent(Padding, ["paddingTop", "paddingBottom"])}
+      {renderSettingsComponent(Color, "backgroundColor")}
+      {renderSettingsComponent(Radius, "borderRadius")}
     </Container1>
   );
 };
