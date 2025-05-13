@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef, Children } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   CarouselWrapper,
   CarouselTrack,
   CarouselItem,
   DotContainer,
   Dot,
+  ImageFile,
 } from "./carousel.styles";
+import { useDispatch } from "react-redux";
 
 const Carousel = ({
   children,
@@ -14,16 +16,17 @@ const Carousel = ({
   overhang = 5,
   gap = 10,
   isDots = true,
+  blockId,
+  itemId,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [offset, setOffset] = useState(0);
-  const trackRef = useRef();
+  const trackRef = useRef(null);
   const startX = useRef(0);
   const isDragging = useRef(false);
-  const autoScrollRef = useRef();
-
-  // Преобразование children в массив
-  const childrenArray = Children.toArray(children);
+  const autoScrollRef = useRef(null);
+  const dispatch = useDispatch();
+  const fileInputRef = useRef(null);
 
   const calculateOffset = (index) => {
     const trackWidth = trackRef.current?.offsetWidth || 0; // Общая ширина контейнера
@@ -35,13 +38,13 @@ const Carousel = ({
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? childrenArray.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? children.length - 1 : prevIndex - 1,
     );
   };
 
   const handleNextClick = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === childrenArray.length - 1 ? 0 : prevIndex + 1,
+      prevIndex === children.length - 1 ? 0 : prevIndex + 1,
     );
   };
 
@@ -70,6 +73,35 @@ const Carousel = ({
     isDragging.current = false;
   };
 
+  const handleFileClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const fileName = file.name;
+
+      dispatch({
+        type: "UPDATE_BLOCK",
+        payload: {
+          blockId,
+          itemId,
+          text: children.map((child, index) => {
+            if (index === currentIndex) {
+              return fileName;
+            } else {
+              return child;
+            }
+          }),
+        },
+      });
+    }
+  };
+
   useEffect(() => {
     if (autoScrollInterval > 0) {
       autoScrollRef.current = setInterval(() => {
@@ -85,28 +117,36 @@ const Carousel = ({
   }, [currentIndex]);
 
   return (
-    <CarouselWrapper maxWidth={maxWidth}>
+    <CarouselWrapper $maxWidth={maxWidth}>
       <CarouselTrack
         ref={trackRef}
-        offset={offset}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        gap={gap}
+        $offset={offset}
+        $gap={gap}
       >
-        {childrenArray.map((child, index) => (
-          <CarouselItem key={index} gap={gap} overhang={overhang}>
-            {child}
-          </CarouselItem>
-        ))}
+        {children.map((child, index) => {
+          return (
+            <CarouselItem key={index} $gap={gap} $overhang={overhang}>
+              <img src={child} alt="картинка" onClick={handleFileClick} />
+              <ImageFile
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+              />
+            </CarouselItem>
+          );
+        })}
       </CarouselTrack>
       {isDots && (
-        <DotContainer gap={gap} overhang={overhang}>
+        <DotContainer $gap={gap} $overhang={overhang}>
           {children.map((_, index) => (
             <Dot
               key={index}
-              isActive={index === currentIndex}
               onClick={() => handleDotClick(index)}
+              $isActive={index === currentIndex}
             />
           ))}
         </DotContainer>

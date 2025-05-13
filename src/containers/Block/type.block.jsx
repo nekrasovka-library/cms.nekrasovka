@@ -3,6 +3,7 @@ import Editor from "../Editor/editor.jsx";
 import Image from "../Image/image.jsx";
 import { TypeBlockContainer } from "./block.styles.js";
 import { calculateBlockWidth } from "../../helpers/index.js";
+import Carousel from "../../nekrasovka-ui/Carousel/index.jsx";
 
 const generateBlockStyles = ({
   maxWidth,
@@ -33,17 +34,26 @@ const generateBlockStyles = ({
   }`;
 };
 
-const getComponentParams = ({ type, blockId, itemId, backgroundColor }) => {
+const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
   if (type === "text") {
     return {
       blockId,
       itemId,
-      backgroundColor,
+      backgroundColor: styles.backgroundColor,
     };
   }
 
   if (type === "image") {
     return { blockId, itemId };
+  }
+
+  if (type === "carousel") {
+    return {
+      children: text,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      blockId,
+      itemId,
+    };
   }
 
   return {};
@@ -52,6 +62,7 @@ const getComponentParams = ({ type, blockId, itemId, backgroundColor }) => {
 const CONSTRUCTOR_COMPONENTS = {
   text: Editor,
   image: Image,
+  carousel: Carousel,
 };
 
 const TypeBlock = ({ isItems, items, styles, blockId }) => {
@@ -67,7 +78,8 @@ const TypeBlock = ({ isItems, items, styles, blockId }) => {
               type,
               blockId,
               itemId: id,
-              backgroundColor: styles.backgroundColor,
+              styles,
+              text,
             });
 
             return <ItemComponent key={elementIndex} text={text} {...params} />;

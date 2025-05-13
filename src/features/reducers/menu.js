@@ -43,6 +43,30 @@ const initialState = {
         },
       ],
     },
+    {
+      id: 4,
+      name: "Галерея",
+      variant: [
+        {
+          id: 4,
+          image: "tpl_670.png",
+          type: "carousel",
+          text: [
+            "jorgenhaland101813.jpg",
+            "jorgenhaland101813.jpg",
+            "jorgenhaland101813.jpg",
+          ],
+          menuId: 4,
+          styles: {
+            maxWidth: "12",
+            paddingTop: "90px",
+            paddingBottom: "90px",
+            backgroundColor: "#ffffff",
+            textAlign: "center",
+          },
+        },
+      ],
+    },
   ],
 };
 
