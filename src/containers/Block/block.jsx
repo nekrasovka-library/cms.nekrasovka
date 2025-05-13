@@ -35,6 +35,7 @@ const Block = ({ blockIndex, id, items, styles, isItems }) => {
   const handleBlockSettings = () => {
     dispatch({ type: "TOGGLE_SETTINGS" });
     dispatch({ type: "CHANGE_EDITOR", payload: null });
+    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
   };
 
   const handleMouseOut = () => {
@@ -43,7 +44,6 @@ const Block = ({ blockIndex, id, items, styles, isItems }) => {
 
   const handleMouseOver = () => {
     setIsBlankBlockFocused(true);
-    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
   };
 
   const handleBlockDown = () => {
