@@ -36,7 +36,6 @@ const DotContainer = styled.div`
   display: flex;
   justify-content: center;
   column-gap: 5px;
-  padding-top: 16px;
 `;
 
 const Dot = styled.div`
@@ -56,6 +55,7 @@ const Dot = styled.div`
 
 const ImageFile = styled.input`
   visibility: hidden;
+  height: 16px;
 `;
 
 export {
