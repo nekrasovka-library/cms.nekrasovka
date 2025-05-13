@@ -72,8 +72,6 @@ const Settings = () => {
     return null;
   };
 
-  if (!blockSettings) return null;
-
   return (
     <Container1 $isMenuOpen={isSettingsOpen}>
       <Header
