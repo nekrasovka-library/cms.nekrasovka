@@ -14,7 +14,9 @@ const generateBlockStyles = ({
   textAlign,
 }) => {
   const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
-  const computedTextAlign = textAlign ? `* {text-align: ${textAlign};}` : "";
+  const computedTextAlign = textAlign
+    ? `.sun-editor-editable {text-align: ${textAlign};}`
+    : "";
   const computedBorderRadius = borderRadius
     ? `img {border-radius: ${borderRadius}px;}`
     : "";

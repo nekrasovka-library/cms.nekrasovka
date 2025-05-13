@@ -16,9 +16,12 @@ const Container = styled.div`
       $isEditorFocused && " > div {background-color: rgba(0, 0, 0, 0.05);}"};
   }
 
+  .se-btn-tray {
+    padding: 0;
+  }
+
   .se-toolbar {
     display: ${({ $isModal }) => ($isModal ? "none" : "flex")};
-    align-content: center;
     justify-content: center;
     position: fixed;
     top: 0;
@@ -26,6 +29,7 @@ const Container = styled.div`
     z-index: 1000;
     height: 60px;
     width: 100%;
+    text-align: center;
     background-color: #fff;
     transition-duration: 0.4s;
     transition-property: transform;
