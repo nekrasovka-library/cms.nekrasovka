@@ -14,7 +14,7 @@ const Carousel = ({
   maxWidth = 600,
   autoScrollInterval = 0,
   overhang = 5,
-  gap = 10,
+  gap = 0,
   isDots = true,
   blockId,
   itemId,

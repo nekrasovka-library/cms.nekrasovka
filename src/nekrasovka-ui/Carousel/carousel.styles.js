@@ -7,6 +7,7 @@ const CarouselWrapper = styled.div`
   overflow: hidden;
   width: 100%;
   max-width: ${({ $maxWidth }) => $maxWidth}px;
+  text-align: center;
 `;
 
 const CarouselTrack = styled.div`
@@ -20,7 +21,7 @@ const CarouselItem = styled.div`
   flex: 0 0 calc(100% - ${calculateTotalWidth}px);
 
   img {
-    max-width: calc(100% - ${calculateTotalWidth}px);
+    width: calc(100% - ${calculateTotalWidth}px);
   }
 
   &:first-child {

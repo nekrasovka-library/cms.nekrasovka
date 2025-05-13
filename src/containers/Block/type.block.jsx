@@ -16,7 +16,7 @@ const generateBlockStyles = ({
   const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
   const computedTextAlign = textAlign ? `* {text-align: ${textAlign};}` : "";
   const computedBorderRadius = borderRadius
-    ? `* {border-radius: ${borderRadius}px;}`
+    ? `img {border-radius: ${borderRadius}px;}`
     : "";
 
   return `

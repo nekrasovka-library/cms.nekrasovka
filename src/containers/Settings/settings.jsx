@@ -38,33 +38,56 @@ const Settings = () => {
     }
   }, [selectedBlockIndex, blocks]);
 
+  if (!settings) {
+    return null;
+  }
+
+  const {
+    maxWidth,
+    textAlign,
+    paddingTop,
+    paddingBottom,
+    backgroundColor,
+    borderRadius,
+  } = settings;
+
   return (
     <Container1 $isMenuOpen={isSettingsOpen}>
       <Header
         saveSettings={saveSettings}
         saveAndExitSettings={saveAndExitSettings}
       />
-      <Columns
-        maxWidth={settings?.maxWidth}
-        handleSettingsChange={handleSettingsChange}
-      />
-      <Align
-        textAlign={settings?.textAlign}
-        handleSettingsChange={handleSettingsChange}
-      />
-      <Padding
-        paddingTop={settings?.paddingTop}
-        paddingBottom={settings?.paddingBottom}
-        handleSettingsChange={handleSettingsChange}
-      />
-      <Color
-        backgroundColor={settings?.backgroundColor}
-        handleSettingsChange={handleSettingsChange}
-      />
-      <Radius
-        borderRadius={settings?.borderRadius}
-        handleSettingsChange={handleSettingsChange}
-      />
+      {maxWidth && (
+        <Columns
+          maxWidth={maxWidth}
+          handleSettingsChange={handleSettingsChange}
+        />
+      )}
+      {textAlign && (
+        <Align
+          textAlign={textAlign}
+          handleSettingsChange={handleSettingsChange}
+        />
+      )}
+      {paddingTop && paddingBottom && (
+        <Padding
+          paddingTop={paddingTop}
+          paddingBottom={paddingBottom}
+          handleSettingsChange={handleSettingsChange}
+        />
+      )}
+      {backgroundColor && (
+        <Color
+          backgroundColor={backgroundColor}
+          handleSettingsChange={handleSettingsChange}
+        />
+      )}
+      {borderRadius && (
+        <Radius
+          borderRadius={borderRadius}
+          handleSettingsChange={handleSettingsChange}
+        />
+      )}
     </Container1>
   );
 };
