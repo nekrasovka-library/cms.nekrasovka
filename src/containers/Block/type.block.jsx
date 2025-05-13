@@ -20,7 +20,7 @@ const generateBlockStyles = ({
 
   return `
   width: 100%; 
-  &, .sun-editor-editable {
+  & {
     background-color: ${backgroundColor} !important;
   } 
   > div {
@@ -33,21 +33,15 @@ const generateBlockStyles = ({
   }`;
 };
 
-const getComponentParams = ({
-  type,
-  blockId,
-  itemId,
-  editorFocused,
-  setEditorFocused,
-}) => {
+const getComponentParams = ({ type, blockId, itemId, backgroundColor }) => {
   if (type === "text") {
     return {
       blockId,
       itemId,
-      setEditorFocused,
-      isEditorFocused: editorFocused === `${blockId}-${itemId}`,
+      backgroundColor,
     };
   }
+
   if (type === "image") {
     return { blockId, itemId };
   }
@@ -60,14 +54,7 @@ const CONSTRUCTOR_COMPONENTS = {
   image: Image,
 };
 
-const TypeBlock = ({
-  isItems,
-  items,
-  styles,
-  editorFocused,
-  setEditorFocused,
-  blockId,
-}) => {
+const TypeBlock = ({ isItems, items, styles, blockId }) => {
   const computedBlockStyles = styles ? generateBlockStyles(styles) : "";
 
   return (
@@ -80,8 +67,7 @@ const TypeBlock = ({
               type,
               blockId,
               itemId: id,
-              editorFocused,
-              setEditorFocused,
+              backgroundColor: styles.backgroundColor,
             });
 
             return <ItemComponent key={elementIndex} text={text} {...params} />;

@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Block from "../Block/block.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { generateBlockStyles } from "../../helpers";
 
 const Main = () => {
+  const dispatch = useDispatch();
   const { blocks, totalBlocks } = useSelector((state) => state.blocks);
   const { isPreview } = useSelector((state) => state.preview);
-  const [editorFocused, setEditorFocused] = useState(null);
   const hasBlocks = totalBlocks > 0;
   const exportableRef = useRef(null);
 
@@ -22,7 +22,7 @@ const Main = () => {
     const containerElement = target.parentNode?.parentNode?.parentNode;
 
     if (!isExcludedClass(containerElement.classList)) {
-      setEditorFocused(null);
+      dispatch({ type: "RESET_EDITOR" });
     }
   };
 
@@ -70,8 +70,6 @@ const Main = () => {
           items={items}
           styles={styles}
           isItems={!!items}
-          editorFocused={editorFocused}
-          setEditorFocused={setEditorFocused}
         />
       ) : (
         <div

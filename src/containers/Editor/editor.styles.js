@@ -10,15 +10,14 @@ const Container = styled.div`
 
   .sun-editor-editable {
     padding: 0;
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
 
     ${({ $isEditorFocused }) =>
-      $isEditorFocused
-        ? "> div {background-color: rgba(0, 0, 0, 0.05);}"
-        : "background-color: transparent;"};
+      $isEditorFocused && " > div {background-color: rgba(0, 0, 0, 0.05);}"};
   }
 
   .se-toolbar {
-    display: ${({ $isMenuOpen }) => ($isMenuOpen ? "none" : "flex")};
+    display: ${({ $isModal }) => ($isModal ? "none" : "flex")};
     align-content: center;
     justify-content: center;
     position: fixed;

@@ -5,25 +5,18 @@ import { Container } from "./editor.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { TOOLBAR_OPTIONS } from "./editor.constants.js";
 
-const initializeSunEditor = () => {
-  return {
+const Editor = ({ text, itemId, blockId, backgroundColor }) => {
+  const dispatch = useDispatch();
+  const { isMenuOpen } = useSelector((state) => state.menu);
+  const { isSettingsOpen } = useSelector((state) => state.settings);
+  const { editorFocused } = useSelector((state) => state.editor);
+  const isModal = isSettingsOpen || isMenuOpen;
+  const options = {
     buttonList: TOOLBAR_OPTIONS,
     defaultStyle: "font-size: 16px; font-family: Roboto, sans-serif;",
     font: ["Arial", "Roboto"],
-
     resizingBar: false,
   };
-};
-
-const Editor = ({
-  text,
-  itemId,
-  blockId,
-  setEditorFocused,
-  isEditorFocused,
-}) => {
-  const dispatch = useDispatch();
-  const { isMenuOpen } = useSelector((state) => state.menu);
 
   const handleContentChange = (content) => {
     dispatch({
@@ -33,16 +26,20 @@ const Editor = ({
   };
 
   const handleEditorFocused = () => {
-    setEditorFocused(`${blockId}-${itemId}`);
+    dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}-${itemId}` });
   };
 
   return (
-    <Container $isEditorFocused={isEditorFocused} $isMenuOpen={isMenuOpen}>
+    <Container
+      $isEditorFocused={editorFocused === `${blockId}-${itemId}`}
+      $isModal={isModal}
+      $backgroundColor={backgroundColor}
+    >
       <SunEditor
         setContents={text}
         onChange={handleContentChange}
         onClick={handleEditorFocused}
-        setOptions={initializeSunEditor(dispatch, itemId, blockId, text)}
+        setOptions={options}
       />
     </Container>
   );
