@@ -14,7 +14,7 @@ const Radius = ({ borderRadius, handleSettingsChange }) => {
         min="0"
         max="50"
         name="borderRadius"
-        value={borderRadius || ""}
+        value={borderRadius}
         onChange={handleSettingsChange}
         placeholder="0"
       />
