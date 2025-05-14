@@ -52,7 +52,14 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
     };
   }
 
-  if (type === "divider") return { blockId, itemId, text, color: styles.color };
+  if (type === "divider")
+    return {
+      blockId,
+      itemId,
+      text,
+      color: styles.color,
+      opacity: styles.opacity,
+    };
 
   return {};
 };

@@ -103,6 +103,7 @@ const initialState = {
             paddingBottom: "60px",
             backgroundColor: "#ffffff",
             color: "#000",
+            opacity: "0.2",
           },
         },
       ],

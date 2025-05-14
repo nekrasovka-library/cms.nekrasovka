@@ -8,6 +8,7 @@ import BackgroundColor from "./background-color.jsx";
 import Align from "./align.jsx";
 import Radius from "./radius.jsx";
 import Color from "./color.jsx";
+import Opacity from "./opacity.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -82,6 +83,7 @@ const Settings = () => {
       {renderSettingsComponent(Columns, "maxWidth")}
       {renderSettingsComponent(Align, "textAlign")}
       {renderSettingsComponent(Color, "color")}
+      {renderSettingsComponent(Opacity, "opacity")}
       {renderSettingsComponent(Padding, ["paddingTop", "paddingBottom"])}
       {renderSettingsComponent(BackgroundColor, "backgroundColor")}
       {renderSettingsComponent(Radius, "borderRadius")}
