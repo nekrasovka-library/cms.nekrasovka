@@ -87,6 +87,26 @@ const initialState = {
         },
       ],
     },
+    {
+      id: 5,
+      name: "Разделитель",
+      variant: [
+        {
+          id: 5,
+          image: "tpl_126.png",
+          type: "divider",
+          text: "",
+          menuId: 5,
+          styles: {
+            maxWidth: "2",
+            paddingTop: "60px",
+            paddingBottom: "60px",
+            backgroundColor: "#ffffff",
+            color: "#000",
+          },
+        },
+      ],
+    },
   ],
 };
 

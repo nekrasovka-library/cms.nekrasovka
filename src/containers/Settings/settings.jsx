@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Padding from "./padding.jsx";
 import Header from "./header.jsx";
 import Columns from "./columns.jsx";
-import Color from "./color.jsx";
+import BackgroundColor from "./background-color.jsx";
 import Align from "./align.jsx";
 import Radius from "./radius.jsx";
+import Color from "./color.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -80,8 +81,9 @@ const Settings = () => {
       />
       {renderSettingsComponent(Columns, "maxWidth")}
       {renderSettingsComponent(Align, "textAlign")}
+      {renderSettingsComponent(Color, "color")}
       {renderSettingsComponent(Padding, ["paddingTop", "paddingBottom"])}
-      {renderSettingsComponent(Color, "backgroundColor")}
+      {renderSettingsComponent(BackgroundColor, "backgroundColor")}
       {renderSettingsComponent(Radius, "borderRadius")}
     </Container1>
   );

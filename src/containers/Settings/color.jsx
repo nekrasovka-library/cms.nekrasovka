@@ -8,25 +8,25 @@ import {
 } from "./settings.styles.js";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 
-const Color = ({ backgroundColor, handleSettingsChange }) => {
+const Color = ({ color, handleSettingsChange }) => {
   return (
     <ColorContainer>
-      <SettingsLabel>Цвет фона для всего блока</SettingsLabel>
+      <SettingsLabel>Цвет</SettingsLabel>
       <ColorChange>
-        <ColorCircle $backgroundColor={backgroundColor} />
+        <ColorCircle $backgroundColor={color} />
         <ColorInput
           type="text"
-          name="backgroundColor"
-          value={backgroundColor === "transparent" ? "" : backgroundColor}
+          name="color"
+          value={color === "transparent" ? "" : color}
           onChange={handleSettingsChange}
-          placeholder="#ffffff"
+          placeholder="#000"
         />
         <Icon
           icon="close_menu"
           type="button"
           onClick={() =>
             handleSettingsChange({
-              target: { name: "backgroundColor", value: "" },
+              target: { name: "color", value: "" },
             })
           }
         />
