@@ -22,6 +22,7 @@ const Block = ({ blockIndex, id, items, styles, isItems }) => {
     dispatch({ type: "RESET_MENU" });
     dispatch({ type: "TOGGLE_MENU" });
     dispatch({ type: "CHANGE_EDITOR", payload: null });
+    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
   };
 
   const handleDeleteBlock = () => {

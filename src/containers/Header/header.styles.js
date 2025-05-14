@@ -35,6 +35,34 @@ const HeaderRightPreview = styled.div`
 
 const HeaderLeft = styled.div`
   display: flex;
+  align-items: center;
+  column-gap: 20px;
+
+  span {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
 `;
 
-export { HeaderContainer, HeaderRight, HeaderRightPreview, HeaderLeft };
+const HeaderLeftBlankPage = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+`;
+
+const HeaderLeftHome = styled.span`
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  cursor: pointer;
+`;
+
+export {
+  HeaderContainer,
+  HeaderRight,
+  HeaderRightPreview,
+  HeaderLeft,
+  HeaderLeftBlankPage,
+  HeaderLeftHome,
+};

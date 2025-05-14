@@ -2,10 +2,13 @@ import React from "react";
 import {
   HeaderContainer,
   HeaderLeft,
+  HeaderLeftBlankPage,
+  HeaderLeftHome,
   HeaderRight,
   HeaderRightPreview,
 } from "./header.styles.js";
 import { useDispatch, useSelector } from "react-redux";
+import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,7 +20,16 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <HeaderLeft></HeaderLeft>
+      <HeaderLeft>
+        <HeaderLeftHome onClick={() => console.log("home")}>
+          <Icon icon="home" />
+          <span>Мои сайты</span>
+        </HeaderLeftHome>
+        <HeaderLeftBlankPage>
+          <Icon icon="blankPage" />
+          <span>Тестовая страница</span>
+        </HeaderLeftBlankPage>
+      </HeaderLeft>
       <HeaderRight>
         <HeaderRightPreview onClick={toggleView}>
           {isPreview ? "Редактирование" : "Предпросмотр"}

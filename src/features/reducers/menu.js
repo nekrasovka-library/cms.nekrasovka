@@ -24,6 +24,26 @@ const initialState = {
       ],
     },
     {
+      id: 2,
+      name: "Текстовый блок",
+      variant: [
+        {
+          id: 2,
+          text: '<div style="font-size: 20px;line-height: 1.55;">Book design is the art of incorporating the content, style, format, design, and sequence of the various components of a book into a coherent whole. In the words of Jan Tschichold, "Methods and rules that cannot be improved upon have been developed over centuries. To produce perfect books, these rules must be revived and applied." The front matter, or preliminaries, is the first section of a book and typically has the fewest pages. While all pages are counted, page numbers are generally not printed, whether the pages are blank or contain content.</div>',
+          type: "text",
+          image: "tpl_106.png",
+          menuId: 2,
+          styles: {
+            maxWidth: "8",
+            paddingTop: "60px",
+            paddingBottom: "60px",
+            backgroundColor: "#ffffff",
+            textAlign: "left",
+          },
+        },
+      ],
+    },
+    {
       id: 3,
       name: "Изображение",
       variant: [
