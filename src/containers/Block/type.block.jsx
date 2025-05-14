@@ -32,9 +32,11 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
     return {
       blockId,
       itemId,
+      text,
       backgroundColor: styles.backgroundColor,
       textAlign: styles.textAlign,
-      text,
+      gap: styles.gap,
+      tracks: styles.tracks,
     };
   }
 
@@ -44,11 +46,11 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
 
   if (type === "carousel") {
     return {
+      blockId,
+      itemId,
       children: text,
       maxWidth: calculateBlockWidth(styles.maxWidth),
       borderRadius: styles.borderRadius,
-      blockId,
-      itemId,
     };
   }
 

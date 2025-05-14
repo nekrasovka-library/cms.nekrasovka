@@ -108,6 +108,27 @@ const initialState = {
         },
       ],
     },
+    {
+      id: 6,
+      name: "Колонки",
+      variant: [
+        {
+          id: 6,
+          image: "tpl_218.png",
+          type: "text",
+          text: '<div style="font-size: 20px;line-height: 1.55;">Book design is the art of incorporating the content, style, format, design, and sequence of the various components of a book into a coherent whole. In the words of Jan Tschichold, book designer, "methods and rules upon which it is impossible to improve, have been developed over centuries. To produce perfect books, these rules have to be brought back to life and applied.</div><div style="font-size: 20px;line-height: 1.55;">Visual aids are often used to help audiences of informative and persuasive speeches understand the topic being presented. Visual aids can play a large role in how the audience understands and takes in information that is presented.</div>',
+          menuId: 6,
+          styles: {
+            maxWidth: "12",
+            paddingTop: "45px",
+            paddingBottom: "45px",
+            backgroundColor: "#ffffff",
+            gap: "20",
+            tracks: "2",
+          },
+        },
+      ],
+    },
   ],
 };
 

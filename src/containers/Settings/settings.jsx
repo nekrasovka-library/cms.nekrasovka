@@ -9,6 +9,7 @@ import Align from "./align.jsx";
 import Radius from "./radius.jsx";
 import Color from "./color.jsx";
 import Opacity from "./opacity.jsx";
+import Gap from "./gap.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -81,6 +82,7 @@ const Settings = () => {
         saveAndExitSettings={saveAndExitSettings}
       />
       {renderSettingsComponent(Columns, "maxWidth")}
+      {renderSettingsComponent(Gap, "gap")}
       {renderSettingsComponent(Align, "textAlign")}
       {renderSettingsComponent(Color, "color")}
       {renderSettingsComponent(Opacity, "opacity")}

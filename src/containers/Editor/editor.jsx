@@ -5,7 +5,15 @@ import { Container } from "./editor.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { TOOLBAR_OPTIONS } from "./editor.constants.js";
 
-const Editor = ({ text, itemId, blockId, backgroundColor, textAlign }) => {
+const Editor = ({
+  text,
+  itemId,
+  blockId,
+  backgroundColor,
+  textAlign,
+  gap,
+  tracks,
+}) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
@@ -35,6 +43,8 @@ const Editor = ({ text, itemId, blockId, backgroundColor, textAlign }) => {
       $isModal={isModal}
       $backgroundColor={backgroundColor}
       $textAlign={textAlign}
+      $gap={gap}
+      $tracks={tracks}
     >
       <SunEditor
         setContents={text}

@@ -9,6 +9,11 @@ const Container = styled.div`
   }
 
   .sun-editor-editable {
+    ${({ $gap, $tracks }) =>
+      $gap &&
+      $tracks &&
+      `display: grid !important; grid-template-columns: repeat(${$tracks}, 1fr); gap: ${$gap}px;`};
+
     padding: 0;
     background-color: ${({ $backgroundColor }) => $backgroundColor};
     text-align: ${({ $textAlign }) => $textAlign};
