@@ -5,7 +5,7 @@ const DividerContainer = styled.div`
   transition: opacity 0.3s ease-in-out;
   height: 15px;
 
-  hr {
+  > div {
     height: 1px;
     background-color: ${({ $backgroundColor }) => $backgroundColor};
   }

@@ -4,7 +4,7 @@ import { DividerContainer } from "./divider.styles.js";
 const Divider = ({ color, opacity }) => {
   return (
     <DividerContainer $backgroundColor={color} $opacity={opacity}>
-      <hr />
+      <div></div>
     </DividerContainer>
   );
 };
