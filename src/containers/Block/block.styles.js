@@ -20,7 +20,7 @@ const BlankBlockAddButton = styled(BlankBlockButtons)`
   position: absolute;
   bottom: calc(-37px / 2);
   left: calc(100% / 2 - 37px / 2);
-  z-index: 1;
+  z-index: 11111;
 `;
 
 const BlankBlockDots = styled(BlankBlockButtons)`
