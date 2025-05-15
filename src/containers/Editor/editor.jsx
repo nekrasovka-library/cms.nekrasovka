@@ -4,6 +4,7 @@ import "suneditor/dist/css/suneditor.min.css";
 import { Container } from "./editor.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { TOOLBAR_OPTIONS } from "./editor.constants.js";
+import { ru } from "suneditor/src/lang";
 
 const Editor = ({
   text,
@@ -20,10 +21,10 @@ const Editor = ({
   const { editorFocused } = useSelector((state) => state.editor);
   const isModal = isSettingsOpen || isMenuOpen;
   const options = {
-    buttonList: TOOLBAR_OPTIONS,
     defaultStyle: "font-size: 16px; font-family: Roboto, sans-serif;",
     font: ["Arial", "Roboto"],
     resizingBar: false,
+    buttonList: TOOLBAR_OPTIONS,
   };
 
   const handleContentChange = (content) => {
@@ -47,6 +48,7 @@ const Editor = ({
       $tracks={tracks}
     >
       <SunEditor
+        lang={ru}
         setContents={text}
         onChange={handleContentChange}
         onClick={handleEditorFocused}
