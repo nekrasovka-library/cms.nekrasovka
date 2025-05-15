@@ -6,7 +6,7 @@ import {
   DotContainer,
   Dot,
   ImageFile,
-} from "./carousel.styles";
+} from "./carousel.styles.js";
 import { useDispatch } from "react-redux";
 
 const Carousel = ({

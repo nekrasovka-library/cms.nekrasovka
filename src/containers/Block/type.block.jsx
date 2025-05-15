@@ -3,7 +3,7 @@ import Editor from "../Editor/editor.jsx";
 import Image from "../Image/image.jsx";
 import { TypeBlockContainer } from "./block.styles.js";
 import { calculateBlockWidth } from "../../helpers/index.js";
-import Carousel from "../../nekrasovka-ui/Carousel/index.jsx";
+import Carousel from "../Carousel/index.jsx";
 import Divider from "../Divider/divider.jsx";
 
 const generateBlockStyles = ({
