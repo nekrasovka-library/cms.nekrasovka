@@ -11,16 +11,16 @@ const Container = styled.div`
   transition-timing-function: ease-in-out;
   color: #333;
   opacity: ${({ $isMenuOpen }) => ($isMenuOpen ? "1" : "0")};
-  transform: translateX(${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-100%")});
   border-right: 1px solid #eee;
 `;
 
 const Container1 = styled(Container)`
   width: 240px;
-  left: 0;
   z-index: 1120;
+  left: 0;
   background-color: ${({ $isVariantOpen }) =>
     $isVariantOpen ? "rgb(242, 242, 242)" : "#fff"};
+  transform: translateX(${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-100%")});
 `;
 
 const Container2 = styled(Container)`
@@ -29,6 +29,7 @@ const Container2 = styled(Container)`
   z-index: 1119;
   padding: 0 10px;
   background-color: #fff;
+  transform: translateX(${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-200%")});
 `;
 
 const Header = styled.div`

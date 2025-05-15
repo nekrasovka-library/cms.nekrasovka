@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
-  margin: 0 auto;
 
   .sun-editor,
   .se-submenu {
@@ -49,7 +48,6 @@ const Container = styled.div`
     z-index: 1000;
     height: 60px;
     width: 100%;
-    text-align: center;
     background-color: #fff;
     transition-duration: 0.4s;
     transition-property: transform;
@@ -71,6 +69,7 @@ const Container = styled.div`
     align-items: center;
     min-width: 60px;
     margin: 0 !important;
+    border-radius: 0;
   }
 `;
 

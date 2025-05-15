@@ -7,10 +7,10 @@ import Header from "./containers/Header/header.jsx";
 function App() {
   return (
     <>
-      <Menu />
-      <Settings />
       <Header />
       <Main />
+      <Menu />
+      <Settings />
     </>
   );
 }

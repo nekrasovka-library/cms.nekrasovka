@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Block from "../Block/block.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { generateBlockStyles } from "../../helpers";
+import { MainContainer } from "./main.styles.js";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -88,9 +89,9 @@ const Main = () => {
       {renderBlocks(false)}
     </div>
   ) : (
-    <div onClick={handleContainerClick}>
+    <MainContainer onClick={handleContainerClick}>
       {hasBlocks ? renderBlocks(true) : <Block blockIndex={0} />}
-    </div>
+    </MainContainer>
   );
 };
 
