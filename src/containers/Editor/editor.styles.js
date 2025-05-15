@@ -8,6 +8,11 @@ const Container = styled.div`
     border: none;
   }
 
+  .se-list-layer,
+  .se-menu-list li button {
+    border-radius: 0;
+  }
+
   .se-submenu {
     min-width: 60px;
   }
@@ -69,7 +74,6 @@ const Container = styled.div`
     align-items: center;
     min-width: 60px;
     margin: 0 !important;
-    border-radius: 0;
   }
 `;
 
