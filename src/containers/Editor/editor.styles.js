@@ -22,7 +22,7 @@ const Container = styled.div`
     }
   }
 
-  . .sun-editor-editable {
+  .sun-editor-editable {
     ${({ $gap, $tracks }) =>
       $gap &&
       $tracks &&
