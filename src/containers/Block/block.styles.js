@@ -18,8 +18,8 @@ const BlankBlockButtons = styled.div`
 
 const BlankBlockAddButton = styled(BlankBlockButtons)`
   position: absolute;
-  bottom: calc(-37px / 2);
-  left: calc(100% / 2 - 37px / 2);
+  bottom: calc(-36px / 2);
+  left: calc(50% - 29px / 2);
   z-index: 11111;
 `;
 
