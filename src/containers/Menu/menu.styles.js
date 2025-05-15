@@ -12,6 +12,7 @@ const Container = styled.div`
   color: #333;
   opacity: ${({ $isMenuOpen }) => ($isMenuOpen ? "1" : "0")};
   transform: translateX(${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-100%")});
+  border-right: 1px solid #eee;
 `;
 
 const Container1 = styled(Container)`
@@ -23,6 +24,7 @@ const Container1 = styled(Container)`
 `;
 
 const Container2 = styled(Container)`
+  width: 360px;
   left: 240px;
   z-index: 1119;
   padding: 0 10px;
@@ -45,6 +47,8 @@ const Main = styled.div`
 `;
 
 const MainItem2 = styled.div`
+  display: flex;
+  justify-content: center;
   padding: 20px 10px;
   border-bottom: 1px solid;
   border-bottom-color: #eee;

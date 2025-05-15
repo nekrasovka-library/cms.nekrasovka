@@ -4,11 +4,25 @@ const Container = styled.div`
   width: 100%;
   margin: 0 auto;
 
-  .sun-editor {
+  .sun-editor,
+  .se-submenu {
     border: none;
   }
 
-  .sun-editor-editable {
+  .se-submenu {
+    min-width: 60px;
+  }
+
+  .se-btn-select.se-btn-tool-size,
+  .se-btn-select.se-btn-tool-font {
+    width: 100%;
+
+    svg {
+      margin-left: 10px;
+    }
+  }
+
+  . .sun-editor-editable {
     ${({ $gap, $tracks }) =>
       $gap &&
       $tracks &&

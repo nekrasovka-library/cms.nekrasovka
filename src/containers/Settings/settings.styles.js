@@ -13,6 +13,7 @@ const Container = styled.div`
   color: #333;
   opacity: ${({ $isMenuOpen }) => ($isMenuOpen ? "1" : "0")};
   transform: translateX(${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-100%")});
+  border-right: 1px solid #eee;
 `;
 
 const Container1 = styled(Container)`
