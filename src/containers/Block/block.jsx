@@ -10,11 +10,18 @@ import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import TypeBlock from "./type.block.jsx";
 
-const Block = ({ blockIndex, id, items, styles, isItems }) => {
+const Block = ({
+  blockIndex,
+  id,
+  items,
+  styles,
+  isItems,
+  CONSTRUCTOR_COMPONENTS,
+}) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
-  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
+  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(true);
   const isBlankBlockActive =
     isBlankBlockFocused && !isMenuOpen && !isSettingsOpen;
 
@@ -57,7 +64,13 @@ const Block = ({ blockIndex, id, items, styles, isItems }) => {
 
   return (
     <Container onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-      <TypeBlock blockId={id} isItems={isItems} items={items} styles={styles} />
+      <TypeBlock
+        blockId={id}
+        isItems={isItems}
+        items={items}
+        styles={styles}
+        CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
+      />
       <BlankBlockAddButton $isBlankBlockFocused={isBlankBlockActive}>
         <Tooltip text="Добавить блок">
           <Icon icon="add" type="button" onClick={handleAddBlock} />

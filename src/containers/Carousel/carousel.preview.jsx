@@ -5,19 +5,15 @@ import {
   CarouselItem,
   DotContainer,
   Dot,
-  ImageFile,
 } from "./carousel.styles.js";
-import { useDispatch } from "react-redux";
 
-const Carousel = ({
+const CarouselConstructor = ({
   children,
   maxWidth = 600,
   autoScrollInterval = 0,
   overhang = 5,
   gap = 0,
   isDots = true,
-  blockId,
-  itemId,
   borderRadius = 0,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,8 +22,6 @@ const Carousel = ({
   const startX = useRef(0);
   const isDragging = useRef(false);
   const autoScrollRef = useRef(null);
-  const dispatch = useDispatch();
-  const fileInputRef = useRef(null);
 
   const calculateOffset = (index) => {
     const trackWidth = trackRef.current?.offsetWidth || 0; // Общая ширина контейнера
@@ -74,35 +68,6 @@ const Carousel = ({
     isDragging.current = false;
   };
 
-  const handleFileClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-
-    if (file) {
-      const fileName = file.name;
-
-      dispatch({
-        type: "UPDATE_BLOCK",
-        payload: {
-          blockId,
-          itemId,
-          text: children.map((child, index) => {
-            if (index === currentIndex) {
-              return fileName;
-            } else {
-              return child;
-            }
-          }),
-        },
-      });
-    }
-  };
-
   useEffect(() => {
     if (autoScrollInterval > 0) {
       autoScrollRef.current = setInterval(() => {
@@ -135,13 +100,7 @@ const Carousel = ({
               $overhang={overhang}
               $borderRadius={borderRadius}
             >
-              <img src={child} alt="картинка" onClick={handleFileClick} />
-              <ImageFile
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-              />
+              <img src={child} alt="картинка" />
             </CarouselItem>
           );
         })}
@@ -161,4 +120,4 @@ const Carousel = ({
   );
 };
 
-export default Carousel;
+export default CarouselConstructor;

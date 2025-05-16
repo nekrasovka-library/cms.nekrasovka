@@ -6,6 +6,7 @@ const HeaderContainer = styled.header`
   height: 60px;
   padding: 0 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 `;
 
 const HeaderRight = styled.div`

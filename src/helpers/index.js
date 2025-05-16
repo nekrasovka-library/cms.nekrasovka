@@ -101,38 +101,65 @@ const calculateBlockWidth = (columns) => {
   return MIN_WIDTH + COLUMN_BASE_WIDTH * (columns - 1);
 };
 
-const generateBlockStyles = (
-  {
-    maxWidth,
-    backgroundColor,
-    paddingTop,
-    paddingBottom,
-    borderRadius,
-    textAlign,
-  },
-  id,
-) => {
+const generateBlockStyles = ({
+  maxWidth,
+  backgroundColor,
+  paddingTop,
+  paddingBottom,
+}) => {
   const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
-  const computedTextAlign = textAlign ? `text-align: ${textAlign};` : "";
-  const computedBorderRadius = borderRadius
-    ? `img {border-radius: ${borderRadius}px;width: 100%;}`
-    : "img {width: 100%;}";
 
   return `
-    .dynamic-preview-${id} {
-      width: 100%; 
-      background-color: ${backgroundColor};
-      padding-top: ${paddingTop};
-      padding-bottom: ${paddingBottom};
-      ${computedTextAlign}
-    }
-   
-    .dynamic-preview-${id} > div {
-      margin: 0 auto;
-      max-width: ${computedMaxWidth}px;
-      ${computedBorderRadius}
-    }
-  `;
+  width: 100%; 
+  & {
+    background-color: ${backgroundColor} !important;
+  } 
+  > div {
+    margin: 0 auto; 
+    max-width: ${computedMaxWidth}px; 
+    padding-top: ${paddingTop}; 
+    padding-bottom: ${paddingBottom}; 
+  }`;
+};
+
+const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
+  if (type === "text") {
+    return {
+      blockId,
+      itemId,
+      text,
+      backgroundColor: styles.backgroundColor,
+      textAlign: styles.textAlign,
+      gap: styles.gap,
+      tracks: styles.tracks,
+    };
+  }
+
+  if (type === "image") {
+    return { blockId, itemId, text, borderRadius: styles.borderRadius };
+  }
+
+  if (type === "carousel") {
+    return {
+      blockId,
+      itemId,
+      children: text,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      borderRadius: styles.borderRadius,
+    };
+  }
+
+  if (type === "divider") {
+    return {
+      blockId,
+      itemId,
+      text,
+      color: styles.color,
+      opacity: styles.opacity,
+    };
+  }
+
+  return {};
 };
 
 export {
@@ -141,4 +168,5 @@ export {
   useIsMobile,
   generateBlockStyles,
   calculateBlockWidth,
+  getComponentParams,
 };

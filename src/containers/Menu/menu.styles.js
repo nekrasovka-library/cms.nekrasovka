@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.aside`
   display: flex;
   flex-direction: column;
   height: 100vh;

@@ -1,80 +1,17 @@
 import React from "react";
-import Editor from "../Editor/editor.jsx";
-import Image from "../Image/image.jsx";
 import { TypeBlockContainer } from "./block.styles.js";
-import { calculateBlockWidth } from "../../helpers/index.js";
-import Carousel from "../Carousel/index.jsx";
-import Divider from "../Divider/divider.jsx";
+import {
+  generateBlockStyles,
+  getComponentParams,
+} from "../../helpers/index.js";
 
-const generateBlockStyles = ({
-  maxWidth,
-  backgroundColor,
-  paddingTop,
-  paddingBottom,
+const TypeBlock = ({
+  isItems,
+  items,
+  styles,
+  blockId,
+  CONSTRUCTOR_COMPONENTS,
 }) => {
-  const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
-
-  return `
-  width: 100%; 
-  & {
-    background-color: ${backgroundColor} !important;
-  } 
-  > div {
-    margin: 0 auto; 
-    max-width: ${computedMaxWidth}px; 
-    padding-top: ${paddingTop}; 
-    padding-bottom: ${paddingBottom}; 
-  }`;
-};
-
-const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
-  if (type === "text") {
-    return {
-      blockId,
-      itemId,
-      text,
-      backgroundColor: styles.backgroundColor,
-      textAlign: styles.textAlign,
-      gap: styles.gap,
-      tracks: styles.tracks,
-    };
-  }
-
-  if (type === "image") {
-    return { blockId, itemId, text, borderRadius: styles.borderRadius };
-  }
-
-  if (type === "carousel") {
-    return {
-      blockId,
-      itemId,
-      children: text,
-      maxWidth: calculateBlockWidth(styles.maxWidth),
-      borderRadius: styles.borderRadius,
-    };
-  }
-
-  if (type === "divider") {
-    return {
-      blockId,
-      itemId,
-      text,
-      color: styles.color,
-      opacity: styles.opacity,
-    };
-  }
-
-  return {};
-};
-
-const CONSTRUCTOR_COMPONENTS = {
-  text: Editor,
-  image: Image,
-  carousel: Carousel,
-  divider: Divider,
-};
-
-const TypeBlock = ({ isItems, items, styles, blockId }) => {
   const computedBlockStyles = styles ? generateBlockStyles(styles) : "";
 
   return (

@@ -1,10 +1,11 @@
-import React, { useMemo, useRef } from "react";
-import { ImageContainer, ImageFile } from "./image.styles.js";
+import React, { useRef } from "react";
+import { ImageContainer } from "./image.styles.js";
+import ImageFile from "./image.file.jsx";
 import { useDispatch } from "react-redux";
 
-const Image = ({ text, blockId, itemId, borderRadius = 0 }) => {
-  const dispatch = useDispatch();
+const ImageConstructor = ({ text, blockId, itemId, borderRadius = 0 }) => {
   const fileInputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -23,28 +24,23 @@ const Image = ({ text, blockId, itemId, borderRadius = 0 }) => {
         payload: {
           blockId,
           itemId,
-          text: `<div><img src="${fileName}" alt="${fileName}" /></div>`,
+          text: fileName,
         },
       });
     }
   };
 
-  const memoizedInnerHTML = useMemo(() => ({ __html: text }), [text]);
-
   return (
     <ImageContainer $borderRadius={borderRadius}>
-      <div
-        onClick={handleFileClick}
-        dangerouslySetInnerHTML={memoizedInnerHTML}
-      />
+      <img src={text} alt="картинка" onClick={handleFileClick} />
       <ImageFile
-        type="file"
-        accept="image/*"
         ref={fileInputRef}
-        onChange={handleFileChange}
+        blockId={blockId}
+        itemId={itemId}
+        handleFileChange={handleFileChange}
       />
     </ImageContainer>
   );
 };
 
-export default Image;
+export default ImageConstructor;

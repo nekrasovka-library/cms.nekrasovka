@@ -27,15 +27,15 @@ const Container = styled.div`
   }
 
   .sun-editor-editable {
+    padding: 0;
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
+    text-align: ${({ $textAlign }) => $textAlign};
+    line-height: normal;
+
     ${({ $gap, $tracks }) =>
       $gap &&
       $tracks &&
       `display: grid !important; grid-template-columns: repeat(${$tracks}, 1fr); gap: ${$gap}px;`};
-
-    padding: 0;
-    background-color: ${({ $backgroundColor }) => $backgroundColor};
-    text-align: ${({ $textAlign }) => $textAlign};
-
     ${({ $isEditorFocused }) =>
       $isEditorFocused && " > div {background-color: rgba(0, 0, 0, 0.05);}"};
   }
@@ -55,8 +55,9 @@ const Container = styled.div`
     width: 100%;
     background-color: #fff;
     transition-duration: 0.4s;
-    transition-property: transform;
+    transition-property: opacity, transform;
     transition-timing-function: ease-in-out;
+    opacity: ${({ $isEditorFocused }) => ($isEditorFocused ? "1" : "0")};
     transform: translateY(
       ${({ $isEditorFocused }) => ($isEditorFocused ? "0" : "-100%")}
     );

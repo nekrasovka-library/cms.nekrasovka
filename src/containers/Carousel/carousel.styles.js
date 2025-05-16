@@ -38,6 +38,7 @@ const DotContainer = styled.div`
   display: flex;
   justify-content: center;
   column-gap: 5px;
+  margin-top: 15px;
 `;
 
 const Dot = styled.div`
@@ -55,16 +56,4 @@ const Dot = styled.div`
   }
 `;
 
-const ImageFile = styled.input`
-  visibility: hidden;
-  height: 16px;
-`;
-
-export {
-  CarouselWrapper,
-  CarouselTrack,
-  CarouselItem,
-  DotContainer,
-  Dot,
-  ImageFile,
-};
+export { CarouselWrapper, CarouselTrack, CarouselItem, DotContainer, Dot };

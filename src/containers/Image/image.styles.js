@@ -3,18 +3,16 @@ import styled from "styled-components";
 const ImageContainer = styled.div`
   display: flex;
 
-  > div {
-    min-width: 100%;
-  }
-
   img {
+    min-width: 100%;
     width: 100%;
     border-radius: ${({ $borderRadius }) => $borderRadius}px;
   }
 `;
 
-const ImageFile = styled.input`
+const ImageFileContainer = styled.input`
   visibility: hidden;
+  position: absolute;
 `;
 
-export { ImageContainer, ImageFile };
+export { ImageContainer, ImageFileContainer };
