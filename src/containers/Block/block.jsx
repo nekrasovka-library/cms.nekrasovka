@@ -21,7 +21,7 @@ const Block = ({
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
-  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(true);
+  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
   const isBlankBlockActive =
     isBlankBlockFocused && !isMenuOpen && !isSettingsOpen;
 
