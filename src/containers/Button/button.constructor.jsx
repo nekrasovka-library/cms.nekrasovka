@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ButtonContainer } from "./button.styles.js";
+import { Button, ButtonContainer, ButtonForm } from "./button.styles.js";
 import { useDispatch } from "react-redux";
 import { RadiusInput, SettingsLabel } from "../Settings/settings.styles.js";
 
-const Button = ({
+const ButtonConstructor = ({
   text,
   border,
   color,
@@ -72,9 +72,9 @@ const Button = ({
   };
 
   return (
-    <ButtonContainer {...buttonStyles}>
+    <ButtonContainer>
       {isEditing && (
-        <form>
+        <ButtonForm>
           {renderInputField(
             "Ссылка для кнопки",
             "href",
@@ -97,11 +97,15 @@ const Button = ({
               Сохранить
             </button>
           </div>
-        </form>
+        </ButtonForm>
       )}
-      <div onClick={toggleEditing} dangerouslySetInnerHTML={{ __html: text }} />
+      <Button
+        {...buttonStyles}
+        onClick={toggleEditing}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
     </ButtonContainer>
   );
 };
 
-export default Button;
+export default ButtonConstructor;

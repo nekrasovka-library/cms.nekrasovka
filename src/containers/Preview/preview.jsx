@@ -6,7 +6,7 @@ import Carousel from "../Carousel/carousel.preview.jsx";
 import Divider from "../Divider/divider.jsx";
 import TypeBlock from "../Block/type.block.jsx";
 import { PreviewContainer } from "./preview.styles.js";
-import Button from "../Button/button.jsx";
+import Button from "../Button/button.preview.jsx";
 
 const Preview = () => {
   const { blocks } = useSelector((state) => state.blocks);

@@ -6,7 +6,7 @@ import Editor from "../Editor/editor.jsx";
 import Image from "../Image/image.constructor.jsx";
 import Carousel from "../Carousel/carousel.constructor.jsx";
 import Divider from "../Divider/divider.jsx";
-import Button from "../Button/button.jsx";
+import Button from "../Button/button.constructor.jsx";
 
 const Constructor = () => {
   const dispatch = useDispatch();
