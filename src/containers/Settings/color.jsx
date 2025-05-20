@@ -8,10 +8,10 @@ import {
 } from "./settings.styles.js";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 
-const Color = ({ color, handleSettingsChange }) => {
+const Color = ({ color, handleSettingsChange, defaultStyles }) => {
   return (
     <ColorContainer>
-      <SettingsLabel>Цвет</SettingsLabel>
+      <SettingsLabel>Цвет текста</SettingsLabel>
       <ColorChange>
         <ColorCircle $backgroundColor={color} />
         <ColorInput
@@ -26,7 +26,7 @@ const Color = ({ color, handleSettingsChange }) => {
           type="button"
           onClick={() =>
             handleSettingsChange({
-              target: { name: "color", value: "" },
+              target: { name: "color", value: defaultStyles.color },
             })
           }
         />

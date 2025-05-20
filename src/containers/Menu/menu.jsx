@@ -32,7 +32,7 @@ const Menu = () => {
     dispatch({
       type: "ADD_BLOCK",
       payload: {
-        items: [{ text: item.text, type: item.type }],
+        items: [{ text: item.text, type: item.type, variantId: id }],
         styles: item.styles,
       },
     });

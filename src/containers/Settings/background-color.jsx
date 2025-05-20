@@ -8,7 +8,11 @@ import {
 } from "./settings.styles.js";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 
-const BackgroundColor = ({ backgroundColor, handleSettingsChange }) => {
+const BackgroundColor = ({
+  backgroundColor,
+  handleSettingsChange,
+  defaultStyles,
+}) => {
   return (
     <ColorContainer>
       <SettingsLabel>Цвет фона для всего блока</SettingsLabel>
@@ -26,7 +30,10 @@ const BackgroundColor = ({ backgroundColor, handleSettingsChange }) => {
           type="button"
           onClick={() =>
             handleSettingsChange({
-              target: { name: "backgroundColor", value: "" },
+              target: {
+                name: "backgroundColor",
+                value: defaultStyles.backgroundColor,
+              },
             })
           }
         />

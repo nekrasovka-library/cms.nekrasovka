@@ -5,16 +5,14 @@ import {
   SettingsLabel,
 } from "./settings.styles.js";
 
-const Radius = ({ borderRadius, handleSettingsChange }) => {
+const Height = ({ height, handleSettingsChange }) => {
   return (
     <RadiusContainer>
-      <SettingsLabel>Радиус скругления</SettingsLabel>
+      <SettingsLabel>Высота</SettingsLabel>
       <RadiusInput
         type="number"
-        min="0"
-        max="50"
-        name="borderRadius"
-        value={borderRadius}
+        name="height"
+        value={height}
         onChange={handleSettingsChange}
         placeholder="0"
       />
@@ -22,4 +20,4 @@ const Radius = ({ borderRadius, handleSettingsChange }) => {
   );
 };
 
-export default Radius;
+export default Height;

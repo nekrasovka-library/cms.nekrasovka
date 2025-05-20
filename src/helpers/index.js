@@ -159,6 +159,19 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
     };
   }
 
+  if (type === "button") {
+    return {
+      blockId,
+      itemId,
+      text,
+      color: styles.color,
+      border: styles.border,
+      borderRadius: styles.borderRadius,
+      height: styles.height,
+      textAlign: styles.textAlign,
+    };
+  }
+
   return {};
 };
 

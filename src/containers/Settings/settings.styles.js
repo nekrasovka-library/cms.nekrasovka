@@ -4,7 +4,8 @@ const Container = styled.aside`
   display: flex;
   flex-direction: column;
   row-gap: 30px;
-  height: 100vh;
+  height: 100%;
+  overflow: scroll;
   position: fixed;
   top: 0;
   transition-duration: 0.3s;
@@ -14,6 +15,12 @@ const Container = styled.aside`
   opacity: ${({ $isMenuOpen }) => ($isMenuOpen ? "1" : "0")};
   transform: translateX(${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-100%")});
   border-right: 1px solid #eee;
+  padding-bottom: 60px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const Container1 = styled(Container)`
@@ -234,7 +241,7 @@ const RadiusInput = styled.input`
   outline: none;
   border-bottom: 1px solid;
   border-color: rgba(0, 0, 0, 0.2);
-
+  width: 100%;
   transition-duration: 0.3s;
   transition-property: border-color, scale;
   transition-timing-function: cubic-bezier(0, 0, 0.8, 1);
@@ -250,6 +257,30 @@ const RadiusInput = styled.input`
   @media (hover: hover) {
     &:hover {
       border-color: #ff855d;
+    }
+  }
+`;
+
+const BorderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  padding: 0 15px;
+
+  > div:nth-child(2),
+  > div:nth-child(1) > div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  > div:nth-child(1) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+
+    > div {
+      justify-content: space-between;
     }
   }
 `;
@@ -274,4 +305,5 @@ export {
   AlignContainer,
   RadiusContainer,
   RadiusInput,
+  BorderContainer,
 };

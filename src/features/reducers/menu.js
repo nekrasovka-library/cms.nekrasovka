@@ -129,6 +129,34 @@ const initialState = {
         },
       ],
     },
+    {
+      id: 7,
+      name: "Кнопка",
+      variant: [
+        {
+          id: 7,
+          image: "tpl_191.png",
+          type: "button",
+          text: '<a href="//" target=""><span>Let\'s go!</span></a>',
+          menuId: 7,
+          styles: {
+            maxWidth: "12",
+            paddingTop: "90px",
+            paddingBottom: "90px",
+            backgroundColor: "#ffffff",
+            textAlign: "center",
+            color: "#000",
+            borderRadius: "0",
+            height: "60",
+            border: {
+              color: "#000",
+              width: "1",
+              style: "solid",
+            },
+          },
+        },
+      ],
+    },
   ],
 };
 
