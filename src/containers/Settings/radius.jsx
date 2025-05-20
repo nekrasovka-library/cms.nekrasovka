@@ -8,7 +8,7 @@ import {
 const Radius = ({ borderRadius, handleSettingsChange }) => {
   return (
     <RadiusContainer>
-      <SettingsLabel>Радиус скругления</SettingsLabel>
+      <SettingsLabel>Радиус</SettingsLabel>
       <RadiusInput
         type="number"
         min="0"

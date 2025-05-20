@@ -169,6 +169,7 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
       borderRadius: styles.borderRadius,
       height: styles.height,
       textAlign: styles.textAlign,
+      backgroundColor: styles.elementBackgroundColor,
     };
   }
 

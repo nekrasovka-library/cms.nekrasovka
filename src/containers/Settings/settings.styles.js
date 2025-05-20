@@ -285,6 +285,11 @@ const BorderContainer = styled.div`
   }
 `;
 
+const SettingsTitleLabel = styled(SettingsLabel)`
+  padding: 0 15px;
+  font-weight: 600;
+`;
+
 export {
   Container,
   Container1,
@@ -306,4 +311,5 @@ export {
   RadiusContainer,
   RadiusInput,
   BorderContainer,
+  SettingsTitleLabel,
 };

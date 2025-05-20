@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container1 } from "./settings.styles.js";
+import { Container1, SettingsTitleLabel } from "./settings.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import Padding from "./padding.jsx";
 import Header from "./header.jsx";
@@ -12,6 +12,7 @@ import Opacity from "./opacity.jsx";
 import Gap from "./gap.jsx";
 import Height from "./height.jsx";
 import Border from "./border.jsx";
+import ElementBackgroundColor from "./element-background-color.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -82,6 +83,7 @@ const Settings = () => {
           {...extractedProps}
           {...additionalProps}
           handleSettingsChange={handleSettingsChange}
+          defaultStyles={defaultStyles}
         />
       );
     }
@@ -104,13 +106,19 @@ const Settings = () => {
         saveSettings={saveSettings}
         saveAndExitSettings={saveAndExitSettings}
       />
+      <SettingsTitleLabel>Настройки блока</SettingsTitleLabel>
       {renderSettingsComponent(Columns, "maxWidth")}
       {renderSettingsComponent(Gap, "gap")}
       {renderSettingsComponent(Align, "textAlign")}
-      {renderSettingsComponent(Color, "color")}
-      {renderSettingsComponent(Opacity, "opacity")}
       {renderSettingsComponent(Padding, ["paddingTop", "paddingBottom"])}
       {renderSettingsComponent(BackgroundColor, "backgroundColor")}
+      <SettingsTitleLabel>Настройки элемента</SettingsTitleLabel>
+      {renderSettingsComponent(Color, "color")}
+      {renderSettingsComponent(
+        ElementBackgroundColor,
+        "elementBackgroundColor",
+      )}
+      {renderSettingsComponent(Opacity, "opacity")}
       {renderSettingsComponent(Radius, "borderRadius")}
       {renderSettingsComponent(Border, "border")}
       {renderSettingsComponent(Height, "height")}

@@ -153,6 +153,7 @@ const initialState = {
               width: "1",
               style: "solid",
             },
+            elementBackgroundColor: "#ffffff",
           },
         },
       ],
