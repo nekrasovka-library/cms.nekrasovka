@@ -29,7 +29,7 @@ const ButtonConstructor = ({
   };
 
   const extractContentFromHTML = (html) => {
-    const hrefMatch = html.match(/href="\/\/([^"]*)"/);
+    const hrefMatch = html.match(/href="(?:\/\/)?([^"]*)"/);
     const textMatch = html.match(/<span>(.*?)<\/span>/);
     const targetMatch = html.match(/target="([^"]*)"/);
 
