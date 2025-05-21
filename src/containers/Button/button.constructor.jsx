@@ -124,7 +124,7 @@ const ButtonConstructor = ({
         dangerouslySetInnerHTML={{ __html: text }}
       />
       {isEditing && (
-        <ButtonForm $textAlign={textAlign}>
+        <ButtonForm $textAlign={buttonStyles.$textAlign}>
           {renderInputField(
             BUTTON_LABELS.link,
             "href",
