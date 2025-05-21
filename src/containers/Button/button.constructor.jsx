@@ -29,7 +29,7 @@ const ButtonConstructor = ({
   };
 
   const extractContentFromHTML = (html) => {
-    const hrefMatch = html.match(/href="([^"]*)"/);
+    const hrefMatch = html.match(/href="\/\/([^"]*)"/);
     const textMatch = html.match(/<span>(.*?)<\/span>/);
     const targetMatch = html.match(/target="([^"]*)"/);
 
@@ -42,7 +42,7 @@ const ButtonConstructor = ({
 
   const handleSave = () => {
     const updatedText = text
-      .replace(/href="([^"]*)"/, `href="${content.href}"`)
+      .replace(/href="([^"]*)"/, `href="//${content.href}"`)
       .replace(/target="([^"]*)"/, `target="${content.target}"`)
       .replace(/<span>(.*?)<\/span>/, `<span>${content.text}</span>`);
 
@@ -105,7 +105,7 @@ const ButtonConstructor = ({
             "Ссылка для кнопки",
             "href",
             content.href,
-            "//",
+            "nekrasovka.ru",
             (value) => setContent((prev) => ({ ...prev, href: value })),
           )}
           {renderInputField(
