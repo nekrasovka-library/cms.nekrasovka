@@ -8,6 +8,15 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { RadiusInput, SettingsLabel } from "../Settings/settings.styles.js";
 
+const BUTTON_LABELS = {
+  link: "Ссылка для кнопки",
+  text: "Текст кнопки",
+  placeholderLink: "nekrasovka.ru",
+  placeholderText: "Текст",
+};
+
+const DEFAULT_TARGET = "_blank";
+
 const ButtonConstructor = ({
   text,
   border,
@@ -24,36 +33,37 @@ const ButtonConstructor = ({
   const [content, setContent] = useState(null);
   const { isSettingsOpen } = useSelector((state) => state.settings);
 
-  const toggleEditing = (e) => {
+  const handleToggleEditing = (e) => {
     e.preventDefault();
     setIsEditing((prev) => !prev);
-
-    if (!isEditing && isSettingsOpen) dispatch({ type: "TOGGLE_SETTINGS" });
+    if (!isEditing && isSettingsOpen) {
+      dispatch({ type: "TOGGLE_SETTINGS" });
+    }
   };
 
-  const extractContentFromHTML = (html) => {
-    const hrefMatch = html.match(/href="(?:\/\/)?([^"]*)"/);
-    const textMatch = html.match(/<span>(.*?)<\/span>/);
-    const targetMatch = html.match(/target="([^"]*)"/);
+  const contentHandler = {
+    extractFromHTML: (html) => {
+      const hrefMatch = html.match(/href="(?:\/\/)?([^"]*)"/);
+      const textMatch = html.match(/<span>(.*?)<\/span>/);
+      const targetMatch = html.match(/target="([^"]*)"/);
+      return {
+        href: hrefMatch ? hrefMatch[1] : "",
+        text: textMatch ? textMatch[1] : "",
+        target: targetMatch ? targetMatch[1] : "",
+      };
+    },
+    saveUpdatedContent: () => {
+      const updatedText = text
+        .replace(/href="([^"]*)"/, `href="//${content.href}"`)
+        .replace(/target="([^"]*)"/, `target="${content.target}"`)
+        .replace(/<span>(.*?)<\/span>/, `<span>${content.text}</span>`);
 
-    return {
-      href: hrefMatch ? hrefMatch[1] : "",
-      text: textMatch ? textMatch[1] : "",
-      target: targetMatch ? targetMatch[1] : "",
-    };
-  };
-
-  const handleSave = () => {
-    const updatedText = text
-      .replace(/href="([^"]*)"/, `href="//${content.href}"`)
-      .replace(/target="([^"]*)"/, `target="${content.target}"`)
-      .replace(/<span>(.*?)<\/span>/, `<span>${content.text}</span>`);
-
-    setIsEditing(false);
-    dispatch({
-      type: "UPDATE_BLOCK",
-      payload: { blockId, itemId, text: updatedText },
-    });
+      setIsEditing(false);
+      dispatch({
+        type: "UPDATE_BLOCK",
+        payload: { blockId, itemId, text: updatedText },
+      });
+    },
   };
 
   const renderInputField = (label, name, value, placeholder, onChange) => (
@@ -69,13 +79,13 @@ const ButtonConstructor = ({
       {name === "href" && (
         <ButtonFormCheckbox>
           <input
-            checked={content.target === "_blank"}
+            checked={content.target === DEFAULT_TARGET}
             type="checkbox"
             name="target"
             onChange={(e) =>
               setContent((prev) => ({
                 ...prev,
-                target: e.target.checked ? "_blank" : "",
+                target: e.target.checked ? DEFAULT_TARGET : "",
               }))
             }
           />
@@ -87,7 +97,7 @@ const ButtonConstructor = ({
 
   useEffect(() => {
     if (!content) {
-      setContent(extractContentFromHTML(text));
+      setContent(contentHandler.extractFromHTML(text));
     }
   }, [content, text]);
 
@@ -110,30 +120,30 @@ const ButtonConstructor = ({
     <ButtonContainer>
       <Button
         {...buttonStyles}
-        onClick={toggleEditing}
+        onClick={handleToggleEditing}
         dangerouslySetInnerHTML={{ __html: text }}
       />
       {isEditing && (
         <ButtonForm $textAlign={textAlign}>
           {renderInputField(
-            "Ссылка для кнопки",
+            BUTTON_LABELS.link,
             "href",
-            content.href,
-            "nekrasovka.ru",
+            content?.href,
+            BUTTON_LABELS.placeholderLink,
             (value) => setContent((prev) => ({ ...prev, href: value })),
           )}
           {renderInputField(
-            "Текст кнопки",
+            BUTTON_LABELS.text,
             "text",
-            content.text,
-            "Текст",
+            content?.text,
+            BUTTON_LABELS.placeholderText,
             (value) => setContent((prev) => ({ ...prev, text: value })),
           )}
           <div>
-            <button type="button" onClick={toggleEditing}>
+            <button type="button" onClick={handleToggleEditing}>
               Отмена
             </button>
-            <button type="button" onClick={handleSave}>
+            <button type="button" onClick={contentHandler.saveUpdatedContent}>
               Сохранить
             </button>
           </div>
