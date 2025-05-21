@@ -5,7 +5,7 @@ import {
   ButtonForm,
   ButtonFormCheckbox,
 } from "./button.styles.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RadiusInput, SettingsLabel } from "../Settings/settings.styles.js";
 
 const ButtonConstructor = ({
@@ -22,10 +22,13 @@ const ButtonConstructor = ({
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(null);
+  const { isSettingsOpen } = useSelector((state) => state.settings);
 
   const toggleEditing = (e) => {
     e.preventDefault();
     setIsEditing((prev) => !prev);
+
+    if (!isEditing && isSettingsOpen) dispatch({ type: "TOGGLE_SETTINGS" });
   };
 
   const extractContentFromHTML = (html) => {
@@ -88,6 +91,12 @@ const ButtonConstructor = ({
     }
   }, [content, text]);
 
+  useEffect(() => {
+    if (isSettingsOpen) {
+      setIsEditing(false);
+    }
+  }, [isSettingsOpen]);
+
   const buttonStyles = {
     $border: border,
     $color: color,
@@ -99,8 +108,13 @@ const ButtonConstructor = ({
 
   return (
     <ButtonContainer>
+      <Button
+        {...buttonStyles}
+        onClick={toggleEditing}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
       {isEditing && (
-        <ButtonForm>
+        <ButtonForm $textAlign={textAlign}>
           {renderInputField(
             "Ссылка для кнопки",
             "href",
@@ -125,11 +139,6 @@ const ButtonConstructor = ({
           </div>
         </ButtonForm>
       )}
-      <Button
-        {...buttonStyles}
-        onClick={toggleEditing}
-        dangerouslySetInnerHTML={{ __html: text }}
-      />
     </ButtonContainer>
   );
 };

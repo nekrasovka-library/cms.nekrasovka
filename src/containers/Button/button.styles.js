@@ -42,7 +42,10 @@ const ButtonForm = styled.div`
   padding: 15px;
   position: absolute;
   top: calc(100% + 10px);
-  left: calc(50% - 140px);
+  ${({ $textAlign }) => $textAlign === "left" && { left: "0" }};
+  ${({ $textAlign }) => $textAlign === "right" && { right: "0" }};
+  ${({ $textAlign }) =>
+    $textAlign === "center" && { left: "calc(50% - 140px)" }};
   width: 280px;
   z-index: 109011;
 
