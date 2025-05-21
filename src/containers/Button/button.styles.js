@@ -37,8 +37,7 @@ const ButtonForm = styled.div`
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  font-family: tfutura, Arial, sans-serif;
-  gap: 16px;
+  row-gap: 30px;
   min-height: 150px;
   padding: 15px;
   position: absolute;
@@ -48,8 +47,52 @@ const ButtonForm = styled.div`
   z-index: 109011;
 
   > div {
+    display: flex;
+
+    &:not(:last-child) {
+      flex-direction: column;
+      row-gap: 10px;
+
+      input {
+        font-size: 14px;
+        font-weight: 300;
+
+        &[type="checkbox"] {
+          appearance: none;
+          width: 15px;
+          height: 15px;
+          background-color: #fff;
+          border-width: 1px;
+          border-style: solid;
+          border-color: #000;
+          border-radius: 3px;
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: border-color 0.1s ease-in-out;
+          opacity: 0.5;
+
+          &:checked::after {
+            content: "";
+            position: absolute;
+            top: calc(50% - 5.5px);
+            left: calc(50% - 2.5px);
+            width: 3px;
+            height: 7px;
+            border: solid #fa8669; /* Цвет галочки */
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+
+          &:checked {
+            border-color: #fa8669;
+            border-width: 2px;
+          }
+        }
+      }
+    }
+
     &:last-child {
-      display: flex;
       column-gap: 10px;
 
       button {
@@ -65,6 +108,7 @@ const ButtonForm = styled.div`
         &:nth-child(1) {
           background-color: #fff;
           border: 1px solid #b7b7b7;
+          color: #000;
         }
 
         &:nth-child(2) {
@@ -76,6 +120,24 @@ const ButtonForm = styled.div`
       }
     }
   }
+
+  @media (hover: hover) {
+    input[type="checkbox"]:hover {
+      border-color: #fa8669 !important;
+      opacity: 1;
+    }
+  }
 `;
 
-export { ButtonContainer, Button, ButtonForm };
+const ButtonFormCheckbox = styled.label`
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+
+  span {
+    font-size: 11px;
+    font-weight: 400;
+  }
+`;
+
+export { ButtonContainer, Button, ButtonForm, ButtonFormCheckbox };

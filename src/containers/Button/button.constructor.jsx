@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, ButtonContainer, ButtonForm } from "./button.styles.js";
+import {
+  Button,
+  ButtonContainer,
+  ButtonForm,
+  ButtonFormCheckbox,
+} from "./button.styles.js";
 import { useDispatch } from "react-redux";
 import { RadiusInput, SettingsLabel } from "../Settings/settings.styles.js";
 
@@ -26,21 +31,26 @@ const ButtonConstructor = ({
   const extractContentFromHTML = (html) => {
     const hrefMatch = html.match(/href="([^"]*)"/);
     const textMatch = html.match(/<span>(.*?)<\/span>/);
+    const targetMatch = html.match(/target="([^"]*)"/);
+
     return {
       href: hrefMatch ? hrefMatch[1] : "",
       text: textMatch ? textMatch[1] : "",
+      target: targetMatch ? targetMatch[1] : "",
     };
   };
 
   const handleSave = () => {
     const updatedText = text
       .replace(/href="([^"]*)"/, `href="${content.href}"`)
+      .replace(/target="([^"]*)"/, `target="${content.target}"`)
       .replace(/<span>(.*?)<\/span>/, `<span>${content.text}</span>`);
+
+    setIsEditing(false);
     dispatch({
       type: "UPDATE_BLOCK",
       payload: { blockId, itemId, text: updatedText },
     });
-    setIsEditing(false);
   };
 
   const renderInputField = (label, name, value, placeholder, onChange) => (
@@ -53,6 +63,22 @@ const ButtonConstructor = ({
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
       />
+      {name === "href" && (
+        <ButtonFormCheckbox>
+          <input
+            checked={content.target === "_blank"}
+            type="checkbox"
+            name="target"
+            onChange={(e) =>
+              setContent((prev) => ({
+                ...prev,
+                target: e.target.checked ? "_blank" : "",
+              }))
+            }
+          />
+          <span>В новом окне</span>
+        </ButtonFormCheckbox>
+      )}
     </div>
   );
 
@@ -79,7 +105,7 @@ const ButtonConstructor = ({
             "Ссылка для кнопки",
             "href",
             content.href,
-            "https://",
+            "//",
             (value) => setContent((prev) => ({ ...prev, href: value })),
           )}
           {renderInputField(
