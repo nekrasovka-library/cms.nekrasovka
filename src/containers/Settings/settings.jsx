@@ -17,10 +17,9 @@ import ElementBackgroundColor from "./element-background-color.jsx";
 const Settings = () => {
   const dispatch = useDispatch();
   const { isSettingsOpen } = useSelector((state) => state.settings);
-  const { selectedBlockIndex, blocks } = useSelector((state) => state.blocks);
+  const { selectedBlockIndex, block } = useSelector((state) => state.blocks);
+  const { variant } = useSelector((state) => state.menu);
   const [blockSettings, setBlockSettings] = useState(null);
-  const [defaultStyles, setDefaultStyles] = useState(null);
-  const menu = useSelector((state) => state.menu);
 
   const updateBlockStyles = (payload) =>
     dispatch({ type: "UPDATE_BLOCK_STYLES", payload });
@@ -42,27 +41,22 @@ const Settings = () => {
     setBlockSettings((prev) => ({ ...prev, [name]: value }));
   };
 
-  const findByMenuId = (data, variantId) => {
-    for (const obj of data) {
-      const foundVariant = obj.variant.find(
-        (variant) => variant.id === variantId,
-      );
+  useEffect(() => {
+    if (selectedBlockIndex !== null) {
+      dispatch({ type: "GET_BLOCK" });
 
-      if (foundVariant) {
-        return foundVariant.styles; // Возвращаем найденный элемент
+      if (block) {
+        if (block.variantId) {
+          dispatch({
+            type: "GET_VARIANT",
+            payload: { id: block.variantId },
+          });
+        }
+
+        setBlockSettings(block.styles);
       }
     }
-
-    return null; // Возвращаем null, если элемент не найден
-  };
-
-  useEffect(() => {
-    setBlockSettings(blocks?.[selectedBlockIndex]?.styles || null);
-
-    const variantId = blocks?.[selectedBlockIndex]?.items[0].variantId;
-    const variant = findByMenuId(menu.data, variantId);
-    setDefaultStyles(variant);
-  }, [selectedBlockIndex, blocks, menu]);
+  }, [selectedBlockIndex, block, dispatch]);
 
   const renderSettingsComponent = (
     Component,
@@ -83,7 +77,7 @@ const Settings = () => {
           {...extractedProps}
           {...additionalProps}
           handleSettingsChange={handleSettingsChange}
-          defaultStyles={defaultStyles}
+          defaultStyles={variant?.styles}
         />
       );
     }
@@ -93,7 +87,7 @@ const Settings = () => {
           {...{ [propKey]: blockSettings[propKey] }}
           {...additionalProps}
           handleSettingsChange={handleSettingsChange}
-          defaultStyles={defaultStyles}
+          defaultStyles={variant?.styles}
         />
       );
     }

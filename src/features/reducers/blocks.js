@@ -1,5 +1,6 @@
 const initialState = {
   blocks: [],
+  block: null,
   totalBlocks: 0,
   selectedBlockIndex: null,
 };
@@ -109,6 +110,11 @@ const blocks = (state = initialState, action) => {
       return {
         ...state,
         selectedBlockIndex: action.payload.blockIndex,
+      };
+    case "GET_BLOCK":
+      return {
+        ...state,
+        block: state.blocks[state.selectedBlockIndex],
       };
     case "RESET_BLOCKS":
       return initialState;

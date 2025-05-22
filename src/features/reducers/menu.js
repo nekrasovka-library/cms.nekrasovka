@@ -1,7 +1,8 @@
 const initialState = {
   isMenuOpen: false,
   selectedMenuId: null,
-  variant: [],
+  variants: [],
+  variant: {},
   data: [
     {
       id: 1,
@@ -161,8 +162,22 @@ const initialState = {
   ],
 };
 
-const getVariant = (data, id) => {
+const findByMenuId = (data, id) => {
   return data.find((item) => item.id === id).variant;
+};
+
+const findByVariantId = (data, variantId) => {
+  for (const obj of data) {
+    const foundVariant = obj.variant.find(
+      (variant) => variant.id === variantId,
+    );
+
+    if (foundVariant) {
+      return foundVariant; // Возвращаем найденный элемент
+    }
+  }
+
+  return null; // Возвращаем null, если элемент не найден
 };
 
 const menu = (state = initialState, action) => {
@@ -176,7 +191,12 @@ const menu = (state = initialState, action) => {
       return {
         ...state,
         selectedMenuId: action.payload.id,
-        variant: getVariant(state.data, action.payload.id),
+        variants: findByMenuId(state.data, action.payload.id),
+      };
+    case "GET_VARIANT":
+      return {
+        ...state,
+        variant: findByVariantId(state.data, action.payload.id),
       };
     case "RESET_MENU":
       return initialState;

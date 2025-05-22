@@ -13,10 +13,10 @@ import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 
 const Menu = () => {
   const dispatch = useDispatch();
-  const { isMenuOpen, data, selectedMenuId, variant } = useSelector(
+  const { isMenuOpen, data, selectedMenuId, variants } = useSelector(
     (state) => state.menu,
   );
-  const isVariantOpen = variant.length > 0;
+  const isVariantOpen = variants.length > 0;
 
   const handleClose = () => {
     dispatch({ type: "RESET_MENU" });
@@ -27,7 +27,7 @@ const Menu = () => {
   };
 
   const handleVariant = (id) => {
-    const item = variant.find((item) => item.id === id);
+    const item = variants.find((item) => item.id === id);
 
     dispatch({
       type: "ADD_BLOCK",
@@ -66,7 +66,7 @@ const Menu = () => {
       </Container1>
       <Container2 $isMenuOpen={isVariantOpen && isMenuOpen}>
         <Main>
-          {variant.map(({ id, image }, index) => {
+          {variants.map(({ id, image }, index) => {
             return (
               <MainItem2 key={index} onClick={() => handleVariant(id)}>
                 <img src={image} alt="preview" />
