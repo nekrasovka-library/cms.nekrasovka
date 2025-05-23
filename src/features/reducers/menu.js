@@ -52,7 +52,7 @@ const initialState = {
           id: 3,
           image: "tpl_3.png",
           type: "image",
-          text: "imgfish.jpg",
+          text: "",
           menuId: 3,
           styles: {
             maxWidth: "12",

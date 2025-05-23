@@ -7,7 +7,7 @@ import {
   Dot,
 } from "./carousel.styles.js";
 
-const DEFAULT_IMAGE = "imgfish.jpg";
+const DEFAULT_IMAGE = `imgfish.jpg`;
 
 const CarouselConstructor = ({
   children,
@@ -103,7 +103,14 @@ const CarouselConstructor = ({
               $overhang={overhang}
               $borderRadius={borderRadius}
             >
-              <img src={children[index] || DEFAULT_IMAGE} alt="картинка" />
+              <img
+                src={`${import.meta.env.VITE_IMAGES_UR}${children[index]}`}
+                alt="картинка"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = DEFAULT_IMAGE;
+                }}
+              />
             </CarouselItem>
           );
         })}

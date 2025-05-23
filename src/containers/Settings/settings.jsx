@@ -95,8 +95,6 @@ const Settings = () => {
     return null;
   };
 
-  console.log("❗", blockSettings);
-
   return (
     <Container1 $isMenuOpen={isSettingsOpen}>
       <Header

@@ -16,7 +16,7 @@ const DEFAULT_GAP = 0;
 const DEFAULT_BORDER_RADIUS = 0;
 const DEFAULT_TRACKS = 3;
 const SWIPE_THRESHOLD = 50;
-const DEFAULT_IMAGE = "imgfish.jpg";
+const DEFAULT_IMAGE = `imgfish.jpg`;
 
 const useCarousel = (itemsCount, autoScrollInterval) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -133,9 +133,13 @@ const CarouselConstructor = ({
             $borderRadius={borderRadius}
           >
             <img
-              src={children[index] || DEFAULT_IMAGE}
+              src={`${import.meta.env.VITE_IMAGES_UR}${children[index]}`}
               alt="картинка"
               onClick={() => fileInputRef.current[index]?.click()}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = DEFAULT_IMAGE;
+              }}
             />
             <ImageFile
               ref={(el) => (fileInputRef.current[index] = el)}
