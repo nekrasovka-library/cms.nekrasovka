@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { ImageContainer } from "./image.styles.js";
-import ImageFile from "./image.file.jsx";
+import ImageFile from "./components/image.file.jsx";
 import { useDispatch } from "react-redux";
 
 const ImageConstructor = ({ text, blockId, itemId, borderRadius = 0 }) => {

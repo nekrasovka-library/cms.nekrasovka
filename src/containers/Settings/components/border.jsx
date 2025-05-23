@@ -7,8 +7,8 @@ import {
   PaddingSelect,
   RadiusInput,
   SettingsLabel,
-} from "./settings.styles.js";
-import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
+} from "../settings.styles.js";
+import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 
 const STYLE_OPTIONS = [
   { value: "solid", label: "Полная" },

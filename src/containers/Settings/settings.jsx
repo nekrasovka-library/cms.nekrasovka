@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Container1, SettingsTitleLabel } from "./settings.styles.js";
 import { useDispatch, useSelector } from "react-redux";
-import Padding from "./padding.jsx";
-import Header from "./header.jsx";
-import Columns from "./columns.jsx";
-import BackgroundColor from "./background-color.jsx";
-import Align from "./align.jsx";
-import Radius from "./radius.jsx";
-import Color from "./color.jsx";
-import Opacity from "./opacity.jsx";
-import Gap from "./gap.jsx";
-import Height from "./height.jsx";
-import Border from "./border.jsx";
-import ElementBackgroundColor from "./element-background-color.jsx";
+import Padding from "./components/padding.jsx";
+import Header from "./components/header.jsx";
+import Columns from "./components/columns.jsx";
+import BackgroundColor from "./components/background-color.jsx";
+import Align from "./components/align.jsx";
+import Radius from "./components/radius.jsx";
+import Color from "./components/color.jsx";
+import Opacity from "./components/opacity.jsx";
+import Gap from "./components/gap.jsx";
+import Height from "./components/height.jsx";
+import Border from "./components/border.jsx";
+import ElementBackgroundColor from "./components/element-background-color.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
   const { isSettingsOpen } = useSelector((state) => state.settings);
-  const { selectedBlockIndex, block } = useSelector((state) => state.blocks);
+  const { block } = useSelector((state) => state.blocks);
   const { variant } = useSelector((state) => state.menu);
   const [blockSettings, setBlockSettings] = useState(null);
 
@@ -42,7 +42,7 @@ const Settings = () => {
   };
 
   useEffect(() => {
-    if (selectedBlockIndex !== null) {
+    if (isSettingsOpen) {
       dispatch({ type: "GET_BLOCK" });
 
       if (block) {
@@ -56,7 +56,7 @@ const Settings = () => {
         setBlockSettings(block.styles);
       }
     }
-  }, [selectedBlockIndex, block, dispatch]);
+  }, [isSettingsOpen, block, dispatch]);
 
   const renderSettingsComponent = (
     Component,

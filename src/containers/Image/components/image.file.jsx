@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageFileContainer } from "./image.styles.js";
+import { ImageFileContainer } from "../image.styles.js";
 
 const ImageFile = ({ ref, handleFileChange }) => {
   return (

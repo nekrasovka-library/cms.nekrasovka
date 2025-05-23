@@ -3,16 +3,18 @@ import {
   RadiusContainer,
   RadiusInput,
   SettingsLabel,
-} from "./settings.styles.js";
+} from "../settings.styles.js";
 
-const Height = ({ height, handleSettingsChange }) => {
+const Radius = ({ borderRadius, handleSettingsChange }) => {
   return (
     <RadiusContainer>
-      <SettingsLabel>Высота</SettingsLabel>
+      <SettingsLabel>Радиус</SettingsLabel>
       <RadiusInput
         type="number"
-        name="height"
-        value={height}
+        min="0"
+        max="50"
+        name="borderRadius"
+        value={borderRadius}
         onChange={handleSettingsChange}
         placeholder="0"
       />
@@ -20,4 +22,4 @@ const Height = ({ height, handleSettingsChange }) => {
   );
 };
 
-export default Height;
+export default Radius;

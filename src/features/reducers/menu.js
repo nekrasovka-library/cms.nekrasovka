@@ -7,7 +7,7 @@ const initialState = {
     {
       id: 1,
       name: "Заголовок",
-      variant: [
+      variants: [
         {
           id: 1,
           text: "<div style='padding-bottom: 20px;font-size: 16px;font-weight: 600;letter-spacing: 2.5px;'>BASICS</div><div style='font-size: 36px;font-weight: 600;line-height: 1.23;'>Why typography matters?</div>",
@@ -27,7 +27,7 @@ const initialState = {
     {
       id: 2,
       name: "Текстовый блок",
-      variant: [
+      variants: [
         {
           id: 2,
           text: '<div style="font-size: 20px;line-height: 1.55;">Book design is the art of incorporating the content, style, format, design, and sequence of the various components of a book into a coherent whole. In the words of Jan Tschichold, "Methods and rules that cannot be improved upon have been developed over centuries. To produce perfect books, these rules must be revived and applied." The front matter, or preliminaries, is the first section of a book and typically has the fewest pages. While all pages are counted, page numbers are generally not printed, whether the pages are blank or contain content.</div>',
@@ -47,7 +47,7 @@ const initialState = {
     {
       id: 3,
       name: "Изображение",
-      variant: [
+      variants: [
         {
           id: 3,
           image: "tpl_3.png",
@@ -67,7 +67,7 @@ const initialState = {
     {
       id: 4,
       name: "Галерея",
-      variant: [
+      variants: [
         {
           id: 4,
           image: "tpl_670.png",
@@ -84,6 +84,7 @@ const initialState = {
             paddingBottom: "90px",
             backgroundColor: "#ffffff",
             borderRadius: "",
+            tracks: "2",
           },
         },
       ],
@@ -91,7 +92,7 @@ const initialState = {
     {
       id: 5,
       name: "Разделитель",
-      variant: [
+      variants: [
         {
           id: 5,
           image: "tpl_126.png",
@@ -112,7 +113,7 @@ const initialState = {
     {
       id: 6,
       name: "Колонки",
-      variant: [
+      variants: [
         {
           id: 6,
           image: "tpl_218.png",
@@ -133,7 +134,7 @@ const initialState = {
     {
       id: 7,
       name: "Кнопка",
-      variant: [
+      variants: [
         {
           id: 7,
           image: "tpl_191.png",
@@ -163,14 +164,12 @@ const initialState = {
 };
 
 const findByMenuId = (data, id) => {
-  return data.find((item) => item.id === id).variant;
+  return data.find((item) => item.id === id).variants;
 };
 
 const findByVariantId = (data, variantId) => {
   for (const obj of data) {
-    const foundVariant = obj.variant.find(
-      (variant) => variant.id === variantId,
-    );
+    const foundVariant = obj.variants.find((v) => v.id === variantId);
 
     if (foundVariant) {
       return foundVariant; // Возвращаем найденный элемент

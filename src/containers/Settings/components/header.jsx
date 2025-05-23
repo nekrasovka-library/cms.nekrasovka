@@ -4,7 +4,7 @@ import {
   HeaderButtonSave,
   HeaderButtonSaveAndExit,
   HeaderContainer,
-} from "./settings.styles.js";
+} from "../settings.styles.js";
 
 const Header = ({ saveSettings, saveAndExitSettings }) => {
   return (

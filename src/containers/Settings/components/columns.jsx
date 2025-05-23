@@ -4,7 +4,7 @@ import {
   GridColumn,
   GridContainer,
   SettingsLabel,
-} from "./settings.styles.js";
+} from "../settings.styles.js";
 
 const Columns = ({ maxWidth, handleSettingsChange }) => {
   const [hoveredColumns, setHoveredColumns] = useState(null); // Отслеживание колонок при наведении

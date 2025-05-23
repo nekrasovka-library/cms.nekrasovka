@@ -146,6 +146,7 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
       children: text,
       maxWidth: calculateBlockWidth(styles.maxWidth),
       borderRadius: styles.borderRadius,
+      tracks: styles.tracks,
     };
   }
 

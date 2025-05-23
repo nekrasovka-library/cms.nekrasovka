@@ -3,7 +3,7 @@ import {
   AlignContainer,
   PaddingSelect,
   SettingsLabel,
-} from "./settings.styles.js";
+} from "../settings.styles.js";
 
 const ALIGN_OPTIONS = [
   { value: "left", label: "По левому краю" },

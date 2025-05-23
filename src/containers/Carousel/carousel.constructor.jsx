@@ -7,7 +7,7 @@ import {
   Dot,
 } from "./carousel.styles.js";
 import { useDispatch } from "react-redux";
-import ImageFile from "../Image/image.file.jsx";
+import ImageFile from "../Image/components/image.file.jsx";
 
 const CarouselConstructor = ({
   children,
@@ -19,6 +19,7 @@ const CarouselConstructor = ({
   blockId,
   itemId,
   borderRadius = 0,
+  tracks = 3,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -124,6 +125,7 @@ const CarouselConstructor = ({
         onTouchEnd={handleTouchEnd}
         $offset={offset}
         $gap={gap}
+        $tracks={tracks}
       >
         {children.map((child, index) => {
           return (

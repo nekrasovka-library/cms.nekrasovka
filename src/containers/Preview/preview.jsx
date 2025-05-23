@@ -4,7 +4,7 @@ import Text from "../Text/text.jsx";
 import Image from "../Image/image.preview.jsx";
 import Carousel from "../Carousel/carousel.preview.jsx";
 import Divider from "../Divider/divider.jsx";
-import TypeBlock from "../Block/type.block.jsx";
+import TypeBlock from "../Block/components/type.block.jsx";
 import { PreviewContainer } from "./preview.styles.js";
 import Button from "../Button/button.preview.jsx";
 

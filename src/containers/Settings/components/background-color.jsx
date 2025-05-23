@@ -5,27 +5,23 @@ import {
   ColorContainer,
   ColorInput,
   SettingsLabel,
-} from "./settings.styles.js";
-import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
+} from "../settings.styles.js";
+import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 
 const BackgroundColor = ({
-  elementBackgroundColor,
+  backgroundColor,
   handleSettingsChange,
   defaultStyles,
 }) => {
   return (
     <ColorContainer>
-      <SettingsLabel>Цвет элемента</SettingsLabel>
+      <SettingsLabel>Цвет блока</SettingsLabel>
       <ColorChange>
-        <ColorCircle $backgroundColor={elementBackgroundColor} />
+        <ColorCircle $backgroundColor={backgroundColor} />
         <ColorInput
           type="text"
-          name="elementBackgroundColor"
-          value={
-            elementBackgroundColor === "transparent"
-              ? ""
-              : elementBackgroundColor
-          }
+          name="backgroundColor"
+          value={backgroundColor === "transparent" ? "" : backgroundColor}
           onChange={handleSettingsChange}
           placeholder="#ffffff"
         />
@@ -35,8 +31,8 @@ const BackgroundColor = ({
           onClick={() =>
             handleSettingsChange({
               target: {
-                name: "elementBackgroundColor",
-                value: defaultStyles.elementBackgroundColor,
+                name: "backgroundColor",
+                value: defaultStyles.backgroundColor,
               },
             })
           }

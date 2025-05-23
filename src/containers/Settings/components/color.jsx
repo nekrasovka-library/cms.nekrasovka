@@ -5,8 +5,8 @@ import {
   ColorContainer,
   ColorInput,
   SettingsLabel,
-} from "./settings.styles.js";
-import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
+} from "../settings.styles.js";
+import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 
 const Color = ({ color, handleSettingsChange, defaultStyles }) => {
   return (

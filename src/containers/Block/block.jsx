@@ -8,7 +8,7 @@ import {
 import Tooltip from "../../nekrasovka-ui/Tooltip/tooltip.jsx";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import TypeBlock from "./type.block.jsx";
+import TypeBlock from "./components/type.block.jsx";
 
 const Block = ({
   blockIndex,
@@ -29,6 +29,7 @@ const Block = ({
     dispatch({ type: "RESET_MENU" });
     dispatch({ type: "TOGGLE_MENU" });
     dispatch({ type: "CHANGE_EDITOR", payload: null });
+    dispatch({ type: "SET_BLOCK", payload: { blockIndex } });
   };
 
   const handleDeleteBlock = () => {

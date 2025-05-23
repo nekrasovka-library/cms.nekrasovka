@@ -3,7 +3,7 @@ import {
   PaddingContainer,
   SettingsLabel,
   PaddingSelect,
-} from "./settings.styles.js";
+} from "../settings.styles.js";
 
 const PADDING_OPTIONS = [
   { value: "0px", label: "0" },
