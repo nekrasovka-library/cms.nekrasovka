@@ -7,6 +7,8 @@ import {
   Dot,
 } from "./carousel.styles.js";
 
+const DEFAULT_IMAGE = "imgfish.jpg";
+
 const CarouselConstructor = ({
   children,
   maxWidth = 600,
@@ -15,6 +17,7 @@ const CarouselConstructor = ({
   gap = 0,
   isDots = true,
   borderRadius = 0,
+  tracks,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -92,7 +95,7 @@ const CarouselConstructor = ({
         $offset={offset}
         $gap={gap}
       >
-        {children.map((child, index) => {
+        {Array.from({ length: tracks }).map((_, index) => {
           return (
             <CarouselItem
               key={index}
@@ -100,14 +103,14 @@ const CarouselConstructor = ({
               $overhang={overhang}
               $borderRadius={borderRadius}
             >
-              <img src={child} alt="картинка" />
+              <img src={children[index] || DEFAULT_IMAGE} alt="картинка" />
             </CarouselItem>
           );
         })}
       </CarouselTrack>
       {isDots && (
         <DotContainer $gap={gap} $overhang={overhang}>
-          {children.map((_, index) => (
+          {Array.from({ length: tracks }).map((_, index) => (
             <Dot
               key={index}
               onClick={() => handleDotClick(index)}
