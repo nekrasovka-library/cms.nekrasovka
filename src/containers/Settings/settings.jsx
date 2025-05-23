@@ -13,6 +13,7 @@ import Gap from "./components/gap.jsx";
 import Height from "./components/height.jsx";
 import Border from "./components/border.jsx";
 import ElementBackgroundColor from "./components/element-background-color.jsx";
+import Tracks from "./components/tracks.jsx";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -94,6 +95,8 @@ const Settings = () => {
     return null;
   };
 
+  console.log("❗", blockSettings);
+
   return (
     <Container1 $isMenuOpen={isSettingsOpen}>
       <Header
@@ -107,6 +110,7 @@ const Settings = () => {
       {renderSettingsComponent(Padding, ["paddingTop", "paddingBottom"])}
       {renderSettingsComponent(BackgroundColor, "backgroundColor")}
       <SettingsTitleLabel>Настройки элемента</SettingsTitleLabel>
+      {renderSettingsComponent(Tracks, "tracks")}
       {renderSettingsComponent(Color, "color")}
       {renderSettingsComponent(
         ElementBackgroundColor,
