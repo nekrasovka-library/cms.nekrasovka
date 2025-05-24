@@ -8,6 +8,7 @@ import {
 } from "./carousel.styles.js";
 import { useDispatch } from "react-redux";
 import ImageFile from "../Image/components/image.file.jsx";
+import axios from "axios";
 
 const DEFAULT_MAX_WIDTH = 600;
 const DEFAULT_AUTO_SCROLL = 0;
@@ -102,15 +103,24 @@ const CarouselConstructor = ({
     handleTouchEnd,
   } = useCarousel(tracks, autoScrollInterval);
 
-  const handleFileUpdate = (file, index) => {
+  const handleFileUpdate = async (file, index) => {
     if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+    const response = await axios.post(
+      `${import.meta.env.VITE_APP_API}images/upload`,
+      formData,
+    );
 
     dispatch({
       type: "UPDATE_BLOCK",
       payload: {
         blockId,
         itemId,
-        text: children.map((child, i) => (i === index ? file.name : child)),
+        text: Array.from({ length: tracks }).map((_, i) =>
+          i === index ? response.data.file.filename : children[i] || "",
+        ),
       },
     });
   };
@@ -133,7 +143,7 @@ const CarouselConstructor = ({
             $borderRadius={borderRadius}
           >
             <img
-              src={`${import.meta.env.VITE_IMAGES_UR}${children[index]}`}
+              src={`${import.meta.env.VITE_IMAGES_URL}${children[index]}`}
               alt="картинка"
               onClick={() => fileInputRef.current[index]?.click()}
               onError={(e) => {

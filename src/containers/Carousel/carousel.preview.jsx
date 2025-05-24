@@ -104,7 +104,7 @@ const CarouselConstructor = ({
               $borderRadius={borderRadius}
             >
               <img
-                src={`${import.meta.env.VITE_IMAGES_UR}${children[index]}`}
+                src={`${import.meta.env.VITE_IMAGES_URL}${children[index]}`}
                 alt="картинка"
                 onError={(e) => {
                   e.target.onerror = null;

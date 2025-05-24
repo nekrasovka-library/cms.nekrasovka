@@ -41,7 +41,7 @@ const ImageConstructor = ({ text, blockId, itemId, borderRadius = 0 }) => {
   return (
     <ImageContainer $borderRadius={borderRadius}>
       <img
-        src={`${import.meta.env.VITE_IMAGES_UR}${text}`}
+        src={`${import.meta.env.VITE_IMAGES_URL}${text}`}
         alt="картинка"
         onClick={handleFileClick}
         onError={(e) => {
