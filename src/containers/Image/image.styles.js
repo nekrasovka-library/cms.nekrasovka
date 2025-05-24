@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 const ImageContainer = styled.div`
   display: flex;
+  height: 550px;
 
   img {
-    min-width: 100%;
     width: 100%;
+    height: 100%;
     border-radius: ${({ $borderRadius }) => $borderRadius}px;
+    object-fit: cover;
   }
 `;
 
