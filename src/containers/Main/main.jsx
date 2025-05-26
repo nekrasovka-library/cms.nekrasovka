@@ -1,12 +1,19 @@
 import React from "react";
-import Preview from "../Preview/preview.jsx";
-import Constructor from "../Constructor/constructor.jsx";
-import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router";
+import Projects from "../Projects/projects.jsx";
+import Page from "../Page/page.jsx";
+import Project from "../Project/project.jsx";
 
 const Main = () => {
-  const { isPreview } = useSelector((state) => state.preview);
-
-  return isPreview ? <Preview /> : <Constructor />;
+  return (
+    <Routes>
+      <Route path="projects" element={<Projects />}>
+        <Route path=":projectid" element={<Project />}>
+          <Route path=":pageid" element={<Page />} />
+        </Route>
+      </Route>
+    </Routes>
+  );
 };
 
 export default Main;

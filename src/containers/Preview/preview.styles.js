@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-const PreviewContainer = styled.main`
-  height: 100%;
-`;
+const PreviewContainer = styled.main``;
 
 export { PreviewContainer };

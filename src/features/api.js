@@ -15,8 +15,4 @@ ax.interceptors.response.use(
   (error) => {},
 );
 
-const fetchInitData = async () => {
-  return [{ id: 1, title: "test" }];
-};
-
-export { fetchInitData };
+export {};

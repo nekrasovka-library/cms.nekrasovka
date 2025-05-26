@@ -25,7 +25,7 @@ const Columns = ({ maxWidth, handleSettingsChange }) => {
   return (
     <ColumnsContainer>
       <div>
-        <SettingsLabel>Ширина блока</SettingsLabel>
+        <SettingsLabel>Ширина</SettingsLabel>
         <SettingsLabel>
           {hoveredColumns || maxWidth} <span>колонок</span>
         </SettingsLabel>

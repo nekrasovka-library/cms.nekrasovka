@@ -136,7 +136,12 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
   }
 
   if (type === "image") {
-    return { blockId, itemId, text, borderRadius: styles.borderRadius };
+    return {
+      blockId,
+      itemId,
+      text,
+      borderRadius: styles.borderRadius,
+    };
   }
 
   if (type === "carousel") {
