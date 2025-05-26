@@ -2,6 +2,7 @@ import React from "react";
 import { ProjectMainContainer } from "../project.styles.js";
 import { Link } from "react-router";
 import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
+import ProjectMainCard from "./project.main.card.jsx";
 
 const ProjectMain = () => {
   const pages = [
@@ -21,19 +22,13 @@ const ProjectMain = () => {
 
   return (
     <ProjectMainContainer>
-      {pages.map((page) => (
-        <div key={page.pageId}>
-          <Link to={page.pageId}>
-            {page.position === 1 && <Icon icon="home" />}
-            <span>{page.name}</span>
-          </Link>
-          <div>
-            <div>
-              <Icon icon="trash" />
-              <span>УДАЛИТЬ</span>
-            </div>
-          </div>
-        </div>
+      {pages.map(({ pageId, name, position }) => (
+        <ProjectMainCard
+          key={pageId}
+          pageId={pageId}
+          name={name}
+          position={position}
+        />
       ))}
     </ProjectMainContainer>
   );

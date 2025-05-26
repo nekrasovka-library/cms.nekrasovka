@@ -60,47 +60,52 @@ const ProjectHeaderContainer = styled.div`
 const ProjectMainContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
 
-  a {
-    color: #000;
+const ProjectMainCardContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  border-bottom: 1px solid #d5d5d5;
+  cursor: pointer;
+
+  > :nth-child(1) {
+    display: flex;
+    width: 100%;
+    column-gap: 10px;
   }
 
-  > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    border-bottom: 1px solid #d5d5d5;
-    cursor: pointer;
+  > :last-child {
+    visibility: hidden;
 
-    > :nth-child(1) {
+    > div {
       display: flex;
-      width: 100%;
+      align-items: center;
       column-gap: 10px;
-    }
-
-    > :last-child {
-      visibility: hidden;
-
-      > div {
-        display: flex;
-        align-items: center;
-        column-gap: 10px;
-        font-size: 10px;
-      }
+      font-size: 10px;
     }
   }
 
   @media (hover: hover) {
-    > div a:hover,
-    > div > :last-child > div:hover {
+    a:hover,
+    > :last-child > div:hover {
       color: #f4846b;
     }
 
-    > div:hover > div:last-child {
+    &:hover > div:last-child {
       visibility: visible;
     }
   }
+
+  a {
+    color: #000;
+  }
 `;
 
-export { ProjectContainer, ProjectHeaderContainer, ProjectMainContainer };
+export {
+  ProjectContainer,
+  ProjectHeaderContainer,
+  ProjectMainContainer,
+  ProjectMainCardContainer,
+};
