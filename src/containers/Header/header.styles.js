@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -52,11 +53,23 @@ const HeaderLeftBlankPage = styled.div`
   column-gap: 8px;
 `;
 
-const HeaderLeftHome = styled.span`
+const HeaderLeftHome = styled(Link)`
   display: flex;
   align-items: center;
   column-gap: 8px;
   cursor: pointer;
+  text-decoration: none;
+  color: #000;
+
+  @media (hover: hover) {
+    &:hover {
+      color: #f4846b;
+
+      svg path {
+        fill: #f4846b;
+      }
+    }
+  }
 `;
 
 export {

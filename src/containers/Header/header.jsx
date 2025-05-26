@@ -21,9 +21,9 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderLeft>
-        <HeaderLeftHome onClick={() => console.log("home")}>
+        <HeaderLeftHome to="/projects">
           <Icon icon="home" />
-          <span>Мои сайты</span>
+          <span>Мои проекты</span>
         </HeaderLeftHome>
         <HeaderLeftBlankPage>
           <Icon icon="blankPage" />

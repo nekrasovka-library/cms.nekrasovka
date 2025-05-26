@@ -54,16 +54,24 @@ const ProjectCardContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
   > div {
     &:nth-child(1) {
       display: flex;
       height: 140px;
       border-bottom: 1px solid #d9d9d9;
-      font-size: 36px;
-      line-height: 1.2;
-      font-weight: 300;
-      text-overflow: ellipsis;
       cursor: pointer;
+
+      a {
+        font-size: 36px;
+        line-height: 1.2;
+        font-weight: 300;
+        text-overflow: ellipsis;
+      }
     }
 
     &:nth-child(2) {
@@ -92,8 +100,8 @@ const ProjectCardContainer = styled.div`
       background-color: #eee;
     }
 
-    > div:nth-child(1):hover,
-    > div:nth-child(2) > div:hover {
+    > div:nth-child(1):hover a,
+    > div:nth-child(2) > div a:hover {
       color: #f4846b;
     }
   }
