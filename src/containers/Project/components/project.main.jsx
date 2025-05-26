@@ -1,7 +1,5 @@
 import React from "react";
 import { ProjectMainContainer } from "../project.styles.js";
-import { Link } from "react-router";
-import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 import ProjectMainCard from "./project.main.card.jsx";
 
 const ProjectMain = () => {
