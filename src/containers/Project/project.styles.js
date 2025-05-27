@@ -44,14 +44,36 @@ const ProjectHeaderContainer = styled.div`
       }
 
       a {
-        font-size: 18px;
         color: #000;
+      }
+
+      > div {
+        display: flex;
+        column-gap: 20px;
+        align-items: center;
+
+        > div {
+          display: flex;
+          align-items: center;
+          column-gap: 10px;
+          font-size: 18px;
+          color: #000;
+          cursor: pointer;
+
+          &:nth-child(1) {
+            svg {
+              width: 27px;
+              height: 27px;
+            }
+          }
+        }
       }
     }
   }
 
   @media (hover: hover) {
-    > div:nth-child(2) a:hover {
+    > div:nth-child(2) > div > div a:hover,
+    > div:nth-child(2) > div > div div:hover {
       color: #f4846b;
     }
   }

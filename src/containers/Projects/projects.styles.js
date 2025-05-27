@@ -107,9 +107,78 @@ const ProjectCardContainer = styled.div`
   }
 `;
 
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 111111;
+`;
+
+const ModalContent = styled.div`
+  background-color: white;
+  border-radius: 8px;
+  width: 600px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const FormTitle = styled.h2`
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+  padding: 30px 15px;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 30px 15px 15px;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &.primary {
+    background-color: #fa8669;
+    color: white;
+  }
+
+  &.secondary {
+    background: #fff;
+    border: 1px solid #b7b7b7;
+    color: #000;
+  }
+
+  @media (hover: hover) {
+    &.secondary:hover {
+      border-color: #fa8669;
+    }
+  }
+`;
+
 export {
   ProjectCardContainer,
   ProjectsContainer,
   ProjectsHeaderContainer,
   ProjectsCardsContainer,
+  ButtonGroup,
+  Form,
+  ModalContent,
+  ModalOverlay,
+  Button,
+  FormTitle,
 };

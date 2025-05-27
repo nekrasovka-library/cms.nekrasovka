@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import * as path from "node:path";
 import process from "process";
+import { readFileSync, writeFileSync } from "node:fs";
 
 // Инициализация dotenv
 dotenv.config();
@@ -51,7 +52,6 @@ const initializeApp = () => {
 const configureRoutes = (app) => {
   const upload = multer({ storage: createStorage() });
 
-  // API роуты
   app.post("/api/images/upload", upload.single("image"), async (req, res) => {
     const file = req.file;
 
@@ -66,6 +66,172 @@ const configureRoutes = (app) => {
       success: true,
       file,
     });
+  });
+
+  app.get("/api/projects", async (req, res) => {
+    try {
+      const projectsData = readFileSync(
+        join(__dirname, "projects.json"),
+        "utf8",
+      );
+
+      const projects = JSON.parse(projectsData);
+      return res.json({
+        success: true,
+        data: projects,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
+  app.get("/api/projects/:projectId", async (req, res) => {
+    try {
+      const projectsData = readFileSync(
+        join(__dirname, "projects.json"),
+        "utf8",
+      );
+      const projects = JSON.parse(projectsData);
+      const project = projects.find(
+        (project) => project.projectId === +req.params.projectId,
+      );
+
+      if (!project) {
+        return res.status(404).json({
+          success: false,
+          error: "Project not found",
+        });
+      }
+
+      return res.json({
+        success: true,
+        data: project,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
+  app.put("/api/projects/create", async (req, res) => {
+    try {
+      const projectsData = readFileSync(
+        join(__dirname, "projects.json"),
+        "utf8",
+      );
+      const projects = JSON.parse(projectsData);
+
+      const maxId = Math.max(...projects.map((p) => p.projectId), 0);
+      const newProject = {
+        ...req.body.project,
+        projectId: maxId + 1,
+        pages: [],
+      };
+
+      projects.push(newProject);
+      writeFileSync(
+        join(__dirname, "projects.json"),
+        JSON.stringify(projects, null, 2),
+      );
+
+      return res.json({
+        success: true,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
+  app.get("/api/projects/:projectId/:pageId/delete", async (req, res) => {
+    try {
+      const projectsData = readFileSync(
+        join(__dirname, "projects.json"),
+        "utf8",
+      );
+      const projects = JSON.parse(projectsData);
+      const project = projects.find(
+        (p) => p.projectId === +req.params.projectId,
+      );
+
+      if (!project) {
+        return res.status(404).json({
+          success: false,
+          error: "Project not found",
+        });
+      }
+
+      project.pages = project.pages.filter(
+        (page) => page.pageId !== +req.params.pageId,
+      );
+
+      writeFileSync(
+        join(__dirname, "projects.json"),
+        JSON.stringify(projects, null, 2),
+      );
+
+      return res.json({
+        success: true,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
+  app.get("/api/projects/:projectId/page/create", async (req, res) => {
+    try {
+      const projectsData = readFileSync(
+        join(__dirname, "projects.json"),
+        "utf8",
+      );
+      const projects = JSON.parse(projectsData);
+      const project = projects.find(
+        (p) => p.projectId === +req.params.projectId,
+      );
+
+      if (!project) {
+        return res.status(404).json({
+          success: false,
+          error: "Project not found",
+        });
+      }
+
+      const maxPageId = Math.max(
+        ...projects.flatMap((p) => p.pages.map((page) => page.pageId)),
+        0,
+      );
+      const newPage = {
+        name: "Blank page",
+        pageId: maxPageId + 1,
+        projectId: project.projectId,
+        position: project.pages.length > 0 ? 2 : 1,
+      };
+
+      project.pages.push(newPage);
+      writeFileSync(
+        join(__dirname, "projects.json"),
+        JSON.stringify(projects, null, 2),
+      );
+
+      return res.json({
+        success: true,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
   });
 
   // Обработка всех остальных маршрутов - отдаем index.html

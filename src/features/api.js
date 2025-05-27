@@ -15,4 +15,38 @@ ax.interceptors.response.use(
   (error) => {},
 );
 
-export {};
+const fetchProjectFromApi = async (projectId) => {
+  return await axios.get(
+    `${import.meta.env.VITE_APP_API}projects/${projectId}`,
+  );
+};
+
+const fetchProjectsFromApi = async () => {
+  return await axios.get(`${import.meta.env.VITE_APP_API}projects`);
+};
+
+const fetchCreateProjectToApi = async (project) => {
+  return await axios.put(`${import.meta.env.VITE_APP_API}projects/create`, {
+    project,
+  });
+};
+
+const fetchCreateProjectPageToApi = async ({ projectId }) => {
+  return await axios.get(
+    `${import.meta.env.VITE_APP_API}projects/${projectId}/page/create`,
+  );
+};
+
+const fetchDeleteProjectPageToApi = async ({ projectId, pageId }) => {
+  return await axios.get(
+    `${import.meta.env.VITE_APP_API}projects/${projectId}/${pageId}/delete`,
+  );
+};
+
+export {
+  fetchProjectFromApi,
+  fetchProjectsFromApi,
+  fetchCreateProjectToApi,
+  fetchCreateProjectPageToApi,
+  fetchDeleteProjectPageToApi,
+};

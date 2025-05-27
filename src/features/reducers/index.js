@@ -4,14 +4,17 @@ import blocks from "./blocks";
 import settings from "./settings";
 import preview from "./preview";
 import editor from "./editor.js";
+import projects from "./projects";
+import project from "./project";
 
-// Объединяем редьюсеры
 const rootReducer = combineReducers({
   menu: menu,
   blocks: blocks,
   settings: settings,
   preview: preview,
   editor: editor,
+  projects: projects,
+  project: project,
 });
 
 export default rootReducer;

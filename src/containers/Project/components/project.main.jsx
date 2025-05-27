@@ -2,28 +2,14 @@ import React from "react";
 import { ProjectMainContainer } from "../project.styles.js";
 import ProjectMainCard from "./project.main.card.jsx";
 
-const ProjectMain = () => {
-  const pages = [
-    {
-      name: "Blank page",
-      pageId: "1",
-      projectId: "1",
-      position: 1,
-    },
-    {
-      name: "Blank page",
-      pageId: "2",
-      projectId: "1",
-      position: 2,
-    },
-  ];
-
+const ProjectMain = ({ pages }) => {
   return (
     <ProjectMainContainer>
-      {pages.map(({ pageId, name, position }) => (
+      {pages.map(({ pageId, projectId, name, position }) => (
         <ProjectMainCard
           key={pageId}
           pageId={pageId}
+          projectId={projectId}
           name={name}
           position={position}
         />

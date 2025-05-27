@@ -2,11 +2,11 @@ import React from "react";
 import { ProjectCardContainer } from "../projects.styles.js";
 import { Link } from "react-router";
 
-const ProjectCard = ({ projectId = 1, href = "" }) => {
+const ProjectCard = ({ projectId = 1, href = "", name = "" }) => {
   return (
     <ProjectCardContainer>
       <div>
-        <Link to={`${projectId}`}>Тест</Link>
+        <Link to={`${projectId}`}>{name}</Link>
       </div>
       <div>
         <div>

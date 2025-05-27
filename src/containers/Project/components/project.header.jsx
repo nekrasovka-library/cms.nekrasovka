@@ -1,9 +1,15 @@
 import React from "react";
 import { ProjectHeaderContainer } from "../project.styles.js";
-import { Link, useParams } from "react-router";
+import { Link } from "react-router";
+import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
+import { useDispatch } from "react-redux";
 
-const ProjectHeader = ({ href }) => {
-  let { projectId } = useParams();
+const ProjectHeader = ({ href, name, projectId }) => {
+  const dispatch = useDispatch();
+
+  const handleCreateProjectPage = () => {
+    dispatch({ type: "CREATE_PROJECT_PAGE_REQUEST", projectId });
+  };
 
   return (
     <ProjectHeaderContainer $isHref={!!href}>
@@ -20,8 +26,19 @@ const ProjectHeader = ({ href }) => {
         )}
       </div>
       <div>
-        <span>Project {projectId}</span>
-        <Link to={`/settings/${projectId}`}>НАСТРОЙКИ ПРОЕКТА</Link>
+        <div>
+          <span>{name}</span>
+        </div>
+        <div>
+          <div>
+            <Icon icon="settings" fill="#fa886e" />
+            <Link to={`/settings/${projectId}`}>Настройки проекта</Link>
+          </div>
+          <div onClick={handleCreateProjectPage}>
+            <Icon icon="add" fill="#fa886e" />
+            <div>Создать новую страницу</div>
+          </div>
+        </div>
       </div>
     </ProjectHeaderContainer>
   );
