@@ -116,6 +116,12 @@ const blocks = (state = initialState, action) => {
         ...state,
         block: state.blocks[state.selectedBlockIndex],
       };
+    case "GET_BLOCKS":
+      return {
+        ...state,
+        blocks: action.payload,
+        totalBlocks: action.payload.length,
+      };
     case "RESET_BLOCKS":
       return initialState;
     default:

@@ -7,6 +7,7 @@ import arrowDown from "./arrow_down.jsx";
 import arrowUp from "./arrow_up.jsx";
 import home from "./home";
 import blankPage from "./blank_page.jsx";
+import globus from "./globus.jsx";
 
 export default {
   add,
@@ -18,4 +19,5 @@ export default {
   arrowUp,
   home,
   blankPage,
+  globus,
 };

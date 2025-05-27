@@ -12,7 +12,7 @@ const Main = () => {
         <Route index element={<Projects />} />
         <Route path=":projectId">
           <Route index element={<Project />} />
-          <Route path=":pageid" element={<Page />} />
+          <Route path=":pageId" element={<Page />} />
         </Route>
       </Route>
       <Route path="settings">

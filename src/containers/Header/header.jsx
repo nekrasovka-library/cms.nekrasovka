@@ -2,20 +2,36 @@ import React from "react";
 import {
   HeaderContainer,
   HeaderLeft,
-  HeaderLeftBlankPage,
+  HeaderLeftBlankPageLink,
+  HeaderLeftBlankPageList,
   HeaderLeftHome,
   HeaderRight,
   HeaderRightPreview,
 } from "./header.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
+import { Link } from "react-router";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { isPreview } = useSelector((state) => state.preview);
-
-  const toggleView = () => {
+  const { projectData } = useSelector((state) => state.project);
+  const { pageData, isPageLoaded } = useSelector((state) => state.page);
+  const { blocks } = useSelector((state) => state.blocks);
+  const handleToggleView = () => {
     dispatch({ type: "TOGGLE_PREVIEW" });
+  };
+
+  const handleSaveProjectPage = () => {
+    dispatch({
+      type: "UPDATE_PROJECT_PAGE_REQUEST",
+      projectId: projectData.projectId,
+      pageId: pageData.pageId,
+      page: {
+        ...pageData,
+        blocks,
+      },
+    });
   };
 
   return (
@@ -25,14 +41,29 @@ const Header = () => {
           <Icon icon="home" />
           <span>Мои проекты</span>
         </HeaderLeftHome>
-        <HeaderLeftBlankPage>
-          <Icon icon="blankPage" />
-          <span>Тестовая страница</span>
-        </HeaderLeftBlankPage>
+        {isPageLoaded && (
+          <>
+            /
+            <HeaderLeftBlankPageLink>
+              <Icon icon="globus" />
+              <Link to={`/projects/${projectData.projectId}`}>
+                {projectData.name}
+              </Link>
+            </HeaderLeftBlankPageLink>
+            /
+            <HeaderLeftBlankPageList>
+              <Icon icon="blankPage" />
+              <span>{pageData.name}</span>
+            </HeaderLeftBlankPageList>
+          </>
+        )}
       </HeaderLeft>
       <HeaderRight>
-        <HeaderRightPreview onClick={toggleView}>
+        <HeaderRightPreview onClick={handleToggleView}>
           {isPreview ? "Редактирование" : "Предпросмотр"}
+        </HeaderRightPreview>
+        <HeaderRightPreview onClick={handleSaveProjectPage}>
+          Сохранить страницу
         </HeaderRightPreview>
       </HeaderRight>
     </HeaderContainer>

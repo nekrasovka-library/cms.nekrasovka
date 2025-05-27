@@ -37,6 +37,8 @@ const Constructor = () => {
     button: Button,
   };
 
+  console.log("❗", blocks);
+
   const renderBlocks = () =>
     blocks.map(({ id, items, styles }, blockIndex) => {
       return (

@@ -13,7 +13,6 @@ const Project = () => {
   );
 
   useEffect(() => {
-    dispatch({ type: "RESET_PROJECT" });
     dispatch({
       type: "GET_PROJECT_REQUEST",
       projectId,

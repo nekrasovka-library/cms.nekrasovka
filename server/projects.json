@@ -6,35 +6,62 @@
     "pages": [
       {
         "name": "Blank page",
-        "pageId": 6,
-        "projectId": 1,
-        "position": 1
-      }
-    ]
-  },
-  {
-    "name": "Test 2",
-    "href": "",
-    "projectId": 2,
-    "pages": [
-      {
-        "name": "Blank page",
         "pageId": 1,
-        "projectId": 2,
-        "position": 1
-      }
-    ]
-  },
-  {
-    "name": "Test 3",
-    "href": "",
-    "projectId": 3,
-    "pages": [
+        "projectId": 1,
+        "position": 1,
+        "blocks": [
+          {
+            "items": [
+              {
+                "text": "<div style=\"padding-bottom: 20px;font-size: 16px;font-weight: 600;letter-spacing: 2.5px\">BASICS</div><div style=\"font-size: 36px;font-weight: 600;line-height: 1.23\">Why typography matters?</div>",
+                "type": "text",
+                "variantId": 1
+              }
+            ],
+            "styles": {
+              "maxWidth": "10",
+              "paddingTop": "135px",
+              "paddingBottom": "90px",
+              "backgroundColor": "#ffffff",
+              "textAlign": "center"
+            },
+            "id": 1
+          },
+          {
+            "items": [
+              {
+                "text": "<div style=\"font-size: 20px;line-height: 1.55\">Book design is the art of incorporating the content, style, format, design, and sequence of the various components of a book into a coherent whole. In the words of Jan Tschichold, \"Methods and rules that cannot be improved upon have been developed over centuries. To produce perfect books, these rules must be revived and applied.\" The front matter, or preliminaries, is the first section of a book and typically has the fewest pages. While all pages are counted, page numbers are generally not printed, whether the pages are blank or contain content.</div>",
+                "type": "text",
+                "variantId": 2
+              }
+            ],
+            "styles": {
+              "maxWidth": "8",
+              "paddingTop": "60px",
+              "paddingBottom": "60px",
+              "backgroundColor": "#ffffff",
+              "textAlign": "left"
+            },
+            "id": 2
+          }
+        ],
+        "html": ""
+      },
       {
         "name": "Blank page",
         "pageId": 2,
-        "projectId": 3,
-        "position": 1
+        "projectId": 1,
+        "position": 2,
+        "blocks": [],
+        "html": ""
+      },
+      {
+        "name": "Blank page",
+        "pageId": 3,
+        "projectId": 1,
+        "position": 2,
+        "blocks": [],
+        "html": ""
       }
     ]
   }

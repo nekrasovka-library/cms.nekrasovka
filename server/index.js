@@ -150,6 +150,49 @@ const configureRoutes = (app) => {
     }
   });
 
+  app.post("/api/page/update", async (req, res) => {
+    try {
+      const projectsData = readFileSync(
+        join(__dirname, "projects.json"),
+        "utf8",
+      );
+      const projects = JSON.parse(projectsData);
+      const project = projects.find((p) => p.projectId === req.body.projectId);
+
+      if (!project) {
+        return res.status(404).json({
+          success: false,
+          error: "Project not found",
+        });
+      }
+
+      project.pages = project.pages.map((page) => {
+        if (page.pageId === req.body.pageId) {
+          return {
+            ...page,
+            blocks: req.body.blocks || page.blocks,
+            html: req.body.html || page.html,
+          };
+        }
+        return page;
+      });
+
+      writeFileSync(
+        join(__dirname, "projects.json"),
+        JSON.stringify(projects, null, 2),
+      );
+
+      return res.json({
+        success: true,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
   app.get("/api/projects/:projectId/:pageId/delete", async (req, res) => {
     try {
       const projectsData = readFileSync(
@@ -191,6 +234,40 @@ const configureRoutes = (app) => {
     }
   });
 
+  app.get("/api/projects/:projectId/:pageId", async (req, res) => {
+    try {
+      const projectsData = readFileSync(
+        join(__dirname, "projects.json"),
+        "utf8",
+      );
+      const projects = JSON.parse(projectsData);
+      const project = projects.find(
+        (p) => p.projectId === +req.params.projectId,
+      );
+
+      if (!project) {
+        return res.status(404).json({
+          success: false,
+          error: "Project not found",
+        });
+      }
+
+      const page = project.pages.find(
+        (page) => page.pageId === +req.params.pageId,
+      );
+
+      return res.json({
+        success: true,
+        data: page,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
   app.get("/api/projects/:projectId/page/create", async (req, res) => {
     try {
       const projectsData = readFileSync(
@@ -218,6 +295,8 @@ const configureRoutes = (app) => {
         pageId: maxPageId + 1,
         projectId: project.projectId,
         position: project.pages.length > 0 ? 2 : 1,
+        blocks: [],
+        html: "",
       };
 
       project.pages.push(newPage);
