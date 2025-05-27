@@ -6,15 +6,9 @@
     "pages": [
       {
         "name": "Blank page",
-        "pageId": 3,
+        "pageId": 6,
         "projectId": 1,
         "position": 1
-      },
-      {
-        "name": "Blank page",
-        "pageId": 4,
-        "projectId": 1,
-        "position": 2
       }
     ]
   },

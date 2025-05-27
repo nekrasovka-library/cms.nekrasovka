@@ -172,6 +172,9 @@ const configureRoutes = (app) => {
         (page) => page.pageId !== +req.params.pageId,
       );
 
+      const isNotHome = !project.pages.some((page) => page.position === 1);
+      if (isNotHome) project.pages[0].position = 1;
+
       writeFileSync(
         join(__dirname, "projects.json"),
         JSON.stringify(projects, null, 2),
