@@ -121,7 +121,7 @@ const HeaderPageDropdown = styled.div`
   flex-direction: column;
   position: absolute;
   top: 50px;
-  left: 0;
+  left: -5px;
   min-width: 100%;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -135,7 +135,7 @@ const HeaderPageDropdownLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  column-gap: 5px;
+  column-gap: 7px;
   text-decoration: none;
   color: #000;
   padding: 10px;

@@ -67,7 +67,9 @@ const Header = () => {
                       key={page.pageId}
                       to={`/projects/${projectData.projectId}/${page.pageId}`}
                     >
-                      {page.position === 1 && <Icon icon="home" height={10} />}
+                      {page.position === 1 && (
+                        <Icon icon="home" height={10} width={10} />
+                      )}
                       <span>{page.name}</span>
                     </HeaderPageDropdownLink>
                   ))}
