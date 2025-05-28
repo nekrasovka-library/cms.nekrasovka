@@ -69,7 +69,10 @@ const Menu = () => {
           {variants.map(({ id, image }, index) => {
             return (
               <MainItem2 key={index} onClick={() => handleVariant(id)}>
-                <img src={image} alt="preview" />
+                <img
+                  src={`${import.meta.env.VITE_APP_URL}${image}`}
+                  alt="preview"
+                />
               </MainItem2>
             );
           })}
