@@ -124,6 +124,7 @@ const ModalContent = styled.div`
   background-color: white;
   border-radius: 8px;
   width: 600px;
+  padding: 15px;
 `;
 
 const Form = styled.form`

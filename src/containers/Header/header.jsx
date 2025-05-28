@@ -7,6 +7,8 @@ import {
   HeaderLeftHome,
   HeaderRight,
   HeaderRightPreview,
+  HeaderPageDropdown,
+  HeaderPageDropdownLink,
 } from "./header.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
@@ -14,6 +16,7 @@ import { Link } from "react-router";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { isPreview } = useSelector((state) => state.preview);
   const { projectData } = useSelector((state) => state.project);
   const { pageData, isPageLoaded } = useSelector((state) => state.page);
@@ -51,9 +54,25 @@ const Header = () => {
               </Link>
             </HeaderLeftBlankPageLink>
             /
-            <HeaderLeftBlankPageList>
+            <HeaderLeftBlankPageList
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
               <Icon icon="blankPage" />
               <span>{pageData.name}</span>
+              {isDropdownOpen && (
+                <HeaderPageDropdown>
+                  {projectData.pages.map((page) => (
+                    <HeaderPageDropdownLink
+                      $isActive={page.pageId === pageData.pageId}
+                      key={page.pageId}
+                      to={`/projects/${projectData.projectId}/${page.pageId}`}
+                    >
+                      {page.position === 1 && <Icon icon="home" height={10} />}
+                      <span>{page.name}</span>
+                    </HeaderPageDropdownLink>
+                  ))}
+                </HeaderPageDropdown>
+              )}
             </HeaderLeftBlankPageList>
           </>
         )}

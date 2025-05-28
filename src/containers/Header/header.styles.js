@@ -40,7 +40,9 @@ const HeaderLeft = styled.div`
   align-items: center;
   column-gap: 10px;
 
-  span {
+  > a > span,
+  > div > span,
+  > div > a {
     font-weight: 600;
     font-size: 12px;
     text-transform: uppercase;
@@ -75,6 +77,8 @@ const HeaderLeftBlankPageLink = styled(HeaderLeftBlankPage)`
 `;
 
 const HeaderLeftBlankPageList = styled(HeaderLeftBlankPage)`
+  position: relative;
+
   &:after {
     border-color: currentcolor transparent transparent;
     border-style: solid;
@@ -112,6 +116,41 @@ const HeaderLeftHome = styled(Link)`
   }
 `;
 
+const HeaderPageDropdown = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  min-width: 100%;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 100;
+  row-gap: 1px;
+`;
+
+const HeaderPageDropdownLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 5px;
+  text-decoration: none;
+  color: #000;
+  padding: 10px;
+  white-space: nowrap;
+
+  background-color: ${({ $isActive }) =>
+    $isActive ? "rgba(0, 0, 0, 0.09)" : "#fff"};
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.09);
+    }
+  }
+`;
+
 export {
   HeaderContainer,
   HeaderRight,
@@ -121,4 +160,6 @@ export {
   HeaderLeftHome,
   HeaderLeftBlankPageLink,
   HeaderLeftBlankPageList,
+  HeaderPageDropdown,
+  HeaderPageDropdownLink,
 };
