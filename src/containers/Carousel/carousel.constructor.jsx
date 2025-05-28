@@ -148,7 +148,7 @@ const CarouselConstructor = ({
               onClick={() => fileInputRef.current[index]?.click()}
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = DEFAULT_IMAGE;
+                e.target.src = `${import.meta.env.VITE_APP_URL}${DEFAULT_IMAGE}`;
               }}
             />
             <ImageFile

@@ -1,18 +1,33 @@
 import React from "react";
 import { ProjectHeaderContainer } from "../project.styles.js";
-import { Link } from "react-router";
 import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 import { useDispatch } from "react-redux";
+import { Button } from "../../Projects/projects.styles.js";
 
-const ProjectHeader = ({ href, name, projectId }) => {
+const ProjectHeader = ({
+  href,
+  name,
+  projectId,
+  setIsProjectSettingsOpen,
+  isProjectSettingsOpen,
+}) => {
   const dispatch = useDispatch();
 
   const handleCreateProjectPage = () => {
     dispatch({ type: "CREATE_PROJECT_PAGE_REQUEST", projectId });
   };
 
+  const handleCloseSettings = () => {
+    setIsProjectSettingsOpen(false);
+  };
+
+  const handleSaveSettings = () => {};
+
   return (
-    <ProjectHeaderContainer $isHref={!!href}>
+    <ProjectHeaderContainer
+      $isHref={!!href}
+      $isProjectSettingsOpen={isProjectSettingsOpen}
+    >
       <div>
         <span>Адрес сайта:</span>
         {href ? (
@@ -20,25 +35,52 @@ const ProjectHeader = ({ href, name, projectId }) => {
             {href}
           </a>
         ) : (
-          <Link to={`/settings/${projectId}`}>
-            указать в настройках проекта
-          </Link>
+          <span>...</span>
         )}
       </div>
       <div>
         <div>
-          <span>{name}</span>
+          <h3>{name}</h3>
+          {isProjectSettingsOpen ? (
+            <div>
+              <Icon icon="arrowRightLong" />
+              <h3>Настройки проекта</h3>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-        <div>
+        {isProjectSettingsOpen ? (
           <div>
-            <Icon icon="settings" fill="#fa886e" />
-            <Link to={`/settings/${projectId}`}>Настройки проекта</Link>
+            <Button
+              type="button"
+              className="secondary"
+              onClick={handleCloseSettings}
+            >
+              Закрыть
+            </Button>
+            <Button
+              type="button"
+              className="primary"
+              onClick={handleSaveSettings}
+            >
+              Сохранить
+            </Button>
           </div>
-          <div onClick={handleCreateProjectPage}>
-            <Icon icon="add" fill="#fa886e" />
-            <div>Создать новую страницу</div>
+        ) : (
+          <div>
+            <div>
+              <Icon icon="settings" fill="#fa886e" />
+              <span onClick={() => setIsProjectSettingsOpen(true)}>
+                Настройки проекта
+              </span>
+            </div>
+            <div onClick={handleCreateProjectPage}>
+              <Icon icon="add" fill="#fa886e" />
+              <div>Создать новую страницу</div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </ProjectHeaderContainer>
   );

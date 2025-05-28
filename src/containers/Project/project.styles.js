@@ -21,6 +21,8 @@ const ProjectHeaderContainer = styled.div`
     width: 100%;
 
     &:nth-child(1) {
+      visibility: ${({ $isProjectSettingsOpen }) =>
+        $isProjectSettingsOpen ? "hidden" : "visible"};
       justify-content: flex-end;
       column-gap: 5px;
       font-size: 16px;
@@ -39,12 +41,14 @@ const ProjectHeaderContainer = styled.div`
       justify-content: space-between;
       font-weight: 300;
 
-      span {
+      h3 {
         font-size: 50px;
-      }
+        margin: 0;
+        font-weight: 300;
 
-      a {
-        color: #000;
+        &:nth-child(2) {
+          opacity: 0.3;
+        }
       }
 
       > div {
@@ -72,7 +76,7 @@ const ProjectHeaderContainer = styled.div`
   }
 
   @media (hover: hover) {
-    > div:nth-child(2) > div > div a:hover,
+    > div:nth-child(2) > div > div span:hover,
     > div:nth-child(2) > div > div div:hover {
       color: #f4846b;
     }
@@ -82,6 +86,13 @@ const ProjectHeaderContainer = styled.div`
 const ProjectMainContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const ProjectMainContainerHeader = styled.div`
+  font-size: 18px;
+  font-weight: 300;
+  opacity: 0.5;
+  padding: 35px 0 30px;
 `;
 
 const ProjectMainCardContainer = styled.div`
@@ -130,4 +141,5 @@ export {
   ProjectHeaderContainer,
   ProjectMainContainer,
   ProjectMainCardContainer,
+  ProjectMainContainerHeader,
 };

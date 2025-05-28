@@ -11,7 +11,7 @@ const ImageConstructor = ({ text, borderRadius = 0 }) => {
         alt="картинка"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = DEFAULT_IMAGE;
+          e.target.src = `${import.meta.env.VITE_APP_URL}${DEFAULT_IMAGE}`;
         }}
       />
     </ImageContainer>

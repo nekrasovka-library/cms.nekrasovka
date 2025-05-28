@@ -1,10 +1,14 @@
 import React from "react";
-import { ProjectMainContainer } from "../project.styles.js";
+import {
+  ProjectMainContainer,
+  ProjectMainContainerHeader,
+} from "../project.styles.js";
 import ProjectMainCard from "./project.main.card.jsx";
 
 const ProjectMain = ({ pages }) => {
   return (
     <ProjectMainContainer>
+      <ProjectMainContainerHeader>Страницы проекта:</ProjectMainContainerHeader>
       {pages.map(({ pageId, projectId, name, position }) => (
         <ProjectMainCard
           key={pageId}

@@ -9,6 +9,7 @@ import home from "./home";
 import blankPage from "./blank_page.jsx";
 import globus from "./globus.jsx";
 import edit from "./edit.jsx";
+import arrowRightLong from "./arrow_right_long.jsx";
 
 export default {
   add,
@@ -22,4 +23,5 @@ export default {
   blankPage,
   globus,
   edit,
+  arrowRightLong,
 };

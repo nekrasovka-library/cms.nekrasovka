@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ProjectContainer } from "./project.styles.js";
 import ProjectHeader from "../Project/components/project.header.jsx";
 import ProjectMain from "./components/project.main.jsx";
@@ -11,6 +11,7 @@ const Project = () => {
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
+  const [isProjectSettingsOpen, setIsProjectSettingsOpen] = useState(false);
 
   useEffect(() => {
     dispatch({
@@ -26,8 +27,10 @@ const Project = () => {
           href={projectData.href}
           name={projectData.name}
           projectId={projectData.projectId}
+          setIsProjectSettingsOpen={setIsProjectSettingsOpen}
+          isProjectSettingsOpen={isProjectSettingsOpen}
         />
-        <ProjectMain pages={projectData.pages} />
+        {isProjectSettingsOpen ? "" : <ProjectMain pages={projectData.pages} />}
       </ProjectContainer>
     )
   );
