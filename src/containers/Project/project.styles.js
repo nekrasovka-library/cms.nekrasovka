@@ -136,10 +136,28 @@ const ProjectMainCardContainer = styled.div`
   }
 `;
 
+const ProjectSettingsContainer = styled.div`
+  background: #fff;
+  border: 1px solid #e7e7e7;
+
+  > div {
+    display: flex;
+
+    &:nth-child(1) {
+      width: 225px;
+      border-right: 1px solid #ddd;
+    }
+
+    &:nth-child(2) {
+    }
+  }
+`;
+
 export {
   ProjectContainer,
   ProjectHeaderContainer,
   ProjectMainContainer,
   ProjectMainCardContainer,
   ProjectMainContainerHeader,
+  ProjectSettingsContainer,
 };

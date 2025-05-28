@@ -10,7 +10,7 @@ const ProjectCard = ({ projectId = 1, href = "", name = "" }) => {
       </div>
       <div>
         <div>
-          <Link to={`/settings/${projectId}`}>НАСТРОЙКИ ПРОЕКТА</Link>
+          <Link to={`/projects/${projectId}`}>РЕДАКТИРОВАТЬ ПРОЕКТ</Link>
         </div>
         <div>{href && <a href={href}>ссылка</a>}</div>
       </div>

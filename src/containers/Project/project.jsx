@@ -4,6 +4,7 @@ import ProjectHeader from "../Project/components/project.header.jsx";
 import ProjectMain from "./components/project.main.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import ProjectSettings from "./components/project.settings.jsx";
 
 const Project = () => {
   const { projectId } = useParams();
@@ -30,7 +31,11 @@ const Project = () => {
           setIsProjectSettingsOpen={setIsProjectSettingsOpen}
           isProjectSettingsOpen={isProjectSettingsOpen}
         />
-        {isProjectSettingsOpen ? "" : <ProjectMain pages={projectData.pages} />}
+        {isProjectSettingsOpen ? (
+          <ProjectSettings />
+        ) : (
+          <ProjectMain pages={projectData.pages} />
+        )}
       </ProjectContainer>
     )
   );
