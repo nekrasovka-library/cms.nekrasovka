@@ -79,14 +79,16 @@ const Header = () => {
           </>
         )}
       </HeaderLeft>
-      <HeaderRight>
-        <HeaderRightPreview onClick={handleToggleView}>
-          {isPreview ? "Редактирование" : "Предпросмотр"}
-        </HeaderRightPreview>
-        <HeaderRightPreview onClick={handleSaveProjectPage}>
-          Сохранить страницу
-        </HeaderRightPreview>
-      </HeaderRight>
+      {isPageLoaded && (
+        <HeaderRight>
+          <HeaderRightPreview onClick={handleToggleView}>
+            {isPreview ? "Редактирование" : "Предпросмотр"}
+          </HeaderRightPreview>
+          <HeaderRightPreview onClick={handleSaveProjectPage}>
+            Сохранить страницу
+          </HeaderRightPreview>
+        </HeaderRight>
+      )}
     </HeaderContainer>
   );
 };
