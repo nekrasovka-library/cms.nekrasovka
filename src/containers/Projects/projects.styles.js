@@ -49,7 +49,7 @@ const ProjectCardContainer = styled.div`
   background-color: #fff;
   border: 1px solid #d9d9d9;
   transition-duration: 0.2s;
-  transition-property: box-shadow, color;
+  transition-property: box-shadow, color, border-color;
   transition-timing-function: ease-in-out;
   position: relative;
   padding: 20px 30px 0;
