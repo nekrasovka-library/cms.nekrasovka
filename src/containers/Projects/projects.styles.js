@@ -101,6 +101,7 @@ const ProjectCardContainer = styled.div`
   @media (hover: hover) {
     &:hover {
       box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
+      border-color: #fff;
     }
 
     > div:nth-child(1):hover a,
