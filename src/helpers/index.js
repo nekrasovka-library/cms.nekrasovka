@@ -1,66 +1,5 @@
 import { useState, useEffect } from "react";
 
-const useWindowDimensions = () => {
-  const isClient = typeof window === "object";
-
-  function getSize() {
-    return {
-      width: isClient ? window.innerWidth : undefined,
-      height: isClient ? window.innerHeight : undefined,
-    };
-  }
-
-  const [windowSize, setWindowSize] = useState(getSize);
-
-  useEffect(() => {
-    if (!isClient) {
-      return false;
-    }
-
-    function handleResize() {
-      setWindowSize(getSize());
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount and unmount
-
-  return windowSize;
-};
-
-const copyToClipboard = async (text) => {
-  let isCopied;
-
-  if (navigator.clipboard) {
-    try {
-      await navigator.clipboard.writeText(text);
-      isCopied = true;
-    } catch (err) {
-      console.error("Ошибка при копировании подписи: ", err);
-      isCopied = false;
-    }
-  } else {
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    textarea.style.position = "absolute";
-    textarea.style.left = "-9999px";
-    document.body.appendChild(textarea);
-    textarea.select();
-
-    try {
-      document.execCommand("copy");
-      isCopied = true;
-    } catch (err) {
-      console.error("Ошибка при копировании подписи через execCommand: ", err);
-      isCopied = false;
-    }
-
-    document.body.removeChild(textarea);
-  }
-
-  return isCopied;
-};
-
 const useIsMobile = (breakpoint = 700) => {
   // Если "window" недоступен (SSR), считается, что ширина неизвестна. Начальное значение false.
   const [isMobile, setIsMobile] = useState(() => {
@@ -183,8 +122,6 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
 };
 
 export {
-  useWindowDimensions,
-  copyToClipboard,
   useIsMobile,
   generateBlockStyles,
   calculateBlockWidth,

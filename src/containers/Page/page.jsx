@@ -13,7 +13,7 @@ const Page = () => {
   const { isProjectLoaded } = useSelector((state) => state.project);
 
   useEffect(() => {
-    dispatch({ type: "GET_PROJECT_PAGE_REQUEST", projectId, pageId });
+    dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
     if (!isProjectLoaded) dispatch({ type: "GET_PROJECT_REQUEST", projectId });
 
     return () => {

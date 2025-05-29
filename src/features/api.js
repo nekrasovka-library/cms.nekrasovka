@@ -21,10 +21,8 @@ const fetchProjectApi = async (projectId) => {
   );
 };
 
-const fetchProjectPageApi = async ({ projectId, pageId }) => {
-  return await axios.get(
-    `${import.meta.env.VITE_APP_API}projects/${projectId}/${pageId}`,
-  );
+const fetchProjectPageApi = async ({ pageId }) => {
+  return await axios.get(`${import.meta.env.VITE_APP_API}page/${pageId}`);
 };
 
 const fetchProjectsApi = async () => {
@@ -38,15 +36,16 @@ const fetchCreateProjectApi = async (project) => {
 };
 
 const fetchCreateProjectPageApi = async ({ projectId }) => {
-  return await axios.get(
-    `${import.meta.env.VITE_APP_API}projects/${projectId}/page/create`,
-  );
+  return await axios.post(`${import.meta.env.VITE_APP_API}page/create`, {
+    projectId,
+  });
 };
 
 const fetchDeleteProjectPageApi = async ({ projectId, pageId }) => {
-  return await axios.get(
-    `${import.meta.env.VITE_APP_API}projects/${projectId}/${pageId}/delete`,
-  );
+  return await axios.post(`${import.meta.env.VITE_APP_API}page/delete`, {
+    projectId,
+    pageId,
+  });
 };
 
 const fetchUpdateProjectPageApi = async ({ page }) => {

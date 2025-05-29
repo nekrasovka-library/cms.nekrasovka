@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Text from "../Text/text.jsx";
+import Text from "../../components/Text/text.jsx";
 import Image from "../../components/Image/image.preview.jsx";
 import Carousel from "../../components/Carousel/carousel.preview.jsx";
 import Divider from "../../components/Divider/divider.jsx";

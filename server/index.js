@@ -193,16 +193,16 @@ const configureRoutes = (app) => {
     }
   });
 
-  app.get("/api/projects/:projectId/:pageId/delete", async (req, res) => {
+  app.post("/api/page/delete", async (req, res) => {
+    const { projectId, pageId } = req.body;
+
     try {
       const projectsData = readFileSync(
         join(__dirname, "projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
-      const project = projects.find(
-        (p) => p.projectId === +req.params.projectId,
-      );
+      const project = projects.find((p) => p.projectId === +projectId);
 
       if (!project) {
         return res.status(404).json({
@@ -211,9 +211,7 @@ const configureRoutes = (app) => {
         });
       }
 
-      project.pages = project.pages.filter(
-        (page) => page.pageId !== +req.params.pageId,
-      );
+      project.pages = project.pages.filter((page) => page.pageId !== +pageId);
 
       const isPages = project.pages.length > 0;
 
@@ -238,16 +236,16 @@ const configureRoutes = (app) => {
     }
   });
 
-  app.get("/api/projects/:projectId/:pageId", async (req, res) => {
+  app.get("/api/page/:pageId", async (req, res) => {
+    const { projectId } = req.params;
+
     try {
       const projectsData = readFileSync(
         join(__dirname, "projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
-      const project = projects.find(
-        (p) => p.projectId === +req.params.projectId,
-      );
+      const project = projects.find((p) => p.projectId === +projectId);
 
       if (!project) {
         return res.status(404).json({
@@ -272,16 +270,16 @@ const configureRoutes = (app) => {
     }
   });
 
-  app.get("/api/projects/:projectId/page/create", async (req, res) => {
+  app.post("/api/page/create", async (req, res) => {
+    const { projectId } = req.body;
+
     try {
       const projectsData = readFileSync(
         join(__dirname, "projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
-      const project = projects.find(
-        (p) => p.projectId === +req.params.projectId,
-      );
+      const project = projects.find((p) => p.projectId === +projectId);
 
       if (!project) {
         return res.status(404).json({
