@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Text from "../Text/text.jsx";
-import Image from "../Image/image.preview.jsx";
-import Carousel from "../Carousel/carousel.preview.jsx";
-import Divider from "../Divider/divider.jsx";
+import Image from "../../components/Image/image.preview.jsx";
+import Carousel from "../../components/Carousel/carousel.preview.jsx";
+import Divider from "../../components/Divider/divider.jsx";
 import TypeBlock from "../Block/components/type.block.jsx";
 import { PreviewContainer } from "./preview.styles.js";
-import Button from "../Button/button.preview.jsx";
+import Button from "../../components/Button/button.preview.jsx";
 
 const Preview = () => {
   const { blocks } = useSelector((state) => state.blocks);

@@ -29,14 +29,16 @@ const ProjectHeader = ({
       $isProjectSettingsOpen={isProjectSettingsOpen}
     >
       <div>
-        <span>Адрес сайта:</span>
-        {href ? (
-          <a href={href} target="_blank" rel="noopener noreferrer">
-            {href}
-          </a>
-        ) : (
-          <span>...</span>
-        )}
+        <div>
+          <span>Адрес сайта:</span>
+          {href ? (
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              {href}
+            </a>
+          ) : (
+            <span>укажите в настройках проекта</span>
+          )}
+        </div>
       </div>
       <div>
         <div>

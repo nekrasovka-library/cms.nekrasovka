@@ -6,7 +6,10 @@ import {
   ButtonFormCheckbox,
 } from "./button.styles.js";
 import { useDispatch, useSelector } from "react-redux";
-import { RadiusInput, SettingsLabel } from "../Settings/settings.styles.js";
+import {
+  RadiusInput,
+  SettingsLabel,
+} from "../../containers/Settings/settings.styles.js";
 
 const BUTTON_LABELS = {
   link: "Ссылка для кнопки",

@@ -2,11 +2,11 @@ import React from "react";
 import Block from "../Block/block.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { ConstructorContainer } from "./constructor.styles.js";
-import Editor from "../Editor/editor.jsx";
-import Image from "../Image/image.constructor.jsx";
-import Carousel from "../Carousel/carousel.constructor.jsx";
-import Divider from "../Divider/divider.jsx";
-import Button from "../Button/button.constructor.jsx";
+import Editor from "../../components/Editor/editor.jsx";
+import Image from "../../components/Image/image.constructor.jsx";
+import Carousel from "../../components/Carousel/carousel.constructor.jsx";
+import Divider from "../../components/Divider/divider.jsx";
+import Button from "../../components/Button/button.constructor.jsx";
 
 const Constructor = () => {
   const dispatch = useDispatch();

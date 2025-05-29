@@ -24,9 +24,18 @@ const ProjectHeaderContainer = styled.div`
       visibility: ${({ $isProjectSettingsOpen }) =>
         $isProjectSettingsOpen ? "hidden" : "visible"};
       justify-content: flex-end;
-      column-gap: 5px;
-      font-size: 16px;
-      font-weight: 300;
+
+      > div {
+        display: flex;
+        column-gap: 5px;
+        font-size: 16px;
+        font-weight: 300;
+        width: 471.39px;
+
+        span:nth-child(2) {
+          color: #000;
+        }
+      }
 
       span {
         color: #999;
@@ -39,7 +48,6 @@ const ProjectHeaderContainer = styled.div`
 
     &:nth-child(2) {
       justify-content: space-between;
-      font-weight: 300;
 
       h3 {
         font-size: 50px;
