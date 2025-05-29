@@ -89,6 +89,8 @@ const configureRoutes = (app) => {
   });
 
   app.get("/api/projects/:projectId", async (req, res) => {
+    const { projectId } = req.params;
+
     try {
       const projectsData = readFileSync(
         join(__dirname, "projects.json"),
@@ -96,7 +98,7 @@ const configureRoutes = (app) => {
       );
       const projects = JSON.parse(projectsData);
       const project = projects.find(
-        (project) => project.projectId === +req.params.projectId,
+        (project) => project.projectId === +projectId,
       );
 
       if (!project) {
@@ -119,6 +121,8 @@ const configureRoutes = (app) => {
   });
 
   app.put("/api/projects/create", async (req, res) => {
+    const { project } = req.body;
+
     try {
       const projectsData = readFileSync(
         join(__dirname, "projects.json"),
@@ -128,7 +132,7 @@ const configureRoutes = (app) => {
 
       const maxId = Math.max(...projects.map((p) => p.projectId), 0);
       const newProject = {
-        ...req.body.project,
+        ...project,
         projectId: maxId + 1,
         pages: [],
       };
@@ -151,13 +155,15 @@ const configureRoutes = (app) => {
   });
 
   app.post("/api/page/update", async (req, res) => {
+    const { projectId, pageId, blocks, html } = req.body;
+
     try {
       const projectsData = readFileSync(
         join(__dirname, "projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
-      const project = projects.find((p) => p.projectId === req.body.projectId);
+      const project = projects.find((p) => p.projectId === projectId);
 
       if (!project) {
         return res.status(404).json({
@@ -167,11 +173,11 @@ const configureRoutes = (app) => {
       }
 
       project.pages = project.pages.map((page) => {
-        if (page.pageId === req.body.pageId) {
+        if (page.pageId === pageId) {
           return {
             ...page,
-            blocks: req.body.blocks || page.blocks,
-            html: req.body.html || page.html,
+            blocks: blocks || page.blocks,
+            html: html || page.html,
           };
         }
         return page;
@@ -237,7 +243,8 @@ const configureRoutes = (app) => {
   });
 
   app.get("/api/page/:pageId", async (req, res) => {
-    const { projectId } = req.params;
+    const { pageId } = req.params;
+    let page;
 
     try {
       const projectsData = readFileSync(
@@ -245,18 +252,21 @@ const configureRoutes = (app) => {
         "utf8",
       );
       const projects = JSON.parse(projectsData);
-      const project = projects.find((p) => p.projectId === +projectId);
 
-      if (!project) {
+      for (const project of projects) {
+        const foundPage = project.pages.find((p) => p.pageId === +pageId);
+        if (foundPage) {
+          page = foundPage;
+          break;
+        }
+      }
+
+      if (!page) {
         return res.status(404).json({
           success: false,
           error: "Project not found",
         });
       }
-
-      const page = project.pages.find(
-        (page) => page.pageId === +req.params.pageId,
-      );
 
       return res.json({
         success: true,
