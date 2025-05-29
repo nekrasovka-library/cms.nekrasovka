@@ -6,7 +6,7 @@ const BackToConstructorButton = styled.button`
   color: #fff;
   font-size: 16px;
   font-weight: 500;
-  padding: 14px;
+  padding: 14px 22px;
   position: fixed;
   bottom: 15px;
   left: 15px;
