@@ -3,6 +3,7 @@ import Preview from "../Preview/preview.jsx";
 import Constructor from "../Constructor/constructor.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { BackToConstructorButton } from "./page.styles.js";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,19 @@ const Page = () => {
     }
   }, [isPageLoaded]);
 
-  return isPreview ? <Preview /> : <Constructor />;
+  return isPreview ? (
+    <>
+      <Preview />
+      <BackToConstructorButton
+        type="button"
+        onClick={() => dispatch({ type: "TOGGLE_PREVIEW" })}
+      >
+        <span>Вернуться к редактированию</span>
+      </BackToConstructorButton>
+    </>
+  ) : (
+    <Constructor />
+  );
 };
 
 export default Page;
