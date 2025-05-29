@@ -73,6 +73,7 @@ const ProjectCardContainer = styled.div`
         line-height: 1.2;
         font-weight: 300;
         text-overflow: ellipsis;
+        width: 100%;
       }
     }
 
