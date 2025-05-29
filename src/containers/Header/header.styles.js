@@ -116,7 +116,7 @@ const HeaderLeftHome = styled(Link)`
   }
 `;
 
-const HeaderPageDropdown = styled.div`
+const HeaderPageDropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -160,6 +160,6 @@ export {
   HeaderLeftHome,
   HeaderLeftBlankPageLink,
   HeaderLeftBlankPageList,
-  HeaderPageDropdown,
+  HeaderPageDropdownContainer,
   HeaderPageDropdownLink,
 };
