@@ -5,12 +5,7 @@ import {
 } from "./header.styles.js";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 
-const HeaderPageDropdown = ({
-  pages,
-  pageId,
-  projectId,
-  setIsDropdownOpen,
-}) => {
+const HeaderDropdown = ({ pages, pageId, projectId, setIsDropdownOpen }) => {
   return (
     <HeaderPageDropdownContainer>
       {pages.map((page) => (
@@ -28,4 +23,4 @@ const HeaderPageDropdown = ({
   );
 };
 
-export default HeaderPageDropdown;
+export default HeaderDropdown;

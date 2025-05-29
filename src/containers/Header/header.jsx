@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   HeaderContainer,
   HeaderLeft,
@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { Link } from "react-router";
-import HeaderPageDropdown from "./header.page.dropdown.jsx";
+import HeaderDropdown from "./header.dropdown.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -37,6 +37,11 @@ const Header = () => {
     });
   };
 
+  useEffect(() => {
+    if (isPreview) handleToggleView();
+    if (isDropdownOpen) setIsDropdownOpen(false);
+  }, [pageData.pageId]);
+
   return (
     <HeaderContainer>
       <HeaderLeft>
@@ -60,7 +65,7 @@ const Header = () => {
               <Icon icon="blankPage" />
               <span>{pageData.name}</span>
               {isDropdownOpen && (
-                <HeaderPageDropdown
+                <HeaderDropdown
                   pages={projectData.pages}
                   pageId={pageData.pageId}
                   projectId={projectData.projectId}

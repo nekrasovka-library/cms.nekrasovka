@@ -48,7 +48,7 @@ const ProjectCardContainer = styled.div`
   height: 200px;
   background-color: #fff;
   border: 1px solid #d9d9d9;
-  transition: background-color 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
   position: relative;
   padding: 20px 30px 0;
   display: flex;
@@ -97,7 +97,7 @@ const ProjectCardContainer = styled.div`
 
   @media (hover: hover) {
     &:hover {
-      background-color: #eee;
+      box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
     }
 
     > div:nth-child(1):hover a,
