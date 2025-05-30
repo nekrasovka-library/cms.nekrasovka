@@ -17,7 +17,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { isPreview } = useSelector((state) => state.preview);
-  const { projectData } = useSelector((state) => state.project);
   const { pageData, isPageLoaded } = useSelector((state) => state.page);
   const { blocks } = useSelector((state) => state.blocks);
 
@@ -26,13 +25,18 @@ const Header = () => {
   };
 
   const handleSaveProjectPage = () => {
+    const { html, name, projectId, pageId } = pageData;
+
     dispatch({
       type: "UPDATE_PROJECT_PAGE_REQUEST",
-      projectId: projectData.projectId,
-      pageId: pageData.pageId,
+      projectId,
+      pageId,
       page: {
-        ...pageData,
+        projectId,
+        pageId,
         blocks,
+        html,
+        name,
       },
     });
   };
@@ -54,8 +58,8 @@ const Header = () => {
             /
             <HeaderLeftBlankPageLink>
               <Icon icon="globus" />
-              <Link to={`/projects/${projectData.projectId}`}>
-                {projectData.name}
+              <Link to={`/projects/${pageData.project.projectId}`}>
+                {pageData.project.name}
               </Link>
             </HeaderLeftBlankPageLink>
             /
@@ -67,9 +71,9 @@ const Header = () => {
               <span>{pageData.name}</span>
               {isDropdownOpen && (
                 <HeaderDropdown
-                  pages={projectData.pages}
+                  pages={pageData.project.pages}
                   pageId={pageData.pageId}
-                  projectId={projectData.projectId}
+                  projectId={pageData.project.projectId}
                   setIsDropdownOpen={setIsDropdownOpen}
                 />
               )}

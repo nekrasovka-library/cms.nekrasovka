@@ -7,14 +7,12 @@ import { BackToConstructorButton } from "./page.styles.js";
 
 const Page = () => {
   const dispatch = useDispatch();
-  const { pageId, projectId } = useParams();
+  const { pageId } = useParams();
   const { isPreview } = useSelector((state) => state.preview);
   const { pageData, isPageLoaded } = useSelector((state) => state.page);
-  const { isProjectLoaded } = useSelector((state) => state.project);
 
   useEffect(() => {
     dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
-    if (!isProjectLoaded) dispatch({ type: "GET_PROJECT_REQUEST", projectId });
 
     return () => {
       dispatch({ type: "RESET_PROJECT_PAGE" });
@@ -24,7 +22,7 @@ const Page = () => {
 
   useEffect(() => {
     if (isPageLoaded) {
-      dispatch({ type: "GET_BLOCKS", payload: pageData.blocks });
+      dispatch({ type: "GET_BLOCKS_SUCCESS", payload: pageData.blocks });
     }
   }, [isPageLoaded]);
 

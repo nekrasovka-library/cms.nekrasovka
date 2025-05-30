@@ -116,7 +116,7 @@ const blocks = (state = initialState, action) => {
         ...state,
         block: state.blocks[state.selectedBlockIndex],
       };
-    case "GET_BLOCKS":
+    case "GET_BLOCKS_SUCCESS":
       return {
         ...state,
         blocks: action.payload,

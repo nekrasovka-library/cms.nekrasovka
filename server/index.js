@@ -155,7 +155,7 @@ const configureRoutes = (app) => {
   });
 
   app.post("/api/page/update", async (req, res) => {
-    const { projectId, pageId, blocks, html } = req.body;
+    const { projectId, pageId, blocks, html, name } = req.body;
 
     try {
       const projectsData = readFileSync(
@@ -178,6 +178,7 @@ const configureRoutes = (app) => {
             ...page,
             blocks: blocks || page.blocks,
             html: html || page.html,
+            name: name || page.name,
           };
         }
         return page;
@@ -256,7 +257,22 @@ const configureRoutes = (app) => {
       for (const project of projects) {
         const foundPage = project.pages.find((p) => p.pageId === +pageId);
         if (foundPage) {
-          page = foundPage;
+          page = {
+            ...foundPage,
+            project: {
+              name: project.name,
+              href: "",
+              projectId: project.projectId,
+              pages: project.pages.map(
+                ({ name, pageId, projectId, position }) => ({
+                  name,
+                  pageId,
+                  projectId,
+                  position,
+                }),
+              ),
+            },
+          };
           break;
         }
       }
