@@ -19,6 +19,7 @@ const Header = () => {
   const { isPreview } = useSelector((state) => state.preview);
   const { pageData, isPageLoaded } = useSelector((state) => state.page);
   const { blocks } = useSelector((state) => state.blocks);
+  const { projectData } = useSelector((state) => state.project);
 
   const handleToggleView = () => {
     dispatch({ type: "TOGGLE_PREVIEW" });
@@ -53,8 +54,8 @@ const Header = () => {
             /
             <HeaderLeftBlankPageLink>
               <Icon icon="globus" />
-              <Link to={`/projects/${pageData.project.projectId}`}>
-                {pageData.project.name}
+              <Link to={`/projects/${projectData.projectId}`}>
+                {projectData.name}
               </Link>
             </HeaderLeftBlankPageLink>
             /
@@ -66,9 +67,9 @@ const Header = () => {
               <span>{pageData.name}</span>
               {isDropdownOpen && (
                 <HeaderDropdown
-                  pages={pageData.project.pages}
+                  pages={projectData.pages}
                   pageId={pageData.pageId}
-                  projectId={pageData.project.projectId}
+                  projectId={projectData.projectId}
                   setIsDropdownOpen={setIsDropdownOpen}
                 />
               )}

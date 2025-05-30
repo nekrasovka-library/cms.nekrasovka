@@ -7,18 +7,22 @@ import { BackToConstructorButton } from "./page.styles.js";
 
 const Page = () => {
   const dispatch = useDispatch();
-  const { pageId } = useParams();
+  const { pageId, projectId } = useParams();
   const { isPreview } = useSelector((state) => state.preview);
   const { pageData, isPageLoaded } = useSelector((state) => state.page);
+  const { isProjectLoaded } = useSelector((state) => state.project);
 
   useEffect(() => {
     dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
+    if (projectId !== pageData.projectId && !isProjectLoaded) {
+      dispatch({ type: "GET_PROJECT_REQUEST", projectId });
+    }
 
     return () => {
       dispatch({ type: "RESET_PROJECT_PAGE" });
       dispatch({ type: "RESET_BLOCKS" });
     };
-  }, [pageId]);
+  }, [pageId, projectId]);
 
   useEffect(() => {
     if (isPageLoaded) {

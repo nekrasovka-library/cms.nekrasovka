@@ -9,10 +9,10 @@ import ProjectSettings from "./components/project.settings.jsx";
 const Project = () => {
   const { projectId } = useParams();
   const dispatch = useDispatch();
+  const [isProjectSettingsOpen, setIsProjectSettingsOpen] = useState(false);
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
-  const [isProjectSettingsOpen, setIsProjectSettingsOpen] = useState(false);
 
   useEffect(() => {
     dispatch({

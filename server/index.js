@@ -110,7 +110,15 @@ const configureRoutes = (app) => {
 
       return res.json({
         success: true,
-        data: project,
+        data: {
+          ...project,
+          pages: project.pages.map(({ name, pageId, position, projectId }) => ({
+            name,
+            pageId,
+            position,
+            projectId,
+          })),
+        },
       });
     } catch (error) {
       return res.status(500).json({
@@ -258,22 +266,7 @@ const configureRoutes = (app) => {
       for (const project of projects) {
         const foundPage = project.pages.find((p) => p.pageId === +pageId);
         if (foundPage) {
-          page = {
-            ...foundPage,
-            project: {
-              name: project.name,
-              href: "",
-              projectId: project.projectId,
-              pages: project.pages.map(
-                ({ name, pageId, projectId, position }) => ({
-                  name,
-                  pageId,
-                  projectId,
-                  position,
-                }),
-              ),
-            },
-          };
+          page = foundPage;
           break;
         }
       }
