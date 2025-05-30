@@ -61,6 +61,7 @@ const HeaderLeftBlankPageLink = styled(HeaderLeftBlankPage)`
   a {
     text-decoration: none;
     color: #000;
+    letter-spacing: 1px;
   }
 
   @media (hover: hover) {
@@ -78,6 +79,10 @@ const HeaderLeftBlankPageLink = styled(HeaderLeftBlankPage)`
 
 const HeaderLeftBlankPageList = styled(HeaderLeftBlankPage)`
   position: relative;
+
+  > span {
+    letter-spacing: 1px;
+  }
 
   &:after {
     border-color: currentcolor transparent transparent;
@@ -104,6 +109,7 @@ const HeaderLeftHome = styled(Link)`
   text-decoration: none;
   color: #000;
   padding: 5px 5px 5px 0;
+  letter-spacing: 1px;
 
   @media (hover: hover) {
     &:hover {
@@ -138,11 +144,12 @@ const HeaderPageDropdownLink = styled(Link)`
   column-gap: 7px;
   text-decoration: none;
   color: #000;
-  padding: 10px;
+  padding: 6px 8px;
   white-space: nowrap;
 
   background-color: ${({ $isActive }) =>
     $isActive ? "rgba(0, 0, 0, 0.09)" : "#fff"};
+  font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
 
   @media (hover: hover) {
     &:hover {

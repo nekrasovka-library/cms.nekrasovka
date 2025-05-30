@@ -36,7 +36,7 @@ const fetchCreateProjectApi = async (project) => {
 };
 
 const fetchCreateProjectPageApi = async ({ projectId }) => {
-  return await axios.post(`${import.meta.env.VITE_APP_API}page/create`, {
+  return await axios.put(`${import.meta.env.VITE_APP_API}page/create`, {
     projectId,
   });
 };

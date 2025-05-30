@@ -280,7 +280,7 @@ const configureRoutes = (app) => {
     }
   });
 
-  app.post("/api/page/create", async (req, res) => {
+  app.put("/api/page/create", async (req, res) => {
     const { projectId } = req.body;
 
     try {
