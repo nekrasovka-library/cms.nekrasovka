@@ -48,8 +48,8 @@ const fetchDeleteProjectPageApi = async ({ projectId, pageId }) => {
   });
 };
 
-const fetchUpdateProjectPageApi = async ({ page }) => {
-  return await axios.post(`${import.meta.env.VITE_APP_API}page/update`, page);
+const fetchUpdateProjectPageApi = async (params) => {
+  return await axios.post(`${import.meta.env.VITE_APP_API}page/update`, params);
 };
 
 export {

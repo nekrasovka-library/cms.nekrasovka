@@ -155,7 +155,7 @@ const configureRoutes = (app) => {
   });
 
   app.post("/api/page/update", async (req, res) => {
-    const { projectId, pageId, blocks, html, name } = req.body;
+    const { projectId, pageId, blocks, html, name, position } = req.body;
 
     try {
       const projectsData = readFileSync(
@@ -179,6 +179,7 @@ const configureRoutes = (app) => {
             blocks: blocks || page.blocks,
             html: html || page.html,
             name: name || page.name,
+            position: position || page.position,
           };
         }
         return page;
