@@ -6,8 +6,8 @@ const Container = styled.aside`
   height: 100vh;
   position: fixed;
   top: 0;
-  transition-duration: 0.3s;
   transition-property: opacity, transform;
+  transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
   color: #333;
   opacity: ${({ $isMenuOpen }) => ($isMenuOpen ? "1" : "0")};

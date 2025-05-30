@@ -100,6 +100,8 @@ const HeaderLeftBlankPageList = styled(HeaderLeftBlankPage)`
       background-color: #f5f5f5;
     }
   }
+
+  ${({ $isDropdownOpen }) => $isDropdownOpen && `background-color: #f5f5f5;`};
 `;
 
 const HeaderLeftHome = styled(Link)`
@@ -127,7 +129,7 @@ const HeaderPageDropdownContainer = styled.div`
   flex-direction: column;
   position: absolute;
   top: 50px;
-  left: -5px;
+  left: 0;
   min-width: 100%;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -143,18 +145,17 @@ const HeaderPageDropdownLink = styled(Link)`
   justify-content: flex-end;
   column-gap: 7px;
   text-decoration: none;
-  color: #000;
   padding: 6px 8px;
   white-space: nowrap;
 
+  color: ${({ $isActive }) => ($isActive ? "#000" : "#333")};
   background-color: ${({ $isActive }) =>
     $isActive ? "rgba(0, 0, 0, 0.09)" : "#fff"};
   font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
 
   @media (hover: hover) {
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.09);
-    }
+    ${({ $isActive }) =>
+      !$isActive && "&:hover {background-color: rgba(0, 0, 0, 0.05);}"};
   }
 `;
 

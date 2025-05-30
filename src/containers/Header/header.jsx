@@ -61,6 +61,7 @@ const Header = () => {
             /
             <HeaderLeftBlankPageList
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              $isDropdownOpen={isDropdownOpen}
             >
               <Icon icon="blankPage" />
               <span>{pageData.name}</span>
