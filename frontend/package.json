@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node_modules/.bin/vite",
     "build": "node_modules/.bin/vite build",
-    "clear": "rimraf build"
+    "clear": "rimraf dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.7.0",
@@ -30,6 +30,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
-    "vite": "^6.3.1"
+    "vite": "^6.3.1",
+    "rimraf": "^6.0.1"
   }
 }
