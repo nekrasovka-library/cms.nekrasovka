@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ProjectContainer } from "./project.styles.js";
-import ProjectHeader from "../Project/components/project.header.jsx";
+import ProjectHeader from "./components/project.header.jsx";
 import ProjectMain from "./components/project.main.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";

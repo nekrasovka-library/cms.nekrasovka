@@ -1,5 +1,5 @@
 import React from "react";
-import icons from "./icons";
+import icons from "./icons/index.js";
 
 const Button = ({ children, onClick }) => {
   return (

@@ -14,19 +14,20 @@ const Page = () => {
 
   useEffect(() => {
     dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
-    if (projectId !== pageData.projectId && !isProjectLoaded) {
-      dispatch({ type: "GET_PROJECT_REQUEST", projectId });
-    }
 
     return () => {
       dispatch({ type: "RESET_PROJECT_PAGE" });
       dispatch({ type: "RESET_BLOCKS" });
     };
-  }, [pageId, projectId]);
+  }, [pageId]);
 
   useEffect(() => {
     if (isPageLoaded) {
       dispatch({ type: "GET_BLOCKS_SUCCESS", payload: pageData.blocks });
+
+      if (projectId !== pageData.projectId && !isProjectLoaded) {
+        dispatch({ type: "GET_PROJECT_REQUEST", projectId });
+      }
     }
   }, [isPageLoaded]);
 

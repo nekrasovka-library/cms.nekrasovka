@@ -19,7 +19,7 @@ import {
   getProjectPageSuccess,
   getProjectPageFailure,
   updateProjectPageFailure,
-} from "../actions";
+} from "../actions/index.js";
 
 function* getProject(params) {
   try {

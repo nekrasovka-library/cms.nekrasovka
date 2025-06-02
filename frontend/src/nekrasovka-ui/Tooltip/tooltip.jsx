@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useIsMobile } from "../../helpers";
-import { TooltipWrapper } from "./tooltip.styles";
+import { useIsMobile } from "../../helpers/index.js";
+import { TooltipWrapper } from "./tooltip.styles.js";
 
 const Tooltip = ({ children, text, position = "top" }) => {
   const [isVisible, setIsVisible] = useState(false);

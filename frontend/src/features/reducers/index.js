@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
-import menu from "./menu";
-import blocks from "./blocks";
-import settings from "./settings";
-import preview from "./preview";
+import menu from "./menu.js";
+import blocks from "./blocks.js";
+import settings from "./settings.js";
+import preview from "./preview.js";
 import editor from "./editor.js";
-import projects from "./projects";
-import project from "./project";
-import page from "./page";
+import projects from "./projects.js";
+import project from "./project.js";
+import page from "./page.js";
 
 const rootReducer = combineReducers({
   menu: menu,

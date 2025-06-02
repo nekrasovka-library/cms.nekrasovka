@@ -18,8 +18,8 @@ const __dirname = path.dirname(__filename);
 
 // Константы
 const PORT = 3001;
-const BUILD_DIR = resolve(__dirname, "../", "dist");
-const IMAGES_DIR = resolve(__dirname, "../", "images");
+const BUILD_DIR = resolve(__dirname, "../../frontend/dist");
+const IMAGES_DIR = resolve(__dirname, "../../images");
 const STATIC_PATHS = {
   index: join(BUILD_DIR, "index.html"),
 };
@@ -71,7 +71,7 @@ const configureRoutes = (app) => {
   app.get("/api/projects", async (req, res) => {
     try {
       const projectsData = readFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         "utf8",
       );
 
@@ -93,7 +93,7 @@ const configureRoutes = (app) => {
 
     try {
       const projectsData = readFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
@@ -133,7 +133,7 @@ const configureRoutes = (app) => {
 
     try {
       const projectsData = readFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
@@ -147,7 +147,7 @@ const configureRoutes = (app) => {
 
       projects.push(newProject);
       writeFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         JSON.stringify(projects, null, 2),
       );
 
@@ -167,7 +167,7 @@ const configureRoutes = (app) => {
 
     try {
       const projectsData = readFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
@@ -194,7 +194,7 @@ const configureRoutes = (app) => {
       });
 
       writeFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         JSON.stringify(projects, null, 2),
       );
 
@@ -214,7 +214,7 @@ const configureRoutes = (app) => {
 
     try {
       const projectsData = readFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
@@ -237,7 +237,7 @@ const configureRoutes = (app) => {
       }
 
       writeFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         JSON.stringify(projects, null, 2),
       );
 
@@ -258,7 +258,7 @@ const configureRoutes = (app) => {
 
     try {
       const projectsData = readFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
@@ -295,7 +295,7 @@ const configureRoutes = (app) => {
 
     try {
       const projectsData = readFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         "utf8",
       );
       const projects = JSON.parse(projectsData);
@@ -323,7 +323,7 @@ const configureRoutes = (app) => {
 
       project.pages.push(newPage);
       writeFileSync(
-        join(__dirname, "projects.json"),
+        join(__dirname, "../../database/projects.json"),
         JSON.stringify(projects, null, 2),
       );
 
