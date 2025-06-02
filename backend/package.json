@@ -1,7 +1,7 @@
 {
   "name": "csm.nekrasovka",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "server": "PORT=3001 nodemon src/server.js",
@@ -17,9 +17,6 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
-    "eslint": "^9.22.0",
-    "globals": "^16.0.0",
     "nodemon": "^3.0.3"
   }
 }
