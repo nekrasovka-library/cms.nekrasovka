@@ -17,7 +17,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Константы
-const PORT = 3001;
+const PORT = process.env.PORT;
 const BUILD_DIR = resolve(__dirname, "../../frontend/dist");
 const IMAGES_DIR = resolve(__dirname, "../../images");
 const STATIC_PATHS = {
