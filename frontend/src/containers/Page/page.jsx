@@ -5,6 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { BackToConstructorButton } from "./page.styles.js";
 
+const GET_BLOCKS_SUCCESS = "GET_BLOCKS_SUCCESS";
+const RESET_BLOCKS = "RESET_BLOCKS";
+const RESET_PROJECT_PAGE = "RESET_PROJECT_PAGE";
+const GET_PROJECT_PAGE_REQUEST = "GET_PROJECT_PAGE_REQUEST";
+const GET_PROJECT_REQUEST = "GET_PROJECT_REQUEST";
+const TOGGLE_PREVIEW = "TOGGLE_PREVIEW";
+
 const Page = () => {
   const dispatch = useDispatch();
   const { pageId, projectId } = useParams();
@@ -18,20 +25,20 @@ const Page = () => {
   const prevPageIdRef = useRef(null);
 
   const togglePreview = useCallback(() => {
-    dispatch({ type: "TOGGLE_PREVIEW" });
+    dispatch({ type: TOGGLE_PREVIEW });
   }, [dispatch]);
 
   // Загрузка данных страницы только если pageId изменился
   useEffect(() => {
     // Отправляем запрос только если pageId изменился
     if (prevPageIdRef.current !== pageId) {
-      dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
+      dispatch({ type: GET_PROJECT_PAGE_REQUEST, pageId });
       prevPageIdRef.current = pageId;
     }
 
     return () => {
-      dispatch({ type: "RESET_PROJECT_PAGE" });
-      dispatch({ type: "RESET_BLOCKS" });
+      dispatch({ type: RESET_PROJECT_PAGE });
+      dispatch({ type: RESET_BLOCKS });
       blocksFetched.current = false;
     };
   }, [pageId, dispatch]);
@@ -40,7 +47,7 @@ const Page = () => {
   useEffect(() => {
     // Проверяем, что страница загружена и блоки еще не были запрошены
     if (isPageLoaded && !blocksFetched.current && pageData?.blocks) {
-      dispatch({ type: "GET_BLOCKS_SUCCESS", payload: pageData.blocks });
+      dispatch({ type: GET_BLOCKS_SUCCESS, payload: pageData.blocks });
       blocksFetched.current = true;
 
       // Проверяем, нужно ли загружать проект
@@ -50,7 +57,7 @@ const Page = () => {
         projectId !== pageData.projectId &&
         !isProjectLoaded
       ) {
-        dispatch({ type: "GET_PROJECT_REQUEST", projectId });
+        dispatch({ type: GET_PROJECT_REQUEST, projectId });
       }
     }
   }, [isPageLoaded, pageData, projectId, isProjectLoaded, dispatch]);
