@@ -1,357 +1,63 @@
 import express from "express";
-import { join, resolve, extname } from "node:path";
 import cors from "cors";
 import bodyParser from "body-parser";
-import multer from "multer";
-import dotenv from "dotenv";
-import { fileURLToPath } from "url";
-import * as path from "node:path";
 import process from "process";
-import { readFileSync, writeFileSync } from "node:fs";
 
-// Инициализация dotenv
-dotenv.config();
+// Импорт конфигурации
+import CONFIG from "./config.js";
 
-// Для ES модулей нужно явно получить __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Импорт маршрутов
+import imagesRoutes from "./routes/images.js";
+import projectsRoutes from "./routes/projects.js";
+import pagesRoutes from "./routes/pages.js";
 
-// Константы
-const PORT = process.env.PORT;
-const BUILD_DIR = resolve(__dirname, "../../frontend/dist");
-const IMAGES_DIR = resolve(__dirname, "../../images");
-const STATIC_PATHS = {
-  index: join(BUILD_DIR, "index.html"),
-};
-
-// Конфигурация multer
-const createStorage = () => {
-  return multer.diskStorage({
-    destination: (req, file, cb) => cb(null, IMAGES_DIR),
-    filename: (req, file, cb) =>
-      cb(null, `${Date.now()}${extname(file.originalname)}`),
-  });
-};
-
-// Инициализация приложения
+/**
+ * Инициализация приложения
+ * @returns {Object} экземпляр Express приложения
+ */
 const initializeApp = () => {
   const app = express();
 
-  // Middleware
+  // Настройка middleware
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
   // Статические файлы
-  app.use("/images", express.static(IMAGES_DIR));
+  app.use("/images", express.static(CONFIG.PATHS.IMAGES_DIR));
 
   return app;
 };
 
-// Роуты
+/**
+ * Конфигурация маршрутов
+ * @param {Object} app - экземпляр Express приложения
+ */
 const configureRoutes = (app) => {
-  const upload = multer({ storage: createStorage() });
-
-  app.post("/api/images/upload", upload.single("image"), async (req, res) => {
-    const file = req.file;
-
-    if (!file) {
-      return res.status(400).json({
-        error: "No file uploaded",
-        success: false,
-      });
-    }
-
-    return res.json({
-      success: true,
-      file,
-    });
-  });
-
-  app.get("/api/projects", async (req, res) => {
-    try {
-      const projectsData = readFileSync(
-        join(__dirname, "../../database/projects.json"),
-        "utf8",
-      );
-
-      const projects = JSON.parse(projectsData);
-      return res.json({
-        success: true,
-        data: projects,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-      });
-    }
-  });
-
-  app.get("/api/projects/:projectId", async (req, res) => {
-    const { projectId } = req.params;
-
-    try {
-      const projectsData = readFileSync(
-        join(__dirname, "../../database/projects.json"),
-        "utf8",
-      );
-      const projects = JSON.parse(projectsData);
-      const project = projects.find(
-        (project) => project.projectId === +projectId,
-      );
-
-      if (!project) {
-        return res.status(404).json({
-          success: false,
-          error: "Project not found",
-        });
-      }
-
-      return res.json({
-        success: true,
-        data: {
-          ...project,
-          pages: project.pages.map(({ name, pageId, position, projectId }) => ({
-            name,
-            pageId,
-            position,
-            projectId,
-          })),
-        },
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-      });
-    }
-  });
-
-  app.put("/api/projects/create", async (req, res) => {
-    const { project } = req.body;
-
-    try {
-      const projectsData = readFileSync(
-        join(__dirname, "../../database/projects.json"),
-        "utf8",
-      );
-      const projects = JSON.parse(projectsData);
-
-      const maxId = Math.max(...projects.map((p) => p.projectId), 0);
-      const newProject = {
-        ...project,
-        projectId: maxId + 1,
-        pages: [],
-      };
-
-      projects.push(newProject);
-      writeFileSync(
-        join(__dirname, "../../database/projects.json"),
-        JSON.stringify(projects, null, 2),
-      );
-
-      return res.json({
-        success: true,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-      });
-    }
-  });
-
-  app.post("/api/page/update", async (req, res) => {
-    const { projectId, pageId, blocks, html, name, position } = req.body;
-
-    try {
-      const projectsData = readFileSync(
-        join(__dirname, "../../database/projects.json"),
-        "utf8",
-      );
-      const projects = JSON.parse(projectsData);
-      const project = projects.find((p) => p.projectId === projectId);
-
-      if (!project) {
-        return res.status(404).json({
-          success: false,
-          error: "Project not found",
-        });
-      }
-
-      project.pages = project.pages.map((page) => {
-        if (page.pageId === pageId) {
-          return {
-            ...page,
-            blocks: blocks || page.blocks,
-            html: html || page.html,
-            name: name || page.name,
-            position: position || page.position,
-          };
-        }
-        return page;
-      });
-
-      writeFileSync(
-        join(__dirname, "../../database/projects.json"),
-        JSON.stringify(projects, null, 2),
-      );
-
-      return res.json({
-        success: true,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-      });
-    }
-  });
-
-  app.post("/api/page/delete", async (req, res) => {
-    const { projectId, pageId } = req.body;
-
-    try {
-      const projectsData = readFileSync(
-        join(__dirname, "../../database/projects.json"),
-        "utf8",
-      );
-      const projects = JSON.parse(projectsData);
-      const project = projects.find((p) => p.projectId === +projectId);
-
-      if (!project) {
-        return res.status(404).json({
-          success: false,
-          error: "Project not found",
-        });
-      }
-
-      project.pages = project.pages.filter((page) => page.pageId !== +pageId);
-
-      const isPages = project.pages.length > 0;
-
-      if (isPages) {
-        const isNotHome = !project.pages.some((page) => page.position === 1);
-        if (isNotHome) project.pages[0].position = 1;
-      }
-
-      writeFileSync(
-        join(__dirname, "../../database/projects.json"),
-        JSON.stringify(projects, null, 2),
-      );
-
-      return res.json({
-        success: true,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-      });
-    }
-  });
-
-  app.get("/api/page/:pageId", async (req, res) => {
-    const { pageId } = req.params;
-    let page;
-
-    try {
-      const projectsData = readFileSync(
-        join(__dirname, "../../database/projects.json"),
-        "utf8",
-      );
-      const projects = JSON.parse(projectsData);
-
-      for (const project of projects) {
-        const foundPage = project.pages.find((p) => p.pageId === +pageId);
-        if (foundPage) {
-          page = foundPage;
-          break;
-        }
-      }
-
-      if (!page) {
-        return res.status(404).json({
-          success: false,
-          error: "Project not found",
-        });
-      }
-
-      return res.json({
-        success: true,
-        data: page,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-      });
-    }
-  });
-
-  app.put("/api/page/create", async (req, res) => {
-    const { projectId } = req.body;
-
-    try {
-      const projectsData = readFileSync(
-        join(__dirname, "../../database/projects.json"),
-        "utf8",
-      );
-      const projects = JSON.parse(projectsData);
-      const project = projects.find((p) => p.projectId === +projectId);
-
-      if (!project) {
-        return res.status(404).json({
-          success: false,
-          error: "Project not found",
-        });
-      }
-
-      const maxPageId = Math.max(
-        ...projects.flatMap((p) => p.pages.map((page) => page.pageId)),
-        0,
-      );
-      const newPage = {
-        name: "Blank page",
-        pageId: maxPageId + 1,
-        projectId: project.projectId,
-        position: project.pages.length > 0 ? 2 : 1,
-        blocks: [],
-        html: "",
-      };
-
-      project.pages.push(newPage);
-      writeFileSync(
-        join(__dirname, "../../database/projects.json"),
-        JSON.stringify(projects, null, 2),
-      );
-
-      return res.json({
-        success: true,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-      });
-    }
-  });
+  // Регистрация API маршрутов
+  app.use("/api/images", imagesRoutes);
+  app.use("/api/projects", projectsRoutes);
+  app.use("/api/page", pagesRoutes);
 
   // Обработка всех остальных маршрутов - отдаем index.html
   app.use((req, res) => {
-    res.sendFile(STATIC_PATHS.index);
+    res.sendFile(CONFIG.PATHS.INDEX_HTML);
   });
 };
 
-// Запуск сервера
+/**
+ * Запуск сервера
+ * @param {Object} app - экземпляр Express приложения
+ */
 const startServer = (app) => {
-  app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+  app.listen(CONFIG.PORT, () => {
+    console.log(`Server started on port ${CONFIG.PORT}`);
   });
 };
 
-// Основная функция
+/**
+ * Основная функция запуска приложения
+ */
 const main = () => {
   try {
     const app = initializeApp();
