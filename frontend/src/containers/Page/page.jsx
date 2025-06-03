@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import Preview from "../Preview/preview.jsx";
 import Constructor from "../Constructor/constructor.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,32 +12,53 @@ const Page = () => {
   const { pageData, isPageLoaded } = useSelector((state) => state.page);
   const { isProjectLoaded } = useSelector((state) => state.project);
 
+  // Ref для отслеживания, был ли уже отправлен запрос на блоки
+  const blocksFetched = useRef(false);
+  // Ref для хранения предыдущего pageId
+  const prevPageIdRef = useRef(null);
+
+  const togglePreview = useCallback(() => {
+    dispatch({ type: "TOGGLE_PREVIEW" });
+  }, [dispatch]);
+
+  // Загрузка данных страницы только если pageId изменился
   useEffect(() => {
-    dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
+    // Отправляем запрос только если pageId изменился
+    if (prevPageIdRef.current !== pageId) {
+      dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
+      prevPageIdRef.current = pageId;
+    }
 
     return () => {
       dispatch({ type: "RESET_PROJECT_PAGE" });
       dispatch({ type: "RESET_BLOCKS" });
+      blocksFetched.current = false;
     };
-  }, [pageId]);
+  }, [pageId, dispatch]);
 
+  // Обработка загруженных данных страницы
   useEffect(() => {
-    if (isPageLoaded) {
+    // Проверяем, что страница загружена и блоки еще не были запрошены
+    if (isPageLoaded && !blocksFetched.current && pageData?.blocks) {
       dispatch({ type: "GET_BLOCKS_SUCCESS", payload: pageData.blocks });
+      blocksFetched.current = true;
 
-      if (projectId !== pageData.projectId && !isProjectLoaded) {
+      // Проверяем, нужно ли загружать проект
+      if (
+        projectId &&
+        pageData.projectId &&
+        projectId !== pageData.projectId &&
+        !isProjectLoaded
+      ) {
         dispatch({ type: "GET_PROJECT_REQUEST", projectId });
       }
     }
-  }, [isPageLoaded]);
+  }, [isPageLoaded, pageData, projectId, isProjectLoaded, dispatch]);
 
   return isPreview ? (
     <>
       <Preview />
-      <BackToConstructorButton
-        type="button"
-        onClick={() => dispatch({ type: "TOGGLE_PREVIEW" })}
-      >
+      <BackToConstructorButton type="button" onClick={togglePreview}>
         <span>Вернуться к редактированию</span>
       </BackToConstructorButton>
     </>

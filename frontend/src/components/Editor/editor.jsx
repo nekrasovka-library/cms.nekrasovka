@@ -28,10 +28,12 @@ const Editor = ({
   };
 
   const handleContentChange = (content) => {
-    dispatch({
-      type: "UPDATE_BLOCK",
-      payload: { blockId, itemId, text: content },
-    });
+    if (editorFocused) {
+      dispatch({
+        type: "UPDATE_BLOCK",
+        payload: { blockId, itemId, text: content },
+      });
+    }
   };
 
   const handleEditorFocused = () => {
