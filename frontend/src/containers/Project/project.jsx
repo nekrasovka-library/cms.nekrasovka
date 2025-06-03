@@ -13,11 +13,6 @@ import Transition from "../../components/Transition/transition.jsx";
 // Константы Redux actions
 const GET_PROJECT_REQUEST = "GET_PROJECT_REQUEST";
 
-/**
- * Хук для загрузки данных проекта
- * @param {string} projectId - ID проекта для загрузки
- * @returns {Object} Объект с данными проекта и статусом загрузки
- */
 const useProjectData = (projectId) => {
   const dispatch = useDispatch();
   const prevProjectIdRef = useRef(null);

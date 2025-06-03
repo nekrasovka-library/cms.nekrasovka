@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "csm.nekrasovka",
-      script: "./src/server.js",
+      script: "./dist/server/server.js",
       env_production: {
         NODE_ENV: "production",
         PORT: 3001,
@@ -17,7 +17,7 @@ module.exports = {
       repo: "git@github.com:nekrasovka-library/csm.nekrasovka.git",
       path: "/var/www/csm.test.nekrasovka",
       "post-deploy":
-        "cd /var/www/csm.test.nekrasovka/current/frontend && npm install && npm run build && cd ../backend && npm install && pm2 reload /var/www/csm.test.nekrasovka/current/backend/ecosystem.config.js --env production",
+        "cd /var/www/csm.test.nekrasovka/current/frontend && npm install && npm run build && cd ../backend && npm install && npm run build && pm2 reload /var/www/csm.test.nekrasovka/current/backend/ecosystem.config.js --env production",
       env: {
         NODE_ENV: "production",
         PORT: 3001,
