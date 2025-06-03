@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
@@ -20,15 +20,16 @@ const GET_PROJECT_REQUEST = "GET_PROJECT_REQUEST";
  */
 const useProjectData = (projectId) => {
   const dispatch = useDispatch();
+  const prevProjectIdRef = useRef(null);
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
 
   useEffect(() => {
-    dispatch({
-      type: GET_PROJECT_REQUEST,
-      projectId,
-    });
+    if (prevProjectIdRef.current !== projectId) {
+      dispatch({ type: GET_PROJECT_REQUEST, projectId });
+      prevProjectIdRef.current = projectId;
+    }
   }, [projectId, dispatch, isProjectLoaded]);
 
   return { projectData, isProjectLoaded };
