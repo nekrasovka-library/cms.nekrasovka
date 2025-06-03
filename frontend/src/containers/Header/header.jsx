@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { Link } from "react-router";
-import HeaderDropdown from "./header.dropdown.jsx";
+import HeaderDropdown from "./components/header.dropdown.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();

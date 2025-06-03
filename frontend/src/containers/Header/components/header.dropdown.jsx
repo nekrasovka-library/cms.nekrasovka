@@ -2,8 +2,8 @@ import React from "react";
 import {
   HeaderPageDropdownContainer,
   HeaderPageDropdownLink,
-} from "./header.styles.js";
-import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
+} from "../header.styles.js";
+import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 
 const HeaderDropdown = ({ pages, pageId, projectId, setIsDropdownOpen }) => {
   return (
