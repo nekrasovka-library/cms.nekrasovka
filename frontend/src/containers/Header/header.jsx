@@ -26,14 +26,13 @@ const Header = () => {
   };
 
   const handleSaveProjectPage = () => {
-    const { html, projectId, pageId } = pageData;
+    const { projectId, pageId } = pageData;
 
     dispatch({
       type: "UPDATE_PROJECT_PAGE_REQUEST",
       projectId,
       pageId,
       blocks,
-      html,
     });
   };
 

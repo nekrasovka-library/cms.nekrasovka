@@ -104,9 +104,9 @@ const ProjectMainContainerHeader = styled.div`
 `;
 
 const ProjectMainCardContainer = styled.div`
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: space-between;
+  grid-template-columns: repeat(3, 1fr);
   height: 60px;
   border-bottom: 1px solid #d5d5d5;
   cursor: pointer;
@@ -117,8 +117,15 @@ const ProjectMainCardContainer = styled.div`
     column-gap: 10px;
   }
 
+  > :nth-child(2) {
+    color: #979797;
+    text-align: left;
+  }
+
   > :last-child {
     visibility: hidden;
+    display: flex;
+    justify-content: flex-end;
 
     > div {
       display: flex;

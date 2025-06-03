@@ -4,7 +4,7 @@ import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 import { Link } from "react-router";
 import { useDispatch } from "react-redux";
 
-const ProjectMainCard = ({ pageId, projectId, name, position }) => {
+const ProjectMainCard = ({ pageId, projectId, name, position, url }) => {
   const dispatch = useDispatch();
 
   const handleDeleteProjectPage = () => {
@@ -17,6 +17,7 @@ const ProjectMainCard = ({ pageId, projectId, name, position }) => {
         {position === 1 && <Icon icon="home" />}
         <span>{name}</span>
       </Link>
+      <div>{url}</div>
       <div>
         <div onClick={handleDeleteProjectPage}>
           <Icon icon="trash" />

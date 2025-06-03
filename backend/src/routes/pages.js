@@ -1,12 +1,17 @@
-import express from 'express';
-import { readDatabase, writeDatabase, findProject, handleApiError } from '../utils/database.js';
+import express from "express";
+import {
+  readDatabase,
+  writeDatabase,
+  findProject,
+  handleApiError,
+} from "../utils/database.js";
 
 const router = express.Router();
 
 /**
  * Получение страницы по ID
  */
-router.get('/:pageId', (req, res) => {
+router.get("/:pageId", (req, res) => {
   const { pageId } = req.params;
 
   try {
@@ -14,7 +19,7 @@ router.get('/:pageId', (req, res) => {
     let page;
 
     for (const project of projects) {
-      const foundPage = project.pages.find(p => p.pageId === +pageId);
+      const foundPage = project.pages.find((p) => p.pageId === +pageId);
       if (foundPage) {
         page = foundPage;
         break;
@@ -24,13 +29,13 @@ router.get('/:pageId', (req, res) => {
     if (!page) {
       return res.status(404).json({
         success: false,
-        error: 'Page not found'
+        error: "Page not found",
       });
     }
 
     return res.json({
       success: true,
-      data: page
+      data: page,
     });
   } catch (error) {
     return handleApiError(res, error);
@@ -40,8 +45,8 @@ router.get('/:pageId', (req, res) => {
 /**
  * Обновление страницы
  */
-router.post('/update', (req, res) => {
-  const { projectId, pageId, blocks, html, name, position } = req.body;
+router.post("/update", (req, res) => {
+  const { projectId, pageId, blocks, name } = req.body;
 
   try {
     const projects = readDatabase();
@@ -50,18 +55,16 @@ router.post('/update', (req, res) => {
     if (!project) {
       return res.status(404).json({
         success: false,
-        error: 'Project not found'
+        error: "Project not found",
       });
     }
 
-    project.pages = project.pages.map(page => {
+    project.pages = project.pages.map((page) => {
       if (page.pageId === pageId) {
         return {
           ...page,
           blocks: blocks || page.blocks,
-          html: html || page.html,
           name: name || page.name,
-          position: position || page.position
         };
       }
       return page;
@@ -70,7 +73,7 @@ router.post('/update', (req, res) => {
     writeDatabase(projects);
 
     return res.json({
-      success: true
+      success: true,
     });
   } catch (error) {
     return handleApiError(res, error);
@@ -80,7 +83,7 @@ router.post('/update', (req, res) => {
 /**
  * Удаление страницы
  */
-router.post('/delete', (req, res) => {
+router.post("/delete", (req, res) => {
   const { projectId, pageId } = req.body;
 
   try {
@@ -90,21 +93,25 @@ router.post('/delete', (req, res) => {
     if (!project) {
       return res.status(404).json({
         success: false,
-        error: 'Project not found'
+        error: "Project not found",
       });
     }
 
-    project.pages = project.pages.filter(page => page.pageId !== +pageId);
+    project.pages = project.pages.filter((page) => page.pageId !== +pageId);
 
     // Если есть страницы и нет домашней, делаем первую страницу домашней
-    if (project.pages.length > 0 && !project.pages.some(page => page.position === 1)) {
+    if (
+      project.pages.length > 0 &&
+      !project.pages.some((page) => page.position === 1)
+    ) {
       project.pages[0].position = 1;
+      project.pages[0].url = "/";
     }
 
     writeDatabase(projects);
 
     return res.json({
-      success: true
+      success: true,
     });
   } catch (error) {
     return handleApiError(res, error);
@@ -114,7 +121,7 @@ router.post('/delete', (req, res) => {
 /**
  * Создание страницы
  */
-router.put('/create', (req, res) => {
+router.put("/create", (req, res) => {
   const { projectId } = req.body;
 
   try {
@@ -124,29 +131,29 @@ router.put('/create', (req, res) => {
     if (!project) {
       return res.status(404).json({
         success: false,
-        error: 'Project not found'
+        error: "Project not found",
       });
     }
 
     const maxPageId = Math.max(
-      ...projects.flatMap(p => p.pages.map(page => page.pageId)),
-      0
+      ...projects.flatMap((p) => p.pages.map((page) => page.pageId)),
+      0,
     );
 
     const newPage = {
-      name: 'Blank page',
+      name: "Blank page",
       pageId: maxPageId + 1,
       projectId: project.projectId,
       position: project.pages.length > 0 ? 2 : 1,
       blocks: [],
-      html: ''
+      url: project.pages.length > 0 ? `/page${maxPageId + 1}` : "/",
     };
 
     project.pages.push(newPage);
     writeDatabase(projects);
 
     return res.json({
-      success: true
+      success: true,
     });
   } catch (error) {
     return handleApiError(res, error);

@@ -1,17 +1,22 @@
-import express from 'express';
-import { readDatabase, writeDatabase, findProject, handleApiError } from '../utils/database.js';
+import express from "express";
+import {
+  readDatabase,
+  writeDatabase,
+  findProject,
+  handleApiError,
+} from "../utils/database.js";
 
 const router = express.Router();
 
 /**
  * Получение всех проектов
  */
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   try {
     const projects = readDatabase();
     return res.json({
       success: true,
-      data: projects
+      data: projects,
     });
   } catch (error) {
     return handleApiError(res, error);
@@ -21,7 +26,7 @@ router.get('/', (req, res) => {
 /**
  * Получение проекта по ID
  */
-router.get('/:projectId', (req, res) => {
+router.get("/:projectId", (req, res) => {
   const { projectId } = req.params;
 
   try {
@@ -31,7 +36,7 @@ router.get('/:projectId', (req, res) => {
     if (!project) {
       return res.status(404).json({
         success: false,
-        error: 'Project not found'
+        error: "Project not found",
       });
     }
 
@@ -39,10 +44,16 @@ router.get('/:projectId', (req, res) => {
       success: true,
       data: {
         ...project,
-        pages: project.pages.map(({ name, pageId, position, projectId }) => ({
-          name, pageId, position, projectId
-        }))
-      }
+        pages: project.pages.map(
+          ({ name, pageId, position, projectId, url }) => ({
+            name,
+            pageId,
+            position,
+            projectId,
+            url,
+          }),
+        ),
+      },
     });
   } catch (error) {
     return handleApiError(res, error);
@@ -52,24 +63,24 @@ router.get('/:projectId', (req, res) => {
 /**
  * Создание нового проекта
  */
-router.put('/create', (req, res) => {
+router.put("/create", (req, res) => {
   const { project } = req.body;
 
   try {
     const projects = readDatabase();
-    const maxId = Math.max(...projects.map(p => p.projectId), 0);
+    const maxId = Math.max(...projects.map((p) => p.projectId), 0);
 
     const newProject = {
       ...project,
       projectId: maxId + 1,
-      pages: []
+      pages: [],
     };
 
     projects.push(newProject);
     writeDatabase(projects);
 
     return res.json({
-      success: true
+      success: true,
     });
   } catch (error) {
     return handleApiError(res, error);

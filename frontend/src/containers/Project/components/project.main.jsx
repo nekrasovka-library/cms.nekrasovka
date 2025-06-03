@@ -9,13 +9,14 @@ const ProjectMain = ({ pages }) => {
   return (
     <ProjectMainContainer>
       <ProjectMainContainerHeader>Страницы проекта:</ProjectMainContainerHeader>
-      {pages.map(({ pageId, projectId, name, position }) => (
+      {pages.map(({ pageId, projectId, name, position, url }) => (
         <ProjectMainCard
           key={pageId}
           pageId={pageId}
           projectId={projectId}
           name={name}
           position={position}
+          url={url}
         />
       ))}
     </ProjectMainContainer>
