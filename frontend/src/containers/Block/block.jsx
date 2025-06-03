@@ -21,9 +21,11 @@ const Block = ({
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
+  const { totalBlocks } = useSelector((state) => state.blocks);
   const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
   const isBlankBlockActive =
-    isBlankBlockFocused && !isMenuOpen && !isSettingsOpen;
+    (isBlankBlockFocused && !isMenuOpen && !isSettingsOpen) ||
+    totalBlocks === 0;
 
   const handleAddBlock = () => {
     dispatch({ type: "RESET_MENU" });
