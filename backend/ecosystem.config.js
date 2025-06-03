@@ -5,7 +5,7 @@ module.exports = {
       script: "./dist/server/server.js",
       env_production: {
         NODE_ENV: "production",
-        PORT: 3001,
+        PORT: 3013,
       },
     },
   ],
@@ -20,7 +20,7 @@ module.exports = {
         "cd /var/www/csm.test.nekrasovka/current/frontend && npm install && npm run build && cd ../backend && npm install && npm run build && pm2 reload /var/www/csm.test.nekrasovka/current/backend/ecosystem.config.js --env production",
       env: {
         NODE_ENV: "production",
-        PORT: 3001,
+        PORT: 3013,
       },
     },
   },
