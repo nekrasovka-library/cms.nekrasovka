@@ -7,11 +7,15 @@ import Image from "../../components/Image/image.constructor.jsx";
 import Carousel from "../../components/Carousel/carousel.constructor.jsx";
 import Divider from "../../components/Divider/divider.jsx";
 import Button from "../../components/Button/button.constructor.jsx";
+import { AnimatePresence } from "framer-motion";
+import PageTransition from "../../components/PageTransition/page-transition.jsx";
+import { useParams } from "react-router";
 
 const Constructor = () => {
   const dispatch = useDispatch();
   const { blocks, totalBlocks } = useSelector((state) => state.blocks);
   const hasBlocks = totalBlocks > 0;
+  const { pageId } = useParams();
 
   const EXCLUDED_CLASSES = ["se-container", "se-btn-module", "se-wrapper"];
 
@@ -53,9 +57,13 @@ const Constructor = () => {
     });
 
   return (
-    <ConstructorContainer onClick={handleContainerClick}>
-      {hasBlocks ? renderBlocks(true) : <Block blockIndex={0} />}
-    </ConstructorContainer>
+    <AnimatePresence mode="wait">
+      <PageTransition key={pageId}>
+        <ConstructorContainer onClick={handleContainerClick}>
+          {hasBlocks ? renderBlocks(true) : <Block blockIndex={0} />}
+        </ConstructorContainer>
+      </PageTransition>
+    </AnimatePresence>
   );
 };
 
