@@ -20,6 +20,7 @@ const Editor = ({
   const { isSettingsOpen } = useSelector((state) => state.settings);
   const { editorFocused } = useSelector((state) => state.editor);
   const isModal = isSettingsOpen || isMenuOpen;
+  const isEditorFocused = editorFocused === `${blockId}-${itemId}`;
   const options = {
     defaultStyle: "font-size: 16px; font-family: Roboto, sans-serif;",
     font: ["Arial", "Roboto"],
@@ -28,12 +29,10 @@ const Editor = ({
   };
 
   const handleContentChange = (content) => {
-    if (editorFocused) {
-      dispatch({
-        type: "UPDATE_BLOCK",
-        payload: { blockId, itemId, text: content },
-      });
-    }
+    dispatch({
+      type: "UPDATE_BLOCK",
+      payload: { blockId, itemId, text: content },
+    });
   };
 
   const handleEditorFocused = () => {
@@ -42,7 +41,7 @@ const Editor = ({
 
   return (
     <Container
-      $isEditorFocused={editorFocused === `${blockId}-${itemId}`}
+      $isEditorFocused={isEditorFocused}
       $isModal={isModal}
       $backgroundColor={backgroundColor}
       $textAlign={textAlign}
