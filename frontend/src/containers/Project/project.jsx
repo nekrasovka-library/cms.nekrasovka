@@ -25,12 +25,10 @@ const useProjectData = (projectId) => {
   );
 
   useEffect(() => {
-    if (!isProjectLoaded) {
-      dispatch({
-        type: GET_PROJECT_REQUEST,
-        projectId,
-      });
-    }
+    dispatch({
+      type: GET_PROJECT_REQUEST,
+      projectId,
+    });
   }, [projectId, dispatch, isProjectLoaded]);
 
   return { projectData, isProjectLoaded };
