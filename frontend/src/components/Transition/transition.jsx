@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const pageVariants = {
+const defaultVariants = {
   initial: {
     opacity: 0,
   },
@@ -9,7 +9,7 @@ const pageVariants = {
     opacity: 1,
     transition: {
       type: "spring",
-      stiffness: 240,
+      stiffness: 260,
       damping: 20,
     },
   },
@@ -17,24 +17,26 @@ const pageVariants = {
     opacity: 0,
     transition: {
       type: "spring",
-      stiffness: 240,
+      stiffness: 260,
       damping: 20,
     },
   },
 };
 
-const PageTransition = ({ children, className }) => {
+const Transition = ({ children, variants, className }) => {
+  const animationVariants = variants || defaultVariants;
+
   return (
     <motion.div
       className={className}
       initial="initial"
       animate="in"
       exit="out"
-      variants={pageVariants}
+      variants={animationVariants}
     >
       {children}
     </motion.div>
   );
 };
 
-export default PageTransition;
+export default Transition;

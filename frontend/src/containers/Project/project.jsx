@@ -7,6 +7,8 @@ import ProjectHeader from "./components/project.header.jsx";
 import ProjectMain from "./components/project.main.jsx";
 import ProjectSettings from "./components/project.settings.jsx";
 import { ProjectContainer } from "./project.styles.js";
+import { AnimatePresence } from "framer-motion";
+import Transition from "../../components/Transition/transition.jsx";
 
 // Константы Redux actions
 const GET_PROJECT_REQUEST = "GET_PROJECT_REQUEST";
@@ -53,12 +55,15 @@ const Project = () => {
         setIsProjectSettingsOpen={setIsProjectSettingsOpen}
         isProjectSettingsOpen={isProjectSettingsOpen}
       />
-
-      {isProjectSettingsOpen ? (
-        <ProjectSettings />
-      ) : (
-        <ProjectMain pages={projectData.pages} />
-      )}
+      <AnimatePresence mode="wait">
+        <Transition key={isProjectSettingsOpen}>
+          {isProjectSettingsOpen ? (
+            <ProjectSettings />
+          ) : (
+            <ProjectMain pages={projectData.pages} />
+          )}
+        </Transition>
+      </AnimatePresence>
     </ProjectContainer>
   );
 };

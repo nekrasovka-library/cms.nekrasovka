@@ -8,7 +8,7 @@ import Carousel from "../../components/Carousel/carousel.constructor.jsx";
 import Divider from "../../components/Divider/divider.jsx";
 import Button from "../../components/Button/button.constructor.jsx";
 import { AnimatePresence } from "framer-motion";
-import PageTransition from "../../components/PageTransition/page-transition.jsx";
+import Transition from "../../components/Transition/transition.jsx";
 import { useParams } from "react-router";
 
 const Constructor = () => {
@@ -58,11 +58,11 @@ const Constructor = () => {
 
   return (
     <AnimatePresence mode="wait">
-      <PageTransition key={pageId}>
+      <Transition key={pageId}>
         <ConstructorContainer onClick={handleContainerClick}>
           {hasBlocks ? renderBlocks(true) : <Block blockIndex={0} />}
         </ConstructorContainer>
-      </PageTransition>
+      </Transition>
     </AnimatePresence>
   );
 };
