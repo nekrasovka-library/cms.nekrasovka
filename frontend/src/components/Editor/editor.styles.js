@@ -31,7 +31,6 @@ const Container = styled.div`
     background-color: ${({ $backgroundColor }) => $backgroundColor};
     text-align: ${({ $textAlign }) => $textAlign};
     line-height: normal;
-    height: 100%;
 
     ${({ $gap, $tracks }) =>
       $gap &&

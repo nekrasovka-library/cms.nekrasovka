@@ -22,7 +22,8 @@ const Editor = ({
   const isModal = isSettingsOpen || isMenuOpen;
   const isEditorFocused = editorFocused === `${blockId}-${itemId}`;
   const options = {
-    defaultStyle: "font-size: 16px; font-family: Roboto, sans-serif;",
+    defaultStyle:
+      "height: 100%; font-size: 16px; font-family: Roboto, sans-serif;",
     font: ["Arial", "Roboto"],
     resizingBar: false,
     buttonList: TOOLBAR_OPTIONS,
