@@ -19,7 +19,8 @@
     "styled-components": "^6.1.17",
     "suneditor": "^2.47.5",
     "suneditor-react": "^3.6.1",
-    "framer-motion": "^12.15.0"
+    "framer-motion": "^12.15.0",
+    "fdir": "^6.4.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
