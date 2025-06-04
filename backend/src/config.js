@@ -10,14 +10,11 @@ dotenv.config();
 const CONFIG = {
   PORT: process.env.PORT || 3013,
   PATHS: {
-    BUILD_DIR: resolve(__dirname, "../../../../frontend/dist"),
+    BUILD_DIR: resolve(__dirname, "../../frontend/dist"),
     IMAGES_DIR: resolve(__dirname, "../../../../images"),
     DATABASE_DIR: resolve(__dirname, "../../../../database"),
     DATABASE_FILE: resolve(__dirname, "../../../../database/projects.json"),
-    INDEX_HTML: join(
-      resolve(__dirname, "../../../../frontend/dist"),
-      "index.html",
-    ),
+    INDEX_HTML: join(resolve(__dirname, "../../frontend/dist"), "index.html"),
   },
 };
 
