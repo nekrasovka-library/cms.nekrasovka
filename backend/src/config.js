@@ -1,13 +1,10 @@
-import { fileURLToPath } from "url";
-import { resolve, join, dirname } from "node:path";
-import dotenv from "dotenv";
+const { resolve, join } = require("node:path");
+const dotenv = require("dotenv");
 
 // Инициализация dotenv
 dotenv.config();
 
 // Получение __dirname для ES модулей
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 // Конфигурация приложения
 const CONFIG = {
@@ -24,4 +21,4 @@ const CONFIG = {
   },
 };
 
-export default CONFIG;
+module.exports = CONFIG;

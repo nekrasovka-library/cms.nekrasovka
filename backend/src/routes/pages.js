@@ -1,10 +1,10 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   readDatabase,
   writeDatabase,
   findProject,
   handleApiError,
-} from "../utils/database.js";
+} = require("../utils/database.js");
 
 const router = express.Router();
 
@@ -160,4 +160,4 @@ router.put("/create", (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

@@ -6,7 +6,7 @@ const CONFIG = require("../config.js");
  * Создание хранилища для загрузки файлов
  * @returns {Object} конфигурация хранилища multer
  */
-export const createFileStorage = () => {
+const createFileStorage = () => {
   return multer.diskStorage({
     destination: (req, file, cb) => cb(null, CONFIG.PATHS.IMAGES_DIR),
     filename: (req, file, cb) =>
@@ -17,4 +17,6 @@ export const createFileStorage = () => {
 /**
  * Middleware для загрузки файлов
  */
-export const upload = multer({ storage: createFileStorage() });
+const upload = multer({ storage: createFileStorage() });
+
+module.exports = { createFileStorage, upload };
