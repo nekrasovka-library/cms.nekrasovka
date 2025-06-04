@@ -8,15 +8,11 @@ dotenv.config();
 const CONFIG = {
   PORT: process.env.PORT || 3013,
   PATHS: {
-    BUILD_DIR: resolve(__dirname, "../../frontend/build"),
-    INDEX_HTML: join(resolve(__dirname, "../../frontend/build"), "index.html"),
-
-    IMAGES_DIR: resolve(__dirname, "../../../images"),
-    DATABASE_DIR: resolve(__dirname, "../../../database"),
-    DATABASE_FILE: resolve(__dirname, "../../../database/projects.json"),
-    // IMAGES_DIR: resolve(__dirname, "../../images"),
-    // DATABASE_DIR: resolve(__dirname, "../../database"),
-    // DATABASE_FILE: resolve(__dirname, "../../database/projects.json"),
+    BUILD_DIR: resolve(__dirname, process.env.FRONTEND),
+    INDEX_HTML: join(resolve(__dirname, process.env.FRONTEND), "index.html"),
+    IMAGES_DIR: resolve(__dirname, process.env.IMAGES),
+    DATABASE_DIR: resolve(__dirname, process.env.DATABASE),
+    DATABASE_FILE: resolve(__dirname, process.env.DATABASE, "projects.json"),
   },
 };
 
