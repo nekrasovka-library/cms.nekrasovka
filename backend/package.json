@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "server": "nodemon src/server.js",
-    "deploy": "pm2 deploy prod deploy",
+    "deploy": "pm2 deploy test deploy",
     "build": "node_modules/.bin/vite build --ssr src/server.js --outDir dist/server",
     "clear": "rimraf dist"
   },
@@ -20,8 +20,7 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.3",
-    "vite": "^6.3.1",
-    "rimraf": "^6.0.1"
-
+    "rimraf": "^6.0.1",
+    "vite": "^6.3.1"
   }
 }
