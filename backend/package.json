@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "server": "nodemon src/server.js",
+    "server": "nodemon src/server.mjs",
     "deploy": "pm2 deploy test deploy",
     "build": "node_modules/.bin/vite build --ssr src/server.js --outDir dist/server",
     "clear": "rimraf dist"
