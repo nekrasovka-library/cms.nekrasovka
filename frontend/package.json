@@ -2,7 +2,6 @@
   "name": "csm.nekrasovka",
   "private": true,
   "version": "0.1.0",
-  "type": "module",
   "scripts": {
     "start": "node_modules/.bin/vite",
     "build": "node_modules/.bin/vite build",
