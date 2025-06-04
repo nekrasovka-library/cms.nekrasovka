@@ -109,7 +109,7 @@ const CarouselConstructor = ({
     const formData = new FormData();
     formData.append("image", file);
     const response = await axios.post(
-      `${import.meta.env.REACT_APP_API}images/upload`,
+      `${process.env.REACT_APP_API}images/upload`,
       formData,
     );
 
@@ -143,12 +143,12 @@ const CarouselConstructor = ({
             $borderRadius={borderRadius}
           >
             <img
-              src={`${import.meta.env.REACT_APP_IMAGES_URL}${children[index]}`}
+              src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}
               alt="картинка"
               onClick={() => fileInputRef.current[index]?.click()}
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = `${import.meta.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
+                e.target.src = `${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
               }}
             />
             <ImageFile

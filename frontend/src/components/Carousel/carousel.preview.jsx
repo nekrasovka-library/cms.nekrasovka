@@ -104,11 +104,11 @@ const CarouselConstructor = ({
               $borderRadius={borderRadius}
             >
               <img
-                src={`${import.meta.env.REACT_APP_IMAGES_URL}${children[index]}`}
+                src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}
                 alt="картинка"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = `${import.meta.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
+                  e.target.src = `${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
                 }}
               />
             </CarouselItem>

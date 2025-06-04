@@ -70,7 +70,7 @@ const Menu = () => {
             return (
               <MainItem2 key={index} onClick={() => handleVariant(id)}>
                 <img
-                  src={`${import.meta.env.REACT_APP_URL}${image}`}
+                  src={`${process.env.REACT_APP_URL}${image}`}
                   alt="preview"
                 />
               </MainItem2>
