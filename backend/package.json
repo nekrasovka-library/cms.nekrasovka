@@ -2,7 +2,6 @@
   "name": "csm.nekrasovka",
   "private": true,
   "version": "0.1.0",
-  "type": "module",
   "scripts": {
     "server": "nodemon src/server.js",
     "deploy": "pm2 deploy test deploy",
