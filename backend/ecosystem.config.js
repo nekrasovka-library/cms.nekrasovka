@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "csm.nekrasovka",
-      script: "src/server.js",
+      script: "./src/server.js",
       env_production: {
         NODE_ENV: "production",
         PORT: 3013,
