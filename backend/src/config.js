@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 
 // Конфигурация приложения
 const CONFIG = {
-  PORT: process.env.PORT,
+  PORT: process.env.PORT || 3013,
   PATHS: {
     BUILD_DIR: resolve(__dirname, "../../../frontend/dist"),
     IMAGES_DIR: resolve(__dirname, "../../../images"),
