@@ -23,7 +23,7 @@ const ImageConstructor = ({ text, blockId, itemId, borderRadius = 0 }) => {
       const formData = new FormData();
       formData.append("image", file);
       const response = await axios.post(
-        `${import.meta.env.VITE_APP_API}images/upload`,
+        `${import.meta.env.REACT_APP_API}images/upload`,
         formData,
       );
 
@@ -41,12 +41,12 @@ const ImageConstructor = ({ text, blockId, itemId, borderRadius = 0 }) => {
   return (
     <ImageContainer $borderRadius={borderRadius}>
       <img
-        src={`${import.meta.env.VITE_IMAGES_URL}${text}`}
+        src={`${import.meta.env.REACT_APP_IMAGES_URL}${text}`}
         alt="картинка"
         onClick={handleFileClick}
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = `${import.meta.env.VITE_APP_URL}${DEFAULT_IMAGE}`;
+          e.target.src = `${import.meta.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
         }}
       />
       <ImageFile

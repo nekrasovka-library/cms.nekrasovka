@@ -4,8 +4,7 @@
   "version": "0.1.0",
   "scripts": {
     "server": "nodemon src/server.js",
-    "deploy": "pm2 deploy test deploy",
-    "clear": "rimraf dist"
+    "deploy": "pm2 deploy test deploy"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
@@ -17,7 +16,6 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3",
-    "rimraf": "^6.0.1"
+    "nodemon": "^3.0.3"
   }
 }

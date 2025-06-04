@@ -7,11 +7,11 @@ const ImageConstructor = ({ text, borderRadius = 0 }) => {
   return (
     <ImageContainer $borderRadius={borderRadius}>
       <img
-        src={`${import.meta.env.VITE_IMAGES_URL}${text}`}
+        src={`${import.meta.env.REACT_APP_IMAGES_URL}${text}`}
         alt="картинка"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = `${import.meta.env.VITE_APP_URL}${DEFAULT_IMAGE}`;
+          e.target.src = `${import.meta.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
         }}
       />
     </ImageContainer>
