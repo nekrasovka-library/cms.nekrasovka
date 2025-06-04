@@ -7,11 +7,17 @@
     "build": "react-scripts build",
     "clear": "rimraf build"
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^2.7.0",
     "axios": "^1.8.4",
     "react": "^19.0.0",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.6.1",
