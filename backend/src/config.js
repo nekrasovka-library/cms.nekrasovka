@@ -18,7 +18,7 @@ const CONFIG = {
     DATABASE_DIR: resolve(__dirname, "../../../../database"),
     DATABASE_FILE: resolve(__dirname, "../../../../database/projects.json"),
     INDEX_HTML: join(
-      resolve(__dirname, "../../../frontend/dist"),
+      resolve(__dirname, "../../../../frontend/dist"),
       "index.html",
     ),
   },
