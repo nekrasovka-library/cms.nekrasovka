@@ -6,6 +6,9 @@ module.exports = {
       env_production: {
         NODE_ENV: "production",
         PORT: 3013,
+        IMAGES: "../../../images",
+        DATABASE: "../../../database",
+        FRONTEND: "../../frontend/build",
       },
     },
   ],
