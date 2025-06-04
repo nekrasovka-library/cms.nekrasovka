@@ -6,7 +6,7 @@ dotenv.config();
 
 // Конфигурация приложения
 const CONFIG = {
-  PORT: process.env.PORT || 3013,
+  PORT: 3013,
   PATHS: {
     INDEX_HTML: join(resolve(__dirname, "../../frontend/build"), "index.html"),
     IMAGES_DIR: resolve(__dirname, "../../../../images"),
