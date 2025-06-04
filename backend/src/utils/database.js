@@ -1,12 +1,12 @@
-import { readFileSync, writeFileSync } from 'node:fs';
-import CONFIG from '../config.js';
+const { readFileSync, writeFileSync } = require("node:fs");
+const CONFIG = require("../config.js");
 
 /**
  * Чтение базы данных проектов
  * @returns {Array} массив проектов
  */
 export const readDatabase = () => {
-  return JSON.parse(readFileSync(CONFIG.PATHS.DATABASE_FILE, 'utf8'));
+  return JSON.parse(readFileSync(CONFIG.PATHS.DATABASE_FILE, "utf8"));
 };
 
 /**
@@ -24,7 +24,7 @@ export const writeDatabase = (data) => {
  * @returns {Object|undefined} найденный проект или undefined
  */
 export const findProject = (projects, projectId) => {
-  return projects.find(p => p.projectId === +projectId);
+  return projects.find((p) => p.projectId === +projectId);
 };
 
 /**
@@ -34,9 +34,9 @@ export const findProject = (projects, projectId) => {
  * @returns {Object} ответ с ошибкой
  */
 export const handleApiError = (res, error) => {
-  console.error('API Error:', error);
+  console.error("API Error:", error);
   return res.status(500).json({
     success: false,
-    error: error.message
+    error: error.message,
   });
 };

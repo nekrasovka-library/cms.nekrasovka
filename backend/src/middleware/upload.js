@@ -1,6 +1,6 @@
-import multer from 'multer';
-import { extname } from 'node:path';
-import CONFIG from '../config.js';
+const multer = require("multer");
+const { extname } = require("node:path");
+const CONFIG = require("../config.js");
 
 /**
  * Создание хранилища для загрузки файлов
@@ -9,7 +9,8 @@ import CONFIG from '../config.js';
 export const createFileStorage = () => {
   return multer.diskStorage({
     destination: (req, file, cb) => cb(null, CONFIG.PATHS.IMAGES_DIR),
-    filename: (req, file, cb) => cb(null, `${Date.now()}${extname(file.originalname)}`)
+    filename: (req, file, cb) =>
+      cb(null, `${Date.now()}${extname(file.originalname)}`),
   });
 };
 

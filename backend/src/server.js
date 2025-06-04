@@ -1,15 +1,15 @@
-import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import process from "process";
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const process = require("process");
 
 // Импорт конфигурации
-import CONFIG from "./config.js";
+const CONFIG = require("./config.js");
 
 // Импорт маршрутов
-import imagesRoutes from "./routes/images.js";
-import projectsRoutes from "./routes/projects.js";
-import pagesRoutes from "./routes/pages.js";
+const imagesRoutes = require("./routes/images.js");
+const projectsRoutes = require("./routes/projects.js");
+const pagesRoutes = require("./routes/pages.js");
 
 /**
  * Инициализация приложения
