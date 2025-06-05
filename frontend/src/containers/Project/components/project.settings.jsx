@@ -23,6 +23,7 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
     { id: 1, title: "Главное" },
     { id: 2, title: "Шрифты и цвета" },
     { id: 3, title: "Главная страница" },
+    { id: 4, title: "Пользователи" },
   ];
 
   const projectFonts = [
