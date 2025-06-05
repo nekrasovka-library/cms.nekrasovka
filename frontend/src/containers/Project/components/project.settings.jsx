@@ -68,7 +68,7 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
         {activeTitle === 2 && (
           <ProjectSettingsFonts>
             <div>
-              <SettingsLabel>Библиотека шрифтов</SettingsLabel>
+              <SettingsLabel>Шрифт проекта</SettingsLabel>
               <PaddingSelect
                 name="fonts"
                 onChange={handleSettingsChange}
