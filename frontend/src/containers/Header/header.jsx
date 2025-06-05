@@ -79,6 +79,7 @@ const Header = () => {
                   pageId={pageData.pageId}
                   projectId={projectData.projectId}
                   setIsDropdownOpen={setIsDropdownOpen}
+                  mainPage={projectData.mainPage}
                 />
               )}
             </HeaderLeftBlankPageList>

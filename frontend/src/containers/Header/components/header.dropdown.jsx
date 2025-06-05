@@ -5,7 +5,13 @@ import {
 } from "../header.styles.js";
 import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 
-const HeaderDropdown = ({ pages, pageId, projectId, setIsDropdownOpen }) => {
+const HeaderDropdown = ({
+  pages,
+  pageId,
+  projectId,
+  setIsDropdownOpen,
+  mainPage,
+}) => {
   return (
     <HeaderPageDropdownContainer>
       {pages.map((page) => (
@@ -15,7 +21,11 @@ const HeaderDropdown = ({ pages, pageId, projectId, setIsDropdownOpen }) => {
           to={`/projects/${projectId}/${page.pageId}`}
           onClick={() => setIsDropdownOpen((prev) => !prev)}
         >
-          {page.position === 1 && <Icon icon="home" height={10} width={10} />}
+          {mainPage === page.pageId ? (
+            <Icon icon="home" height={10} width={10} />
+          ) : (
+            <div />
+          )}
           <span>{page.name}</span>
         </HeaderPageDropdownLink>
       ))}

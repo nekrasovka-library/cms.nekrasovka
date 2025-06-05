@@ -142,11 +142,14 @@ const HeaderPageDropdownContainer = styled.div`
 const HeaderPageDropdownLink = styled(Link)`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   column-gap: 7px;
   text-decoration: none;
   padding: 6px 8px;
   white-space: nowrap;
+
+  > div {
+    width: 10px;
+  }
 
   color: ${({ $isActive }) => ($isActive ? "#000" : "#333")};
   background-color: ${({ $isActive }) =>
