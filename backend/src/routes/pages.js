@@ -101,7 +101,7 @@ router.post("/delete", (req, res) => {
     project.pages = project.pages.filter((page) => page.pageId !== +pageId);
 
     // Если есть страницы и нет домашней, делаем первую страницу домашней
-    if (project.pages.length > 0 && project.mainPage !== null) {
+    if (project.pages.length > 0 && project.mainPage === pageId) {
       project.mainPage = project.pages[0].pageId;
       project.pages[0].url = "/";
     }

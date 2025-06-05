@@ -245,6 +245,25 @@ const ProjectSettingsProjectMain = styled.div`
   }
 `;
 
+const ProjectSettingsFonts = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 45px;
+  width: 100%;
+
+  > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    select {
+      font-size: 24px;
+      font-weight: 300;
+      color: #000;
+    }
+  }
+`;
+
 const ProjectSettingsMainPage = styled.div`
   display: flex;
   flex-direction: column;
@@ -279,4 +298,5 @@ export {
   ProjectSettingsMainPage,
   ProjectMainCardPageName,
   ProjectSettingsProjectMain,
+  ProjectSettingsFonts,
 };

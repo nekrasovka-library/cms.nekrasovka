@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   ProjectSettingsActions,
   ProjectSettingsContainer,
+  ProjectSettingsFonts,
   ProjectSettingsMainPage,
   ProjectSettingsProjectMain,
   ProjectSettingsTitles,
@@ -20,7 +21,8 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
 
   const settingsTitles = [
     { id: 1, title: "Главное" },
-    { id: 2, title: "Главная страница" },
+    { id: 2, title: "Шрифты и цвета" },
+    { id: 3, title: "Главная страница" },
   ];
 
   return (
@@ -53,6 +55,27 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
           </ProjectSettingsProjectMain>
         )}
         {activeTitle === 2 && (
+          <ProjectSettingsFonts>
+            <div>
+              <SettingsLabel>Библиотека шрифтов</SettingsLabel>
+              <PaddingSelect
+                name="mainPage"
+                onChange={handleSettingsChange}
+                value={projectSettings?.mainPage}
+              >
+                {projectData.pages.map((page) => (
+                  <option key={page.pageId} value={page.pageId}>
+                    {page.name}
+                  </option>
+                ))}
+              </PaddingSelect>
+            </div>
+            <div>
+              <SettingsLabel>Загрузить шрифт</SettingsLabel>
+            </div>
+          </ProjectSettingsFonts>
+        )}
+        {activeTitle === 3 && (
           <ProjectSettingsMainPage>
             <SettingsLabel>Главная страница</SettingsLabel>
             <PaddingSelect
@@ -68,8 +91,7 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
             </PaddingSelect>
             <div>
               Выберите, какая страница будет главной для вашего сайта
-              (открывается по умолчанию при заходе на сайт). Читайте подробнее в
-              справочном центре
+              (открывается по умолчанию при заходе на сайт).
             </div>
           </ProjectSettingsMainPage>
         )}
