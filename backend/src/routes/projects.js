@@ -75,6 +75,7 @@ router.put("/create", (req, res) => {
       projectId: maxId + 1,
       mainPage: null,
       pages: [],
+      fontFamily: "",
     };
 
     projects.push(newProject);
@@ -89,7 +90,7 @@ router.put("/create", (req, res) => {
 });
 
 router.post("/update", (req, res) => {
-  const { mainPage, name, href, projectId } = req.body;
+  const { mainPage, fontFamily, name, href, projectId } = req.body;
 
   try {
     const projects = readDatabase();
@@ -111,6 +112,7 @@ router.post("/update", (req, res) => {
           mainPage: +mainPage || project.mainPage,
           name: name || project.name,
           href: href || project.href,
+          fontFamily: fontFamily || project.fontFamily,
         };
       } else return project;
     });
