@@ -103,6 +103,43 @@ const ProjectMainContainerHeader = styled.div`
   padding: 35px 0 30px;
 `;
 
+const ProjectMainCardPageName = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+
+  > div {
+    display: flex;
+  }
+
+  > a {
+    display: flex;
+    column-gap: 10px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    padding: 0;
+  }
+
+  span,
+  input {
+    font-size: 17px;
+  }
+
+  > div {
+    display: flex;
+    column-gap: 10px;
+
+    svg {
+      visibility: hidden;
+      opacity: 0.3;
+    }
+  }
+`;
+
 const ProjectMainCardContainer = styled.div`
   display: grid;
   align-items: center;
@@ -110,12 +147,6 @@ const ProjectMainCardContainer = styled.div`
   height: 60px;
   border-bottom: 1px solid #d5d5d5;
   cursor: pointer;
-
-  > :nth-child(1) {
-    display: flex;
-    width: 100%;
-    column-gap: 10px;
-  }
 
   > :nth-child(2) {
     color: #979797;
@@ -136,12 +167,17 @@ const ProjectMainCardContainer = styled.div`
   }
 
   @media (hover: hover) {
-    a:hover,
+    > :nth-child(1):hover a,
     > :last-child > div:hover {
       color: #f4846b;
     }
 
-    &:hover > div:last-child {
+    > :nth-child(1) > div svg:hover {
+      opacity: 1;
+    }
+
+    &:hover > div:last-child,
+    &:hover > :nth-child(1) > div svg {
       visibility: visible;
     }
   }
@@ -152,19 +188,81 @@ const ProjectMainCardContainer = styled.div`
 `;
 
 const ProjectSettingsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 225px 1fr;
   background: #fff;
   border: 1px solid #e7e7e7;
+`;
 
-  > div {
+const ProjectSettingsTitles = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+`;
+
+const ProjectSettingsTitlesTitle = styled.div`
+  padding: 18px 30px;
+  transition-duration: 0.1s;
+  transition-property: background-color, color;
+  transition-timing-function: ease-in-out;
+  font-weight: 400;
+  font-size: 18px;
+
+  ${({ $isTitleActive }) =>
+    $isTitleActive && "background-color: #fa876b; color: #fff;"};
+
+  @media (hover: hover) {
+    &:hover {
+      ${({ $isTitleActive }) =>
+        !$isTitleActive &&
+        "background-color: rgba(0, 0, 0, 0.03); color: #fa876b; cursor: pointer;"};
+    }
+  }
+`;
+
+const ProjectSettingsActions = styled.div`
+  padding: 60px 150px;
+  display: flex;
+  justify-content: center;
+`;
+
+const ProjectSettingsProjectMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 45px;
+  width: 100%;
+
+  > div:nth-child(1) {
     display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 
-    &:nth-child(1) {
-      width: 225px;
-      border-right: 1px solid #ddd;
+    input {
+      font-size: 24px;
+      font-weight: 300;
+      color: #000;
     }
+  }
+`;
 
-    &:nth-child(2) {
-    }
+const ProjectSettingsMainPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 100%;
+
+  select {
+    font-size: 24px;
+    font-weight: 300;
+    color: #000;
+    cursor: pointer;
+  }
+
+  > div:last-child {
+    font-size: 15px;
+    font-weight: 300;
+    color: #333;
+    padding: 20px 0 10px;
   }
 `;
 
@@ -175,4 +273,10 @@ export {
   ProjectMainCardContainer,
   ProjectMainContainerHeader,
   ProjectSettingsContainer,
+  ProjectSettingsTitles,
+  ProjectSettingsTitlesTitle,
+  ProjectSettingsActions,
+  ProjectSettingsMainPage,
+  ProjectMainCardPageName,
+  ProjectSettingsProjectMain,
 };

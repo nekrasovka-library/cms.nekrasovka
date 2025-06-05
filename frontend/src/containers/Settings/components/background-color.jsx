@@ -26,7 +26,7 @@ const BackgroundColor = ({
           placeholder="#ffffff"
         />
         <Icon
-          icon="close_menu"
+          icon="closeMenu"
           type="button"
           onClick={() =>
             handleSettingsChange({

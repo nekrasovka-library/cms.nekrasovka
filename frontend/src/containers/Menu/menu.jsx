@@ -45,7 +45,7 @@ const Menu = () => {
       <Container1 $isMenuOpen={isMenuOpen} $isVariantOpen={isVariantOpen}>
         <Header>
           <CloseMenuButton>
-            <Icon icon="close_menu" type="button" onClick={handleClose} />
+            <Icon icon="closeMenu" type="button" onClick={handleClose} />
           </CloseMenuButton>
         </Header>
         <Main>

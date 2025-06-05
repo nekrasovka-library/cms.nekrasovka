@@ -1,11 +1,79 @@
-import React from "react";
-import { ProjectSettingsContainer } from "../project.styles.js";
+import React, { useState } from "react";
+import {
+  ProjectSettingsActions,
+  ProjectSettingsContainer,
+  ProjectSettingsMainPage,
+  ProjectSettingsProjectMain,
+  ProjectSettingsTitles,
+  ProjectSettingsTitlesTitle,
+} from "../project.styles.js";
+import {
+  PaddingSelect,
+  RadiusInput,
+  SettingsLabel,
+} from "../../Settings/settings.styles";
+import { useSelector } from "react-redux";
 
-const ProjectSettings = () => {
+const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
+  const [activeTitle, setActiveTitle] = useState(1);
+  const { projectData } = useSelector((state) => state.project);
+
+  const settingsTitles = [
+    { id: 1, title: "Главное" },
+    { id: 2, title: "Главная страница" },
+  ];
+
   return (
     <ProjectSettingsContainer>
-      <div></div>
-      <div></div>
+      <ProjectSettingsTitles>
+        {settingsTitles.map((title) => {
+          return (
+            <ProjectSettingsTitlesTitle
+              key={title.id}
+              $isTitleActive={title.id === activeTitle}
+              onClick={() => setActiveTitle(title.id)}
+            >
+              {title.title}
+            </ProjectSettingsTitlesTitle>
+          );
+        })}
+      </ProjectSettingsTitles>
+      <ProjectSettingsActions>
+        {activeTitle === 1 && (
+          <ProjectSettingsProjectMain>
+            <div>
+              <SettingsLabel>Название проекта</SettingsLabel>
+              <RadiusInput
+                type="text"
+                name="name"
+                value={projectSettings?.name}
+                onChange={handleSettingsChange}
+              />
+            </div>
+          </ProjectSettingsProjectMain>
+        )}
+        {activeTitle === 2 && (
+          <ProjectSettingsMainPage>
+            <SettingsLabel>Главная страница</SettingsLabel>
+            <PaddingSelect
+              name="mainPage"
+              onChange={handleSettingsChange}
+              value={projectSettings?.mainPage}
+            >
+              {projectData.pages.map((page) => (
+                <option key={page.pageId} value={page.pageId}>
+                  {page.name}
+                </option>
+              ))}
+            </PaddingSelect>
+            <div>
+              Выберите, какая страница будет главной для вашего сайта
+              (открывается по умолчанию при заходе на сайт). Читайте подробнее в
+              справочном центре
+            </div>
+          </ProjectSettingsMainPage>
+        )}
+      </ProjectSettingsActions>
     </ProjectSettingsContainer>
   );
 };

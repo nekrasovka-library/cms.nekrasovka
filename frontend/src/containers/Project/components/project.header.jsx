@@ -1,28 +1,17 @@
 import React from "react";
 import { ProjectHeaderContainer } from "../project.styles.js";
 import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
-import { useDispatch } from "react-redux";
 import { Button } from "../../Projects/projects.styles.js";
 
 const ProjectHeader = ({
   href,
   name,
-  projectId,
   setIsProjectSettingsOpen,
   isProjectSettingsOpen,
+  handleSaveSettings,
+  handleCloseSettings,
+  handleCreateProjectPage,
 }) => {
-  const dispatch = useDispatch();
-
-  const handleCreateProjectPage = () => {
-    dispatch({ type: "CREATE_PROJECT_PAGE_REQUEST", projectId });
-  };
-
-  const handleCloseSettings = () => {
-    setIsProjectSettingsOpen(false);
-  };
-
-  const handleSaveSettings = () => {};
-
   return (
     <ProjectHeaderContainer
       $isHref={!!href}

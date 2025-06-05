@@ -37,6 +37,43 @@ const Project = () => {
   const { projectId } = useParams();
   const [isProjectSettingsOpen, setIsProjectSettingsOpen] = useState(false);
   const { projectData, isProjectLoaded } = useProjectData(projectId);
+  const [projectSettings, setProjectSettings] = useState(null);
+  const dispatch = useDispatch();
+
+  const handleSettingsChange = ({ target: { name, value } }) => {
+    setProjectSettings((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSaveSettings = () => {
+    dispatch({
+      type: "UPDATE_PROJECT_REQUEST",
+      ...projectSettings,
+      projectId: projectData.projectId,
+    });
+    dispatch({ type: "GET_PROJECT_REQUEST", projectId: projectData.projectId });
+  };
+
+  const handleCreateProjectPage = () => {
+    dispatch({
+      type: "CREATE_PROJECT_PAGE_REQUEST",
+      projectId: projectData.projectId,
+    });
+    dispatch({ type: "GET_PROJECT_REQUEST", projectId: projectData.projectId });
+  };
+
+  const handleCloseSettings = () => {
+    setIsProjectSettingsOpen(false);
+  };
+
+  useEffect(() => {
+    if (isProjectLoaded) {
+      setProjectSettings({
+        mainPage: projectData.mainPage,
+        name: projectData.name,
+        href: projectData.href,
+      });
+    }
+  }, [isProjectLoaded]);
 
   if (!isProjectLoaded) return null;
 
@@ -45,16 +82,24 @@ const Project = () => {
       <ProjectHeader
         href={projectData.href}
         name={projectData.name}
-        projectId={projectData.projectId}
         setIsProjectSettingsOpen={setIsProjectSettingsOpen}
         isProjectSettingsOpen={isProjectSettingsOpen}
+        handleSaveSettings={handleSaveSettings}
+        handleCloseSettings={handleCloseSettings}
+        handleCreateProjectPage={handleCreateProjectPage}
       />
       <AnimatePresence mode="wait">
         <Transition key={isProjectSettingsOpen}>
           {isProjectSettingsOpen ? (
-            <ProjectSettings />
+            <ProjectSettings
+              handleSettingsChange={handleSettingsChange}
+              projectSettings={projectSettings}
+            />
           ) : (
-            <ProjectMain pages={projectData.pages} />
+            <ProjectMain
+              pages={projectData.pages}
+              mainPage={projectData.mainPage}
+            />
           )}
         </Transition>
       </AnimatePresence>

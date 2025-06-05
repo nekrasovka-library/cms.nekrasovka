@@ -7,6 +7,7 @@ import {
   fetchProjectPageApi,
   fetchProjectsApi,
   fetchUpdateProjectPageApi,
+  fetchUpdateProjectApi,
 } from "../api.js";
 import {
   getProjectFailure,
@@ -19,7 +20,8 @@ import {
   getProjectPageSuccess,
   getProjectPageFailure,
   updateProjectPageFailure,
-} from "../actions/index.js";
+  updateProjectFailure,
+} from "../actions";
 
 function* getProject(params) {
   try {
@@ -58,11 +60,17 @@ function* createProject(action) {
   }
 }
 
+function* updateProject(params) {
+  try {
+    yield call(fetchUpdateProjectApi, params);
+  } catch (error) {
+    yield put(updateProjectFailure(error.message));
+  }
+}
+
 function* deleteProjectPage(params) {
   try {
     yield call(fetchDeleteProjectPageApi, params);
-    const response = yield call(fetchProjectApi, params.projectId);
-    yield put(getProjectSuccess(response.data));
   } catch (error) {
     yield put(deleteProjectPageFailure(error.message));
   }
@@ -71,8 +79,6 @@ function* deleteProjectPage(params) {
 function* createProjectPage(params) {
   try {
     yield call(fetchCreateProjectPageApi, params);
-    const response = yield call(fetchProjectApi, params.projectId);
-    yield put(getProjectSuccess(response.data));
   } catch (error) {
     yield put(createProjectPageFailure(error.message));
   }
@@ -81,8 +87,6 @@ function* createProjectPage(params) {
 function* updateProjectPage(params) {
   try {
     yield call(fetchUpdateProjectPageApi, params);
-    const response = yield call(fetchProjectPageApi, params);
-    yield put(getProjectPageSuccess(response.data));
   } catch (error) {
     yield put(updateProjectPageFailure(error.message));
   }
@@ -104,6 +108,10 @@ export function* watchCreateProject() {
   yield takeLatest("CREATE_PROJECT_REQUEST", createProject);
 }
 
+export function* watchUpdateProject() {
+  yield takeLatest("UPDATE_PROJECT_REQUEST", updateProject);
+}
+
 export function* watchCreateProjectPage() {
   yield takeLatest("CREATE_PROJECT_PAGE_REQUEST", createProjectPage);
 }
@@ -121,6 +129,7 @@ export default function* rootSaga() {
     watchGetProject(),
     watchGetProjects(),
     watchCreateProject(),
+    watchUpdateProject(),
     watchDeleteProjectPage(),
     watchCreateProjectPage(),
     watchGetProjectPage(),

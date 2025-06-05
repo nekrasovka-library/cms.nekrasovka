@@ -1,5 +1,5 @@
 import add from "./add.jsx";
-import close_menu from "./close_menu.jsx";
+import closeMenu from "./close_menu";
 import trash from "./trash.jsx";
 import copy from "./copy.jsx";
 import settings from "./settings.jsx";
@@ -10,10 +10,11 @@ import blankPage from "./blank_page.jsx";
 import globus from "./globus.jsx";
 import edit from "./edit.jsx";
 import arrowRightLong from "./arrow_right_long.jsx";
+import save from "./save.jsx";
 
 export default {
   add,
-  close_menu,
+  closeMenu,
   trash,
   copy,
   settings,
@@ -24,4 +25,5 @@ export default {
   globus,
   edit,
   arrowRightLong,
+  save,
 };

@@ -48,6 +48,11 @@ const updateProjectPageFailure = (error) => ({
   payload: error,
 });
 
+const updateProjectFailure = (error) => ({
+  type: "UPDATE_PROJECT_FAILURE",
+  payload: error,
+});
+
 export {
   getProjectsFailure,
   getProjectSuccess,
@@ -59,4 +64,5 @@ export {
   getProjectPageSuccess,
   getProjectPageFailure,
   updateProjectPageFailure,
+  updateProjectFailure,
 };

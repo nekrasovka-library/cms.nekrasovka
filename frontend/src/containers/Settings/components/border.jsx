@@ -69,7 +69,7 @@ const Border = ({ border, handleSettingsChange, defaultStyles }) => {
             placeholder="#000"
           />
           <Icon
-            icon="close_menu"
+            icon="closeMenu"
             type="button"
             onClick={() =>
               handleBorderChange({

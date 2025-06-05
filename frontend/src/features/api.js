@@ -50,6 +50,13 @@ const fetchUpdateProjectPageApi = async (params) => {
   return await axios.post(`${process.env.REACT_APP_API}page/update`, params);
 };
 
+const fetchUpdateProjectApi = async (params) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}projects/update`,
+    params,
+  );
+};
+
 export {
   fetchProjectApi,
   fetchProjectsApi,
@@ -58,4 +65,5 @@ export {
   fetchDeleteProjectPageApi,
   fetchProjectPageApi,
   fetchUpdateProjectPageApi,
+  fetchUpdateProjectApi,
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   HeaderContainer,
   HeaderLeft,
@@ -15,11 +15,12 @@ import HeaderDropdown from "./components/header.dropdown.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isPreview } = useSelector((state) => state.preview);
-  const { pageData, isPageLoaded } = useSelector((state) => state.page);
+  const { pageData } = useSelector((state) => state.page);
   const { blocks } = useSelector((state) => state.blocks);
   const { projectData } = useSelector((state) => state.project);
+  const [isProjectOpen, setIsProjectOpen] = useState(false);
 
   const handleToggleView = () => {
     dispatch({ type: "TOGGLE_PREVIEW" });
@@ -34,12 +35,20 @@ const Header = () => {
       pageId,
       blocks,
     });
+    dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
   };
 
   useEffect(() => {
     if (isPreview) handleToggleView();
     if (isDropdownOpen) setIsDropdownOpen(false);
   }, [pageData.pageId]);
+
+  useEffect(() => {
+    const params = window.location.pathname.split("/");
+
+    if (params[2] && params[3]) setIsProjectOpen(true);
+    else setIsProjectOpen(false);
+  }, [window.location.pathname]);
 
   return (
     <HeaderContainer>
@@ -48,7 +57,7 @@ const Header = () => {
           <Icon icon="home" />
           <span>Мои проекты</span>
         </HeaderLeftHome>
-        {isPageLoaded && (
+        {isProjectOpen && (
           <>
             /
             <HeaderLeftBlankPageLink>
@@ -76,7 +85,7 @@ const Header = () => {
           </>
         )}
       </HeaderLeft>
-      {isPageLoaded && (
+      {isProjectOpen && (
         <HeaderRight>
           <HeaderRightPreview onClick={handleToggleView}>
             {isPreview ? "Редактирование" : "Предпросмотр"}

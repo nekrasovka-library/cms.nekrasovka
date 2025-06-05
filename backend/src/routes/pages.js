@@ -67,6 +67,7 @@ router.post("/update", (req, res) => {
           name: name || page.name,
         };
       }
+
       return page;
     });
 
@@ -100,12 +101,13 @@ router.post("/delete", (req, res) => {
     project.pages = project.pages.filter((page) => page.pageId !== +pageId);
 
     // Если есть страницы и нет домашней, делаем первую страницу домашней
-    if (
-      project.pages.length > 0 &&
-      !project.pages.some((page) => page.position === 1)
-    ) {
-      project.pages[0].position = 1;
+    if (project.pages.length > 0 && project.mainPage !== null) {
+      project.mainPage = project.pages[0].pageId;
       project.pages[0].url = "/";
+    }
+
+    if (project.pages.length === 0 && project.mainPage !== null) {
+      project.mainPage = null;
     }
 
     writeDatabase(projects);
@@ -144,7 +146,6 @@ router.put("/create", (req, res) => {
       name: "Blank page",
       pageId: maxPageId + 1,
       projectId: project.projectId,
-      position: project.pages.length > 0 ? 2 : 1,
       blocks: [],
       url: project.pages.length > 0 ? `/page${maxPageId + 1}` : "/",
     };

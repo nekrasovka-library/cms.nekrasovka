@@ -22,6 +22,11 @@ const project = (state = initialState, action) => {
         ...state,
         projectError: action.payload,
       };
+    case "UPDATE_PROJECT_FAILURE":
+      return {
+        ...state,
+        projectError: action.payload,
+      };
     case "DELETE_PROJECT_PAGE_FAILURE":
       return {
         ...state,

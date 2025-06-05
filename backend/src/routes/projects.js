@@ -73,11 +73,49 @@ router.put("/create", (req, res) => {
     const newProject = {
       ...project,
       projectId: maxId + 1,
+      mainPage: null,
       pages: [],
     };
 
     projects.push(newProject);
     writeDatabase(projects);
+
+    return res.json({
+      success: true,
+    });
+  } catch (error) {
+    return handleApiError(res, error);
+  }
+});
+
+router.post("/update", (req, res) => {
+  const { mainPage, name, href, projectId } = req.body;
+
+  try {
+    const projects = readDatabase();
+
+    const newProjects = projects.map((project) => {
+      if (project.projectId === projectId) {
+        project.pages.map((page) => {
+          if (project.mainPage === page.pageId) {
+            page.url = `/page${page.pageId}`;
+          } else if (page.pageId === +mainPage) {
+            page.url = "/";
+          }
+
+          return page;
+        });
+
+        return {
+          ...project,
+          mainPage: +mainPage || project.mainPage,
+          name: name || project.name,
+          href: href || project.href,
+        };
+      } else return project;
+    });
+
+    writeDatabase(newProjects);
 
     return res.json({
       success: true,
