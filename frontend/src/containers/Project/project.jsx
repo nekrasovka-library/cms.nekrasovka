@@ -50,7 +50,6 @@ const Project = () => {
       ...projectSettings,
       projectId: projectData.projectId,
     });
-    dispatch({ type: "GET_PROJECT_REQUEST", projectId: projectData.projectId });
   };
 
   const handleCreateProjectPage = () => {
