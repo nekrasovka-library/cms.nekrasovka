@@ -25,6 +25,17 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
     { id: 3, title: "Главная страница" },
   ];
 
+  const projectFonts = [
+    {
+      id: 1,
+      label: "Roboto",
+    },
+    {
+      id: 2,
+      label: "Rubik",
+    },
+  ];
+
   return (
     <ProjectSettingsContainer>
       <ProjectSettingsTitles>
@@ -59,13 +70,13 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
             <div>
               <SettingsLabel>Библиотека шрифтов</SettingsLabel>
               <PaddingSelect
-                name="mainPage"
+                name="fonts"
                 onChange={handleSettingsChange}
-                value={projectSettings?.mainPage}
+                value={projectSettings?.fontFamily}
               >
-                {projectData.pages.map((page) => (
-                  <option key={page.pageId} value={page.pageId}>
-                    {page.name}
+                {projectFonts.map((font) => (
+                  <option key={font.id} value={font.label}>
+                    {font.label}
                   </option>
                 ))}
               </PaddingSelect>

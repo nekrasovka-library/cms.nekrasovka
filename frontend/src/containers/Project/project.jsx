@@ -70,6 +70,7 @@ const Project = () => {
         mainPage: projectData.mainPage,
         name: projectData.name,
         href: projectData.href,
+        fontFamily: projectData.fontFamily,
       });
     }
   }, [isProjectLoaded]);
