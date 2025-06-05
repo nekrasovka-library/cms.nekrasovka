@@ -151,6 +151,11 @@ router.put("/create", (req, res) => {
     };
 
     project.pages.push(newPage);
+
+    if (project.mainPage === null) {
+      project.mainPage = newPage.pageId;
+    }
+
     writeDatabase(projects);
 
     return res.json({
