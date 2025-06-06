@@ -13,32 +13,16 @@ import Transition from "../../components/Transition/transition.jsx";
 // Константы Redux actions
 const GET_PROJECT_REQUEST = "GET_PROJECT_REQUEST";
 
-const useProjectData = (projectId) => {
+const Project = () => {
+  const { projectId } = useParams();
+  const [isProjectSettingsOpen, setIsProjectSettingsOpen] = useState(false);
   const dispatch = useDispatch();
   const prevProjectIdRef = useRef(null);
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
 
-  useEffect(() => {
-    if (prevProjectIdRef.current !== projectId) {
-      dispatch({ type: GET_PROJECT_REQUEST, projectId });
-      prevProjectIdRef.current = projectId;
-    }
-  }, [projectId, dispatch, isProjectLoaded]);
-
-  return { projectData, isProjectLoaded };
-};
-
-/**
- * Компонент страницы проекта
- */
-const Project = () => {
-  const { projectId } = useParams();
-  const [isProjectSettingsOpen, setIsProjectSettingsOpen] = useState(false);
-  const { projectData, isProjectLoaded } = useProjectData(projectId);
   const [projectSettings, setProjectSettings] = useState(null);
-  const dispatch = useDispatch();
 
   const handleSettingsChange = ({ target: { name, value } }) => {
     setProjectSettings((prev) => ({ ...prev, [name]: value }));
@@ -57,12 +41,21 @@ const Project = () => {
       type: "CREATE_PROJECT_PAGE_REQUEST",
       projectId: projectData.projectId,
     });
+
     dispatch({ type: "GET_PROJECT_REQUEST", projectId: projectData.projectId });
   };
 
   const handleCloseSettings = () => {
     setIsProjectSettingsOpen(false);
   };
+
+  useEffect(() => {
+    if (prevProjectIdRef.current !== projectId) {
+      dispatch({ type: "RESET_PROJECT" });
+      dispatch({ type: GET_PROJECT_REQUEST, projectId });
+      prevProjectIdRef.current = projectId;
+    }
+  }, [projectId, dispatch]);
 
   useEffect(() => {
     if (isProjectLoaded) {
