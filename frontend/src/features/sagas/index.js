@@ -75,7 +75,12 @@ function* updateProject(params) {
 
 function* deleteProjectPage(params) {
   try {
-    yield call(fetchDeleteProjectPageApi, params);
+    const { data } = yield call(fetchDeleteProjectPageApi, params);
+
+    if (data.success) {
+      const response = yield call(fetchProjectApi, params.projectId);
+      yield put(getProjectSuccess(response.data));
+    }
   } catch (error) {
     yield put(deleteProjectPageFailure(error.message));
   }
@@ -96,7 +101,12 @@ function* createProjectPage(params) {
 
 function* updateProjectPage(params) {
   try {
-    yield call(fetchUpdateProjectPageApi, params);
+    const { data } = yield call(fetchUpdateProjectPageApi, params);
+
+    if (data.success) {
+      const response = yield call(fetchProjectApi, params.projectId);
+      yield put(getProjectSuccess(response.data));
+    }
   } catch (error) {
     yield put(updateProjectPageFailure(error.message));
   }

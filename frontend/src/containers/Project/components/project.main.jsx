@@ -11,12 +11,10 @@ const ProjectMain = ({ pages, mainPage }) => {
 
   const handlePageNameSave = (projectId, pageId, name) => {
     dispatch({ type: "UPDATE_PROJECT_PAGE_REQUEST", projectId, pageId, name });
-    dispatch({ type: "GET_PROJECT_REQUEST", projectId });
   };
 
   const handleDeleteProjectPage = (projectId, pageId) => {
     dispatch({ type: "DELETE_PROJECT_PAGE_REQUEST", projectId, pageId });
-    dispatch({ type: "GET_PROJECT_REQUEST", projectId });
   };
 
   return (
