@@ -60,7 +60,7 @@ router.post("/update", (req, res) => {
     }
 
     project.pages = project.pages.map((page) => {
-      if (page.pageId === pageId) {
+      if (page.pageId === +pageId) {
         return {
           ...page,
           blocks: blocks || page.blocks,
@@ -100,13 +100,12 @@ router.post("/delete", (req, res) => {
 
     project.pages = project.pages.filter((page) => page.pageId !== +pageId);
 
-    // Если есть страницы и нет домашней, делаем первую страницу домашней
-    if (project.pages.length > 0 && project.mainPage === pageId) {
+    if (project.pages.length > 0 && project.mainPage === +pageId) {
       project.mainPage = project.pages[0].pageId;
       project.pages[0].url = "/";
     }
 
-    if (project.pages.length === 0 && project.mainPage !== null) {
+    if (project.pages.length === 0) {
       project.mainPage = null;
     }
 

@@ -94,18 +94,21 @@ router.post("/update", (req, res) => {
 
   try {
     const projects = readDatabase();
-
     const newProjects = projects.map((project) => {
       if (project.projectId === projectId) {
-        project.pages.map((page) => {
-          if (project.mainPage === page.pageId) {
-            page.url = `/page${page.pageId}`;
-          } else if (page.pageId === +mainPage) {
-            page.url = "/";
-          }
+        if (project.mainPage !== +mainPage && mainPage !== null) {
+          project.pages.map((page) => {
+            if (project.mainPage === page.pageId && +mainPage !== page.pageId) {
+              page.url = `/page${page.pageId}`;
+            }
 
-          return page;
-        });
+            if (page.pageId === +mainPage) {
+              page.url = "/";
+            }
+
+            return page;
+          });
+        }
 
         return {
           ...project,
