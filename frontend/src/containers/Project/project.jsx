@@ -41,8 +41,6 @@ const Project = () => {
       type: "CREATE_PROJECT_PAGE_REQUEST",
       projectId: projectData.projectId,
     });
-
-    dispatch({ type: "GET_PROJECT_REQUEST", projectId: projectData.projectId });
   };
 
   const handleCloseSettings = () => {
