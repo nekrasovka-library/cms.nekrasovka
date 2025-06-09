@@ -23,7 +23,6 @@ const Project = () => {
     (state) => state.project,
   );
 
-
   const handleSettingsChange = ({ target: { name, value } }) => {
     setProjectSettings((prev) => ({ ...prev, [name]: value }));
   };
@@ -62,6 +61,8 @@ const Project = () => {
         name: projectData.name,
         href: projectData.href,
         fontFamily: projectData.fontFamily,
+        color: projectData.color,
+        backgroundColor: projectData.backgroundColor,
       });
     }
   }, [isProjectLoaded]);
