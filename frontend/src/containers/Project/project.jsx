@@ -18,11 +18,11 @@ const Project = () => {
   const [isProjectSettingsOpen, setIsProjectSettingsOpen] = useState(false);
   const dispatch = useDispatch();
   const prevProjectIdRef = useRef(null);
+  const [projectSettings, setProjectSettings] = useState(null);
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
 
-  const [projectSettings, setProjectSettings] = useState(null);
 
   const handleSettingsChange = ({ target: { name, value } }) => {
     setProjectSettings((prev) => ({ ...prev, [name]: value }));

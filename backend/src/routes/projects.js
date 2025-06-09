@@ -76,6 +76,8 @@ router.put("/create", (req, res) => {
       mainPage: null,
       pages: [],
       fontFamily: "",
+      backgroundColor: "#fff",
+      color: "#000",
     };
 
     projects.push(newProject);
@@ -90,7 +92,15 @@ router.put("/create", (req, res) => {
 });
 
 router.post("/update", (req, res) => {
-  const { mainPage, fontFamily, name, href, projectId } = req.body;
+  const {
+    mainPage,
+    fontFamily,
+    backgroundColor,
+    color,
+    name,
+    href,
+    projectId,
+  } = req.body;
 
   try {
     const projects = readDatabase();
@@ -116,6 +126,8 @@ router.post("/update", (req, res) => {
           name: name || project.name,
           href: href || project.href,
           fontFamily: fontFamily || project.fontFamily,
+          backgroundColor: backgroundColor || project.backgroundColor,
+          color: color || project.color,
         };
       } else return project;
     });
