@@ -245,18 +245,18 @@ const ProjectSettingsProjectMain = styled.div`
   }
 `;
 
-const ProjectSettingsFonts = styled.div`
+const ProjectSettingsFontsAndColors = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 45px;
   width: 100%;
 
-  > div:nth-child(1) {
+  > div {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
 
-    select {
+    select, input {
       font-size: 24px;
       font-weight: 300;
       color: #000;
@@ -298,5 +298,5 @@ export {
   ProjectSettingsMainPage,
   ProjectMainCardPageName,
   ProjectSettingsProjectMain,
-  ProjectSettingsFonts,
+  ProjectSettingsFontsAndColors,
 };

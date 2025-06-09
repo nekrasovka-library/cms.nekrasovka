@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   ProjectSettingsActions,
   ProjectSettingsContainer,
-  ProjectSettingsFonts,
+  ProjectSettingsFontsAndColors,
   ProjectSettingsMainPage,
   ProjectSettingsProjectMain,
   ProjectSettingsTitles,
@@ -12,8 +12,13 @@ import {
   PaddingSelect,
   RadiusInput,
   SettingsLabel,
+  ColorChange,
+  ColorCircle,
+  ColorContainer,
+  ColorInput,
 } from "../../Settings/settings.styles";
 import { useSelector } from "react-redux";
+import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 
 const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
   const [activeTitle, setActiveTitle] = useState(1);
@@ -66,11 +71,11 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
           </ProjectSettingsProjectMain>
         )}
         {activeTitle === 2 && (
-          <ProjectSettingsFonts>
+          <ProjectSettingsFontsAndColors>
             <div>
               <SettingsLabel>Шрифт проекта</SettingsLabel>
               <PaddingSelect
-                name="fonts"
+                name="fontFamily"
                 onChange={handleSettingsChange}
                 value={projectSettings?.fontFamily}
               >
@@ -84,7 +89,20 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
             <div>
               <SettingsLabel>Загрузить шрифт</SettingsLabel>
             </div>
-          </ProjectSettingsFonts>
+            <div>
+              <SettingsLabel>Цвет текста</SettingsLabel>
+              <ColorChange>
+                <ColorCircle $backgroundColor={projectSettings?.backgroundColor} />
+                <ColorInput
+                  type="text"
+                  name="backgroundColor"
+                  value={projectSettings?.backgroundColor}
+                  onChange={handleSettingsChange}
+                  placeholder="#000"
+                />
+              </ColorChange>
+            </div>
+          </ProjectSettingsFontsAndColors>
         )}
         {activeTitle === 3 && (
           <ProjectSettingsMainPage>
