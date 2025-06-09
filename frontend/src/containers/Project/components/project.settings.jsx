@@ -90,7 +90,7 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
               <SettingsLabel>Загрузить шрифт</SettingsLabel>
             </div>
             <div>
-              <SettingsLabel>Цвет текста</SettingsLabel>
+              <SettingsLabel>Цвет текста в проекте</SettingsLabel>
               <ColorChange>
                 <ColorCircle $backgroundColor={projectSettings?.backgroundColor} />
                 <ColorInput
