@@ -73,7 +73,7 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
         {activeTitle === 2 && (
           <ProjectSettingsFontsAndColors>
             <div>
-              <SettingsLabel>Шрифт проекта</SettingsLabel>
+              <SettingsLabel>Шрифт страницы</SettingsLabel>
               <PaddingSelect
                 name="fontFamily"
                 onChange={handleSettingsChange}
@@ -90,13 +90,26 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
               <SettingsLabel>Загрузить шрифт</SettingsLabel>
             </div>
             <div>
-              <SettingsLabel>Цвет текста в проекте</SettingsLabel>
+              <SettingsLabel>Цвет фона страницы</SettingsLabel>
               <ColorChange>
                 <ColorCircle $backgroundColor={projectSettings?.backgroundColor} />
                 <ColorInput
                   type="text"
                   name="backgroundColor"
                   value={projectSettings?.backgroundColor}
+                  onChange={handleSettingsChange}
+                  placeholder="#fff"
+                />
+              </ColorChange>
+            </div>
+            <div>
+              <SettingsLabel>Цвет текста страницы</SettingsLabel>
+              <ColorChange>
+                <ColorCircle $backgroundColor={projectSettings?.color} />
+                <ColorInput
+                  type="text"
+                  name="color"
+                  value={projectSettings?.color}
                   onChange={handleSettingsChange}
                   placeholder="#000"
                 />
