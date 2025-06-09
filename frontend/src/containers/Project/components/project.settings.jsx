@@ -22,22 +22,12 @@ import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
   const [activeTitle, setActiveTitle] = useState(1);
   const { projectData } = useSelector((state) => state.project);
+  const { fontsData } = useSelector((state) => state.fonts);
 
   const settingsTitles = [
     { id: 1, title: "Главное" },
     { id: 2, title: "Шрифты и цвета" },
     { id: 3, title: "Главная страница" },
-  ];
-
-  const projectFonts = [
-    {
-      id: 1,
-      label: "Roboto",
-    },
-    {
-      id: 2,
-      label: "Rubik",
-    },
   ];
 
   return (
@@ -78,9 +68,9 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
                 onChange={handleSettingsChange}
                 value={projectSettings?.fontFamily}
               >
-                {projectFonts.map((font) => (
-                  <option key={font.id} value={font.label}>
-                    {font.label}
+                {fontsData.map((font) => (
+                  <option key={font.id} value={font.name}>
+                    {font.name}
                   </option>
                 ))}
               </PaddingSelect>

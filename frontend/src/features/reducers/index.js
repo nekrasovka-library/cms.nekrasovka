@@ -7,6 +7,7 @@ import editor from "./editor.js";
 import projects from "./projects.js";
 import project from "./project.js";
 import page from "./page.js";
+import fonts from "./fonts";
 
 const rootReducer = combineReducers({
   menu: menu,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   projects: projects,
   project: project,
   page: page,
+  fonts: fonts,
 });
 
 export default rootReducer;

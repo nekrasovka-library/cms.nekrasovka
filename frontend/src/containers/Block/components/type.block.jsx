@@ -1,9 +1,6 @@
 import React from "react";
 import { TypeBlockContainer } from "../block.styles.js";
-import {
-  generateBlockStyles,
-  getComponentParams,
-} from "../../../helpers/index.js";
+import { generateBlockStyles, getComponentParams } from "../../../helpers";
 
 const TypeBlock = ({
   isItems,

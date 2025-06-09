@@ -75,7 +75,7 @@ router.put("/create", (req, res) => {
       projectId: maxId + 1,
       mainPage: null,
       pages: [],
-      fontFamily: "",
+      fontFamily: "Roboto",
       backgroundColor: "#fff",
       color: "#000",
     };

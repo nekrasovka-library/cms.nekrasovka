@@ -19,12 +19,15 @@ const Editor = ({
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
   const { editorFocused } = useSelector((state) => state.editor);
+  const { fontsData } = useSelector((state) => state.fonts);
+  const { projectData, isProjectLoaded } = useSelector(
+    (state) => state.project,
+  );
   const isModal = isSettingsOpen || isMenuOpen;
   const isEditorFocused = editorFocused === `${blockId}-${itemId}`;
   const options = {
-    defaultStyle:
-      "height: 100%; font-size: 16px; font-family: Roboto, sans-serif;",
-    font: ["Arial", "Roboto"],
+    defaultStyle: `height: 100%; font-size: 16px; color: ${projectData.color}; font-family: ${projectData.fontFamily}, sans-serif;`,
+    font: fontsData.map((font) => font.name),
     resizingBar: false,
     buttonList: TOOLBAR_OPTIONS,
   };
@@ -49,13 +52,15 @@ const Editor = ({
       $gap={gap}
       $tracks={tracks}
     >
-      <SunEditor
-        lang={ru}
-        setContents={text}
-        onChange={handleContentChange}
-        onClick={handleEditorFocused}
-        setOptions={options}
-      />
+      {isProjectLoaded && (
+        <SunEditor
+          lang={ru}
+          setContents={text}
+          onChange={handleContentChange}
+          onClick={handleEditorFocused}
+          setOptions={options}
+        />
+      )}
     </Container>
   );
 };

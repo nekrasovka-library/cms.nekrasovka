@@ -10,6 +10,7 @@ const CONFIG = require("./config.js");
 const imagesRoutes = require("./routes/images.js");
 const projectsRoutes = require("./routes/projects.js");
 const pagesRoutes = require("./routes/pages.js");
+const fontsRoutes = require("./routes/fonts.js");
 
 /**
  * Инициализация приложения
@@ -39,6 +40,7 @@ const configureRoutes = (app) => {
   app.use("/api/images", imagesRoutes);
   app.use("/api/projects", projectsRoutes);
   app.use("/api/page", pagesRoutes);
+  app.use("/api/fonts", fontsRoutes);
 
   // Обработка всех остальных маршрутов - отдаем index.html
   app.use((req, res) => {

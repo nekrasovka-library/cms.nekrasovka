@@ -15,6 +15,10 @@ ax.interceptors.response.use(
   (error) => {},
 );
 
+const fetchFontsApi = async (projectId) => {
+  return await axios.get(`${process.env.REACT_APP_API}fonts`);
+};
+
 const fetchProjectApi = async (projectId) => {
   return await axios.get(`${process.env.REACT_APP_API}projects/${projectId}`);
 };
@@ -66,4 +70,5 @@ export {
   fetchProjectPageApi,
   fetchUpdateProjectPageApi,
   fetchUpdateProjectApi,
+  fetchFontsApi,
 };

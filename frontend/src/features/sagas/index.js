@@ -8,6 +8,7 @@ import {
   fetchProjectsApi,
   fetchUpdateProjectPageApi,
   fetchUpdateProjectApi,
+  fetchFontsApi,
 } from "../api.js";
 import {
   getProjectFailure,
@@ -21,7 +22,18 @@ import {
   getProjectPageFailure,
   updateProjectPageFailure,
   updateProjectFailure,
+  getFontsSuccess,
+  getFontsFailure,
 } from "../actions";
+
+function* getFonts() {
+  try {
+    const response = yield call(fetchFontsApi);
+    yield put(getFontsSuccess(response.data));
+  } catch (error) {
+    yield put(getFontsFailure(error.message));
+  }
+}
 
 function* getProject(params) {
   try {
@@ -144,6 +156,10 @@ export function* watchUpdateProjectPage() {
   yield takeLatest("UPDATE_PROJECT_PAGE_REQUEST", updateProjectPage);
 }
 
+export function* watchGetFonts() {
+  yield takeLatest("GET_FONTS_REQUEST", getFonts);
+}
+
 export default function* rootSaga() {
   yield all([
     watchGetProject(),
@@ -154,5 +170,6 @@ export default function* rootSaga() {
     watchCreateProjectPage(),
     watchGetProjectPage(),
     watchUpdateProjectPage(),
+    watchGetFonts(),
   ]);
 }

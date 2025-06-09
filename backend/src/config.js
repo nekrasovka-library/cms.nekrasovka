@@ -12,7 +12,12 @@ const CONFIG = {
     INDEX_HTML: join(resolve(__dirname, process.env.FRONTEND), "index.html"),
     IMAGES_DIR: resolve(__dirname, process.env.IMAGES),
     DATABASE_DIR: resolve(__dirname, process.env.DATABASE),
-    DATABASE_FILE: resolve(__dirname, process.env.DATABASE, "projects.json"),
+    DATABASE_PROJECTS: resolve(
+      __dirname,
+      process.env.DATABASE,
+      "projects.json",
+    ),
+    DATABASE_FONTS: resolve(__dirname, process.env.DATABASE, "fonts.json"),
   },
 };
 

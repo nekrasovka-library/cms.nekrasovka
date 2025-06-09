@@ -6,7 +6,7 @@ const CONFIG = require("../config.js");
  * @returns {Array} массив проектов
  */
 const readDatabase = () => {
-  return JSON.parse(readFileSync(CONFIG.PATHS.DATABASE_PROJECTS, "utf8"));
+  return JSON.parse(readFileSync(CONFIG.PATHS.DATABASE_FONTS, "utf8"));
 };
 
 /**
@@ -14,17 +14,7 @@ const readDatabase = () => {
  * @param {Array} data - данные для записи
  */
 const writeDatabase = (data) => {
-  writeFileSync(CONFIG.PATHS.DATABASE_PROJECTS, JSON.stringify(data, null, 2));
-};
-
-/**
- * Поиск проекта по ID
- * @param {Array} projects - массив проектов
- * @param {number|string} projectId - ID проекта
- * @returns {Object|undefined} найденный проект или undefined
- */
-const findProject = (projects, projectId) => {
-  return projects.find((p) => p.projectId === +projectId);
+  writeFileSync(CONFIG.PATHS.DATABASE_FONTS, JSON.stringify(data, null, 2));
 };
 
 /**
@@ -41,4 +31,4 @@ const handleApiError = (res, error) => {
   });
 };
 
-module.exports = { handleApiError, readDatabase, writeDatabase, findProject };
+module.exports = { handleApiError, readDatabase, writeDatabase };

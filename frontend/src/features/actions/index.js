@@ -18,6 +18,16 @@ const getProjectFailure = (error) => ({
   payload: error,
 });
 
+const getFontsSuccess = (project) => ({
+  type: "GET_FONTS_SUCCESS",
+  payload: project,
+});
+
+const getFontsFailure = (error) => ({
+  type: "GET_FONTS_FAILURE",
+  payload: error,
+});
+
 const getProjectsSuccess = (project) => ({
   type: "GET_PROJECTS_SUCCESS",
   payload: project,
@@ -65,4 +75,6 @@ export {
   getProjectPageFailure,
   updateProjectPageFailure,
   updateProjectFailure,
+  getFontsFailure,
+  getFontsSuccess,
 };
