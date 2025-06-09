@@ -14,7 +14,6 @@ import {
   SettingsLabel,
   ColorChange,
   ColorCircle,
-  ColorContainer,
   ColorInput,
 } from "../../Settings/settings.styles";
 import { useSelector } from "react-redux";
@@ -92,13 +91,24 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
             <div>
               <SettingsLabel>Цвет фона страницы</SettingsLabel>
               <ColorChange>
-                <ColorCircle $backgroundColor={projectSettings?.backgroundColor} />
+                <ColorCircle
+                  $backgroundColor={projectSettings?.backgroundColor}
+                />
                 <ColorInput
                   type="text"
                   name="backgroundColor"
                   value={projectSettings?.backgroundColor}
                   onChange={handleSettingsChange}
                   placeholder="#fff"
+                />
+                <Icon
+                  icon="closeMenu"
+                  type="button"
+                  onClick={() =>
+                    handleSettingsChange({
+                      target: { name: "backgroundColor", value: "#fff" },
+                    })
+                  }
                 />
               </ColorChange>
             </div>
@@ -112,6 +122,15 @@ const ProjectSettings = ({ handleSettingsChange, projectSettings }) => {
                   value={projectSettings?.color}
                   onChange={handleSettingsChange}
                   placeholder="#000"
+                />
+                <Icon
+                  icon="closeMenu"
+                  type="button"
+                  onClick={() =>
+                    handleSettingsChange({
+                      target: { name: "color", value: "#000" },
+                    })
+                  }
                 />
               </ColorChange>
             </div>
