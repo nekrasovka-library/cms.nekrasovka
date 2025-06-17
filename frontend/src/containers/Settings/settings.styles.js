@@ -205,7 +205,7 @@ const ColorCircle = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   ${({ $backgroundColor }) =>
     $backgroundColor === "transparent"
-      ? `background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath fill='%23CCC' d='M0 0h5v5H0zM5 5h5v5H5z'/%3E%3Cpath fill='%23fff' d='M5 0h5v5H5zM0 5h5v5H0z'/%3E%3C/svg%3E")`
+      ? `background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='//www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath fill='%23CCC' d='M0 0h5v5H0zM5 5h5v5H5z'/%3E%3Cpath fill='%23fff' d='M5 0h5v5H5zM0 5h5v5H0z'/%3E%3C/svg%3E")`
       : `background-color: ${$backgroundColor}`}
 `;
 

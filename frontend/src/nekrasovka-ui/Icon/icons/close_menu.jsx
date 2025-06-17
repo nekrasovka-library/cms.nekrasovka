@@ -1,12 +1,7 @@
 import React from "react";
 
 export default ({ width = 16, height = 16, fill = "#000" }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={width}
-    height={height}
-    fill="none"
-  >
+  <svg xmlns="//www.w3.org/2000/svg" width={width} height={height} fill="none">
     <path
       fill={fill}
       fillRule="evenodd"

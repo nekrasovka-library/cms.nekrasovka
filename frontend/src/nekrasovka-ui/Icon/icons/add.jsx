@@ -3,7 +3,7 @@ import React from "react";
 export default ({ width = "29", height = "29", fill = "#000" }) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="//www.w3.org/2000/svg"
       width={width}
       height={height}
       fill="none"
