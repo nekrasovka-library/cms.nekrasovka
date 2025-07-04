@@ -34,6 +34,7 @@ const ProjectCreate = ({ isOpen, onClose, onSubmit }) => {
 
   const handleSubmit = () => {
     onSubmit(formData);
+    setFormData(initialState);
     onClose();
   };
 
