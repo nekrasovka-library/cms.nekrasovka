@@ -175,6 +175,46 @@ const Button = styled.button`
   }
 `;
 
+const FormTemplate = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 16px;
+  margin-top: 10px;
+`;
+
+const FormTemplateCard = styled.div`
+  cursor: pointer;
+  background-color: ${({ $isFormCardSlected }) =>
+    $isFormCardSlected ? "rgba(238, 238, 238, 0.4)" : "#fff"};
+  transition: background-color 0.3s cubic-bezier(0, 0, 0.8, 1);
+  box-shadow: 0 1px 6px #eee;
+
+  > div {
+    &:nth-child(1) {
+      img {
+        height: auto;
+        width: 100%;
+      }
+    }
+
+    &:nth-child(2) {
+      font-size: 16px;
+      padding: 15px;
+
+      h4 {
+        font-weight: 700;
+        margin: 0;
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(238, 238, 238, 0.4);
+    }
+  }
+`;
+
 export {
   ProjectCardContainer,
   ProjectsContainer,
@@ -186,4 +226,6 @@ export {
   ModalOverlay,
   Button,
   FormTitle,
+  FormTemplate,
+  FormTemplateCard,
 };

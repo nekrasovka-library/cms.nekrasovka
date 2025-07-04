@@ -6,6 +6,8 @@ import {
   ButtonGroup,
   Button,
   FormTitle,
+  FormTemplate,
+  FormTemplateCard,
 } from "../projects.styles.js";
 import {
   RadiusContainer,
@@ -13,11 +15,15 @@ import {
   SettingsLabel,
 } from "../../Settings/settings.styles.js";
 
+const DEFAULT_IMAGE = `imgfish.jpg`;
+const initialState = {
+  name: "",
+  href: "",
+  template: "",
+};
+
 const ProjectCreate = ({ isOpen, onClose, onSubmit }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    href: "",
-  });
+  const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
     setFormData({
@@ -55,6 +61,43 @@ const ProjectCreate = ({ isOpen, onClose, onSubmit }) => {
               value={formData.href}
               onChange={handleChange}
             />
+          </RadiusContainer>
+          <RadiusContainer>
+            <SettingsLabel>Выберите шаблон</SettingsLabel>
+            <FormTemplate>
+              <FormTemplateCard
+                $isFormCardSlected={formData.template === "empty"}
+                onClick={() => setFormData({ ...formData, template: "empty" })}
+              >
+                <div>
+                  <img
+                    src={`${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`}
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <h4>Пустой проект</h4>
+                  <p>Начните с чистого листа</p>
+                </div>
+              </FormTemplateCard>
+              <FormTemplateCard
+                $isFormCardSlected={formData.template === "header-footer"}
+                onClick={() =>
+                  setFormData({ ...formData, template: "header-footer" })
+                }
+              >
+                <div>
+                  <img
+                    src={`${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`}
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <h4>Шаблон с шапкой и подвалом</h4>
+                  <p>Базовая структура сайта</p>
+                </div>
+              </FormTemplateCard>
+            </FormTemplate>
           </RadiusContainer>
           <ButtonGroup>
             <Button type="button" className="secondary" onClick={onClose}>
