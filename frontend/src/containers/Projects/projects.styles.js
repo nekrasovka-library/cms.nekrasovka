@@ -184,10 +184,12 @@ const FormTemplate = styled.div`
 
 const FormTemplateCard = styled.div`
   cursor: pointer;
-  background-color: ${({ $isFormCardSlected }) =>
-    $isFormCardSlected ? "rgba(238, 238, 238, 0.4)" : "#fff"};
-  transition: background-color 0.3s cubic-bezier(0, 0, 0.8, 1);
+  background-color: ${({ $isFormCardSelected }) =>
+    $isFormCardSelected ? "rgba(238, 238, 238, 0.4)" : "#fff"};
   box-shadow: 0 1px 6px #eee;
+  transition-duration: 0.3s;
+  transition-property: background-color, color;
+  transition-timing-function: ease-in-out;
 
   > div {
     &:nth-child(1) {
@@ -204,6 +206,8 @@ const FormTemplateCard = styled.div`
       h4 {
         font-weight: 700;
         margin: 0;
+        color: ${({ $isFormCardSelected }) =>
+          $isFormCardSelected ? "#f4846b" : "#000"};
       }
     }
   }
@@ -211,6 +215,10 @@ const FormTemplateCard = styled.div`
   @media (hover: hover) {
     &:hover {
       background-color: rgba(238, 238, 238, 0.4);
+
+      > div:nth-child(2) h4 {
+        color: #f4846b;
+      }
     }
   }
 `;

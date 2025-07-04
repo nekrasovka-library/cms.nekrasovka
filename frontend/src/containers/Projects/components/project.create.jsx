@@ -71,7 +71,7 @@ const ProjectCreate = ({ isOpen, onClose, onSubmit }) => {
             <SettingsLabel>Выберите шаблон</SettingsLabel>
             <FormTemplate>
               <FormTemplateCard
-                $isFormCardSlected={formData.template === "empty"}
+                $isFormCardSelected={formData.template === "empty"}
                 onClick={() => setFormData({ ...formData, template: "empty" })}
               >
                 <div>
@@ -86,7 +86,7 @@ const ProjectCreate = ({ isOpen, onClose, onSubmit }) => {
                 </div>
               </FormTemplateCard>
               <FormTemplateCard
-                $isFormCardSlected={formData.template === "header-footer"}
+                $isFormCardSelected={formData.template === "header-footer"}
                 onClick={() =>
                   setFormData({ ...formData, template: "header-footer" })
                 }
