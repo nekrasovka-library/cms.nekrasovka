@@ -38,10 +38,15 @@ const ProjectCreate = ({ isOpen, onClose, onSubmit }) => {
     onClose();
   };
 
+  const handleClose = () => {
+    setFormData(initialState);
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
-    <ModalOverlay onClick={onClose}>
+    <ModalOverlay onClick={handleClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <FormTitle>Новый проект</FormTitle>
         <Form>
@@ -101,7 +106,7 @@ const ProjectCreate = ({ isOpen, onClose, onSubmit }) => {
             </FormTemplate>
           </RadiusContainer>
           <ButtonGroup>
-            <Button type="button" className="secondary" onClick={onClose}>
+            <Button type="button" className="secondary" onClick={handleClose}>
               Отмена
             </Button>
             <Button type="submit" className="primary" onClick={handleSubmit}>
