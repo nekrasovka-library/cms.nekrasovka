@@ -102,9 +102,11 @@ const Block = ({
             </Tooltip>
           )}
 
-          <Tooltip text="Удалить блок">
-            <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
-          </Tooltip>
+          {!isFixedBlock() && (
+            <Tooltip text="Удалить блок">
+              <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
+            </Tooltip>
+          )}
 
           {canMoveUp() && (
             <Tooltip text="Переместить вверх">
