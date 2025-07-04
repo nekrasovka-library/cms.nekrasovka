@@ -7,13 +7,13 @@ import {
   HeaderLeftHome,
   HeaderRight,
   HeaderRightPreview,
-} from "./header.styles.js";
+} from "./constructor.header.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { Link } from "react-router";
-import HeaderDropdown from "./components/header.dropdown.jsx";
+import ConstructorHeaderDropdown from "./components/constructor.header.dropdown.jsx";
 
-const Header = () => {
+const ConstructorHeader = () => {
   const dispatch = useDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isPreview } = useSelector((state) => state.preview);
@@ -74,7 +74,7 @@ const Header = () => {
               <Icon icon="blankPage" />
               <span>{pageData.name}</span>
               {isDropdownOpen && (
-                <HeaderDropdown
+                <ConstructorHeaderDropdown
                   pages={projectData.pages}
                   pageId={pageData.pageId}
                   projectId={projectData.projectId}
@@ -100,4 +100,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default ConstructorHeader;

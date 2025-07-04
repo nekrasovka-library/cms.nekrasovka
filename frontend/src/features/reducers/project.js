@@ -1,5 +1,5 @@
 const initialState = {
-  projectData: [],
+  projectData: {},
   projectError: null,
   isProjectLoaded: false,
 };

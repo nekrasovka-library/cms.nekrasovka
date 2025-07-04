@@ -2,10 +2,10 @@ import React from "react";
 import {
   HeaderPageDropdownContainer,
   HeaderPageDropdownLink,
-} from "../header.styles.js";
+} from "../constructor.header.styles.js";
 import Icon from "../../../nekrasovka-ui/Icon/icon.jsx";
 
-const HeaderDropdown = ({
+const ConstructorHeaderDropdown = ({
   pages,
   pageId,
   projectId,
@@ -33,4 +33,4 @@ const HeaderDropdown = ({
   );
 };
 
-export default HeaderDropdown;
+export default ConstructorHeaderDropdown;
