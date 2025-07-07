@@ -22,6 +22,19 @@ const Project = () => {
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
+  const menu = useSelector((state) => state.menu);
+
+  const findByVariantId = (data, variantId) => {
+    for (const obj of data) {
+      const foundVariant = obj.variants.find((v) => v.id === variantId);
+
+      if (foundVariant) {
+        return foundVariant; // Возвращаем найденный элемент
+      }
+    }
+
+    return null; // Возвращаем null, если элемент не найден
+  };
 
   const handleSettingsChange = ({ target: { name, value } }) => {
     setProjectSettings((prev) => ({ ...prev, [name]: value }));
@@ -36,10 +49,33 @@ const Project = () => {
   };
 
   const handleCreateProjectPage = () => {
-    dispatch({
-      type: "CREATE_PROJECT_PAGE_REQUEST",
-      projectId: projectData.projectId,
-    });
+    if (projectData.template === "header-footer") {
+      let projectBlocks = [8, 9].map((id) => {
+        const variant = findByVariantId(menu.data, id);
+
+        return {
+          items: [
+            {
+              text: variant.text,
+              type: variant.type,
+              variantId: variant.id,
+            },
+          ],
+          styles: variant.styles,
+        };
+      });
+
+      dispatch({
+        type: "CREATE_PROJECT_PAGE_REQUEST",
+        projectId: projectData.projectId,
+        blocks: projectBlocks,
+      });
+    } else {
+      dispatch({
+        type: "CREATE_PROJECT_PAGE_REQUEST",
+        projectId: projectData.projectId,
+      });
+    }
   };
 
   const handleCloseSettings = () => {

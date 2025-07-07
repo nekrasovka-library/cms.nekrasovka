@@ -123,7 +123,7 @@ router.post("/delete", (req, res) => {
  * Создание страницы
  */
 router.put("/create", (req, res) => {
-  const { projectId } = req.body;
+  const { projectId, blocks } = req.body;
 
   try {
     const projects = readDatabase();
@@ -145,7 +145,7 @@ router.put("/create", (req, res) => {
       name: "Blank page",
       pageId: maxPageId + 1,
       projectId: project.projectId,
-      blocks: [],
+      blocks: blocks || [],
       url: project.pages.length > 0 ? `/page${maxPageId + 1}` : "/",
     };
 

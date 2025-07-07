@@ -37,10 +37,8 @@ const fetchCreateProjectApi = async (project) => {
   });
 };
 
-const fetchCreateProjectPageApi = async ({ projectId }) => {
-  return await axios.put(`${process.env.REACT_APP_API}page/create`, {
-    projectId,
-  });
+const fetchCreateProjectPageApi = async (params) => {
+  return await axios.put(`${process.env.REACT_APP_API}page/create`, params);
 };
 
 const fetchDeleteProjectPageApi = async ({ projectId, pageId }) => {
