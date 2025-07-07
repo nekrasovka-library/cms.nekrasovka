@@ -19,7 +19,7 @@ const CarouselTrack = styled.div`
 
 const CarouselItem = styled.div`
   flex: 0 0 calc(100% - ${calculateTotalWidth}px);
-  height: 550px;
+  height: ${({ $height }) => $height}px;
 
   img {
     width: calc(100% - ${calculateTotalWidth}px);

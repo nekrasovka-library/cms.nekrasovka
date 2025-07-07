@@ -18,6 +18,7 @@ const CarouselConstructor = ({
   isDots = true,
   borderRadius = 0,
   tracks,
+  height = "550",
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -102,6 +103,7 @@ const CarouselConstructor = ({
               $gap={gap}
               $overhang={overhang}
               $borderRadius={borderRadius}
+              $height={height}
             >
               <img
                 src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}

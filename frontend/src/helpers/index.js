@@ -78,6 +78,7 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
       blockId,
       text,
       borderRadius: styles.borderRadius,
+      height: styles.height,
     };
   }
 
@@ -88,6 +89,7 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
       maxWidth: calculateBlockWidth(styles.maxWidth),
       borderRadius: styles.borderRadius,
       tracks: styles.tracks,
+      height: styles.height,
     };
   }
 

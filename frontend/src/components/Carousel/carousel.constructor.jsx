@@ -89,6 +89,7 @@ const CarouselConstructor = ({
   blockId,
   borderRadius = DEFAULT_BORDER_RADIUS,
   tracks = DEFAULT_TRACKS,
+  height = "550",
 }) => {
   const dispatch = useDispatch();
   const fileInputRef = useRef([]);
@@ -139,6 +140,7 @@ const CarouselConstructor = ({
             $gap={gap}
             $overhang={overhang}
             $borderRadius={borderRadius}
+            $height={height}
           >
             <img
               src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}
