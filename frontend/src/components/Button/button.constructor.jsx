@@ -29,7 +29,6 @@ const ButtonConstructor = ({
   textAlign,
   backgroundColor,
   blockId,
-  itemId,
 }) => {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
@@ -64,7 +63,7 @@ const ButtonConstructor = ({
       setIsEditing(false);
       dispatch({
         type: "UPDATE_BLOCK",
-        payload: { blockId, itemId, text: updatedText },
+        payload: { blockId, text: updatedText },
       });
     },
   };

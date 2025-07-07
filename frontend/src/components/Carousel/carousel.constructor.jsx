@@ -87,7 +87,6 @@ const CarouselConstructor = ({
   gap = DEFAULT_GAP,
   isDots = true,
   blockId,
-  itemId,
   borderRadius = DEFAULT_BORDER_RADIUS,
   tracks = DEFAULT_TRACKS,
 }) => {
@@ -117,7 +116,6 @@ const CarouselConstructor = ({
       type: "UPDATE_BLOCK",
       payload: {
         blockId,
-        itemId,
         text: Array.from({ length: tracks }).map((_, i) =>
           i === index ? response.data.file.filename : children[i] || "",
         ),

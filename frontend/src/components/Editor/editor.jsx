@@ -6,15 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TOOLBAR_OPTIONS } from "./editor.constants.js";
 import { ru } from "suneditor/src/lang";
 
-const Editor = ({
-  text,
-  itemId,
-  blockId,
-  backgroundColor,
-  textAlign,
-  gap,
-  tracks,
-}) => {
+const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
@@ -24,7 +16,7 @@ const Editor = ({
     (state) => state.project,
   );
   const isModal = isSettingsOpen || isMenuOpen;
-  const isEditorFocused = editorFocused === `${blockId}-${itemId}`;
+  const isEditorFocused = editorFocused === `${blockId}`;
   const options = {
     defaultStyle: `height: 100%; font-size: 16px; color: ${projectData.color}; font-family: ${projectData.fontFamily}, sans-serif;`,
     font: fontsData.map((font) => font.name),
@@ -35,12 +27,12 @@ const Editor = ({
   const handleContentChange = (content) => {
     dispatch({
       type: "UPDATE_BLOCK",
-      payload: { blockId, itemId, text: content },
+      payload: { blockId, text: content },
     });
   };
 
   const handleEditorFocused = () => {
-    dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}-${itemId}` });
+    dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}` });
   };
 
   return (

@@ -61,11 +61,10 @@ const generateBlockStyles = ({
   }`;
 };
 
-const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
+const getComponentParams = ({ text, type, blockId, styles }) => {
   if (type === "text") {
     return {
       blockId,
-      itemId,
       text,
       backgroundColor: styles.backgroundColor,
       textAlign: styles.textAlign,
@@ -77,7 +76,6 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
   if (type === "image") {
     return {
       blockId,
-      itemId,
       text,
       borderRadius: styles.borderRadius,
     };
@@ -86,7 +84,6 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
   if (type === "carousel") {
     return {
       blockId,
-      itemId,
       children: text,
       maxWidth: calculateBlockWidth(styles.maxWidth),
       borderRadius: styles.borderRadius,
@@ -97,7 +94,6 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
   if (type === "divider") {
     return {
       blockId,
-      itemId,
       text,
       color: styles.color,
       opacity: styles.opacity,
@@ -107,7 +103,6 @@ const getComponentParams = ({ text, type, blockId, itemId, styles }) => {
   if (type === "button") {
     return {
       blockId,
-      itemId,
       text,
       color: styles.color,
       border: styles.border,
