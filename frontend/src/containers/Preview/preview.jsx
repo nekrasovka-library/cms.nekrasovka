@@ -8,7 +8,7 @@ import TypeBlock from "../Block/components/type.block.jsx";
 import { PreviewContainer } from "./preview.styles.js";
 import Button from "../../components/Button/button.preview.jsx";
 import HeaderPreview from "../../components/Header/header.preview";
-import Footer from "../../components/Footer/footer";
+import FooterPreview from "../../components/Footer/footer.preview";
 
 const Preview = () => {
   const { blocks, totalBlocks } = useSelector((state) => state.blocks);
@@ -20,7 +20,7 @@ const Preview = () => {
     divider: Divider,
     button: Button,
     header: HeaderPreview,
-    footer: Footer,
+    footer: FooterPreview,
   };
 
   return (

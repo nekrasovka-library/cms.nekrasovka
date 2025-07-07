@@ -1,7 +1,7 @@
 import React from "react";
 
-const HeaderPreview = ({ text }) => {
+const HeaderConstructor = ({ text }) => {
   return <div dangerouslySetInnerHTML={{ __html: text }} />;
 };
 
-export default HeaderPreview;
+export default HeaderConstructor;

@@ -164,7 +164,20 @@ const initialState = {
           id: 8,
           image: "header_nekrasovka.png",
           type: "header",
-          text: "<div></div>",
+          text: `<div style="display: flex; justify-content: space-between;">
+<div>
+<img src="/nekrasovka.png" alt="" height="50">
+<a href=""><img src="/mos.png" alt="" height="50" style="margin-left: 35px;"></a>
+</div>
+<div style="display: flex; align-items: center;">
+<a href="">
+<img src="/vk.png" alt="" height="30">
+</a>
+<a href="">
+<img src="/telegram.png" alt="" height="30" style="margin-left: 10px;">
+</a>
+</div>
+</div>`,
           menuId: 8,
           styles: {
             paddingTop: "25px",
@@ -183,10 +196,15 @@ const initialState = {
           id: 9,
           image: "footer_nekrasovka.png",
           type: "footer",
-          text: "<div></div>",
+          text: `<div style="display: flex; justify-content: space-between;">
+<div>
+<img src="/nekrasovka.png" alt="" height="50">
+<a href=""><img src="/mos.png" alt="" height="50" style="margin-left: 35px;"></a>
+</div>
+</div>`,
           menuId: 9,
           styles: {
-            paddingTop: "0px",
+            paddingTop: "45px",
             paddingBottom: "45px",
             maxWidth: "12",
             backgroundColor: "#EDEEE9",

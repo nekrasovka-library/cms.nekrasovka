@@ -113,6 +113,22 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
     };
   }
 
+  if (type === "header") {
+    return {
+      blockId,
+      text,
+      backgroundColor: styles.elementBackgroundColor,
+    };
+  }
+
+  if (type === "footer") {
+    return {
+      blockId,
+      text,
+      backgroundColor: styles.elementBackgroundColor,
+    };
+  }
+
   return {};
 };
 

@@ -6,8 +6,8 @@ import Editor from "../../components/Editor/editor.jsx";
 import Image from "../../components/Image/image.constructor.jsx";
 import Carousel from "../../components/Carousel/carousel.constructor.jsx";
 import Divider from "../../components/Divider/divider.jsx";
-import HeaderPreview from "../../components/Header/header.preview.jsx";
-import Footer from "../../components/Footer/footer.jsx";
+import HeaderConstructor from "../../components/Header/header.constructor.jsx";
+import FooterConstructor from "../../components/Footer/footer.constructor.jsx";
 import Button from "../../components/Button/button.constructor.jsx";
 import { AnimatePresence } from "framer-motion";
 import Transition from "../../components/Transition/transition.jsx";
@@ -41,8 +41,8 @@ const Constructor = () => {
     carousel: Carousel,
     divider: Divider,
     button: Button,
-    header: HeaderPreview,
-    footer: Footer,
+    header: HeaderConstructor,
+    footer: FooterConstructor,
   };
 
   const renderBlocks = () => {

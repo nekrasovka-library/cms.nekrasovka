@@ -25,6 +25,7 @@ const TypeBlock = ({
               text,
             });
 
+            console.log("❗", { params });
             return <ItemComponent key={elementIndex} {...params} />;
           })}
         </div>
