@@ -10,9 +10,6 @@ import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import TypeBlock from "./components/type.block.jsx";
 
-const FIXED_BLOCK_TYPES = ["header", "footer"];
-const FOOTER_TYPE = "footer";
-
 const Block = ({
   blockIndex,
   id,
@@ -27,13 +24,8 @@ const Block = ({
   const { isSettingsOpen } = useSelector((state) => state.settings);
   const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
 
-  const blockType = items?.[0]?.type;
-
-  const isFixedBlock = (type = blockType) => FIXED_BLOCK_TYPES.includes(type);
-  const isFooterBlock = (type = blockType) => type === FOOTER_TYPE;
-
-  const canMoveUp = () => !isFixedBlock() && blockIndex !== 1;
-  const canMoveDown = () => !isFixedBlock() && blockIndex + 2 !== totalBlocks;
+  const canMoveUp = () => blockIndex !== 0;
+  const canMoveDown = () => blockIndex !== totalBlocks;
 
   const isBlankBlockActive =
     (isBlankBlockFocused && !isMenuOpen && !isSettingsOpen) ||
@@ -82,13 +74,11 @@ const Block = ({
         CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
       />
 
-      {!isFooterBlock() && (
-        <BlankBlockAddButton $isBlankBlockFocused={isBlankBlockActive}>
-          <Tooltip text="Добавить блок">
-            <Icon icon="add" type="button" onClick={handleAddBlock} />
-          </Tooltip>
-        </BlankBlockAddButton>
-      )}
+      <BlankBlockAddButton $isBlankBlockFocused={isBlankBlockActive}>
+        <Tooltip text="Добавить блок">
+          <Icon icon="add" type="button" onClick={handleAddBlock} />
+        </Tooltip>
+      </BlankBlockAddButton>
 
       {isItems && (
         <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
@@ -96,17 +86,13 @@ const Block = ({
             <Icon icon="settings" type="button" onClick={handleBlockSettings} />
           </Tooltip>
 
-          {!isFixedBlock() && (
-            <Tooltip text="Копировать блок">
-              <Icon icon="copy" type="button" onClick={handleCopyBlock} />
-            </Tooltip>
-          )}
+          <Tooltip text="Копировать блок">
+            <Icon icon="copy" type="button" onClick={handleCopyBlock} />
+          </Tooltip>
 
-          {!isFixedBlock() && (
-            <Tooltip text="Удалить блок">
-              <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
-            </Tooltip>
-          )}
+          <Tooltip text="Удалить блок">
+            <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
+          </Tooltip>
 
           {canMoveUp() && (
             <Tooltip text="Переместить вверх">
@@ -130,9 +116,7 @@ const Block = ({
         </BlankBlockActionButtons>
       )}
 
-      {!isFooterBlock() && (
-        <BlankBlockDots $isBlankBlockFocused={isBlankBlockActive} />
-      )}
+      <BlankBlockDots $isBlankBlockFocused={isBlankBlockActive} />
     </Container>
   );
 };

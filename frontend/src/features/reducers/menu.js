@@ -156,6 +156,64 @@ const initialState = {
         },
       ],
     },
+    {
+      id: 8,
+      name: "Шапка",
+      variants: [
+        {
+          id: 8,
+          image: "tpl_191.png",
+          type: "header",
+          text: '<a href="//" target=""><span>Let\'s go!</span></a>',
+          menuId: 8,
+          styles: {
+            maxWidth: "12",
+            paddingTop: "90px",
+            paddingBottom: "90px",
+            backgroundColor: "#ffffff",
+            textAlign: "center",
+            color: "#000",
+            borderRadius: "0",
+            height: "60",
+            border: {
+              color: "#000",
+              width: "1",
+              style: "solid",
+            },
+            elementBackgroundColor: "#ffffff",
+          },
+        },
+      ],
+    },
+    {
+      id: 9,
+      name: "Подвал",
+      variants: [
+        {
+          id: 9,
+          image: "tpl_191.png",
+          type: "footer",
+          text: '<a href="//" target=""><span>Let\'s go!</span></a>',
+          menuId: 9,
+          styles: {
+            maxWidth: "12",
+            paddingTop: "90px",
+            paddingBottom: "90px",
+            backgroundColor: "#ffffff",
+            textAlign: "center",
+            color: "#000",
+            borderRadius: "0",
+            height: "60",
+            border: {
+              color: "#000",
+              width: "1",
+              style: "solid",
+            },
+            elementBackgroundColor: "#ffffff",
+          },
+        },
+      ],
+    },
   ],
 };
 

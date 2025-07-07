@@ -23,17 +23,9 @@ const Preview = () => {
     footer: Footer,
   };
 
-  const sortedBlocks = [...blocks].sort((a, b) => {
-    if (a.items?.[0]?.type === "header") return -1;
-    if (b.items?.[0]?.type === "header") return 1;
-    if (a.items?.[0]?.type === "footer") return 1;
-    if (b.items?.[0]?.type === "footer") return -1;
-    return 0;
-  });
-
   return (
     <PreviewContainer>
-      {sortedBlocks.map(({ id, items, styles }, blockIndex) => {
+      {blocks.map(({ id, items, styles }, blockIndex) => {
         return (
           <TypeBlock
             key={id}
