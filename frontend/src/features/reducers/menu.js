@@ -166,14 +166,14 @@ const initialState = {
           type: "header",
           text: `<div style="display: flex; justify-content: space-between;">
 <div>
-<a href=""><img src="/nekrasovka.png" alt="" height="50"></a>
-<a href=""><img src="/mos.png" alt="" height="50" style="margin-left: 35px;"></a>
+<a href="//nekrasovka.ru/" target="_blank"><img src="/nekrasovka.png" alt="" height="50"></a>
+<a href="//mos.ru/kultura/" target="_blank"><img src="/mos.png" alt="" height="50" style="margin-left: 35px;"></a>
 </div>
 <div style="display: flex; align-items: center;">
-<a href="">
+<a href="//vk.com/nekrasovkalibrary" target="_blank">
 <img src="/vk.png" alt="" height="30">
 </a>
-<a href="">
+<a href="//t.me/nekrasovkalibrary" target="_blank">
 <img src="/telegram.png" alt="" height="30" style="margin-left: 10px;">
 </a>
 </div>
@@ -198,12 +198,19 @@ const initialState = {
           type: "footer",
           text: `<div style="display: flex; justify-content: space-between;">
 <div>
-<a href="">
+<a href="//mos.ru/kultura/" target="_blank">
 <img src="/nekrasovka.png" alt="" height="50">
 </a>
-<a href="">
+<a href="//nekrasovka.ru/" target="_blank">
 <img src="/mos.png" alt="" height="50" style="margin-left: 35px;">
 </a>
+</div>
+<div style="display: flex; column-gap: 50px; font-size: 14px; color: #346178;">
+<div style="max-width: 250px;">Сведения об организации, осуществляющей образовательную деятельность</div>
+<div>Оценка качества услуг</div>
+<button style="display: flex; align-items: center; justify-content: center; column-gap: 10px; padding: 0 15px; height: 40px; background: #5D4A96; border-radius: 5px; color: #EDEEE9; font-size: 14px;">
+<img src="/question.png" alt="" height="20"><span>Задать вопрос</span>
+</button>
 </div>
 </div>`,
           menuId: 9,
