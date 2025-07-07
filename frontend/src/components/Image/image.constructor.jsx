@@ -6,7 +6,7 @@ import axios from "axios";
 
 const DEFAULT_IMAGE = `imgfish.jpg`;
 
-const ImageConstructor = ({ text, blockId, borderRadius = 0 }) => {
+const ImageConstructor = ({ text, blockId, height, borderRadius = 0 }) => {
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ const ImageConstructor = ({ text, blockId, borderRadius = 0 }) => {
   };
 
   return (
-    <ImageContainer $borderRadius={borderRadius}>
+    <ImageContainer $borderRadius={borderRadius} $height={height}>
       <img
         src={`${process.env.REACT_APP_IMAGES_URL}${text}`}
         alt="картинка"

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ImageContainer = styled.div`
   display: flex;
-  height: 550px;
+  height: ${({ $height }) => $height}px;
 
   img {
     width: 100%;
