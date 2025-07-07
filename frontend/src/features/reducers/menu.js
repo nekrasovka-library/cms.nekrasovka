@@ -166,7 +166,7 @@ const initialState = {
           type: "header",
           text: `<div style="display: flex; justify-content: space-between;">
 <div>
-<img src="/nekrasovka.png" alt="" height="50">
+<a href=""><img src="/nekrasovka.png" alt="" height="50"></a>
 <a href=""><img src="/mos.png" alt="" height="50" style="margin-left: 35px;"></a>
 </div>
 <div style="display: flex; align-items: center;">
@@ -198,8 +198,12 @@ const initialState = {
           type: "footer",
           text: `<div style="display: flex; justify-content: space-between;">
 <div>
+<a href="">
 <img src="/nekrasovka.png" alt="" height="50">
-<a href=""><img src="/mos.png" alt="" height="50" style="margin-left: 35px;"></a>
+</a>
+<a href="">
+<img src="/mos.png" alt="" height="50" style="margin-left: 35px;">
+</a>
 </div>
 </div>`,
           menuId: 9,
