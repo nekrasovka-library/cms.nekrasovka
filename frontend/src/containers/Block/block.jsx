@@ -23,9 +23,12 @@ const Block = ({
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
   const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
+  const FIXED_BLOCK_TYPES = ["header", "footer"];
+  const blockType = items?.[0]?.type;
 
   const canMoveUp = () => blockIndex !== 0;
-  const canMoveDown = () => blockIndex !== totalBlocks;
+  const canMoveDown = () => blockIndex + 1 !== totalBlocks;
+  const isFixedBlock = (type = blockType) => FIXED_BLOCK_TYPES.includes(type);
 
   const isBlankBlockActive =
     (isBlankBlockFocused && !isMenuOpen && !isSettingsOpen) ||
@@ -82,13 +85,21 @@ const Block = ({
 
       {isItems && (
         <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
-          <Tooltip text="Настройки">
-            <Icon icon="settings" type="button" onClick={handleBlockSettings} />
-          </Tooltip>
+          {!isFixedBlock() && (
+            <Tooltip text="Настройки">
+              <Icon
+                icon="settings"
+                type="button"
+                onClick={handleBlockSettings}
+              />
+            </Tooltip>
+          )}
 
-          <Tooltip text="Копировать блок">
-            <Icon icon="copy" type="button" onClick={handleCopyBlock} />
-          </Tooltip>
+          {!isFixedBlock() && (
+            <Tooltip text="Копировать блок">
+              <Icon icon="copy" type="button" onClick={handleCopyBlock} />
+            </Tooltip>
+          )}
 
           <Tooltip text="Удалить блок">
             <Icon icon="trash" type="button" onClick={handleDeleteBlock} />

@@ -6,7 +6,7 @@ import Editor from "../../components/Editor/editor.jsx";
 import Image from "../../components/Image/image.constructor.jsx";
 import Carousel from "../../components/Carousel/carousel.constructor.jsx";
 import Divider from "../../components/Divider/divider.jsx";
-import Header from "../../components/Header/header.jsx";
+import HeaderPreview from "../../components/Header/header.preview.jsx";
 import Footer from "../../components/Footer/footer.jsx";
 import Button from "../../components/Button/button.constructor.jsx";
 import { AnimatePresence } from "framer-motion";
@@ -41,7 +41,7 @@ const Constructor = () => {
     carousel: Carousel,
     divider: Divider,
     button: Button,
-    header: Header,
+    header: HeaderPreview,
     footer: Footer,
   };
 

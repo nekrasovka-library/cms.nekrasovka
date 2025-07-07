@@ -7,7 +7,7 @@ import Divider from "../../components/Divider/divider.jsx";
 import TypeBlock from "../Block/components/type.block.jsx";
 import { PreviewContainer } from "./preview.styles.js";
 import Button from "../../components/Button/button.preview.jsx";
-import Header from "../../components/Header/header";
+import HeaderPreview from "../../components/Header/header.preview";
 import Footer from "../../components/Footer/footer";
 
 const Preview = () => {
@@ -19,7 +19,7 @@ const Preview = () => {
     carousel: Carousel,
     divider: Divider,
     button: Button,
-    header: Header,
+    header: HeaderPreview,
     footer: Footer,
   };
 

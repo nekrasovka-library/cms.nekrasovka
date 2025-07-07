@@ -25,10 +25,10 @@ const BlankBlockAddButton = styled(BlankBlockButtons)`
 
 const BlankBlockDots = styled(BlankBlockButtons)`
   border-bottom: 1px dashed #ccc;
-  position: relative;
+  position: absolute;
   bottom: 0;
   width: 100vw;
-  z-index: -1;
+  z-index: 1;
 `;
 
 const BlankBlockActionButtons = styled(BlankBlockButtons)`
