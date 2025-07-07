@@ -3,7 +3,6 @@ import styled from "styled-components";
 const DividerContainer = styled.div`
   opacity: ${({ $opacity }) => $opacity};
   transition: opacity 0.3s ease-in-out;
-  height: 15px;
 
   > div {
     height: 1px;
