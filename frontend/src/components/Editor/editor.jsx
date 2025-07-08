@@ -56,25 +56,27 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   return (
     <Container $isModal={isModal} $gap={gap} $tracks={tracks}>
       {isProjectLoaded &&
-        contents.map((content, index) => (
-          <EditorContainer
-            key={index}
-            $textAlign={textAlign}
-            $isEditorFocused={
-              editorFocused === `${blockId}` && blockFocused === index
-            }
-            $backgroundColor={backgroundColor}
-          >
-            <SunEditor
+        contents.map((content, index) => {
+          const isEditorFocused =
+            editorFocused === `${blockId}` && blockFocused === index;
+          return (
+            <EditorContainer
               key={index}
-              lang={ru}
-              setContents={content}
-              onChange={handleContentChange}
-              onClick={() => handleEditorFocused(index)}
-              setOptions={options}
-            />
-          </EditorContainer>
-        ))}
+              $textAlign={textAlign}
+              $isEditorFocused={isEditorFocused}
+              $backgroundColor={backgroundColor}
+            >
+              <SunEditor
+                key={index}
+                lang={ru}
+                setContents={content}
+                onChange={handleContentChange}
+                onClick={() => handleEditorFocused(index)}
+                setOptions={options}
+              />
+            </EditorContainer>
+          );
+        })}
     </Container>
   );
 };
