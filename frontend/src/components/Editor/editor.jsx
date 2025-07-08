@@ -25,6 +25,7 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   };
 
   const handleContentChange = (index, newContent) => {
+    console.log("❗", index, newContent);
     const newContents = [...text];
     newContents[index] = newContent;
 
@@ -54,7 +55,6 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
               $backgroundColor={backgroundColor}
             >
               <SunEditor
-                key={index}
                 lang={ru}
                 setContents={content}
                 onChange={(newContent) =>
