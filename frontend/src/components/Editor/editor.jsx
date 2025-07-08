@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import { Container, EditorContainer } from "./editor.styles.js";
@@ -13,7 +13,6 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   const { fontsData } = useSelector((state) => state.fonts);
   const { editorFocused } = useSelector((state) => state.editor);
   const [blockFocused, setBlockFocused] = useState(null);
-  const [contents, setContents] = useState([]);
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
@@ -26,13 +25,12 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   };
 
   const handleContentChange = (index, newContent) => {
-    const newContents = [...contents];
+    const newContents = [...text];
     newContents[index] = newContent;
-    setContents(newContents);
 
     dispatch({
       type: "UPDATE_BLOCK",
-      payload: { blockId, text: newContents.join("") },
+      payload: { blockId, text: newContents },
     });
   };
 
@@ -41,22 +39,10 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
     dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}` });
   };
 
-  // Функция для разделения контента на части
-  const splitContent = (html) => {
-    const divs = html.match(/<div[^>]*>.*?<\/div>/gs);
-    return divs || [];
-  };
-
-  useEffect(() => {
-    // Получаем начальный контент и разделяем его
-    const parts = splitContent(text);
-    setContents(parts);
-  }, []);
-
   return (
     <Container $isModal={isModal} $gap={gap} $tracks={tracks}>
       {isProjectLoaded &&
-        contents.map((content, index) => {
+        text.map((content, index) => {
           const isEditorFocused =
             editorFocused === `${blockId}` && blockFocused === index;
 
@@ -71,7 +57,9 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
                 key={index}
                 lang={ru}
                 setContents={content}
-                onChange={handleContentChange}
+                onChange={(newContent) =>
+                  handleContentChange(index, newContent)
+                }
                 onClick={() => handleEditorFocused(index)}
                 setOptions={options}
               />

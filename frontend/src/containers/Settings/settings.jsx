@@ -26,14 +26,12 @@ const Settings = () => {
     dispatch({ type: "UPDATE_BLOCK_STYLES", payload });
 
     if (payload.tracks && payload.tracks !== block.styles.tracks) {
-      const divs = block.items[0].text.match(/<div[^>]*>.*?<\/div>/g);
+      const divs = [...block.items[0].text];
 
       if (payload.tracks > divs.length) {
         const count = payload.tracks - divs.length;
         for (let i = 0; i < count; i++) {
-          divs.push(
-            `<div style="font-size: 20px;line-height: 1.55">Добавить текст</div>`,
-          );
+          divs.push(`<div>Добавить текст</div>`);
         }
       } else {
         const count = divs.length - payload.tracks;
@@ -44,7 +42,7 @@ const Settings = () => {
 
       dispatch({
         type: "UPDATE_BLOCK",
-        payload: { blockId: block.id, text: divs.join("") },
+        payload: { blockId: block.id, text: divs },
       });
     }
   };
