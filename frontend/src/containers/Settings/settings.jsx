@@ -31,7 +31,7 @@ const Settings = () => {
       if (payload.tracks > divs.length) {
         const count = payload.tracks - divs.length;
         for (let i = 0; i < count; i++) {
-          divs.push(`<div>Добавить текст</div>`);
+          divs.push(`<div><span>Добавить текст</span></div>`);
         }
       } else {
         const count = divs.length - payload.tracks;

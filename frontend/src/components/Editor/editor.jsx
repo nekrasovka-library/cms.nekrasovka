@@ -14,6 +14,7 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   const { editorFocused } = useSelector((state) => state.editor);
   const [blockFocused, setBlockFocused] = useState(null);
   const [content, setContent] = useState("");
+  const [isContentChanged, setIsContentChanged] = useState(false);
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
@@ -27,6 +28,7 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
 
   const handleContentChange = (newContent) => {
     setContent(newContent);
+    setIsContentChanged(true);
   };
 
   const handleEditorFocused = (index) => {
@@ -35,7 +37,8 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   };
 
   useEffect(() => {
-    if (blockFocused !== null && content !== text[blockFocused]) {
+    if (isContentChanged && blockFocused !== null) {
+      setIsContentChanged(false);
       const newContents = [...text];
       newContents[blockFocused] = content;
 
@@ -44,7 +47,7 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
         payload: { blockId, text: newContents },
       });
     }
-  }, [content]);
+  }, [isContentChanged, blockFocused]);
 
   return (
     <Container $gap={gap} $tracks={tracks}>
@@ -67,6 +70,9 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
                 onClick={() => handleEditorFocused(index)}
                 onChange={handleContentChange}
                 setOptions={options}
+                enterMode="br"
+                blockTag="br"
+                paragraphTag="div"
               />
             </EditorContainer>
           );
