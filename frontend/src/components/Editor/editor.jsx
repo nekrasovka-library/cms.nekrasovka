@@ -44,10 +44,10 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
         payload: { blockId, text: newContents },
       });
     }
-  }, [content, blockFocused]);
+  }, [content]);
 
   return (
-    <Container $isModal={isModal} $gap={gap} $tracks={tracks}>
+    <Container $gap={gap} $tracks={tracks}>
       {isProjectLoaded &&
         text.map((content, index) => {
           const isEditorFocused =
@@ -56,6 +56,7 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
           return (
             <EditorContainer
               key={index}
+              $isModal={isModal}
               $textAlign={textAlign}
               $isEditorFocused={isEditorFocused}
               $backgroundColor={backgroundColor}
