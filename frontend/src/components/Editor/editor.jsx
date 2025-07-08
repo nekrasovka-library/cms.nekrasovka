@@ -35,7 +35,7 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   };
 
   useEffect(() => {
-    if (blockFocused && content !== text[blockFocused]) {
+    if (blockFocused !== null && content !== text[blockFocused]) {
       const newContents = [...text];
       newContents[blockFocused] = content;
 
