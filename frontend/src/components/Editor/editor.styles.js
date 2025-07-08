@@ -12,6 +12,10 @@ const Container = styled.div`
     border: none;
   }
 
+  .sun-editor .se-wrapper .se-wrapper-inner {
+    min-height: auto;
+  }
+
   .se-list-layer,
   .se-menu-list li button {
     border-radius: 0;

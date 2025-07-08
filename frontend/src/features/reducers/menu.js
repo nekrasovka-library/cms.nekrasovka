@@ -10,7 +10,9 @@ const initialState = {
       variants: [
         {
           id: 1,
-          text: "<div style='padding-bottom: 20px;font-size: 16px;font-weight: 600;letter-spacing: 2.5px;'>BASICS</div><div style='font-size: 36px;font-weight: 600;line-height: 1.23;'>Why typography matters?</div>",
+          text: [
+            "<div style='font-size: 16px; font-weight: 600; letter-spacing: 2.5px;'>BASICS</div><div style='font-size: 36px;font-weight: 600;'>Why typography matters?</div>",
+          ],
           type: "text",
           image: "tpl_60.png",
           menuId: 1,
