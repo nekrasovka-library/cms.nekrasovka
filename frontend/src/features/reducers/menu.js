@@ -171,6 +171,15 @@ const initialState = {
 <a href="//nekrasovka.ru/" target="_blank"><img src="/nekrasovka.png" alt="" height="50"></a>
 <a href="//mos.ru/kultura/" target="_blank"><img src="/mos.png" alt="" height="50" style="margin-left: 35px;"></a>
 </div>
+<div style="display: flex; align-items: center; column-gap: 10px;">
+<div><img src="/clock.png" alt="" height="30"></div>
+<div>
+<span style="display: flex; flex-direction: column; color: #346178; font-size: 14px;">Главное здание сегодня: санитарный день</span>
+<a href="" target="_blank" style="display: flex; align-items: center; column-gap: 5px;"><span style="color: #777777; font-size: 13px;">Адреса и часы работы</span>
+<svg width="16" height="8" viewBox="0 0 16 8" xmlns="http://www.w3.org/2000/svg"><path d="M15.3536 4.35355C15.5488 4.15829 15.5488 3.84171 15.3536 3.64645L12.1716 0.464466C11.9763 0.269204 11.6597 0.269204 11.4645 0.464466C11.2692 0.659728 11.2692 0.976311 11.4645 1.17157L14.2929 4L11.4645 6.82843C11.2692 7.02369 11.2692 7.34027 11.4645 7.53553C11.6597 7.7308 11.9763 7.7308 12.1716 7.53553L15.3536 4.35355ZM0 4.5H15V3.5H0V4.5Z" fill="#777777"/></svg>
+</a>
+</div>
+</div>
 <div style="display: flex; align-items: center;">
 <a href="//vk.com/nekrasovkalibrary" target="_blank">
 <img src="/vk.png" alt="" height="30">
@@ -179,6 +188,11 @@ const initialState = {
 <img src="/telegram.png" alt="" height="30" style="margin-left: 10px;">
 </a>
 </div>
+<style>
+a {
+text-decoration: none;
+}
+</style>
 </div>`,
           menuId: 8,
           styles: {
@@ -207,13 +221,19 @@ const initialState = {
 <img src="/mos.png" alt="" height="50" style="margin-left: 35px;">
 </a>
 </div>
-<div style="display: flex; column-gap: 50px; font-size: 14px; color: #346178;">
-<div style="max-width: 250px;">Сведения об организации, осуществляющей образовательную деятельность</div>
-<div>Оценка качества услуг</div>
-<button style="display: flex; align-items: center; justify-content: center; column-gap: 10px; padding: 0 15px; height: 40px; background: #5D4A96; border-radius: 5px; color: #EDEEE9; font-size: 14px;">
-<img src="/question.png" alt="" height="20"><span>Задать вопрос</span>
+<div style="display: flex; column-gap: 50px; font-size: 14px;">
+<a href="" style="max-width: 250px; cursor: pointer; color: #346178;">Сведения об организации, осуществляющей деятельность</a>
+<a href="" style="cursor: pointer; color: #346178;">Оценка качества услуг</a>
+<button style="display: flex; align-items: center; justify-content: center; column-gap: 10px; padding: 0 15px; height: 40px; background: #5D4A96; border-radius: 5px; color: #EDEEE9; font-size: 14px; cursor: pointer;">
+<img src="/question.png" alt="" height="20">
+<span>Задать вопрос</span>
 </button>
 </div>
+<style>
+a {
+text-decoration: none;
+}
+</style>
 </div>`,
           menuId: 9,
           styles: {
