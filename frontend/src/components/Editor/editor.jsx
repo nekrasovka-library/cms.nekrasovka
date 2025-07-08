@@ -70,9 +70,6 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
                 onClick={() => handleEditorFocused(index)}
                 onChange={handleContentChange}
                 setOptions={options}
-                enterMode="br"
-                blockTag="br"
-                paragraphTag="div"
               />
             </EditorContainer>
           );
