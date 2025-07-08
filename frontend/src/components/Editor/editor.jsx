@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import { Container, EditorContainer } from "./editor.styles.js";
@@ -13,6 +13,7 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   const { fontsData } = useSelector((state) => state.fonts);
   const { editorFocused } = useSelector((state) => state.editor);
   const [blockFocused, setBlockFocused] = useState(null);
+  const [content, setContent] = useState("");
   const { projectData, isProjectLoaded } = useSelector(
     (state) => state.project,
   );
@@ -24,21 +25,26 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
     buttonList: TOOLBAR_OPTIONS,
   };
 
-  const handleContentChange = (index, newContent) => {
-    console.log("❗", index, newContent);
-    const newContents = [...text];
-    newContents[index] = newContent;
-
-    dispatch({
-      type: "UPDATE_BLOCK",
-      payload: { blockId, text: newContents },
-    });
+  const handleContentChange = (newContent) => {
+    setContent(newContent);
   };
 
   const handleEditorFocused = (index) => {
     setBlockFocused(index);
     dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}` });
   };
+
+  useEffect(() => {
+    if (blockFocused && content !== text[blockFocused]) {
+      const newContents = [...text];
+      newContents[blockFocused] = content;
+
+      dispatch({
+        type: "UPDATE_BLOCK",
+        payload: { blockId, text: newContents },
+      });
+    }
+  }, [content, blockFocused]);
 
   return (
     <Container $isModal={isModal} $gap={gap} $tracks={tracks}>
@@ -57,10 +63,8 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
               <SunEditor
                 lang={ru}
                 setContents={content}
-                onChange={(newContent) =>
-                  handleContentChange(index, newContent)
-                }
                 onClick={() => handleEditorFocused(index)}
+                onChange={handleContentChange}
                 setOptions={options}
               />
             </EditorContainer>
