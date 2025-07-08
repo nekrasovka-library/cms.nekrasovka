@@ -33,7 +33,6 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
 
   const handleEditorFocused = (index) => {
     setBlockFocused(index);
-
     dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}` });
   };
 
