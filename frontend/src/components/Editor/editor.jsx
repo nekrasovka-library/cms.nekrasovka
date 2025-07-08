@@ -59,6 +59,7 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
         contents.map((content, index) => {
           const isEditorFocused =
             editorFocused === `${blockId}` && blockFocused === index;
+
           return (
             <EditorContainer
               key={index}
