@@ -2,16 +2,6 @@ import styled from "styled-components";
 
 const AfishaContainer = styled.div`
   position: relative;
-
-  button {
-    cursor: pointer;
-    position: absolute;
-    top: calc(50% - 20px);
-    right: -20px;
-    z-index: 100;
-    height: 40px;
-    width: 40px;
-  }
 `;
 
 const AfishaHeader = styled.div`
@@ -57,4 +47,31 @@ const EventsContainer = styled.div`
   }
 `;
 
-export { EventsContainer, AfishaContainer, AfishaHeader };
+const AfishaButton = styled.button`
+  cursor: pointer;
+  position: absolute;
+  top: calc(50% - 20px);
+  z-index: 100;
+  height: 40px;
+  width: 40px;
+`;
+
+const AfishaButtonLeft = styled(AfishaButton)`
+  left: -20px;
+
+  svg {
+    transform: rotate(180deg);
+  }
+`;
+
+const AfishaButtonRight = styled(AfishaButton)`
+  right: -20px;
+`;
+
+export {
+  EventsContainer,
+  AfishaContainer,
+  AfishaHeader,
+  AfishaButtonLeft,
+  AfishaButtonRight,
+};
