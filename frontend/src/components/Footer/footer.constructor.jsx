@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 
-const FooterConstructor = ({ text }) => {
-  return <div dangerouslySetInnerHTML={{ __html: text }} />;
-};
+const FooterConstructor = memo(({ text }) => (
+  <div dangerouslySetInnerHTML={{ __html: text }} />
+));
 
 export default FooterConstructor;
