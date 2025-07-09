@@ -11,6 +11,7 @@ import globus from "./globus.jsx";
 import edit from "./edit.jsx";
 import arrowRightLong from "./arrow_right_long.jsx";
 import save from "./save.jsx";
+import arrowCarousel from "./arrow_carousel";
 
 export default {
   add,
@@ -26,4 +27,5 @@ export default {
   edit,
   arrowRightLong,
   save,
+  arrowCarousel,
 };
