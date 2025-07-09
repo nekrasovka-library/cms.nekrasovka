@@ -113,42 +113,42 @@ const Afisha = ({ text, gap, tracks }) => {
     return htmlContent
       .replace(
         /<span class="date-text js-event-date">[^<]*<\/span>/,
-        `<span class="date-text js-event-date">${dateText}</span>`,
+        `<span class="date-text">${dateText}</span>`,
       )
       .replace(
         /<span class="js-event-weekday">[^<]*<\/span>/,
-        `<span class="js-event-weekday">${weekday}</span>`,
+        `<span>${weekday}</span>`,
       )
       .replace(
         /<time class="js-event-time">[^<]*<\/time>/,
-        `<time class="js-event-time">${time}</time>`,
+        `<time>${time}</time>`,
       )
       .replace(
-        /<address class="location-text js-event-location">[^<]*<\/address>/,
-        `<address class="location-text js-event-location ${isEventCancelled && "error"}">${isEventCancelled ? "Мероприятие отменено" : event.geo}</address>`,
+        /<a class="location-text js-event-location">[^<]*<\/a>/,
+        isEventCancelled
+          ? '<span class="location-text error">Мероприятие отменено</span>'
+          : `<a href='${event.geo_link}' target="_blank"  class="location-text">${event.geo}</a>`,
       )
       .replace(
         /<span class="event-title js-event-title">[^<]*<\/span>/,
-        `<span class="event-title js-event-title">${event.title}</span>`,
+        `<span class="event-title">${event.title}</span>`,
       )
       .replace(
         /<span class="event-subtitle js-event-subtitle">[^<]*<\/span>/,
         isEventCancelled
           ? ""
-          : `<span class="event-subtitle js-event-subtitle">${eventText}</span>`,
+          : `<span class="event-subtitle">${eventText}</span>`,
       )
       .replace(
         /<div class="price-tag js-event-price">[^<]*<\/div>/,
-        !!event.price
-          ? `<div class="price-tag js-event-price">Платное</div>`
-          : "",
+        !!event.price ? `<div class="price-tag">Платное</div>` : "",
       )
       .replace(/<div class="series-text js-event-series">[^<]*<\/div>/, ``)
       .replace(/<span class="js-event-category">[^<]*<\/span>/, ``)
       .replace(/<span class="js-event-tag">[^<]*<\/span>/, ``)
       .replace(
         /<span class="js-event-restriction">[^<]*<\/span>/,
-        `<span class="js-event-restriction">${event.restriction}</span>`,
+        `<span>${event.restriction}</span>`,
       );
   };
 
