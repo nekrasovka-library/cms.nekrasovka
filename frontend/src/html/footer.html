@@ -1,17 +1,17 @@
 <div class="footer-container">
   <section class="logo-section">
     <a href="//mos.ru/kultura/" target="_blank">
-      <img src="/nekrasovka.png" alt="" height="50">
+      <img src="/nekrasovka.png" alt="" class="logo">
     </a>
     <a href="//nekrasovka.ru/" target="_blank">
-      <img src="/mos.png" alt="" height="50" class="logo-spacing">
+      <img src="/mos.png" alt="" class="logo">
     </a>
   </section>
   <section class="nav-section">
     <a href="//nekrasovka.ru/articles/education" class="nav-link organization-link">Сведения об организации, осуществляющей деятельность</a>
     <a href="//organizations.kultura.mos.ru/organizations/gbuk_gmoskvy_tsentralnaya_universalnaya_nauchnaya_biblioteka_imeni_nanekrasova.html" class="nav-link">Оценка качества услуг</a>
     <button class="question-button">
-      <img src="/question.png" alt="" height="20">
+      <img src="/question.png" alt="Вопрос">
       <span>Задать вопрос</span>
     </button>
   </section>
@@ -21,8 +21,14 @@
       justify-content: space-between;
     }
 
-    .logo-spacing {
-      margin-left: 35px;
+    .logo-section {
+      display: flex;
+      align-items: center;
+      column-gap: 35px;
+    }
+
+    .logo {
+      height: 50px;
     }
 
     .nav-section {
@@ -54,6 +60,10 @@
       font-size: 14px;
       cursor: pointer;
       border: none;
+    }
+
+    .question-button img {
+      height: 20px;
     }
   </style>
 </div>
