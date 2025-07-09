@@ -1,23 +1,59 @@
-<div style="display: flex; justify-content: space-between;">
-  <div>
+<div class="footer-container">
+  <section class="logo-section">
     <a href="//mos.ru/kultura/" target="_blank">
       <img src="/nekrasovka.png" alt="" height="50">
     </a>
     <a href="//nekrasovka.ru/" target="_blank">
-      <img src="/mos.png" alt="" height="50" style="margin-left: 35px;">
+      <img src="/mos.png" alt="" height="50" class="logo-spacing">
     </a>
-  </div>
-  <div style="display: flex; column-gap: 50px; font-size: 14px;">
-    <a href="" style="max-width: 250px; cursor: pointer; color: #346178;">Сведения об организации, осуществляющей деятельность</a>
-    <a href="" style="cursor: pointer; color: #346178;">Оценка качества услуг</a>
-    <button style="display: flex; align-items: center; justify-content: center; column-gap: 10px; padding: 0 15px; height: 40px; background: #5D4A96; border-radius: 5px; color: #EDEEE9; font-size: 14px; cursor: pointer;">
+  </section>
+  <section class="nav-section">
+    <a href="//nekrasovka.ru/articles/education" class="nav-link organization-link">Сведения об организации, осуществляющей деятельность</a>
+    <a href="//organizations.kultura.mos.ru/organizations/gbuk_gmoskvy_tsentralnaya_universalnaya_nauchnaya_biblioteka_imeni_nanekrasova.html" class="nav-link">Оценка качества услуг</a>
+    <button class="question-button">
       <img src="/question.png" alt="" height="20">
       <span>Задать вопрос</span>
     </button>
-  </div>
+  </section>
   <style>
-    a {
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .logo-spacing {
+      margin-left: 35px;
+    }
+
+    .nav-section {
+      display: flex;
+      column-gap: 50px;
+      font-size: 14px;
+    }
+
+    .nav-link {
+      cursor: pointer;
+      color: #346178;
       text-decoration: none;
+    }
+
+    .organization-link {
+      max-width: 250px;
+    }
+
+    .question-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 10px;
+      padding: 0 15px;
+      height: 40px;
+      background: #5D4A96;
+      border-radius: 5px;
+      color: #EDEEE9;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
     }
   </style>
 </div>
