@@ -8,10 +8,13 @@ const Text = ({ text, backgroundColor, textAlign, gap, tracks }) => {
       $textAlign={textAlign}
       $gap={gap}
       $tracks={tracks}
-      dangerouslySetInnerHTML={{
-        __html: text.map((t) => `<div>${t}</div>`).join(""),
-      }}
-    />
+    >
+      {text.map((textBlock, index) => {
+        return (
+          <div key={index} dangerouslySetInnerHTML={{ __html: textBlock }} />
+        );
+      })}
+    </TextContainer>
   );
 };
 

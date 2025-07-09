@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 
-const HeaderConstructor = ({ text }) => {
-  return <div dangerouslySetInnerHTML={{ __html: text }} />;
-};
+const HeaderConstructor = memo(({ text }) => (
+  <div dangerouslySetInnerHTML={{ __html: text }} />
+));
 
 export default HeaderConstructor;

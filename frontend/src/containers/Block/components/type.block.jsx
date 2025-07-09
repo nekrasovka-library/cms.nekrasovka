@@ -14,20 +14,18 @@ const TypeBlock = ({
   return (
     isItems && (
       <TypeBlockContainer $typeBlockStyles={computedBlockStyles}>
-        <div>
-          {items.map(({ text, type, id }, elementIndex) => {
-            const ItemComponent = CONSTRUCTOR_COMPONENTS[type];
-            const params = getComponentParams({
-              type,
-              blockId,
-              itemId: id,
-              styles,
-              text,
-            });
+        {items.map(({ text, type, id }, elementIndex) => {
+          const ItemComponent = CONSTRUCTOR_COMPONENTS[type];
+          const params = getComponentParams({
+            type,
+            blockId,
+            itemId: id,
+            styles,
+            text,
+          });
 
-            return <ItemComponent key={elementIndex} {...params} />;
-          })}
-        </div>
+          return <ItemComponent key={elementIndex} {...params} />;
+        })}
       </TypeBlockContainer>
     )
   );
