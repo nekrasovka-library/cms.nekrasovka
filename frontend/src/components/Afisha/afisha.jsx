@@ -37,6 +37,7 @@ const API_URL = "https://api.electro.nekrasovka.ru/api/calendars";
 
 const Afisha = ({ text, gap, tracks }) => {
   const [events, setEvents] = useState([]);
+  const [scrollIndex, setScrollIndex] = useState(0);
   const eventsContainerRef = useRef(null);
 
   const fetchEvents = async () => {
@@ -54,6 +55,33 @@ const Afisha = ({ text, gap, tracks }) => {
   useEffect(() => {
     fetchEvents();
   }, [tracks]);
+
+  useEffect(() => {
+    const container = eventsContainerRef.current;
+    if (!container) return;
+
+    const preventScroll = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    const preventMouseDrag = (e) => {
+      e.preventDefault();
+    };
+
+    // Блокируем прокрутку колесиком мыши
+    container.addEventListener("wheel", preventScroll, { passive: false });
+    // Блокируем перетаскивание
+    container.addEventListener("mousedown", preventMouseDrag);
+    // Блокируем прокрутку на touch устройствах
+    container.addEventListener("touchmove", preventScroll, { passive: false });
+
+    return () => {
+      container.removeEventListener("wheel", preventScroll);
+      container.removeEventListener("mousedown", preventMouseDrag);
+      container.removeEventListener("touchmove", preventScroll);
+    };
+  }, []);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -161,10 +189,11 @@ const Afisha = ({ text, gap, tracks }) => {
 
   return (
     <AfishaContainer>
-      {events.length > 3 && (
+      {scrollIndex > 0 && (
         <AfishaButtonLeft
           onClick={() => {
             handleScroll(-SCROLL_AMOUNT);
+            setScrollIndex(scrollIndex - 1);
           }}
         >
           <svg
@@ -220,10 +249,11 @@ const Afisha = ({ text, gap, tracks }) => {
           />
         ))}
       </EventsContainer>
-      {events.length > 3 && (
+      {events.length > 3 && scrollIndex < events.length - 1 && (
         <AfishaButtonRight
           onClick={() => {
             handleScroll(SCROLL_AMOUNT);
+            setScrollIndex(scrollIndex + 1);
           }}
         >
           <svg
