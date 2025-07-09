@@ -7,61 +7,59 @@ import {
   EventsContainer,
 } from "./afisha.styles";
 
+const MONTHS = [
+  "января",
+  "февраля",
+  "марта",
+  "апреля",
+  "мая",
+  "июня",
+  "июля",
+  "августа",
+  "сентября",
+  "октября",
+  "ноября",
+  "декабря",
+];
+
+const DAYS = [
+  "воскресенье",
+  "понедельник",
+  "вторник",
+  "среда",
+  "четверг",
+  "пятница",
+  "суббота",
+];
+
+const SCROLL_AMOUNT = 410;
+const API_URL = "https://api.electro.nekrasovka.ru/api/calendars";
+
 const Afisha = ({ text, gap, tracks }) => {
   const [events, setEvents] = useState([]);
   const eventsContainerRef = useRef(null);
 
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      const eventsData = data.response.data.calendars;
+      const limitedEvents = eventsData.slice(0, tracks);
+      setEvents(limitedEvents);
+    } catch (err) {
+      console.error("Ошибка при загрузке событий:", err);
+    }
+  };
+
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch(
-          "https://api.electro.nekrasovka.ru/api/calendars",
-        );
-
-        const data = await response.json();
-        const eventsData = data.response.data.calendars;
-
-        const limitedEvents = eventsData.slice(0, tracks);
-
-        setEvents(limitedEvents);
-      } catch (err) {
-        console.error("Ошибка при загрузке событий:", err);
-      }
-    };
-
     fetchEvents();
   }, [tracks]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const months = [
-      "января",
-      "февраля",
-      "марта",
-      "апреля",
-      "мая",
-      "июня",
-      "июля",
-      "августа",
-      "сентября",
-      "октября",
-      "ноября",
-      "декабря",
-    ];
-    const days = [
-      "воскресенье",
-      "понедельник",
-      "вторник",
-      "среда",
-      "четверг",
-      "пятница",
-      "суббота",
-    ];
-
     const day = date.getDate();
-    const month = months[date.getMonth()];
-    const weekday = days[date.getDay()];
-
+    const month = MONTHS[date.getMonth()];
+    const weekday = DAYS[date.getDay()];
     return { dateText: `${day} ${month}`, weekday };
   };
 
@@ -73,22 +71,17 @@ const Afisha = ({ text, gap, tracks }) => {
     });
   };
 
-  const generateEventHTML = (event, index) => {
-    const { dateText, weekday } = formatDate(event.date);
-    const time = formatTime(event.time_start);
+  const createUniqueClassName = (index) => `event-card-${index}`;
+
+  const createBackgroundImageUrl = (pictureId) => {
+    return pictureId ? `//nekrasovka.ru/img/${pictureId}/medium` : `none`;
+  };
+
+  const replaceEventContent = (htmlContent, event, dateText, weekday, time) => {
     const eventText = event.text.replace(/<[^>]*>/g, "");
+    const isEventCancelled = event.geo === "Отменено";
 
-    // Создаем уникальный ID для события
-    const uniqueClassName = `event-card-${index}`;
-
-    // Формируем URL для background-image
-    const backgroundImageUrl = event.picture_id
-      ? `//nekrasovka.ru/img/${event.picture_id}/medium`
-      : `none`;
-
-    // Заменяем содержимое элементов с js-классами
-    let htmlContent = text
-      .replace(/class="event-card"/, `class="${uniqueClassName}"`)
+    return htmlContent
       .replace(
         /<span class="date-text js-event-date">[^<]*<\/span>/,
         `<span class="date-text js-event-date">${dateText}</span>`,
@@ -103,7 +96,7 @@ const Afisha = ({ text, gap, tracks }) => {
       )
       .replace(
         /<address class="location-text js-event-location">[^<]*<\/address>/,
-        `<address class="location-text js-event-location ${event.geo === "Отменено" && "error"}">${event.geo === "Отменено" ? "Мероприятие отменено" : event.geo}</address>`,
+        `<address class="location-text js-event-location ${isEventCancelled && "error"}">${isEventCancelled ? "Мероприятие отменено" : event.geo}</address>`,
       )
       .replace(
         /<span class="event-title js-event-title">[^<]*<\/span>/,
@@ -111,7 +104,7 @@ const Afisha = ({ text, gap, tracks }) => {
       )
       .replace(
         /<span class="event-subtitle js-event-subtitle">[^<]*<\/span>/,
-        event.geo === "Отменено"
+        isEventCancelled
           ? ""
           : `<span class="event-subtitle js-event-subtitle">${eventText}</span>`,
       )
@@ -128,8 +121,26 @@ const Afisha = ({ text, gap, tracks }) => {
         /<span class="js-event-restriction">[^<]*<\/span>/,
         `<span class="js-event-restriction">${event.restriction}</span>`,
       );
+  };
 
-    // Заменяем background-image в стилях
+  const generateEventHTML = (event, index) => {
+    const { dateText, weekday } = formatDate(event.date);
+    const time = formatTime(event.time_start);
+    const uniqueClassName = createUniqueClassName(index);
+    const backgroundImageUrl = createBackgroundImageUrl(event.picture_id);
+
+    let htmlContent = text.replace(
+      /class="event-card"/,
+      `class="${uniqueClassName}"`,
+    );
+    htmlContent = replaceEventContent(
+      htmlContent,
+      event,
+      dateText,
+      weekday,
+      time,
+    );
+
     htmlContent = htmlContent.replace(
       `class="${uniqueClassName}"`,
       `class="${uniqueClassName}" style="background-image: url('${backgroundImageUrl}');"`,
@@ -153,7 +164,7 @@ const Afisha = ({ text, gap, tracks }) => {
       {events.length > 3 && (
         <AfishaButtonLeft
           onClick={() => {
-            handleScroll(-410);
+            handleScroll(-SCROLL_AMOUNT);
           }}
         >
           <svg
@@ -212,7 +223,7 @@ const Afisha = ({ text, gap, tracks }) => {
       {events.length > 3 && (
         <AfishaButtonRight
           onClick={() => {
-            handleScroll(410);
+            handleScroll(SCROLL_AMOUNT);
           }}
         >
           <svg
