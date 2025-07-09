@@ -9,6 +9,8 @@ const AfishaContainer = styled.div`
     top: calc(50% - 20px);
     right: -20px;
     z-index: 100;
+    height: 40px;
+    width: 40px;
   }
 `;
 
@@ -39,7 +41,7 @@ const EventsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(
     ${({ $tracks }) => $tracks},
-    minmax(386px, 1fr)
+    minmax(380px, 1fr)
   );
   column-gap: ${({ $gap }) => $gap}px;
   position: relative;

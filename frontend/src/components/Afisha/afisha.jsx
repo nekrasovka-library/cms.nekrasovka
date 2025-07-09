@@ -80,8 +80,8 @@ const Afisha = ({ text, gap, tracks }) => {
 
     // Формируем URL для background-image
     const backgroundImageUrl = event.picture_id
-      ? `//nekrasovka.ru/img/${event.picture_id}/large`
-      : `//nekrasovka.ru/img/16393/large`; // fallback изображение
+      ? `//nekrasovka.ru/img/${event.picture_id}/medium`
+      : `none`;
 
     // Заменяем содержимое элементов с js-классами
     let htmlContent = text
@@ -118,18 +118,9 @@ const Afisha = ({ text, gap, tracks }) => {
           ? `<div class="price-tag js-event-price">Платное</div>`
           : "",
       )
-      .replace(
-        /<div class="series-text js-event-series">[^<]*<\/div>/,
-        `<div class="series-text js-event-series">Лекторий</div>`,
-      )
-      .replace(
-        /<span class="js-event-category">[^<]*<\/span>/,
-        `<span class="js-event-category">Образ жизни</span>`,
-      )
-      .replace(
-        /<span class="js-event-tag">[^<]*<\/span>/,
-        `<span class="js-event-tag">#Массовая культура и спорт</span>`,
-      )
+      .replace(/<div class="series-text js-event-series">[^<]*<\/div>/, ``)
+      .replace(/<span class="js-event-category">[^<]*<\/span>/, ``)
+      .replace(/<span class="js-event-tag">[^<]*<\/span>/, ``)
       .replace(
         /<span class="js-event-restriction">[^<]*<\/span>/,
         `<span class="js-event-restriction">${event.restriction}</span>`,
@@ -174,31 +165,33 @@ const Afisha = ({ text, gap, tracks }) => {
           />
         ))}
       </EventsContainer>
-      <button onClick={() => window.scrollTo(0, 0)}>
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle
-            cx="20"
-            cy="20"
-            r="19"
-            fill="#EDEEE9"
-            stroke="#346178"
-            strokeWidth="2"
-          />
-          <path
-            opacity="0.969"
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M15.8558 12.0055C16.1453 11.9874 16.4297 12.0141 16.7089 12.0855C19.4082 14.3403 22.0919 16.6153 24.7599 18.9102C25.4329 19.4701 25.5217 20.11 25.0265 20.8297C22.3251 23.1401 19.6236 25.4506 16.9222 27.761C16.5236 28.0119 16.0971 28.0653 15.6425 27.921C14.9817 27.4837 14.8306 26.9061 15.1893 26.1881C17.5719 24.1165 19.9623 22.0549 22.3606 20.0032C19.9972 17.9332 17.6245 15.8715 15.2426 13.8183C14.8711 13.0044 15.0755 12.4001 15.8558 12.0055Z"
-            fill="#346178"
-          />
-        </svg>
-      </button>
+      {events.length > 3 && (
+        <button onClick={() => window.scrollTo(0, 0)}>
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="20"
+              cy="20"
+              r="19"
+              fill="#EDEEE9"
+              stroke="#346178"
+              strokeWidth="2"
+            />
+            <path
+              opacity="0.969"
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M15.8558 12.0055C16.1453 11.9874 16.4297 12.0141 16.7089 12.0855C19.4082 14.3403 22.0919 16.6153 24.7599 18.9102C25.4329 19.4701 25.5217 20.11 25.0265 20.8297C22.3251 23.1401 19.6236 25.4506 16.9222 27.761C16.5236 28.0119 16.0971 28.0653 15.6425 27.921C14.9817 27.4837 14.8306 26.9061 15.1893 26.1881C17.5719 24.1165 19.9623 22.0549 22.3606 20.0032C19.9972 17.9332 17.6245 15.8715 15.2426 13.8183C14.8711 13.0044 15.0755 12.4001 15.8558 12.0055Z"
+              fill="#346178"
+            />
+          </svg>
+        </button>
+      )}
     </AfishaContainer>
   );
 };
