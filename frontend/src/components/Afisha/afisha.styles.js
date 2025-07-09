@@ -19,15 +19,19 @@ const AfishaHeader = styled.div`
 
   span {
     color: #346178;
+  }
 
-    &:nth-child(1) {
-      font-size: 24px;
-      font-weight: 500;
-    }
+  > span {
+    font-size: 24px;
+    font-weight: 500;
+  }
 
-    &:nth-child(2) {
-      font-size: 14px;
-    }
+  > a span {
+    font-size: 14px;
+  }
+
+  > a svg {
+    margin-left: 5px;
   }
 `;
 
