@@ -9,6 +9,7 @@ import { PreviewContainer } from "./preview.styles.js";
 import Button from "../../components/Button/button.preview.jsx";
 import HeaderPreview from "../../components/Header/header.preview";
 import FooterPreview from "../../components/Footer/footer.preview";
+import Afisha from "../../components/Afisha/afisha";
 
 const Preview = () => {
   const { blocks, totalBlocks } = useSelector((state) => state.blocks);
@@ -21,6 +22,7 @@ const Preview = () => {
     button: Button,
     header: HeaderPreview,
     footer: FooterPreview,
+    afisha: Afisha,
   };
 
   return (

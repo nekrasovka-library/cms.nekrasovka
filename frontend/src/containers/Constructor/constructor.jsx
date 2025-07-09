@@ -10,6 +10,7 @@ import HeaderConstructor from "../../components/Header/header.constructor.jsx";
 import FooterConstructor from "../../components/Footer/footer.constructor.jsx";
 import Button from "../../components/Button/button.constructor.jsx";
 import { AnimatePresence } from "framer-motion";
+import Afisha from "../../components/Afisha/afisha.jsx";
 import Transition from "../../components/Transition/transition.jsx";
 import { useParams } from "react-router";
 
@@ -43,6 +44,7 @@ const Constructor = () => {
     button: Button,
     header: HeaderConstructor,
     footer: FooterConstructor,
+    afisha: Afisha,
   };
 
   const renderBlocks = () => {

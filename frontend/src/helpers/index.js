@@ -35,7 +35,7 @@ const useIsMobile = (breakpoint = 700) => {
 
 const calculateBlockWidth = (columns) => {
   const MIN_WIDTH = 60;
-  const MAX_WIDTH = 1160;
+  const MAX_WIDTH = 1200;
   const COLUMN_BASE_WIDTH = (MAX_WIDTH - MIN_WIDTH) / 11;
   return MIN_WIDTH + COLUMN_BASE_WIDTH * (columns - 1);
 };
@@ -128,6 +128,16 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
       blockId,
       text,
       backgroundColor: styles.elementBackgroundColor,
+    };
+  }
+
+  if (type === "afisha") {
+    return {
+      blockId,
+      text,
+      backgroundColor: styles.elementBackgroundColor,
+      gap: styles.gap,
+      tracks: styles.tracks,
     };
   }
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ProjectContainer = styled.main`
-  max-width: 1160px;
+  max-width: 1200px;
   margin: 0 auto;
 
   a {
@@ -256,7 +256,8 @@ const ProjectSettingsFontsAndColors = styled.div`
     flex-direction: column;
     row-gap: 10px;
 
-    select, input {
+    select,
+    input {
       font-size: 24px;
       font-weight: 300;
       color: #000;

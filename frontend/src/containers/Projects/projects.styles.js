@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ProjectsContainer = styled.main`
-  max-width: 1160px;
+  max-width: 1200px;
   margin: 0 auto;
 `;
 

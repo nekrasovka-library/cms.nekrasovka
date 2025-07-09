@@ -25,7 +25,11 @@ const Settings = () => {
   const updateBlockStyles = (payload) => {
     dispatch({ type: "UPDATE_BLOCK_STYLES", payload });
 
-    if (payload.tracks && payload.tracks !== block.styles.tracks) {
+    if (
+      payload.tracks &&
+      payload.tracks !== block.styles.tracks &&
+      block.items[0].type !== "afisha"
+    ) {
       const divs = [...block.items[0].text];
 
       if (payload.tracks > divs.length) {

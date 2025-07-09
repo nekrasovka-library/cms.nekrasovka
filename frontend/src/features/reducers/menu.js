@@ -1,6 +1,7 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 import header from "raw-loader!../../html/header.html";
 import footer from "raw-loader!../../html/footer.html";
+import afisha from "raw-loader!../../html/afisha.html";
 
 const initialState = {
   isMenuOpen: false,
@@ -203,6 +204,27 @@ const initialState = {
             paddingBottom: "45px",
             maxWidth: "12",
             backgroundColor: "#EDEEE9",
+          },
+        },
+      ],
+    },
+    {
+      id: 10,
+      name: "Афиша",
+      variants: [
+        {
+          id: 10,
+          image: "afisha.png",
+          type: "afisha",
+          text: afisha,
+          menuId: 10,
+          styles: {
+            paddingTop: "30px",
+            paddingBottom: "60px",
+            maxWidth: "12",
+            backgroundColor: "#EDEEE9",
+            gap: "30",
+            tracks: 3,
           },
         },
       ],
