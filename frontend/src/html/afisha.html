@@ -9,12 +9,12 @@
     </div>
     <a class="location-text js-event-location">Конференц-зал / 5 этаж</a>
   </section>
-  <section class="title-section">
+  <a class="title-section">
     <span class="event-title js-event-title">
       «Британской музы небылицы: рождение готической литературы»
     </span>
     <span class="event-subtitle js-event-subtitle">Лекция филолога Артёма Серебренникова</span>
-  </section>
+  </a>
   <section class="footer-section">
     <div class="price-tag js-event-price">Платное</div>
     <div class="series-text js-event-series">Лекторий «Философия абстрактных игр»</div>
@@ -27,6 +27,10 @@
     </div>
   </section>
   <style>
+    a {
+      text-decoration: none;
+    }
+
     [class^="event-card-"] {
       display: flex;
       flex-direction: column;
@@ -55,7 +59,7 @@
       background-size: cover;
     }
 
-    [class^="event-card-"]:not(.error) {
+    [class^="event-card-"]:not(.error), [class^="event-card-"]:not(.error)  a {
       color: #346178;
     }
 
@@ -138,14 +142,13 @@
       line-height: 17px;
     }
 
-    .error .location-text{
+    .error .location-text {
       color: #922D15;
       font-size: 18px;
     }
 
-    a {
-      text-decoration: none;
-      color: #346178;
+    .error a, .error .datetime-header, .error .tags-section {
+      color: #77777785;
     }
   </style>
 </article>

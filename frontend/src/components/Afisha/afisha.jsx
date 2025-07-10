@@ -100,6 +100,15 @@ const Afisha = ({ text, gap, tracks }) => {
     });
   };
 
+  const formatUrl = (dateString, id) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+
+    return `//nekrasovka.ru/afisha/${day}-${month}-${year}/${id}`;
+  };
+
   const createUniqueClassName = (index) => `event-card-${index}`;
 
   const createBackgroundImageUrl = (pictureId) => {
@@ -113,6 +122,7 @@ const Afisha = ({ text, gap, tracks }) => {
     weekday,
     time,
     isEventCancelled,
+    url,
   ) => {
     const eventText = event.text.replace(/<[^>]*>/g, "");
 
@@ -134,6 +144,10 @@ const Afisha = ({ text, gap, tracks }) => {
         isEventCancelled
           ? '<span class="location-text">Мероприятие отменено</span>'
           : `<a href='${event.geo_link}' target="_blank"  class="location-text">${event.geo}</a>`,
+      )
+      .replace(
+        /<a class="title-section">/,
+        `<a href="${url}" class="title-section">`,
       )
       .replace(
         /<span class="event-title js-event-title">[^<]*<\/span>/,
@@ -161,6 +175,7 @@ const Afisha = ({ text, gap, tracks }) => {
   const generateEventHTML = (event, index) => {
     const { dateText, weekday } = formatDate(event.date);
     const time = formatTime(event.time_start);
+    const url = formatUrl(event.date, event.id);
     const uniqueClassName = createUniqueClassName(index);
     const backgroundImageUrl = createBackgroundImageUrl(event.picture_id);
     const isEventCancelled = event.geo === "Отменено";
@@ -174,9 +189,6 @@ const Afisha = ({ text, gap, tracks }) => {
       htmlContent = htmlContent.replace(
         /<\/style>/,
         `
-    .${uniqueClassName}.error {
-      color: #77777785;
-    }
     .${uniqueClassName}.error::before {
       background-image: url('${backgroundImageUrl}');
     }
@@ -196,6 +208,7 @@ const Afisha = ({ text, gap, tracks }) => {
       weekday,
       time,
       isEventCancelled,
+      url,
     );
 
     return htmlContent;
