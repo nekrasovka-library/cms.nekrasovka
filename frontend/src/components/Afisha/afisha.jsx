@@ -211,8 +211,6 @@ const Afisha = ({ text, gap, tracks }) => {
     }
   };
 
-  console.log("❗", scrollIndex, events.length);
-
   return (
     <AfishaContainer>
       {scrollIndex > 0 && (
