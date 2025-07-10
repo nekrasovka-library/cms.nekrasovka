@@ -224,18 +224,21 @@ const Afisha = ({ text, gap, tracks }) => {
     }
   };
 
+  const navigateToNext = () => {
+    handleScroll(SCROLL_AMOUNT * 3);
+    setScrollIndex(scrollIndex + 1);
+  };
+
+  const navigateToPrev = () => {
+    handleScroll(-SCROLL_AMOUNT * 3);
+    setScrollIndex(scrollIndex - 1);
+  };
+
   return (
     <AfishaContainer>
       {scrollIndex > 1 && (
         <AfishaButtonLeft>
-          <Icon
-            icon="arrowCarousel"
-            type="button"
-            onClick={() => {
-              handleScroll(-SCROLL_AMOUNT * 3);
-              setScrollIndex(scrollIndex - 1);
-            }}
-          />
+          <Icon icon="arrowCarousel" type="button" onClick={navigateToPrev} />
         </AfishaButtonLeft>
       )}
       <AfishaHeader>
@@ -257,14 +260,7 @@ const Afisha = ({ text, gap, tracks }) => {
       </EventsContainer>
       {events.length > 3 && scrollIndex < Math.ceil(events.length / 3) && (
         <AfishaButtonRight>
-          <Icon
-            icon="arrowCarousel"
-            type="button"
-            onClick={() => {
-              handleScroll(SCROLL_AMOUNT * 3);
-              setScrollIndex(scrollIndex + 1);
-            }}
-          />
+          <Icon icon="arrowCarousel" type="button" onClick={navigateToNext} />
         </AfishaButtonRight>
       )}
     </AfishaContainer>
