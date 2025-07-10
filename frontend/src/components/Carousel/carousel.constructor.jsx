@@ -131,7 +131,6 @@ const CarouselConstructor = ({
     });
   };
 
-  console.log("❗", currentIndex);
   return (
     <CarouselContainer>
       {currentIndex > 0 && (

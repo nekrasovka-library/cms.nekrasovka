@@ -87,9 +87,11 @@ const CarouselConstructor = ({
 
   return (
     <CarouselContainer>
-      <CarouselButtonLeft>
-        <Icon icon="arrowCarousel" type="button" onClick={handlePrevClick} />
-      </CarouselButtonLeft>
+      {currentIndex > 0 && (
+        <CarouselButtonLeft>
+          <Icon icon="arrowCarousel" type="button" onClick={handlePrevClick} />
+        </CarouselButtonLeft>
+      )}
       <CarouselWrapper $maxWidth={maxWidth}>
         <CarouselTrack
           ref={trackRef}
@@ -130,9 +132,11 @@ const CarouselConstructor = ({
           ))}
         </DotContainer>
       </CarouselWrapper>
-      <CarouselButtonRight>
-        <Icon icon="arrowCarousel" type="button" onClick={handleNextClick} />
-      </CarouselButtonRight>
+      {currentIndex + 1 < tracks && (
+        <CarouselButtonRight>
+          <Icon icon="arrowCarousel" type="button" onClick={handleNextClick} />
+        </CarouselButtonRight>
+      )}
     </CarouselContainer>
   );
 };
