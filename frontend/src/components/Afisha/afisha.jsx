@@ -38,7 +38,7 @@ const API_URL = "https://api.electro.nekrasovka.ru/api/calendars";
 
 const Afisha = ({ text, gap, tracks }) => {
   const [events, setEvents] = useState([]);
-  const [scrollIndex, setScrollIndex] = useState(0);
+  const [scrollIndex, setScrollIndex] = useState(1);
   const eventsContainerRef = useRef(null);
 
   const fetchEvents = async () => {
@@ -226,13 +226,13 @@ const Afisha = ({ text, gap, tracks }) => {
 
   return (
     <AfishaContainer>
-      {scrollIndex > 0 && (
+      {scrollIndex > 1 && (
         <AfishaButtonLeft>
           <Icon
             icon="arrowCarousel"
             type="button"
             onClick={() => {
-              handleScroll(-SCROLL_AMOUNT);
+              handleScroll(-SCROLL_AMOUNT * 3);
               setScrollIndex(scrollIndex - 1);
             }}
           />
@@ -255,13 +255,13 @@ const Afisha = ({ text, gap, tracks }) => {
           />
         ))}
       </EventsContainer>
-      {events.length > 3 && scrollIndex < events.length && (
+      {events.length > 3 && scrollIndex < Math.ceil(events.length / 3) && (
         <AfishaButtonRight>
           <Icon
             icon="arrowCarousel"
             type="button"
             onClick={() => {
-              handleScroll(SCROLL_AMOUNT);
+              handleScroll(SCROLL_AMOUNT * 3);
               setScrollIndex(scrollIndex + 1);
             }}
           />
