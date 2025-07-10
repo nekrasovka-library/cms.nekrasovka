@@ -106,9 +106,15 @@ const Afisha = ({ text, gap, tracks }) => {
     return pictureId ? `//nekrasovka.ru/img/${pictureId}/medium` : `none`;
   };
 
-  const replaceEventContent = (htmlContent, event, dateText, weekday, time) => {
+  const replaceEventContent = (
+    htmlContent,
+    event,
+    dateText,
+    weekday,
+    time,
+    isEventCancelled,
+  ) => {
     const eventText = event.text.replace(/<[^>]*>/g, "");
-    const isEventCancelled = event.geo === "Отменено";
 
     return htmlContent
       .replace(
@@ -126,7 +132,7 @@ const Afisha = ({ text, gap, tracks }) => {
       .replace(
         /<a class="location-text js-event-location">[^<]*<\/a>/,
         isEventCancelled
-          ? '<span class="location-text error">Мероприятие отменено</span>'
+          ? '<span class="location-text">Мероприятие отменено</span>'
           : `<a href='${event.geo_link}' target="_blank"  class="location-text">${event.geo}</a>`,
       )
       .replace(
@@ -157,22 +163,39 @@ const Afisha = ({ text, gap, tracks }) => {
     const time = formatTime(event.time_start);
     const uniqueClassName = createUniqueClassName(index);
     const backgroundImageUrl = createBackgroundImageUrl(event.picture_id);
+    const isEventCancelled = event.geo === "Отменено";
+    let htmlContent = "";
 
-    let htmlContent = text.replace(
-      /class="event-card"/,
-      `class="${uniqueClassName}"`,
-    );
+    if (isEventCancelled) {
+      htmlContent = text.replace(
+        /class="event-card"/,
+        `class="${uniqueClassName} error" style="position: relative;"`,
+      );
+      htmlContent = htmlContent.replace(
+        /<\/style>/,
+        `
+    .${uniqueClassName}.error {
+      color: #77777785;
+    }
+    .${uniqueClassName}.error::before {
+      background-image: url('${backgroundImageUrl}');
+    }
+    </style>`,
+      );
+    } else {
+      htmlContent = text.replace(
+        /class="event-card"/,
+        `class="${uniqueClassName}" style="background-image: url('${backgroundImageUrl}');"`,
+      );
+    }
+
     htmlContent = replaceEventContent(
       htmlContent,
       event,
       dateText,
       weekday,
       time,
-    );
-
-    htmlContent = htmlContent.replace(
-      `class="${uniqueClassName}"`,
-      `class="${uniqueClassName}" style="background-image: url('${backgroundImageUrl}');"`,
+      isEventCancelled,
     );
 
     return htmlContent;
@@ -187,6 +210,8 @@ const Afisha = ({ text, gap, tracks }) => {
       });
     }
   };
+
+  console.log("❗", scrollIndex, events.length);
 
   return (
     <AfishaContainer>
@@ -217,7 +242,7 @@ const Afisha = ({ text, gap, tracks }) => {
           />
         ))}
       </EventsContainer>
-      {events.length > 3 && scrollIndex < events.length - 1 && (
+      {scrollIndex < events.length && (
         <AfishaButtonRight
           onClick={() => {
             handleScroll(SCROLL_AMOUNT);

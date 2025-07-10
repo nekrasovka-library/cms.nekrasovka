@@ -28,7 +28,7 @@ const Settings = () => {
     if (
       payload.tracks &&
       payload.tracks !== block.styles.tracks &&
-      block.items[0].type !== "afisha"
+      block.items[0].type === "text"
     ) {
       const divs = [...block.items[0].text];
 

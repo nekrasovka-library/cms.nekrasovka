@@ -34,13 +34,29 @@
       height: 400px;
       max-width: 400px;
       border-radius: 5px;
-      position: relative;
       font-family: Rubik, sans-serif;
-      color: #346178;
+    }
+
+    [class^="event-card-"].error::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.1;
+      border-radius: 5px;
+      z-index: 1;
+    }
+
+    [class^="event-card-"].error::before, [class^="event-card-"] {
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      background-blend-mode: multiply;
+    }
+
+    [class^="event-card-"]:not(.error) {
+      color: #346178;
     }
 
     .datetime-section {
@@ -122,8 +138,9 @@
       line-height: 17px;
     }
 
-    .error {
+    .error .location-text{
       color: #922D15;
+      font-size: 18px;
     }
 
     a {
