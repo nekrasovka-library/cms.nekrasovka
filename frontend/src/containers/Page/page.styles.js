@@ -11,6 +11,7 @@ const BackToConstructorButton = styled.button`
   bottom: 15px;
   left: 15px;
   cursor: pointer;
+  z-index: 100;
 `;
 
 export { BackToConstructorButton };
