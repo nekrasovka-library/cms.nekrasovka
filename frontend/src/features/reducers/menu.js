@@ -89,7 +89,7 @@ const initialState = {
             paddingTop: "90px",
             paddingBottom: "90px",
             backgroundColor: "#ffffff",
-            borderRadius: "0",
+            borderRadius: "5",
             tracks: 4,
             height: "550",
           },
