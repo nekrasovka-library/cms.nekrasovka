@@ -240,7 +240,7 @@ const Afisha = ({ text, gap, tracks }) => {
           />
         ))}
       </EventsContainer>
-      {scrollIndex < events.length && (
+      {events.length > 3 && scrollIndex < events.length && (
         <AfishaButtonRight
           onClick={() => {
             handleScroll(SCROLL_AMOUNT);
