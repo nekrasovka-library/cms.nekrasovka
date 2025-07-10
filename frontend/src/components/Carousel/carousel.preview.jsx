@@ -17,7 +17,7 @@ const CarouselConstructor = ({
   children,
   maxWidth = 600,
   autoScrollInterval = 0,
-  overhang = 5,
+  overhang = 0,
   gap = 0,
   borderRadius = 0,
   tracks,
