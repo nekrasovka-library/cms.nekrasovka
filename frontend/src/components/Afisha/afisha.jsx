@@ -240,7 +240,7 @@ const Afisha = ({ text, gap, tracks }) => {
       )}
       <AfishaHeader>
         <span>Афиша</span>
-        <a href="">
+        <a href="//nekrasovka.ru/afisha">
           <span>Все события</span>
           <Icon icon="arrowRightLong" fill="#346178" />
         </a>
