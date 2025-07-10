@@ -39,15 +39,11 @@ const CarouselConstructor = ({
   };
 
   const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? children.length - 1 : prevIndex - 1,
-    );
+    setCurrentIndex((prev) => (prev === 0 ? tracks - 1 : prev - 1));
   };
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === children.length - 1 ? 0 : prevIndex + 1,
-    );
+    setCurrentIndex((prev) => (prev === tracks - 1 ? 0 : prev + 1));
   };
 
   const handleDotClick = (index) => {
@@ -92,7 +88,7 @@ const CarouselConstructor = ({
   return (
     <CarouselContainer>
       <CarouselButtonLeft>
-        <Icon icon="arrowCarousel" type="button" onClick={() => {}} />
+        <Icon icon="arrowCarousel" type="button" onClick={handlePrevClick} />
       </CarouselButtonLeft>
       <CarouselWrapper $maxWidth={maxWidth}>
         <CarouselTrack
@@ -123,19 +119,19 @@ const CarouselConstructor = ({
               </CarouselItem>
             );
           })}
-          <DotContainer $gap={gap} $overhang={overhang}>
-            {Array.from({ length: tracks }).map((_, index) => (
-              <Dot
-                key={index}
-                onClick={() => handleDotClick(index)}
-                $isActive={index === currentIndex}
-              />
-            ))}
-          </DotContainer>
         </CarouselTrack>
+        <DotContainer $gap={gap} $overhang={overhang}>
+          {Array.from({ length: tracks }).map((_, index) => (
+            <Dot
+              key={index}
+              onClick={() => handleDotClick(index)}
+              $isActive={index === currentIndex}
+            />
+          ))}
+        </DotContainer>
       </CarouselWrapper>
       <CarouselButtonRight>
-        <Icon icon="arrowCarousel" type="button" onClick={() => {}} />
+        <Icon icon="arrowCarousel" type="button" onClick={handleNextClick} />
       </CarouselButtonRight>
     </CarouselContainer>
   );
