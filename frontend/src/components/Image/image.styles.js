@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 const ImageContainer = styled.div`
   display: flex;
-  height: ${({ $height }) => $height}px;
 
   img {
     width: 100%;
-    height: 100%;
+    height: ${({ $height }) => $height}px;
     border-radius: ${({ $borderRadius }) => $borderRadius}px;
     object-fit: cover;
   }
