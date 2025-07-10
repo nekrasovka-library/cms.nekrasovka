@@ -214,13 +214,15 @@ const Afisha = ({ text, gap, tracks }) => {
   return (
     <AfishaContainer>
       {scrollIndex > 0 && (
-        <AfishaButtonLeft
-          onClick={() => {
-            handleScroll(-SCROLL_AMOUNT);
-            setScrollIndex(scrollIndex - 1);
-          }}
-        >
-          <Icon icon="arrowCarousel" />
+        <AfishaButtonLeft>
+          <Icon
+            icon="arrowCarousel"
+            type="button"
+            onClick={() => {
+              handleScroll(-SCROLL_AMOUNT);
+              setScrollIndex(scrollIndex - 1);
+            }}
+          />
         </AfishaButtonLeft>
       )}
       <AfishaHeader>
@@ -241,13 +243,15 @@ const Afisha = ({ text, gap, tracks }) => {
         ))}
       </EventsContainer>
       {events.length > 3 && scrollIndex < events.length && (
-        <AfishaButtonRight
-          onClick={() => {
-            handleScroll(SCROLL_AMOUNT);
-            setScrollIndex(scrollIndex + 1);
-          }}
-        >
-          <Icon icon="arrowCarousel" />
+        <AfishaButtonRight>
+          <Icon
+            icon="arrowCarousel"
+            type="button"
+            onClick={() => {
+              handleScroll(SCROLL_AMOUNT);
+              setScrollIndex(scrollIndex + 1);
+            }}
+          />
         </AfishaButtonRight>
       )}
     </AfishaContainer>

@@ -8,6 +8,11 @@ const CarouselWrapper = styled.div`
   width: 100%;
   max-width: ${({ $maxWidth }) => $maxWidth}px;
   text-align: center;
+  position: relative;
+`;
+
+const CarouselContainer = styled.div`
+  position: relative;
 `;
 
 const CarouselTrack = styled.div`
@@ -42,21 +47,53 @@ const DotContainer = styled.div`
   justify-content: center;
   column-gap: 5px;
   margin-top: 15px;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
 `;
 
 const Dot = styled.div`
-  width: 8px;
-  height: 8px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background-color: ${({ $isActive }) => ($isActive ? "#222" : "#c7c7c7")};
+  background-color: ${({ $isActive }) => ($isActive ? "#346178" : "#EDEEE9")};
+  ${({ $isActive }) => !$isActive && "border: 2px solid #346178;"};
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
 
   @media (hover: hover) {
     &:hover {
-      background-color: #222;
+      background-color: #346178;
+      border: none;
     }
   }
 `;
 
-export { CarouselWrapper, CarouselTrack, CarouselItem, DotContainer, Dot };
+const CarouselButton = styled.div`
+  position: absolute;
+  top: calc(50% - 20px);
+  z-index: 100;
+`;
+
+const CarouselButtonLeft = styled(CarouselButton)`
+  left: -20px;
+
+  svg {
+    transform: rotate(180deg);
+  }
+`;
+
+const CarouselButtonRight = styled(CarouselButton)`
+  right: -20px;
+`;
+
+export {
+  CarouselWrapper,
+  CarouselTrack,
+  CarouselItem,
+  DotContainer,
+  Dot,
+  CarouselButtonLeft,
+  CarouselButtonRight,
+  CarouselContainer,
+};

@@ -47,13 +47,10 @@ const EventsContainer = styled.div`
   }
 `;
 
-const AfishaButton = styled.button`
-  cursor: pointer;
+const AfishaButton = styled.div`
   position: absolute;
   top: calc(50% - 20px);
   z-index: 100;
-  height: 40px;
-  width: 40px;
 `;
 
 const AfishaButtonLeft = styled(AfishaButton)`

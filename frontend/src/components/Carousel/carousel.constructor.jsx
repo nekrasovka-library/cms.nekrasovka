@@ -5,14 +5,18 @@ import {
   CarouselItem,
   DotContainer,
   Dot,
+  CarouselContainer,
+  CarouselButtonRight,
+  CarouselButtonLeft,
 } from "./carousel.styles.js";
 import { useDispatch } from "react-redux";
 import ImageFile from "../Image/components/image.file.jsx";
 import axios from "axios";
+import Icon from "../../nekrasovka-ui/Icon/icon";
 
 const DEFAULT_MAX_WIDTH = 600;
 const DEFAULT_AUTO_SCROLL = 0;
-const DEFAULT_OVERHANG = 5;
+const DEFAULT_OVERHANG = 0;
 const DEFAULT_GAP = 0;
 const DEFAULT_BORDER_RADIUS = 0;
 const DEFAULT_TRACKS = 3;
@@ -76,6 +80,8 @@ const useCarousel = (itemsCount, autoScrollInterval) => {
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd: () => (touchRef.current.isDragging = false),
+    navigateToNext,
+    navigateToPrev,
   };
 };
 
@@ -85,7 +91,6 @@ const CarouselConstructor = ({
   autoScrollInterval = DEFAULT_AUTO_SCROLL,
   overhang = DEFAULT_OVERHANG,
   gap = DEFAULT_GAP,
-  isDots = true,
   blockId,
   borderRadius = DEFAULT_BORDER_RADIUS,
   tracks = DEFAULT_TRACKS,
@@ -101,6 +106,8 @@ const CarouselConstructor = ({
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
+    navigateToNext,
+    navigateToPrev,
   } = useCarousel(tracks, autoScrollInterval);
 
   const handleFileUpdate = async (file, index) => {
@@ -125,42 +132,45 @@ const CarouselConstructor = ({
   };
 
   return (
-    <CarouselWrapper $maxWidth={maxWidth}>
-      <CarouselTrack
-        ref={trackRef}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        $offset={offset}
-        $gap={gap}
-      >
-        {Array.from({ length: tracks }).map((_, index) => (
-          <CarouselItem
-            key={index}
-            $gap={gap}
-            $overhang={overhang}
-            $borderRadius={borderRadius}
-            $height={height}
-          >
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}
-              alt="картинка"
-              onClick={() => fileInputRef.current[index]?.click()}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
-              }}
-            />
-            <ImageFile
-              ref={(el) => (fileInputRef.current[index] = el)}
-              handleFileChange={(e) =>
-                handleFileUpdate(e.target.files[0], index)
-              }
-            />
-          </CarouselItem>
-        ))}
-      </CarouselTrack>
-      {isDots && (
+    <CarouselContainer>
+      <CarouselButtonLeft>
+        <Icon icon="arrowCarousel" type="button" onClick={navigateToPrev} />
+      </CarouselButtonLeft>
+      <CarouselWrapper $maxWidth={maxWidth}>
+        <CarouselTrack
+          ref={trackRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          $offset={offset}
+          $gap={gap}
+        >
+          {Array.from({ length: tracks }).map((_, index) => (
+            <CarouselItem
+              key={index}
+              $gap={gap}
+              $overhang={overhang}
+              $borderRadius={borderRadius}
+              $height={height}
+            >
+              <img
+                src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}
+                alt="картинка"
+                onClick={() => fileInputRef.current[index]?.click()}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
+                }}
+              />
+              <ImageFile
+                ref={(el) => (fileInputRef.current[index] = el)}
+                handleFileChange={(e) =>
+                  handleFileUpdate(e.target.files[0], index)
+                }
+              />
+            </CarouselItem>
+          ))}
+        </CarouselTrack>
         <DotContainer $gap={gap} $overhang={overhang}>
           {Array.from({ length: tracks }).map((_, index) => (
             <Dot
@@ -170,8 +180,11 @@ const CarouselConstructor = ({
             />
           ))}
         </DotContainer>
-      )}
-    </CarouselWrapper>
+      </CarouselWrapper>
+      <CarouselButtonRight>
+        <Icon icon="arrowCarousel" type="button" onClick={navigateToNext} />
+      </CarouselButtonRight>
+    </CarouselContainer>
   );
 };
 

@@ -5,7 +5,11 @@ import {
   CarouselItem,
   DotContainer,
   Dot,
+  CarouselContainer,
+  CarouselButtonRight,
+  CarouselButtonLeft,
 } from "./carousel.styles.js";
+import Icon from "../../nekrasovka-ui/Icon/icon";
 
 const DEFAULT_IMAGE = `imgfish.jpg`;
 
@@ -15,7 +19,6 @@ const CarouselConstructor = ({
   autoScrollInterval = 0,
   overhang = 5,
   gap = 0,
-  isDots = true,
   borderRadius = 0,
   tracks,
   height = "550",
@@ -87,48 +90,54 @@ const CarouselConstructor = ({
   }, [currentIndex]);
 
   return (
-    <CarouselWrapper $maxWidth={maxWidth}>
-      <CarouselTrack
-        ref={trackRef}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        $offset={offset}
-        $gap={gap}
-      >
-        {Array.from({ length: tracks }).map((_, index) => {
-          return (
-            <CarouselItem
-              key={index}
-              $gap={gap}
-              $overhang={overhang}
-              $borderRadius={borderRadius}
-              $height={height}
-            >
-              <img
-                src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}
-                alt="картинка"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
-                }}
+    <CarouselContainer>
+      <CarouselButtonLeft>
+        <Icon icon="arrowCarousel" type="button" onClick={() => {}} />
+      </CarouselButtonLeft>
+      <CarouselWrapper $maxWidth={maxWidth}>
+        <CarouselTrack
+          ref={trackRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          $offset={offset}
+          $gap={gap}
+        >
+          {Array.from({ length: tracks }).map((_, index) => {
+            return (
+              <CarouselItem
+                key={index}
+                $gap={gap}
+                $overhang={overhang}
+                $borderRadius={borderRadius}
+                $height={height}
+              >
+                <img
+                  src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}
+                  alt="картинка"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
+                  }}
+                />
+              </CarouselItem>
+            );
+          })}
+          <DotContainer $gap={gap} $overhang={overhang}>
+            {Array.from({ length: tracks }).map((_, index) => (
+              <Dot
+                key={index}
+                onClick={() => handleDotClick(index)}
+                $isActive={index === currentIndex}
               />
-            </CarouselItem>
-          );
-        })}
-      </CarouselTrack>
-      {isDots && (
-        <DotContainer $gap={gap} $overhang={overhang}>
-          {Array.from({ length: tracks }).map((_, index) => (
-            <Dot
-              key={index}
-              onClick={() => handleDotClick(index)}
-              $isActive={index === currentIndex}
-            />
-          ))}
-        </DotContainer>
-      )}
-    </CarouselWrapper>
+            ))}
+          </DotContainer>
+        </CarouselTrack>
+      </CarouselWrapper>
+      <CarouselButtonRight>
+        <Icon icon="arrowCarousel" type="button" onClick={() => {}} />
+      </CarouselButtonRight>
+    </CarouselContainer>
   );
 };
 
