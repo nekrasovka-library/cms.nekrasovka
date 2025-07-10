@@ -131,11 +131,14 @@ const CarouselConstructor = ({
     });
   };
 
+  console.log("❗", currentIndex);
   return (
     <CarouselContainer>
-      <CarouselButtonLeft>
-        <Icon icon="arrowCarousel" type="button" onClick={navigateToPrev} />
-      </CarouselButtonLeft>
+      {currentIndex > 0 && (
+        <CarouselButtonLeft>
+          <Icon icon="arrowCarousel" type="button" onClick={navigateToPrev} />
+        </CarouselButtonLeft>
+      )}
       <CarouselWrapper $maxWidth={maxWidth}>
         <CarouselTrack
           ref={trackRef}
@@ -181,9 +184,11 @@ const CarouselConstructor = ({
           ))}
         </DotContainer>
       </CarouselWrapper>
-      <CarouselButtonRight>
-        <Icon icon="arrowCarousel" type="button" onClick={navigateToNext} />
-      </CarouselButtonRight>
+      {currentIndex + 1 < tracks && (
+        <CarouselButtonRight>
+          <Icon icon="arrowCarousel" type="button" onClick={navigateToNext} />
+        </CarouselButtonRight>
+      )}
     </CarouselContainer>
   );
 };
