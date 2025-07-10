@@ -224,7 +224,7 @@ const initialState = {
             maxWidth: "12",
             backgroundColor: "#EDEEE9",
             gap: "30",
-            tracks: 3,
+            tracks: 7,
           },
         },
       ],
