@@ -9,6 +9,7 @@ import ProjectSettings from "./components/project.settings.jsx";
 import { ProjectContainer } from "./project.styles.js";
 import { AnimatePresence } from "framer-motion";
 import Transition from "../../components/Transition/transition.jsx";
+import { generateUniqueId } from "../../helpers";
 
 // Константы Redux actions
 const GET_PROJECT_REQUEST = "GET_PROJECT_REQUEST";
@@ -62,6 +63,7 @@ const Project = () => {
             },
           ],
           styles: variant.styles,
+          id: generateUniqueId(),
         };
       });
 

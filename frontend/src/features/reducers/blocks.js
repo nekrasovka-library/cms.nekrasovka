@@ -1,3 +1,5 @@
+import { generateUniqueId } from "../../helpers";
+
 const initialState = {
   blocks: [],
   block: null,
@@ -69,7 +71,7 @@ const blocks = (state = initialState, action) => {
         totalBlocks: state.totalBlocks + 1,
         blocks: insertNewBlock(state.blocks, state.selectedBlockIndex, {
           ...action.payload,
-          id: state.totalBlocks + 1,
+          id: generateUniqueId(),
         }),
       };
     case "UPDATE_BLOCK":

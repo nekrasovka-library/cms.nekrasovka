@@ -1,7 +1,7 @@
 /* eslint-disable import/no-webpack-loader-syntax */
-import header from "raw-loader!../../html/header.html";
-import footer from "raw-loader!../../html/footer.html";
-import afisha from "raw-loader!../../html/afisha.html";
+import header from "raw-loader!../../files/Header/header.html";
+import footer from "raw-loader!../../files/Footer/footer.html";
+import afisha from "raw-loader!../../files/Afisha/afisha.html";
 
 const initialState = {
   isMenuOpen: false,

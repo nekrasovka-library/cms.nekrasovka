@@ -1,270 +1,29 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  AfishaButtonLeft,
-  AfishaButtonRight,
-  AfishaContainer,
-  AfishaHeader,
-  EventsContainer,
-} from "./afisha.styles";
-import Icon from "../../nekrasovka-ui/Icon/icon";
+import React, { useEffect, useRef, memo } from "react";
 
-const MONTHS = [
-  "января",
-  "февраля",
-  "марта",
-  "апреля",
-  "мая",
-  "июня",
-  "июля",
-  "августа",
-  "сентября",
-  "октября",
-  "ноября",
-  "декабря",
-];
-
-const DAYS = [
-  "воскресенье",
-  "понедельник",
-  "вторник",
-  "среда",
-  "четверг",
-  "пятница",
-  "суббота",
-];
-
-const SCROLL_AMOUNT = 410;
-const API_URL = "https://api.electro.nekrasovka.ru/api/calendars";
-
-const Afisha = ({ text, gap, tracks }) => {
-  const [events, setEvents] = useState([]);
-  const [scrollIndex, setScrollIndex] = useState(1);
-  const eventsContainerRef = useRef(null);
-
-  const fetchEvents = async () => {
-    try {
-      const response = await fetch(API_URL);
-      const data = await response.json();
-      const eventsData = data.response.data.calendars;
-      const limitedEvents = eventsData.slice(0, tracks);
-      setEvents(limitedEvents);
-    } catch (err) {
-      console.error("Ошибка при загрузке событий:", err);
-    }
-  };
+const Afisha = memo(({ text, gap, tracks }) => {
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    fetchEvents();
-  }, [tracks]);
+    // Загружаем CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "//localhost:3013/files/afisha.css";
+    document.head.appendChild(link);
 
-  useEffect(() => {
-    const container = eventsContainerRef.current;
-    if (!container) return;
-
-    const preventScroll = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    };
-
-    const preventMouseDrag = (e) => {
-      e.preventDefault();
-    };
-
-    // Блокируем прокрутку колесиком мыши
-    container.addEventListener("wheel", preventScroll, { passive: false });
-    // Блокируем перетаскивание
-    container.addEventListener("mousedown", preventMouseDrag);
-    // Блокируем прокрутку на touch устройствах
-    container.addEventListener("touchmove", preventScroll, { passive: false });
+    // Загружаем и выполняем JavaScript
+    const script = document.createElement("script");
+    script.src = "//localhost:3013/files/afisha.js";
+    script.async = true;
+    document.head.appendChild(script);
 
     return () => {
-      container.removeEventListener("wheel", preventScroll);
-      container.removeEventListener("mousedown", preventMouseDrag);
-      container.removeEventListener("touchmove", preventScroll);
+      // Очистка при размонтировании
+      document.head.removeChild(link);
+      document.head.removeChild(script);
     };
   }, []);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = MONTHS[date.getMonth()];
-    const weekday = DAYS[date.getDay()];
-    return { dateText: `${day} ${month}`, weekday };
-  };
-
-  const formatTime = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleTimeString("ru-RU", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
-  const formatUrl = (dateString, id) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-
-    return `//nekrasovka.ru/afisha/${day}-${month}-${year}/${id}`;
-  };
-
-  const createUniqueClassName = (index) => `event-card-${index}`;
-
-  const createBackgroundImageUrl = (pictureId) => {
-    return pictureId ? `//nekrasovka.ru/img/${pictureId}/medium` : `none`;
-  };
-
-  const replaceEventContent = (
-    htmlContent,
-    event,
-    dateText,
-    weekday,
-    time,
-    isEventCancelled,
-    url,
-  ) => {
-    const eventText = event.text.replace(/<[^>]*>/g, "");
-
-    return htmlContent
-      .replace(
-        /<span class="date-text js-event-date">[^<]*<\/span>/,
-        `<span class="date-text">${dateText}</span>`,
-      )
-      .replace(
-        /<span class="js-event-weekday">[^<]*<\/span>/,
-        `<span>${weekday}</span>`,
-      )
-      .replace(
-        /<time class="js-event-time">[^<]*<\/time>/,
-        `<time>${time}</time>`,
-      )
-      .replace(
-        /<a class="location-text js-event-location">[^<]*<\/a>/,
-        isEventCancelled
-          ? '<span class="location-text">Мероприятие отменено</span>'
-          : `<a href='${event.geo_link}' target="_blank"  class="location-text">${event.geo}</a>`,
-      )
-      .replace(
-        /<a class="title-section">/,
-        `<a href="${url}" class="title-section">`,
-      )
-      .replace(
-        /<span class="event-title js-event-title">[^<]*<\/span>/,
-        `<span class="event-title">${event.title}</span>`,
-      )
-      .replace(
-        /<span class="event-subtitle js-event-subtitle">[^<]*<\/span>/,
-        isEventCancelled
-          ? ""
-          : `<span class="event-subtitle">${eventText}</span>`,
-      )
-      .replace(
-        /<div class="price-tag js-event-price">[^<]*<\/div>/,
-        !!event.price ? `<div class="price-tag">Платное</div>` : "",
-      )
-      .replace(/<div class="series-text js-event-series">[^<]*<\/div>/, ``)
-      .replace(/<span class="js-event-category">[^<]*<\/span>/, ``)
-      .replace(/<span class="js-event-tag">[^<]*<\/span>/, ``)
-      .replace(
-        /<span class="js-event-restriction">[^<]*<\/span>/,
-        `<span>${event.restriction}</span>`,
-      );
-  };
-
-  const generateEventHTML = (event, index) => {
-    const { dateText, weekday } = formatDate(event.date);
-    const time = formatTime(event.time_start);
-    const url = formatUrl(event.date, event.id);
-    const uniqueClassName = createUniqueClassName(index);
-    const backgroundImageUrl = createBackgroundImageUrl(event.picture_id);
-    const isEventCancelled = event.geo === "Отменено";
-    let htmlContent = "";
-
-    if (isEventCancelled) {
-      htmlContent = text.replace(
-        /class="event-card"/,
-        `class="${uniqueClassName} error" style="position: relative;"`,
-      );
-      htmlContent = htmlContent.replace(
-        /<\/style>/,
-        `
-    .${uniqueClassName}.error::before {
-      background-image: url('${backgroundImageUrl}');
-    }
-    </style>`,
-      );
-    } else {
-      htmlContent = text.replace(
-        /class="event-card"/,
-        `class="${uniqueClassName}" style="background-image: url('${backgroundImageUrl}');"`,
-      );
-    }
-
-    htmlContent = replaceEventContent(
-      htmlContent,
-      event,
-      dateText,
-      weekday,
-      time,
-      isEventCancelled,
-      url,
-    );
-
-    return htmlContent;
-  };
-
-  const handleScroll = (scrollAmount) => {
-    if (eventsContainerRef.current) {
-      const container = eventsContainerRef.current;
-      container.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const navigateToNext = () => {
-    handleScroll(SCROLL_AMOUNT * 3);
-    setScrollIndex(scrollIndex + 1);
-  };
-
-  const navigateToPrev = () => {
-    handleScroll(-SCROLL_AMOUNT * 3);
-    setScrollIndex(scrollIndex - 1);
-  };
-
-  return (
-    <AfishaContainer>
-      {scrollIndex > 1 && (
-        <AfishaButtonLeft>
-          <Icon icon="arrowCarousel" type="button" onClick={navigateToPrev} />
-        </AfishaButtonLeft>
-      )}
-      <AfishaHeader>
-        <span>Афиша</span>
-        <a href="//nekrasovka.ru/afisha">
-          <span>Все события</span>
-          <Icon icon="arrowRightLong" fill="#346178" />
-        </a>
-      </AfishaHeader>
-      <EventsContainer $gap={gap} $tracks={tracks} ref={eventsContainerRef}>
-        {events.map((event, index) => (
-          <div
-            key={index}
-            dangerouslySetInnerHTML={{
-              __html: generateEventHTML(event, index),
-            }}
-          />
-        ))}
-      </EventsContainer>
-      {events.length > 3 && scrollIndex < Math.ceil(events.length / 3) && (
-        <AfishaButtonRight>
-          <Icon icon="arrowCarousel" type="button" onClick={navigateToNext} />
-        </AfishaButtonRight>
-      )}
-    </AfishaContainer>
-  );
-};
+  return <div ref={containerRef} dangerouslySetInnerHTML={{ __html: text }} />;
+});
 
 export default Afisha;

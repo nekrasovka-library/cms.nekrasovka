@@ -144,9 +144,14 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
   return {};
 };
 
+const generateUniqueId = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
+
 export {
   useIsMobile,
   generateBlockStyles,
   calculateBlockWidth,
   getComponentParams,
+  generateUniqueId,
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Block from "../Block/block.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { ConstructorContainer } from "./constructor.styles.js";
@@ -36,16 +36,19 @@ const Constructor = () => {
     }
   };
 
-  const CONSTRUCTOR_COMPONENTS = {
-    text: Editor,
-    image: Image,
-    carousel: Carousel,
-    divider: Divider,
-    button: Button,
-    header: HeaderConstructor,
-    footer: FooterConstructor,
-    afisha: Afisha,
-  };
+  const CONSTRUCTOR_COMPONENTS = useMemo(
+    () => ({
+      text: Editor,
+      image: Image,
+      carousel: Carousel,
+      divider: Divider,
+      button: Button,
+      header: HeaderConstructor,
+      footer: FooterConstructor,
+      afisha: Afisha,
+    }),
+    [],
+  );
 
   const renderBlocks = () => {
     return blocks.map(({ id, items, styles }, blockIndex) => (

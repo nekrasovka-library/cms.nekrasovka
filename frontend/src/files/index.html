@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="//localhost:3013/files/afisha.css" />
+    <script src="//localhost:3013/files/afisha.js" async="async"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <script>
+      // Универсальная функция для загрузки HTML
+      async function includeHTML(elementId, filePath) {
+        const element = document.getElementsByTagName(elementId)[0];
+
+        if (!element) {
+          console.error(`Элемент с ID "${elementId}" не найден`);
+          return;
+        }
+
+        try {
+          const response = await fetch(filePath);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          element.innerHTML = await response.text();
+        } catch (error) {
+          console.error(`Ошибка загрузки ${filePath}:`, error);
+          element.innerHTML = "<p>Ошибка загрузки контента</p>";
+        }
+      }
+
+      // Загружаем все компоненты
+      document.addEventListener("DOMContentLoaded", () => {
+        includeHTML("body", "/frontend/src/files/Afisha/afisha.html");
+      });
+    </script>
+  </body>
+</html>
