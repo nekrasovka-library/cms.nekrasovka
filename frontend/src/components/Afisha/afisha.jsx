@@ -7,12 +7,12 @@ const Afisha = memo(({ text, gap, tracks }) => {
     // Загружаем CSS
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = `${process.env.REACT_APP_URL}/files/afisha.css`;
+    link.href = `${process.env.REACT_APP_URL}files/afisha.css`;
     document.head.appendChild(link);
 
     // Загружаем и выполняем JavaScript
     const script = document.createElement("script");
-    script.src = `${process.env.REACT_APP_URL}/files/afisha.js`;
+    script.src = `${process.env.REACT_APP_URL}files/afisha.js`;
     script.async = true;
     document.head.appendChild(script);
 
