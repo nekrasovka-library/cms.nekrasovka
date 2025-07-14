@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useCallback } from "react";
-import Preview from "../Preview/preview.jsx";
 import Constructor from "../Constructor/constructor.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -62,15 +61,15 @@ const Page = () => {
     }
   }, [isPageLoaded, pageData, projectId, isProjectLoaded, dispatch]);
 
-  return isPreview ? (
+  return (
     <>
-      <Preview />
-      <BackToConstructorButton type="button" onClick={togglePreview}>
-        <span>Вернуться к редактированию</span>
-      </BackToConstructorButton>
+      {isPreview && (
+        <BackToConstructorButton type="button" onClick={togglePreview}>
+          <span>Вернуться к редактированию</span>
+        </BackToConstructorButton>
+      )}
+      <Constructor />
     </>
-  ) : (
-    <Constructor />
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
+  ButtonComponent,
   ButtonContainer,
   ButtonForm,
   ButtonFormCheckbox,
@@ -20,7 +20,7 @@ const BUTTON_LABELS = {
 
 const DEFAULT_TARGET = "_blank";
 
-const ButtonConstructor = ({
+const Button = ({
   text,
   border,
   color,
@@ -120,7 +120,7 @@ const ButtonConstructor = ({
 
   return (
     <ButtonContainer>
-      <Button
+      <ButtonComponent
         {...buttonStyles}
         onClick={handleToggleEditing}
         dangerouslySetInnerHTML={{ __html: text }}
@@ -155,4 +155,4 @@ const ButtonConstructor = ({
   );
 };
 
-export default ButtonConstructor;
+export default Button;

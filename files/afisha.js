@@ -33,7 +33,6 @@ const CONFIG = {
   RETRY_DELAY: 100,
   CANCELLED_EVENT_TEXT: "Отменено",
   CANCELLED_EVENT_MESSAGE: "Мероприятие отменено",
-  LOADING_MESSAGE: "Загрузка событий...",
   ERROR_MESSAGE: "Ошибка загрузки событий",
   SKELETON_CARDS_COUNT: 3,
   LAZY_LOAD_THRESHOLD: 0.1, // Загружать когда 10% элемента видно
@@ -152,7 +151,6 @@ class AfishaJS {
   }
 
   applyFallbackImage(card) {
-    card.style.backgroundColor = "#f0f0f0";
     card.classList.add("image-loaded", "image-error");
     this.intersectionObserver.unobserve(card);
   }
@@ -163,14 +161,14 @@ class AfishaJS {
     this.eventsContainer.innerHTML = "";
 
     for (let i = 0; i < CONFIG.SKELETON_CARDS_COUNT; i++) {
-      const skeletonCard = this.createSkeletonCard(i);
+      const skeletonCard = this.createSkeletonCard();
       this.eventsContainer.appendChild(skeletonCard);
     }
   }
 
-  createSkeletonCard(index) {
+  createSkeletonCard() {
     const skeletonCard = document.createElement("div");
-    skeletonCard.className = `event-card skeleton-card skeleton-card-${index}`;
+    skeletonCard.className = `event-card skeleton-card`;
 
     skeletonCard.innerHTML = `
       <section class="datetime-section">
@@ -195,65 +193,7 @@ class AfishaJS {
       </section>
     `;
 
-    // Добавляем стили для размытия
-    this.addSkeletonStyles(index);
-
     return skeletonCard;
-  }
-
-  addSkeletonStyles(index) {
-    const existingStyle = document.querySelector(
-      `style[data-skeleton="${index}"]`,
-    );
-    if (existingStyle) return;
-
-    const style = document.createElement("style");
-    style.setAttribute("data-skeleton", index);
-    style.textContent = `
-      .skeleton-card-${index} {
-        background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .skeleton-card-${index}::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-        animation: skeleton-loading 2s infinite;
-      }
-      
-      .skeleton-card-${index} .skeleton-text {
-        background: rgba(0,0,0,0.1);
-        border-radius: 4px;
-        color: transparent;
-        filter: blur(1px);
-        animation: skeleton-pulse 1.5s ease-in-out infinite alternate;
-      }
-      
-      @keyframes skeleton-loading {
-        0% {
-          left: -100%;
-        }
-        100% {
-          left: 100%;
-        }
-      }
-      
-      @keyframes skeleton-pulse {
-        0% {
-          opacity: 0.6;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-    `;
-    document.head.appendChild(style);
   }
 
   async fetchEvents() {
@@ -316,12 +256,10 @@ class AfishaJS {
   applyEventCardStyles(eventCard, backgroundImageUrl, isEventCancelled, index) {
     if (isEventCancelled) {
       eventCard.classList.add("error");
-      eventCard.style.position = "relative";
       this.addCancelledEventStyles(index, backgroundImageUrl);
     } else {
       // Не устанавливаем фон сразу - это будет делать lazy loading
       eventCard.dataset.imageUrl = backgroundImageUrl;
-      eventCard.style.backgroundColor = "#f5f5f5"; // Временный фон
 
       // Добавляем карточку в наблюдение
       this.intersectionObserver.observe(eventCard);

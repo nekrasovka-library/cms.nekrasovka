@@ -22,6 +22,7 @@ const Block = ({
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
+  const { isPreview } = useSelector((state) => state.preview);
   const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
   const FIXED_BLOCK_TYPES = ["header", "footer"];
   const blockType = items?.[0]?.type;
@@ -77,57 +78,61 @@ const Block = ({
         CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
       />
 
-      <BlankBlockAddButton $isBlankBlockFocused={isBlankBlockActive}>
-        <Tooltip text="Добавить блок">
-          <Icon icon="add" type="button" onClick={handleAddBlock} />
-        </Tooltip>
-      </BlankBlockAddButton>
-
-      {isItems && (
-        <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
-          {!isFixedBlock() && (
-            <Tooltip text="Настройки">
-              <Icon
-                icon="settings"
-                type="button"
-                onClick={handleBlockSettings}
-              />
+      {!isPreview && (
+        <>
+          <BlankBlockAddButton $isBlankBlockFocused={isBlankBlockActive}>
+            <Tooltip text="Добавить блок">
+              <Icon icon="add" type="button" onClick={handleAddBlock} />
             </Tooltip>
+          </BlankBlockAddButton>
+
+          {isItems && (
+            <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
+              {!isFixedBlock() && (
+                <Tooltip text="Настройки">
+                  <Icon
+                    icon="settings"
+                    type="button"
+                    onClick={handleBlockSettings}
+                  />
+                </Tooltip>
+              )}
+
+              {!isFixedBlock() && (
+                <Tooltip text="Копировать блок">
+                  <Icon icon="copy" type="button" onClick={handleCopyBlock} />
+                </Tooltip>
+              )}
+
+              <Tooltip text="Удалить блок">
+                <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
+              </Tooltip>
+
+              {canMoveUp() && (
+                <Tooltip text="Переместить вверх">
+                  <Icon
+                    icon="arrowUp"
+                    type="button"
+                    onClick={() => handleBlockMove("up")}
+                  />
+                </Tooltip>
+              )}
+
+              {canMoveDown() && (
+                <Tooltip text="Переместить вниз">
+                  <Icon
+                    icon="arrowDown"
+                    type="button"
+                    onClick={() => handleBlockMove("down")}
+                  />
+                </Tooltip>
+              )}
+            </BlankBlockActionButtons>
           )}
 
-          {!isFixedBlock() && (
-            <Tooltip text="Копировать блок">
-              <Icon icon="copy" type="button" onClick={handleCopyBlock} />
-            </Tooltip>
-          )}
-
-          <Tooltip text="Удалить блок">
-            <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
-          </Tooltip>
-
-          {canMoveUp() && (
-            <Tooltip text="Переместить вверх">
-              <Icon
-                icon="arrowUp"
-                type="button"
-                onClick={() => handleBlockMove("up")}
-              />
-            </Tooltip>
-          )}
-
-          {canMoveDown() && (
-            <Tooltip text="Переместить вниз">
-              <Icon
-                icon="arrowDown"
-                type="button"
-                onClick={() => handleBlockMove("down")}
-              />
-            </Tooltip>
-          )}
-        </BlankBlockActionButtons>
+          <BlankBlockDots $isBlankBlockFocused={isBlankBlockActive} />
+        </>
       )}
-
-      <BlankBlockDots $isBlankBlockFocused={isBlankBlockActive} />
     </Container>
   );
 };

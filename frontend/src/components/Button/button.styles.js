@@ -4,7 +4,7 @@ const ButtonContainer = styled.div`
   position: relative;
 `;
 
-const Button = styled.div`
+const ButtonComponent = styled.div`
   text-align: ${({ $textAlign }) => $textAlign};
 
   a {
@@ -143,4 +143,4 @@ const ButtonFormCheckbox = styled.label`
   }
 `;
 
-export { ButtonContainer, Button, ButtonForm, ButtonFormCheckbox };
+export { ButtonContainer, ButtonComponent, ButtonForm, ButtonFormCheckbox };
