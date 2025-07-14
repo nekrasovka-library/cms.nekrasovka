@@ -10,6 +10,7 @@ module.exports = {
         FONTS: "../../../fonts",
         DATABASE: "../../../database",
         FRONTEND: "../../frontend/build",
+        FILES: "./src/files",
       },
     },
   ],
