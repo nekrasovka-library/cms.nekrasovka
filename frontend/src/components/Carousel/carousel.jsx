@@ -11,8 +11,8 @@ import {
 } from "./carousel.styles.js";
 import { useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon";
-import ImageConstructor from "./image.constructor";
-import ImagePreview from "./image.preview";
+import ImageConstructor from "../Image/image.constructor";
+import ImagePreview from "../Image/image.preview";
 
 const DEFAULT_MAX_WIDTH = 600;
 const DEFAULT_AUTO_SCROLL = 0;
@@ -21,7 +21,6 @@ const DEFAULT_GAP = 0;
 const DEFAULT_BORDER_RADIUS = 0;
 const DEFAULT_TRACKS = 3;
 const SWIPE_THRESHOLD = 50;
-const DEFAULT_IMAGE = `imgfish.jpg`;
 
 const useCarousel = (itemsCount, autoScrollInterval) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -127,26 +126,21 @@ const Carousel = ({
           $gap={gap}
         >
           {Array.from({ length: tracks }).map((_, index) => (
-            <CarouselItem
-              key={index}
-              $gap={gap}
-              $overhang={overhang}
-              $borderRadius={borderRadius}
-              $height={height}
-            >
+            <CarouselItem key={index} $gap={gap} $overhang={overhang}>
               {isPreview ? (
                 <ImagePreview
-                  imageName={children[index]}
-                  DEFAULT_IMAGE={DEFAULT_IMAGE}
+                  text={children[index]}
+                  height={height}
+                  borderRadius={borderRadius}
                 />
               ) : (
                 <ImageConstructor
-                  imageName={children[index]}
-                  DEFAULT_IMAGE={DEFAULT_IMAGE}
                   blockId={blockId}
                   tracks={tracks}
-                  children={children}
-                  index={index}
+                  text={children[index]}
+                  imgIndex={index}
+                  height={height}
+                  borderRadius={borderRadius}
                 />
               )}
             </CarouselItem>

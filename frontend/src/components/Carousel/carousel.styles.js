@@ -24,14 +24,6 @@ const CarouselTrack = styled.div`
 
 const CarouselItem = styled.div`
   flex: 0 0 calc(100% - ${calculateTotalWidth}px);
-  height: ${({ $height }) => $height}px;
-
-  img {
-    width: calc(100% - ${calculateTotalWidth}px);
-    height: 100%;
-    border-radius: ${({ $borderRadius }) => $borderRadius}px;
-    object-fit: cover;
-  }
 
   &:first-child {
     margin-left: ${calculateTotalMargin}px;

@@ -6,7 +6,14 @@ import axios from "axios";
 
 const DEFAULT_IMAGE = `imgfish.jpg`;
 
-const ImageConstructor = ({ text, blockId, height, borderRadius = 0 }) => {
+const ImageConstructor = ({
+  text,
+  tracks,
+  imgIndex,
+  blockId,
+  height,
+  borderRadius = 0,
+}) => {
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -31,7 +38,11 @@ const ImageConstructor = ({ text, blockId, height, borderRadius = 0 }) => {
         type: "UPDATE_BLOCK",
         payload: {
           blockId,
-          text: response.data.file.filename,
+          text: !tracks
+            ? Array.from({ length: tracks }).map((_, i) =>
+                i === imgIndex ? response.data.file.filename : text,
+              )
+            : response.data.file.filename,
         },
       });
     }
