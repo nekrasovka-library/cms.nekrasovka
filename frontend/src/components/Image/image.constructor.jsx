@@ -8,10 +8,9 @@ const DEFAULT_IMAGE = `imgfish.jpg`;
 
 const ImageConstructor = ({
   text,
-  tracks,
-  imgIndex,
   blockId,
   height,
+  imgIndex = 0,
   borderRadius = 0,
 }) => {
   const fileInputRef = useRef(null);
@@ -34,15 +33,14 @@ const ImageConstructor = ({
         formData,
       );
 
+      const newText = [...text];
+      newText[imgIndex] = response.data.file.filename;
+
       dispatch({
         type: "UPDATE_BLOCK",
         payload: {
           blockId,
-          text: !tracks
-            ? Array.from({ length: tracks }).map((_, i) =>
-                i === imgIndex ? response.data.file.filename : text,
-              )
-            : response.data.file.filename,
+          text: newText,
         },
       });
     }
@@ -51,7 +49,7 @@ const ImageConstructor = ({
   return (
     <ImageContainer $borderRadius={borderRadius} $height={height}>
       <img
-        src={`${process.env.REACT_APP_IMAGES_URL}${text}`}
+        src={`${process.env.REACT_APP_IMAGES_URL}${text[imgIndex]}`}
         alt="картинка"
         onClick={handleFileClick}
         onError={(e) => {

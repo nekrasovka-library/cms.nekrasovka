@@ -125,8 +125,7 @@ const Carousel = ({
             <CarouselItem key={index} $gap={gap} $overhang={overhang}>
               <Image
                 blockId={blockId}
-                tracks={tracks}
-                text={children[index]}
+                text={children}
                 imgIndex={index}
                 height={height}
                 borderRadius={borderRadius}
