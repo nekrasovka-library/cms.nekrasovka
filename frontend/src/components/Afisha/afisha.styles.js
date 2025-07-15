@@ -89,10 +89,6 @@ const AfishaHeaderLink = styled.a`
   }
 `;
 
-const AfishaHeaderArrow = styled.svg`
-  margin-left: ${AFISHA_THEME.spacingXs};
-`;
-
 const AfishaMain = styled.div`
   position: relative;
 `;
@@ -144,7 +140,7 @@ const EventsContainer = styled.div`
 
   /* Large desktop styles */
   @media (min-width: ${AFISHA_THEME.breakpointDesktop}) {
-    column-gap: ${AFISHA_THEME.spacingXxl};
+    column-gap: ${({ $gap }) => $gap}px;
   }
 
   /* Tablet styles */
@@ -293,6 +289,7 @@ const DateTimeHeader = styled.div`
 
 const DateText = styled.span`
   font-weight: ${AFISHA_THEME.fontWeightMedium};
+  margin-right: 5px;
 `;
 
 const LocationText = styled.span`
@@ -424,7 +421,6 @@ export {
   AfishaHeader,
   AfishaHeaderTitle,
   AfishaHeaderLink,
-  AfishaHeaderArrow,
   AfishaMain,
   AfishaButtonLeft,
   AfishaButtonRight,

@@ -5,7 +5,6 @@ import {
   AfishaHeader,
   AfishaHeaderTitle,
   AfishaHeaderLink,
-  AfishaHeaderArrow,
   AfishaMain,
   AfishaButtonLeft,
   AfishaButtonRight,
@@ -25,6 +24,7 @@ import {
   ErrorMessage,
   SkeletonText,
 } from "./afisha.styles";
+import Icon from "../../nekrasovka-ui/Icon/icon";
 
 // Константы
 const MONTHS = [
@@ -211,7 +211,7 @@ const Afisha = ({
           {!eventCancelled && <EventSubtitle>{eventText}</EventSubtitle>}
         </TitleSection>
         <FooterSection>
-          {event.price && <PriceTag>Платное</PriceTag>}
+          {!!event.price && <PriceTag>Платное</PriceTag>}
           <TagsSection>
             <div></div>
             <span>{event.restriction}</span>
@@ -247,12 +247,12 @@ const Afisha = ({
     }
   }, []);
 
-  const navigateToPrev = useCallback(() => {
+  const navigateToNext = useCallback(() => {
     handleScroll(scrollAmountRef.current);
     setScrollIndex((prev) => prev + 1);
   }, [handleScroll]);
 
-  const navigateToNext = useCallback(() => {
+  const navigateToPrev = useCallback(() => {
     handleScroll(-scrollAmountRef.current);
     setScrollIndex((prev) => prev - 1);
   }, [handleScroll]);
@@ -289,7 +289,7 @@ const Afisha = ({
   // Обновление количества прокрутки
   useEffect(() => {
     if (eventsContainerRef.current) {
-      scrollAmountRef.current = eventsContainerRef.current.clientWidth + gap;
+      scrollAmountRef.current = eventsContainerRef.current.clientWidth + +gap;
     }
   }, [gap, windowWidth]);
 
@@ -336,78 +336,23 @@ const Afisha = ({
           <AfishaHeaderTitle>Афиша</AfishaHeaderTitle>
           <AfishaHeaderLink href="//nekrasovka.ru/afisha">
             <span>Все события</span>
-            <AfishaHeaderArrow
-              width="16"
-              height="8"
-              viewBox="0 0 16 8"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15.3536 4.35355C15.5488 4.15829 15.5488 3.84171 15.3536 3.64645L12.1716 0.464466C11.9763 0.269204 11.6597 0.269204 11.4645 0.464466C11.2692 0.659728 11.2692 0.976311 11.4645 1.17157L14.2929 4L11.4645 6.82843C11.2692 7.02369 11.2692 7.34027 11.4645 7.53553C11.6597 7.7308 11.9763 7.7308 12.1716 7.53553L15.3536 4.35355ZM0 4.5H15V3.5H0V4.5Z"
-                fill="#346178"
-              />
-            </AfishaHeaderArrow>
+            <Icon icon="arrowRightLong" />
           </AfishaHeaderLink>
         </AfishaHeader>
         <AfishaMain>
           <AfishaButtonLeft
             ref={prevButtonRef}
-            onClick={navigateToNext}
-            style={{ display: "none" }}
-          >
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="20"
-                cy="20"
-                r="19"
-                fill="#EDEEE9"
-                stroke="#346178"
-                strokeWidth="2"
-              />
-              <path
-                opacity="0.969"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M15.8558 12.0055C16.1453 11.9874 16.4297 12.0141 16.7089 12.0855C19.4082 14.3403 22.0919 16.6153 24.7599 18.9102C25.4329 19.4701 25.5217 20.11 25.0265 20.8297C22.3251 23.1401 19.6236 25.4506 16.9222 27.761C16.5236 28.0119 16.0971 28.0653 15.6425 27.921C14.9817 27.4837 14.8306 26.9061 15.1893 26.1881C17.5719 24.1165 19.9623 22.0549 22.3606 20.0032C19.9972 17.9332 17.6245 15.8715 15.2426 13.8183C14.8711 13.0044 15.0755 12.4001 15.8558 12.0055Z"
-                fill="#346178"
-                transform="rotate(180 20 20)"
-              />
-            </svg>
-          </AfishaButtonLeft>
-          <AfishaButtonRight
-            ref={nextButtonRef}
             onClick={navigateToPrev}
             style={{ display: "none" }}
           >
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="20"
-                cy="20"
-                r="19"
-                fill="#EDEEE9"
-                stroke="#346178"
-                strokeWidth="2"
-              />
-              <path
-                opacity="0.969"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M15.8558 12.0055C16.1453 11.9874 16.4297 12.0141 16.7089 12.0855C19.4082 14.3403 22.0919 16.6153 24.7599 18.9102C25.4329 19.4701 25.5217 20.11 25.0265 20.8297C22.3251 23.1401 19.6236 25.4506 16.9222 27.761C16.5236 28.0119 16.0971 28.0653 15.6425 27.921C14.9817 27.4837 14.8306 26.9061 15.1893 26.1881C17.5719 24.1165 19.9623 22.0549 22.3606 20.0032C19.9972 17.9332 17.6245 15.8715 15.2426 13.8183C14.8711 13.0044 15.0755 12.4001 15.8558 12.0055Z"
-                fill="#346178"
-              />
-            </svg>
+            <Icon icon="arrowCarousel" />
+          </AfishaButtonLeft>
+          <AfishaButtonRight
+            ref={nextButtonRef}
+            onClick={navigateToNext}
+            style={{ display: "none" }}
+          >
+            <Icon icon="arrowCarousel" />
           </AfishaButtonRight>
           <EventsContainer ref={eventsContainerRef} $gap={gap}>
             {loading
