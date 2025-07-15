@@ -11,7 +11,7 @@ const ImageConstructor = ({
   imageName,
   index,
 }) => {
-  const fileInputRef = useRef([]);
+  const fileInputRef = useRef(null);
   const dispatch = useDispatch();
 
   const handleFileUpdate = async (file, imgIndex) => {
@@ -34,9 +34,11 @@ const ImageConstructor = ({
       },
     });
   };
+
   return (
     <>
       <img
+        onClick={() => fileInputRef.current?.click()}
         src={`${process.env.REACT_APP_IMAGES_URL}${imageName}`}
         alt="картинка"
         onError={(e) => {
