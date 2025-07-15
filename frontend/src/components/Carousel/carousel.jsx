@@ -9,10 +9,8 @@ import {
   CarouselButtonRight,
   CarouselButtonLeft,
 } from "./carousel.styles.js";
-import { useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon";
-import ImageConstructor from "../Image/image.constructor";
-import ImagePreview from "../Image/image.preview";
+import Image from "../Image/image";
 
 const DEFAULT_MAX_WIDTH = 600;
 const DEFAULT_AUTO_SCROLL = 0;
@@ -95,8 +93,6 @@ const Carousel = ({
   tracks = DEFAULT_TRACKS,
   height = "550",
 }) => {
-  const { isPreview } = useSelector((state) => state.preview);
-
   const {
     currentIndex,
     offset,
@@ -127,22 +123,14 @@ const Carousel = ({
         >
           {Array.from({ length: tracks }).map((_, index) => (
             <CarouselItem key={index} $gap={gap} $overhang={overhang}>
-              {isPreview ? (
-                <ImagePreview
-                  text={children[index]}
-                  height={height}
-                  borderRadius={borderRadius}
-                />
-              ) : (
-                <ImageConstructor
-                  blockId={blockId}
-                  tracks={tracks}
-                  text={children[index]}
-                  imgIndex={index}
-                  height={height}
-                  borderRadius={borderRadius}
-                />
-              )}
+              <Image
+                blockId={blockId}
+                tracks={tracks}
+                text={children[index]}
+                imgIndex={index}
+                height={height}
+                borderRadius={borderRadius}
+              />
             </CarouselItem>
           ))}
         </CarouselTrack>

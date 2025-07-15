@@ -2,7 +2,7 @@ import React from "react";
 import Block from "../Block/block.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { ConstructorContainer } from "./constructor.styles.js";
-import Image from "../../components/Image/image.constructor.jsx";
+import Image from "../../components/Image/image";
 import Carousel from "../../components/Carousel/carousel.jsx";
 import Divider from "../../components/Divider/divider.jsx";
 import Header from "../../components/Header/header.jsx";
