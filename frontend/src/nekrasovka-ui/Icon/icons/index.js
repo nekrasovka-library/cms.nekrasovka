@@ -12,6 +12,7 @@ import edit from "./edit.jsx";
 import arrowRightLong from "./arrow_right_long.jsx";
 import save from "./save.jsx";
 import arrowCarousel from "./arrow_carousel";
+import clock from "./clock.jsx";
 
 export default {
   add,
@@ -28,4 +29,5 @@ export default {
   arrowRightLong,
   save,
   arrowCarousel,
+  clock,
 };

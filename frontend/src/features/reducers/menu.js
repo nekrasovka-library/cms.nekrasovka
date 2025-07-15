@@ -1,7 +1,3 @@
-/* eslint-disable import/no-webpack-loader-syntax */
-import header from "raw-loader!../../files/Header/header.html";
-import footer from "raw-loader!../../files/Footer/footer.html";
-
 const initialState = {
   isMenuOpen: false,
   selectedMenuId: null,
@@ -177,7 +173,7 @@ const initialState = {
           id: 8,
           image: "header_nekrasovka.png",
           type: "header",
-          text: header,
+          text: "",
           menuId: 8,
           styles: {
             paddingTop: "25px",
@@ -196,7 +192,7 @@ const initialState = {
           id: 9,
           image: "footer_nekrasovka.png",
           type: "footer",
-          text: footer,
+          text: "",
           menuId: 9,
           styles: {
             paddingTop: "45px",
