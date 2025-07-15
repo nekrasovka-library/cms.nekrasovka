@@ -7,7 +7,12 @@ const Image = ({ text, blockId, tracks, imgIndex, height, borderRadius }) => {
   const { isPreview } = useSelector((state) => state.preview);
 
   return isPreview ? (
-    <ImagePreview text={text} height={height} borderRadius={borderRadius} />
+    <ImagePreview
+      text={text}
+      height={height}
+      borderRadius={borderRadius}
+      imgIndex={imgIndex}
+    />
   ) : (
     <ImageConstructor
       blockId={blockId}
