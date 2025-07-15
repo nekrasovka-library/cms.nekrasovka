@@ -9,10 +9,10 @@ import {
   CarouselButtonRight,
   CarouselButtonLeft,
 } from "./carousel.styles.js";
-import { useDispatch } from "react-redux";
-import ImageFile from "../Image/components/image.file.jsx";
-import axios from "axios";
+import { useSelector } from "react-redux";
 import Icon from "../../nekrasovka-ui/Icon/icon";
+import ImageConstructor from "./image.constructor";
+import ImagePreview from "./image.preview";
 
 const DEFAULT_MAX_WIDTH = 600;
 const DEFAULT_AUTO_SCROLL = 0;
@@ -85,7 +85,7 @@ const useCarousel = (itemsCount, autoScrollInterval) => {
   };
 };
 
-const CarouselConstructor = ({
+const Carousel = ({
   children,
   maxWidth = DEFAULT_MAX_WIDTH,
   autoScrollInterval = DEFAULT_AUTO_SCROLL,
@@ -96,8 +96,8 @@ const CarouselConstructor = ({
   tracks = DEFAULT_TRACKS,
   height = "550",
 }) => {
-  const dispatch = useDispatch();
-  const fileInputRef = useRef([]);
+  const { isPreview } = useSelector((state) => state.preview);
+
   const {
     currentIndex,
     offset,
@@ -109,27 +109,6 @@ const CarouselConstructor = ({
     navigateToNext,
     navigateToPrev,
   } = useCarousel(tracks, autoScrollInterval);
-
-  const handleFileUpdate = async (file, index) => {
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("image", file);
-    const response = await axios.post(
-      `${process.env.REACT_APP_API}images/upload`,
-      formData,
-    );
-
-    dispatch({
-      type: "UPDATE_BLOCK",
-      payload: {
-        blockId,
-        text: Array.from({ length: tracks }).map((_, i) =>
-          i === index ? response.data.file.filename : children[i] || "",
-        ),
-      },
-    });
-  };
 
   return (
     <CarouselContainer>
@@ -155,21 +134,21 @@ const CarouselConstructor = ({
               $borderRadius={borderRadius}
               $height={height}
             >
-              <img
-                src={`${process.env.REACT_APP_IMAGES_URL}${children[index]}`}
-                alt="картинка"
-                onClick={() => fileInputRef.current[index]?.click()}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
-                }}
-              />
-              <ImageFile
-                ref={(el) => (fileInputRef.current[index] = el)}
-                handleFileChange={(e) =>
-                  handleFileUpdate(e.target.files[0], index)
-                }
-              />
+              {isPreview ? (
+                <ImagePreview
+                  imageName={children[index]}
+                  DEFAULT_IMAGE={DEFAULT_IMAGE}
+                />
+              ) : (
+                <ImageConstructor
+                  imageName={children[index]}
+                  DEFAULT_IMAGE={DEFAULT_IMAGE}
+                  blockId={blockId}
+                  tracks={tracks}
+                  children={children}
+                  index={index}
+                />
+              )}
             </CarouselItem>
           ))}
         </CarouselTrack>
@@ -192,4 +171,4 @@ const CarouselConstructor = ({
   );
 };
 
-export default CarouselConstructor;
+export default Carousel;

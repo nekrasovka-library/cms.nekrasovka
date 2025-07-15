@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
-import { Container, EditorContainer } from "./editor.styles.js";
+import { EditorComponent, EditorContainer } from "./text.styles";
 import { useDispatch, useSelector } from "react-redux";
-import { TOOLBAR_OPTIONS } from "./editor.constants.js";
+import { TOOLBAR_OPTIONS } from "./text.constants.js";
 import { ru } from "suneditor/src/lang";
 
-const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
+const TextConstructor = ({
+  text,
+  blockId,
+  backgroundColor,
+  textAlign,
+  gap,
+  tracks,
+}) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
   const { isSettingsOpen } = useSelector((state) => state.settings);
@@ -50,14 +57,14 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
   }, [isContentChanged, blockFocused]);
 
   return (
-    <Container $gap={gap} $tracks={tracks}>
+    <EditorContainer $gap={gap} $tracks={tracks}>
       {isProjectLoaded &&
         text.map((content, index) => {
           const isEditorFocused =
             editorFocused === `${blockId}` && blockFocused === index;
 
           return (
-            <EditorContainer
+            <EditorComponent
               key={index}
               $isModal={isModal}
               $textAlign={textAlign}
@@ -71,11 +78,11 @@ const Editor = ({ text, blockId, backgroundColor, textAlign, gap, tracks }) => {
                 onChange={handleContentChange}
                 setOptions={options}
               />
-            </EditorContainer>
+            </EditorComponent>
           );
         })}
-    </Container>
+    </EditorContainer>
   );
 };
 
-export default Editor;
+export default TextConstructor;

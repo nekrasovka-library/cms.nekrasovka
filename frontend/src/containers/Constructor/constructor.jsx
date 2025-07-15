@@ -2,9 +2,8 @@ import React from "react";
 import Block from "../Block/block.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { ConstructorContainer } from "./constructor.styles.js";
-import Editor from "../../components/Editor/editor.jsx";
 import Image from "../../components/Image/image.constructor.jsx";
-import Carousel from "../../components/Carousel/carousel.constructor.jsx";
+import Carousel from "../../components/Carousel/carousel.jsx";
 import Divider from "../../components/Divider/divider.jsx";
 import Header from "../../components/Header/header.jsx";
 import Footer from "../../components/Footer/footer.jsx";
@@ -20,7 +19,6 @@ const Constructor = () => {
   const { blocks, totalBlocks } = useSelector((state) => state.blocks);
   const hasBlocks = totalBlocks > 0;
   const { pageId } = useParams();
-  const { isPreview } = useSelector((state) => state.preview);
 
   const EXCLUDED_CLASSES = ["se-container", "se-btn-module", "se-wrapper"];
 
@@ -39,7 +37,7 @@ const Constructor = () => {
   };
 
   const CONSTRUCTOR_COMPONENTS = {
-    text: isPreview ? Text : Editor,
+    text: Text,
     image: Image,
     carousel: Carousel,
     divider: Divider,
