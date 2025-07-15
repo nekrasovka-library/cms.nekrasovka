@@ -1,7 +1,6 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 import header from "raw-loader!../../files/Header/header.html";
 import footer from "raw-loader!../../files/Footer/footer.html";
-import afisha from "raw-loader!../../files/Afisha/afisha.html";
 
 const initialState = {
   isMenuOpen: false,
@@ -216,7 +215,7 @@ const initialState = {
           id: 10,
           image: "afisha.png",
           type: "afisha",
-          text: afisha,
+          text: "",
           menuId: 10,
           styles: {
             paddingTop: "30px",
