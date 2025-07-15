@@ -43,6 +43,27 @@ const TextConstructor = ({
     dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}` });
   };
 
+  const updateTextByTracks = () => {
+    const divs = [...text];
+
+    if (tracks > divs.length) {
+      const count = tracks - divs.length;
+      for (let i = 0; i < count; i++) {
+        divs.push(`<div>Добавить текст</div>`);
+      }
+    } else {
+      const count = divs.length - tracks;
+      for (let i = 0; i < count; i++) {
+        divs.pop();
+      }
+    }
+
+    dispatch({
+      type: "UPDATE_BLOCK",
+      payload: { blockId, text: divs },
+    });
+  };
+
   useEffect(() => {
     if (isContentChanged && blockFocused !== null) {
       setIsContentChanged(false);
@@ -55,6 +76,12 @@ const TextConstructor = ({
       });
     }
   }, [isContentChanged, blockFocused]);
+
+  useEffect(() => {
+    if (isProjectLoaded) {
+      updateTextByTracks();
+    }
+  }, [tracks, isProjectLoaded]);
 
   return (
     <EditorContainer $gap={gap} $tracks={tracks}>
