@@ -2,14 +2,12 @@ import React, { memo } from "react";
 import {
   HeaderContainer,
   LogoSection,
-  Logo,
   WorkingHoursSection,
   ClockIcon,
   WorkingHoursInfo,
   StatusText,
   AddressLink,
   SocialLinksSection,
-  SocialIcon,
 } from "./header.styles.js";
 import Icon from "../../nekrasovka-ui/Icon/icon";
 
@@ -18,10 +16,10 @@ const Header = memo(() => {
     <HeaderContainer>
       <LogoSection>
         <a href="//nekrasovka.ru/" target="_blank" rel="noopener noreferrer">
-          <Logo src="/nekrasovka.png" alt="Некрасовка" />
+          <Icon icon="nekrasovka" />
         </a>
         <a href="//mos.ru/kultura/" target="_blank" rel="noopener noreferrer">
-          <Logo src="/mos.png" alt="Москва-Культура" />
+          <Icon icon="mos" />
         </a>
       </LogoSection>
 
@@ -47,14 +45,14 @@ const Header = memo(() => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <SocialIcon src="/vk.png" alt="ВКонтакте" />
+          <Icon icon="vkRound" />
         </a>
         <a
           href="//t.me/nekrasovkalibrary"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <SocialIcon src="/telegram.png" alt="Telegram" />
+          <Icon icon="telegramRound" />
         </a>
       </SocialLinksSection>
     </HeaderContainer>

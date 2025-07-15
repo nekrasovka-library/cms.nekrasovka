@@ -2,22 +2,22 @@ import React from "react";
 import {
   FooterContainer,
   QuestionButton,
-  Logo,
   LogoSection,
   NavLink,
   NavSection,
   OrganizationLink,
 } from "./footer.styles.js";
+import Icon from "../../nekrasovka-ui/Icon/icon";
 
 const Footer = () => {
   return (
     <FooterContainer>
       <LogoSection>
         <a href="//mos.ru/kultura/" target="_blank" rel="noopener noreferrer">
-          <Logo src="/nekrasovka.png" alt="" />
+          <Icon icon="nekrasovka" />
         </a>
         <a href="//nekrasovka.ru/" target="_blank" rel="noopener noreferrer">
-          <Logo src="/mos.png" alt="" />
+          <Icon icon="mos" />
         </a>
       </LogoSection>
       <NavSection>
@@ -28,7 +28,7 @@ const Footer = () => {
           Оценка качества услуг
         </NavLink>
         <QuestionButton>
-          <img src="/question.png" alt="Вопрос" />
+          <Icon icon="question" />
           <span>Задать вопрос</span>
         </QuestionButton>
       </NavSection>

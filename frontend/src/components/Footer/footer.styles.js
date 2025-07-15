@@ -11,10 +11,6 @@ const LogoSection = styled.section`
   column-gap: 35px;
 `;
 
-const Logo = styled.img`
-  height: 50px;
-`;
-
 const NavSection = styled.section`
   display: flex;
   column-gap: 50px;
@@ -44,16 +40,11 @@ const QuestionButton = styled.button`
   font-size: 14px;
   cursor: pointer;
   border: none;
-
-  img {
-    height: 20px;
-  }
 `;
 
 export {
   FooterContainer,
   QuestionButton,
-  Logo,
   LogoSection,
   NavLink,
   NavSection,

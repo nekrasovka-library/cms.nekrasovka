@@ -12,10 +12,6 @@ const LogoSection = styled.section`
   column-gap: 35px;
 `;
 
-const Logo = styled.img`
-  height: 50px;
-`;
-
 const WorkingHoursSection = styled.section`
   display: flex;
   align-items: center;
@@ -51,19 +47,13 @@ const SocialLinksSection = styled.section`
   column-gap: 10px;
 `;
 
-const SocialIcon = styled.img`
-  height: 30px;
-`;
-
 export {
   HeaderContainer,
   LogoSection,
-  Logo,
   WorkingHoursSection,
   ClockIcon,
   WorkingHoursInfo,
   StatusText,
   AddressLink,
   SocialLinksSection,
-  SocialIcon,
 };

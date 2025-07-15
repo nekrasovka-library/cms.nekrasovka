@@ -13,6 +13,11 @@ import arrowRightLong from "./arrow_right_long.jsx";
 import save from "./save.jsx";
 import arrowCarousel from "./arrow_carousel";
 import clock from "./clock.jsx";
+import nekrasovka from "./nekrasovka";
+import mos from "./mos";
+import vkRound from "./vk_round";
+import telegramRound from "./telegram_round";
+import question from "./question";
 
 export default {
   add,
@@ -30,4 +35,9 @@ export default {
   save,
   arrowCarousel,
   clock,
+  nekrasovka,
+  mos,
+  vkRound,
+  telegramRound,
+  question,
 };
