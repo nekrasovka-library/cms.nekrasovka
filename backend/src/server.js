@@ -26,7 +26,6 @@ const initializeApp = () => {
 
   // Статические файлы
   app.use("/images", express.static(CONFIG.PATHS.IMAGES_DIR));
-  app.use("/files", express.static(CONFIG.PATHS.FILES_DIR));
   app.use(express.static(CONFIG.PATHS.BUILD_DIR));
 
   return app;
