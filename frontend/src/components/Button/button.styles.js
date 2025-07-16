@@ -1,10 +1,22 @@
 import styled from "styled-components";
 
 const ButtonContainer = styled.div`
-  position: relative;
+  width: 100%;
+  padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
+  padding-bottom: ${({ $paddingBottom }) =>
+    $paddingBottom ? `${$paddingBottom}` : "0"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
 `;
 
 const ButtonComponent = styled.div`
+  position: relative;
+  max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
+  margin: 0 auto;
+  width: 100%;
+  text-align: ${({ $textAlign }) => $textAlign};
+`;
+
+const Button = styled.div`
   text-align: ${({ $textAlign }) => $textAlign};
 
   a {
@@ -143,4 +155,10 @@ const ButtonFormCheckbox = styled.label`
   }
 `;
 
-export { ButtonContainer, ButtonComponent, ButtonForm, ButtonFormCheckbox };
+export {
+  ButtonContainer,
+  ButtonComponent,
+  Button,
+  ButtonForm,
+  ButtonFormCheckbox,
+};

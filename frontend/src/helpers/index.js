@@ -104,10 +104,11 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
       borderRadius: styles.borderRadius,
       height: styles.height,
       textAlign: styles.textAlign,
-      backgroundColor: styles.elementBackgroundColor,
       maxWidth: calculateBlockWidth(styles.maxWidth),
       paddingTop: styles.paddingTop,
       paddingBottom: styles.paddingBottom,
+      elementBackgroundColor: styles.elementBackgroundColor,
+      backgroundColor: styles.backgroundColor,
     };
   }
 
