@@ -31,6 +31,10 @@ const LogoSection = styled.section`
   display: flex;
   align-items: center;
 
+  @media (min-width: 769px) {
+    column-gap: 35px;
+  }
+
   @media (max-width: 768px) {
     a:nth-child(2) {
       display: none;
