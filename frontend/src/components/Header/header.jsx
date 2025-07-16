@@ -9,6 +9,7 @@ import {
   AddressLink,
   SocialLinksSection,
   HeaderComponent,
+  MobileIconSection,
 } from "./header.styles.js";
 import Icon from "../../nekrasovka-ui/Icon/icon";
 
@@ -28,6 +29,11 @@ const Header = ({ backgroundColor, maxWidth, paddingTop, paddingBottom }) => {
             <Icon icon="mos" />
           </a>
         </LogoSection>
+
+        <MobileIconSection>
+          <Icon icon="search" />
+          <Icon icon="menu" />
+        </MobileIconSection>
 
         <WorkingHoursSection>
           <ClockIcon src="/clock.png" alt="Часы работы" />

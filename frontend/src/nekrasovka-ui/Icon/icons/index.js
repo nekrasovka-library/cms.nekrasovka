@@ -18,6 +18,8 @@ import mos from "./mos";
 import vkRound from "./vk_round";
 import telegramRound from "./telegram_round";
 import question from "./question";
+import search from "./search";
+import menu from "./menu";
 
 export default {
   add,
@@ -40,4 +42,6 @@ export default {
   vkRound,
   telegramRound,
   question,
+  search,
+  menu,
 };

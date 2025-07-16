@@ -2,14 +2,16 @@ import styled from "styled-components";
 
 const HeaderContainer = styled.div`
   width: 100%;
-  padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
-  padding-bottom: ${({ $paddingBottom }) =>
-    $paddingBottom ? `${$paddingBottom}` : "0"};
   background-color: ${({ $backgroundColor }) => $backgroundColor};
 
+  @media (min-width: 769px) {
+    padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
+    padding-bottom: ${({ $paddingBottom }) =>
+      $paddingBottom ? `${$paddingBottom}` : "0"};
+  }
+
   @media (max-width: 768px) {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 15px;
   }
 `;
 
@@ -20,7 +22,7 @@ const HeaderComponent = styled.div`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-wrap: wrap;
     row-gap: 15px;
   }
 `;
@@ -28,7 +30,6 @@ const HeaderComponent = styled.div`
 const LogoSection = styled.section`
   display: flex;
   align-items: center;
-  column-gap: 35px;
 
   @media (max-width: 768px) {
     a:nth-child(2) {
@@ -42,6 +43,18 @@ const LogoSection = styled.section`
   }
 `;
 
+const MobileIconSection = styled.section`
+  @media (min-width: 769px) {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    column-gap: 25px;
+    align-items: center;
+  }
+`;
+
 const WorkingHoursSection = styled.section`
   display: flex;
   align-items: center;
@@ -51,6 +64,7 @@ const WorkingHoursSection = styled.section`
     background: #ffffff;
     border-radius: 5px;
     padding: 5px;
+    width: 100%;
   }
 `;
 
@@ -99,4 +113,5 @@ export {
   AddressLink,
   SocialLinksSection,
   HeaderComponent,
+  MobileIconSection,
 };
