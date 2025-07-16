@@ -19,10 +19,10 @@ const Footer = ({ backgroundColor, maxWidth, paddingTop, paddingBottom }) => {
     >
       <FooterComponent $maxWidth={maxWidth}>
         <LogoSection>
-          <a href="//mos.ru/kultura/" target="_blank" rel="noopener noreferrer">
+          <a href="//nekrasovka.ru/" target="_blank" rel="noopener noreferrer">
             <Icon icon="nekrasovka" />
           </a>
-          <a href="//nekrasovka.ru/" target="_blank" rel="noopener noreferrer">
+          <a href="//mos.ru/kultura/" target="_blank" rel="noopener noreferrer">
             <Icon icon="mos" />
           </a>
         </LogoSection>
