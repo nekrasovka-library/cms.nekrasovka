@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { ImageComponent } from "./image.styles.js";
-import ImageFile from "./components/image.file.jsx";
+import ImageFile from "./image.file.jsx";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 

@@ -154,7 +154,7 @@ const initialState = {
             textAlign: "center",
             color: "#000",
             borderRadius: "0",
-            height: "60",
+            height: "40",
             border: {
               color: "#000",
               width: "1",

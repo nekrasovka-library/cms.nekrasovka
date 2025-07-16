@@ -14,7 +14,7 @@ const ButtonPreview = ({
   return (
     <ButtonComponent $maxWidth={maxWidth} $textAlign={textAlign}>
       <Button
-        $elementBackgroundColor={elementBackgroundColor}
+        $backgroundColor={elementBackgroundColor}
         $border={border}
         $color={color}
         $borderRadius={borderRadius}

@@ -32,10 +32,10 @@ const Button = styled.div`
     border-radius: ${({ $borderRadius }) => $borderRadius}px;
     background-color: ${({ $backgroundColor }) => $backgroundColor};
     height: ${({ $height }) => $height}px;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
