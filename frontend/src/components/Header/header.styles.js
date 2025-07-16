@@ -6,6 +6,11 @@ const HeaderContainer = styled.div`
   padding-bottom: ${({ $paddingBottom }) =>
     $paddingBottom ? `${$paddingBottom}` : "0"};
   background-color: ${({ $backgroundColor }) => $backgroundColor};
+
+  @media (max-width: 768px) {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
 `;
 
 const HeaderComponent = styled.div`
@@ -19,12 +24,29 @@ const LogoSection = styled.section`
   display: flex;
   align-items: center;
   column-gap: 35px;
+
+  @media (max-width: 768px) {
+    a:nth-child(2) {
+      display: none;
+    }
+
+    svg {
+      height: 40px;
+      width: 114px;
+    }
+  }
 `;
 
 const WorkingHoursSection = styled.section`
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
+  @media (min-width: 769px) {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ClockIcon = styled.img`
@@ -51,9 +73,15 @@ const AddressLink = styled.a`
 `;
 
 const SocialLinksSection = styled.section`
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
+  @media (min-width: 769px) {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export {
