@@ -1,16 +1,16 @@
 import React from "react";
-import { getComponentParams } from "../../../helpers";
+import { getComponentParams } from "../../helpers";
 
-const TypeBlock = ({
-  isItems,
+const BlockPreview = ({
+  blockId,
   items,
   styles,
-  blockId,
+  isItems,
   CONSTRUCTOR_COMPONENTS,
 }) => {
   return (
     isItems &&
-    items.map(({ text, type, id }, elementIndex) => {
+    items.map(({ text, type, id }) => {
       const ItemComponent = CONSTRUCTOR_COMPONENTS[type];
       const params = getComponentParams({
         type,
@@ -20,9 +20,9 @@ const TypeBlock = ({
         text,
       });
 
-      return <ItemComponent key={elementIndex} {...params} />;
+      return <ItemComponent key={id} {...params} />;
     })
   );
 };
 
-export default TypeBlock;
+export default BlockPreview;

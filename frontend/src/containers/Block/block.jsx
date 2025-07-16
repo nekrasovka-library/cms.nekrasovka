@@ -1,139 +1,37 @@
-import React, { useState } from "react";
-import {
-  BlankBlockActionButtons,
-  BlankBlockAddButton,
-  BlankBlockDots,
-  Container,
-} from "./block.styles.js";
-import Tooltip from "../../nekrasovka-ui/Tooltip/tooltip.jsx";
-import Icon from "../../nekrasovka-ui/Icon/icon.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import TypeBlock from "./components/type.block.jsx";
+import React from "react";
+import { useSelector } from "react-redux";
+import BlockConstructor from "./block.constructor";
+import BlockPreview from "./block.preview";
 
 const Block = ({
   blockIndex,
-  id,
+  blockId,
   items,
   styles,
   isItems,
   totalBlocks,
   CONSTRUCTOR_COMPONENTS,
 }) => {
-  const dispatch = useDispatch();
-  const { isMenuOpen } = useSelector((state) => state.menu);
-  const { isSettingsOpen } = useSelector((state) => state.settings);
   const { isPreview } = useSelector((state) => state.preview);
-  const [isBlankBlockFocused, setIsBlankBlockFocused] = useState(false);
-  const FIXED_BLOCK_TYPES = ["header", "footer"];
-  const blockType = items?.[0]?.type;
 
-  const canMoveUp = () => blockIndex !== 0;
-  const canMoveDown = () => blockIndex + 1 !== totalBlocks;
-  const isFixedBlock = (type = blockType) => FIXED_BLOCK_TYPES.includes(type);
-
-  const isBlankBlockActive =
-    (isBlankBlockFocused && !isMenuOpen && !isSettingsOpen) ||
-    totalBlocks === 0;
-
-  const dispatchAction = (type, payload = null) => {
-    dispatch({ type, payload });
-  };
-
-  const handleAddBlock = () => {
-    dispatchAction("RESET_MENU");
-    dispatchAction("TOGGLE_MENU");
-    dispatchAction("CHANGE_EDITOR", null);
-    dispatchAction("SET_BLOCK", { blockIndex });
-  };
-
-  const handleDeleteBlock = () => {
-    dispatchAction("DELETE_BLOCK", { id });
-  };
-
-  const handleCopyBlock = () => {
-    dispatchAction("COPY_BLOCK", { items, styles, blockIndex });
-  };
-
-  const handleBlockSettings = () => {
-    dispatchAction("TOGGLE_SETTINGS");
-    dispatchAction("CHANGE_EDITOR", null);
-    dispatchAction("SET_BLOCK", { blockIndex });
-  };
-
-  const handleBlockMove = (direction) => {
-    const actionType = direction === "up" ? "MOVE_BLOCK_UP" : "MOVE_BLOCK_DOWN";
-    dispatchAction(actionType, { blockIndex });
-  };
-
-  const handleMouseOut = () => setIsBlankBlockFocused(false);
-  const handleMouseOver = () => setIsBlankBlockFocused(true);
-
-  return (
-    <Container onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-      <TypeBlock
-        blockId={id}
-        isItems={isItems}
-        items={items}
-        styles={styles}
-        CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
-      />
-
-      {!isPreview && (
-        <>
-          <BlankBlockAddButton $isBlankBlockFocused={isBlankBlockActive}>
-            <Tooltip text="Добавить блок">
-              <Icon icon="add" type="button" onClick={handleAddBlock} />
-            </Tooltip>
-          </BlankBlockAddButton>
-
-          {isItems && (
-            <BlankBlockActionButtons $isBlankBlockFocused={isBlankBlockActive}>
-              {!isFixedBlock() && (
-                <Tooltip text="Настройки">
-                  <Icon
-                    icon="settings"
-                    type="button"
-                    onClick={handleBlockSettings}
-                  />
-                </Tooltip>
-              )}
-
-              {!isFixedBlock() && (
-                <Tooltip text="Копировать блок">
-                  <Icon icon="copy" type="button" onClick={handleCopyBlock} />
-                </Tooltip>
-              )}
-
-              <Tooltip text="Удалить блок">
-                <Icon icon="trash" type="button" onClick={handleDeleteBlock} />
-              </Tooltip>
-
-              {canMoveUp() && (
-                <Tooltip text="Переместить вверх">
-                  <Icon
-                    icon="arrowUp"
-                    type="button"
-                    onClick={() => handleBlockMove("up")}
-                  />
-                </Tooltip>
-              )}
-
-              {canMoveDown() && (
-                <Tooltip text="Переместить вниз">
-                  <Icon
-                    icon="arrowDown"
-                    type="button"
-                    onClick={() => handleBlockMove("down")}
-                  />
-                </Tooltip>
-              )}
-            </BlankBlockActionButtons>
-          )}
-
-          <BlankBlockDots $isBlankBlockFocused={isBlankBlockActive} />
-        </>
-      )}
-    </Container>
+  return isPreview ? (
+    <BlockPreview
+      blockIndex={blockIndex}
+      blockId={blockId}
+      items={items}
+      styles={styles}
+      isItems={isItems}
+      totalBlocks={totalBlocks}
+      CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
+    />
+  ) : (
+    <BlockConstructor
+      blockId={blockId}
+      items={items}
+      styles={styles}
+      isItems={isItems}
+      CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
+    />
   );
 };
 

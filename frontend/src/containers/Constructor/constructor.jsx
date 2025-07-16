@@ -51,7 +51,7 @@ const Constructor = () => {
     return blocks.map(({ id, items, styles }, blockIndex) => (
       <Block
         key={id}
-        id={id}
+        blockId={id}
         blockIndex={blockIndex}
         items={items}
         styles={styles}

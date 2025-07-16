@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const BlockConstructorContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,7 +72,7 @@ const BlankBlockActionButtons = styled(BlankBlockButtons)`
 `;
 
 export {
-  Container,
+  BlockConstructorContainer,
   BlankBlockActionButtons,
   BlankBlockDots,
   BlankBlockAddButton,
