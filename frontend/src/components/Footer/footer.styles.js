@@ -1,8 +1,18 @@
 import styled from "styled-components";
 
 const FooterContainer = styled.div`
+  width: 100%;
+  padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
+  padding-bottom: ${({ $paddingBottom }) =>
+    $paddingBottom ? `${$paddingBottom}` : "0"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+`;
+
+const FooterComponent = styled.div`
   display: flex;
   justify-content: space-between;
+  max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
+  margin: 0 auto;
 `;
 
 const LogoSection = styled.section`
@@ -44,6 +54,7 @@ const QuestionButton = styled.button`
 
 export {
   FooterContainer,
+  FooterComponent,
   QuestionButton,
   LogoSection,
   NavLink,

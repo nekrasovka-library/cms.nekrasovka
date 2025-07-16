@@ -1,10 +1,25 @@
 import React from "react";
-import { DividerContainer } from "./divider.styles.js";
+import { DividerComponent, DividerContainer } from "./divider.styles.js";
 
-const Divider = ({ color, opacity }) => {
+const Divider = ({
+  color,
+  opacity,
+  backgroundColor,
+  maxWidth,
+  paddingTop,
+  paddingBottom,
+}) => {
   return (
-    <DividerContainer $backgroundColor={color} $opacity={opacity}>
-      <div />
+    <DividerContainer
+      $backgroundColor={backgroundColor}
+      $paddingTop={paddingTop}
+      $paddingBottom={paddingBottom}
+    >
+      <DividerComponent
+        $color={color}
+        $opacity={opacity}
+        $maxWidth={maxWidth}
+      />
     </DividerContainer>
   );
 };

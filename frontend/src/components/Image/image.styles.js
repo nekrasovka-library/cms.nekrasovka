@@ -1,7 +1,17 @@
 import styled from "styled-components";
 
 const ImageContainer = styled.div`
+  width: 100%;
+  padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
+  padding-bottom: ${({ $paddingBottom }) =>
+    $paddingBottom ? `${$paddingBottom}` : "0"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+`;
+
+const ImageComponent = styled.div`
   display: flex;
+  max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
+  margin: 0 auto;
 
   img {
     width: 100%;
@@ -16,4 +26,4 @@ const ImageFileContainer = styled.input`
   position: absolute;
 `;
 
-export { ImageContainer, ImageFileContainer };
+export { ImageComponent, ImageFileContainer, ImageContainer };

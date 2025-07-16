@@ -3,15 +3,25 @@ import styled from "styled-components";
 const calculateTotalWidth = ({ $gap, $overhang }) => $gap * 2 + $overhang * 2;
 const calculateTotalMargin = ({ $gap, $overhang }) => $gap + $overhang;
 
+const CarouselContainer = styled.div`
+  width: 100%;
+  padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
+  padding-bottom: ${({ $paddingBottom }) =>
+    $paddingBottom ? `${$paddingBottom}` : "0"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+`;
+
+const CarouselComponent = styled.div`
+  position: relative;
+  max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
+  margin: 0 auto;
+`;
+
 const CarouselWrapper = styled.div`
   overflow: hidden;
   width: 100%;
   max-width: ${({ $maxWidth }) => $maxWidth}px;
   text-align: center;
-  position: relative;
-`;
-
-const CarouselContainer = styled.div`
   position: relative;
 `;
 
@@ -88,4 +98,5 @@ export {
   CarouselButtonLeft,
   CarouselButtonRight,
   CarouselContainer,
+  CarouselComponent,
 };

@@ -13,6 +13,7 @@ const TextConstructor = ({
   textAlign,
   gap,
   tracks,
+  maxWidth,
 }) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state) => state.menu);
@@ -84,7 +85,7 @@ const TextConstructor = ({
   }, [tracks, isProjectLoaded]);
 
   return (
-    <EditorContainer $gap={gap} $tracks={tracks}>
+    <EditorContainer $gap={gap} $tracks={tracks} $maxWidth={maxWidth}>
       {isProjectLoaded &&
         text.map((content, index) => {
           const isEditorFocused =

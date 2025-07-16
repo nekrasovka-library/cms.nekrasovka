@@ -1,20 +1,28 @@
 import React from "react";
-import { TextContainer } from "./text.styles";
+import { TextComponent } from "./text.styles";
 
-const TextPreview = ({ text, backgroundColor, textAlign, gap, tracks }) => {
+const TextPreview = ({
+  text,
+  backgroundColor,
+  textAlign,
+  gap,
+  tracks,
+  maxWidth,
+}) => {
   return (
-    <TextContainer
+    <TextComponent
       $backgroundColor={backgroundColor}
       $textAlign={textAlign}
       $gap={gap}
       $tracks={tracks}
+      $maxWidth={maxWidth}
     >
       {text.map((textBlock, index) => {
         return (
           <div key={index} dangerouslySetInnerHTML={{ __html: textBlock }} />
         );
       })}
-    </TextContainer>
+    </TextComponent>
   );
 };
 

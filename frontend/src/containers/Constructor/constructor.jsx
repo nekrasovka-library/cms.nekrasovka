@@ -8,11 +8,11 @@ import Divider from "../../components/Divider/divider.jsx";
 import Header from "../../components/Header/header.jsx";
 import Footer from "../../components/Footer/footer.jsx";
 import Button from "../../components/Button/button.jsx";
-import { AnimatePresence } from "framer-motion";
 import Afisha from "../../components/Afisha/afisha.jsx";
 import Transition from "../../components/Transition/transition.jsx";
-import { useParams } from "react-router";
 import Text from "../../components/Text/text";
+import { AnimatePresence } from "framer-motion";
+import { useParams } from "react-router";
 
 const Constructor = () => {
   const dispatch = useDispatch();

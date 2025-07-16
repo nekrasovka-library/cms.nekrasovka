@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ImageContainer } from "./image.styles.js";
+import { ImageComponent } from "./image.styles.js";
 import ImageFile from "./components/image.file.jsx";
 import { useDispatch } from "react-redux";
 import axios from "axios";
@@ -12,6 +12,7 @@ const ImageConstructor = ({
   height,
   imgIndex = 0,
   borderRadius = 0,
+  maxWidth,
 }) => {
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
@@ -47,7 +48,11 @@ const ImageConstructor = ({
   };
 
   return (
-    <ImageContainer $borderRadius={borderRadius} $height={height}>
+    <ImageComponent
+      $borderRadius={borderRadius}
+      $height={height}
+      $maxWidth={maxWidth}
+    >
       <img
         src={`${process.env.REACT_APP_IMAGES_URL}${text[imgIndex]}`}
         alt="картинка"
@@ -62,7 +67,7 @@ const ImageConstructor = ({
         blockId={blockId}
         handleFileChange={handleFileChange}
       />
-    </ImageContainer>
+    </ImageComponent>
   );
 };
 

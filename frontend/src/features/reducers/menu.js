@@ -177,7 +177,7 @@ const initialState = {
           menuId: 8,
           styles: {
             paddingTop: "25px",
-            paddingBottom: "25px",
+            paddingBottom: "0",
             maxWidth: "12",
             backgroundColor: "#EDEEE9",
           },
@@ -195,7 +195,7 @@ const initialState = {
           text: "",
           menuId: 9,
           styles: {
-            paddingTop: "45px",
+            paddingTop: "50px",
             paddingBottom: "45px",
             maxWidth: "12",
             backgroundColor: "#EDEEE9",

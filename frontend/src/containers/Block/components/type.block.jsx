@@ -1,6 +1,5 @@
 import React from "react";
-import { TypeBlockContainer } from "../block.styles.js";
-import { generateBlockStyles, getComponentParams } from "../../../helpers";
+import { getComponentParams } from "../../../helpers";
 
 const TypeBlock = ({
   isItems,
@@ -9,25 +8,20 @@ const TypeBlock = ({
   blockId,
   CONSTRUCTOR_COMPONENTS,
 }) => {
-  const computedBlockStyles = styles ? generateBlockStyles(styles) : "";
-
   return (
-    isItems && (
-      <TypeBlockContainer $typeBlockStyles={computedBlockStyles}>
-        {items.map(({ text, type, id }, elementIndex) => {
-          const ItemComponent = CONSTRUCTOR_COMPONENTS[type];
-          const params = getComponentParams({
-            type,
-            blockId,
-            itemId: id,
-            styles,
-            text,
-          });
+    isItems &&
+    items.map(({ text, type, id }, elementIndex) => {
+      const ItemComponent = CONSTRUCTOR_COMPONENTS[type];
+      const params = getComponentParams({
+        type,
+        blockId,
+        itemId: id,
+        styles,
+        text,
+      });
 
-          return <ItemComponent key={elementIndex} {...params} />;
-        })}
-      </TypeBlockContainer>
-    )
+      return <ItemComponent key={elementIndex} {...params} />;
+    })
   );
 };
 

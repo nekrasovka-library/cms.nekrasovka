@@ -1,9 +1,18 @@
 import styled from "styled-components";
 
 const HeaderContainer = styled.div`
+  width: 100%;
+  padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
+  padding-bottom: ${({ $paddingBottom }) =>
+    $paddingBottom ? `${$paddingBottom}` : "0"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+`;
+
+const HeaderComponent = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
+  margin: 0 auto;
 `;
 
 const LogoSection = styled.section`
@@ -56,4 +65,5 @@ export {
   StatusText,
   AddressLink,
   SocialLinksSection,
+  HeaderComponent,
 };

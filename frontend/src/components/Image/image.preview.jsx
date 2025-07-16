@@ -1,11 +1,21 @@
 import React from "react";
-import { ImageContainer } from "./image.styles.js";
+import { ImageComponent } from "./image.styles.js";
 
 const DEFAULT_IMAGE = `imgfish.jpg`;
 
-const ImageConstructor = ({ text, height, imgIndex = 0, borderRadius = 0 }) => {
+const ImageConstructor = ({
+  text,
+  height,
+  imgIndex = 0,
+  borderRadius = 0,
+  maxWidth,
+}) => {
   return (
-    <ImageContainer $borderRadius={borderRadius} $height={height}>
+    <ImageComponent
+      $borderRadius={borderRadius}
+      $height={height}
+      $maxWidth={maxWidth}
+    >
       <img
         src={`${process.env.REACT_APP_IMAGES_URL}${text[imgIndex]}`}
         alt="картинка"
@@ -14,7 +24,7 @@ const ImageConstructor = ({ text, height, imgIndex = 0, borderRadius = 0 }) => {
           e.target.src = `${process.env.REACT_APP_URL}${DEFAULT_IMAGE}`;
         }}
       />
-    </ImageContainer>
+    </ImageComponent>
   );
 };
 

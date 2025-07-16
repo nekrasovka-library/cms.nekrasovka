@@ -8,9 +8,12 @@ import {
   CarouselContainer,
   CarouselButtonRight,
   CarouselButtonLeft,
+  CarouselComponent,
 } from "./carousel.styles.js";
 import Icon from "../../nekrasovka-ui/Icon/icon";
-import Image from "../Image/image";
+import ImagePreview from "../Image/image.preview";
+import ImageConstructor from "../Image/image.constructor";
+import { useSelector } from "react-redux";
 
 const DEFAULT_MAX_WIDTH = 600;
 const DEFAULT_AUTO_SCROLL = 0;
@@ -83,8 +86,7 @@ const useCarousel = (itemsCount, autoScrollInterval) => {
 };
 
 const Carousel = ({
-  children,
-  maxWidth = DEFAULT_MAX_WIDTH,
+  text,
   autoScrollInterval = DEFAULT_AUTO_SCROLL,
   overhang = DEFAULT_OVERHANG,
   gap = DEFAULT_GAP,
@@ -92,6 +94,10 @@ const Carousel = ({
   borderRadius = DEFAULT_BORDER_RADIUS,
   tracks = DEFAULT_TRACKS,
   height = "550",
+  backgroundColor,
+  maxWidth = DEFAULT_MAX_WIDTH,
+  paddingTop,
+  paddingBottom,
 }) => {
   const {
     currentIndex,
@@ -104,50 +110,67 @@ const Carousel = ({
     navigateToNext,
     navigateToPrev,
   } = useCarousel(tracks, autoScrollInterval);
+  const { isPreview } = useSelector((state) => state.preview);
 
   return (
-    <CarouselContainer>
-      {currentIndex > 0 && (
-        <CarouselButtonLeft>
-          <Icon icon="arrowCarousel" type="button" onClick={navigateToPrev} />
-        </CarouselButtonLeft>
-      )}
-      <CarouselWrapper $maxWidth={maxWidth}>
-        <CarouselTrack
-          ref={trackRef}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          $offset={offset}
-          $gap={gap}
-        >
-          {Array.from({ length: tracks }).map((_, index) => (
-            <CarouselItem key={index} $gap={gap} $overhang={overhang}>
-              <Image
-                blockId={blockId}
-                text={children}
-                imgIndex={index}
-                height={height}
-                borderRadius={borderRadius}
+    <CarouselContainer
+      $backgroundColor={backgroundColor}
+      $paddingTop={paddingTop}
+      $paddingBottom={paddingBottom}
+    >
+      <CarouselComponent $maxWidth={maxWidth}>
+        {currentIndex > 0 && (
+          <CarouselButtonLeft>
+            <Icon icon="arrowCarousel" type="button" onClick={navigateToPrev} />
+          </CarouselButtonLeft>
+        )}
+        <CarouselWrapper $maxWidth={maxWidth}>
+          <CarouselTrack
+            ref={trackRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            $offset={offset}
+            $gap={gap}
+          >
+            {Array.from({ length: tracks }).map((_, index) => (
+              <CarouselItem key={index} $gap={gap} $overhang={overhang}>
+                {isPreview ? (
+                  <ImagePreview
+                    text={text}
+                    height={height}
+                    borderRadius={borderRadius}
+                    imgIndex={index}
+                  />
+                ) : (
+                  <ImageConstructor
+                    blockId={blockId}
+                    tracks={tracks}
+                    text={text}
+                    imgIndex={index}
+                    height={height}
+                    borderRadius={borderRadius}
+                  />
+                )}
+              </CarouselItem>
+            ))}
+          </CarouselTrack>
+          <DotContainer $gap={gap} $overhang={overhang}>
+            {Array.from({ length: tracks }).map((_, index) => (
+              <Dot
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                $isActive={index === currentIndex}
               />
-            </CarouselItem>
-          ))}
-        </CarouselTrack>
-        <DotContainer $gap={gap} $overhang={overhang}>
-          {Array.from({ length: tracks }).map((_, index) => (
-            <Dot
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              $isActive={index === currentIndex}
-            />
-          ))}
-        </DotContainer>
-      </CarouselWrapper>
-      {currentIndex + 1 < tracks && (
-        <CarouselButtonRight>
-          <Icon icon="arrowCarousel" type="button" onClick={navigateToNext} />
-        </CarouselButtonRight>
-      )}
+            ))}
+          </DotContainer>
+        </CarouselWrapper>
+        {currentIndex + 1 < tracks && (
+          <CarouselButtonRight>
+            <Icon icon="arrowCarousel" type="button" onClick={navigateToNext} />
+          </CarouselButtonRight>
+        )}
+      </CarouselComponent>
     </CarouselContainer>
   );
 };

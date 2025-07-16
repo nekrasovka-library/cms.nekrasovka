@@ -65,10 +65,12 @@ const CONFIG = {
 };
 
 const Afisha = ({
-  blockId,
-  text,
   gap = CONFIG.DEFAULT_GAP,
   tracks = CONFIG.DEFAULT_TRACKS,
+  backgroundColor,
+  maxWidth,
+  paddingTop,
+  paddingBottom,
 }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -330,8 +332,12 @@ const Afisha = ({
   }
 
   return (
-    <AfishaContainer>
-      <AfishaWrapper>
+    <AfishaContainer
+      $backgroundColor={backgroundColor}
+      $paddingTop={paddingTop}
+      $paddingBottom={paddingBottom}
+    >
+      <AfishaWrapper $maxWidth={maxWidth}>
         <AfishaHeader>
           <AfishaHeaderTitle>Афиша</AfishaHeaderTitle>
           <AfishaHeaderLink href="//nekrasovka.ru/afisha">

@@ -40,36 +40,18 @@ const calculateBlockWidth = (columns) => {
   return MIN_WIDTH + COLUMN_BASE_WIDTH * (columns - 1);
 };
 
-const generateBlockStyles = ({
-  maxWidth,
-  backgroundColor,
-  paddingTop,
-  paddingBottom,
-}) => {
-  const computedMaxWidth = maxWidth ? calculateBlockWidth(maxWidth) : 0;
-
-  return `
-  width: 100%; 
-  & {
-    background-color: ${backgroundColor} !important;
-  } 
-  > div {
-    margin: 0 auto; 
-    max-width: ${computedMaxWidth}px; 
-    padding-top: ${paddingTop}; 
-    padding-bottom: ${paddingBottom}; 
-  }`;
-};
-
 const getComponentParams = ({ text, type, blockId, styles }) => {
   if (type === "text") {
     return {
       blockId,
       text,
-      backgroundColor: styles.backgroundColor,
       textAlign: styles.textAlign,
       gap: styles.gap,
       tracks: styles.tracks,
+      backgroundColor: styles.backgroundColor,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      paddingTop: styles.paddingTop,
+      paddingBottom: styles.paddingBottom,
     };
   }
 
@@ -79,17 +61,24 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
       text,
       borderRadius: styles.borderRadius,
       height: styles.height,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      paddingTop: styles.paddingTop,
+      paddingBottom: styles.paddingBottom,
+      backgroundColor: styles.backgroundColor,
     };
   }
 
   if (type === "carousel") {
     return {
       blockId,
-      children: text,
-      maxWidth: calculateBlockWidth(styles.maxWidth),
+      text,
       borderRadius: styles.borderRadius,
       tracks: styles.tracks,
       height: styles.height,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      paddingTop: styles.paddingTop,
+      paddingBottom: styles.paddingBottom,
+      backgroundColor: styles.backgroundColor,
     };
   }
 
@@ -99,6 +88,10 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
       text,
       color: styles.color,
       opacity: styles.opacity,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      paddingTop: styles.paddingTop,
+      paddingBottom: styles.paddingBottom,
+      backgroundColor: styles.backgroundColor,
     };
   }
 
@@ -112,6 +105,9 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
       height: styles.height,
       textAlign: styles.textAlign,
       backgroundColor: styles.elementBackgroundColor,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      paddingTop: styles.paddingTop,
+      paddingBottom: styles.paddingBottom,
     };
   }
 
@@ -119,7 +115,10 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
     return {
       blockId,
       text,
-      backgroundColor: styles.elementBackgroundColor,
+      backgroundColor: styles.backgroundColor,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      paddingTop: styles.paddingTop,
+      paddingBottom: styles.paddingBottom,
     };
   }
 
@@ -127,7 +126,10 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
     return {
       blockId,
       text,
-      backgroundColor: styles.elementBackgroundColor,
+      backgroundColor: styles.backgroundColor,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      paddingTop: styles.paddingTop,
+      paddingBottom: styles.paddingBottom,
     };
   }
 
@@ -135,9 +137,12 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
     return {
       blockId,
       text,
-      backgroundColor: styles.elementBackgroundColor,
+      backgroundColor: styles.backgroundColor,
       gap: styles.gap,
       tracks: styles.tracks,
+      maxWidth: calculateBlockWidth(styles.maxWidth),
+      paddingTop: styles.paddingTop,
+      paddingBottom: styles.paddingBottom,
     };
   }
 
@@ -150,7 +155,6 @@ const generateUniqueId = () => {
 
 export {
   useIsMobile,
-  generateBlockStyles,
   calculateBlockWidth,
   getComponentParams,
   generateUniqueId,

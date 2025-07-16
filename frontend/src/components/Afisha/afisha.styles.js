@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import { AFISHA_THEME } from "./afisha.constants.js";
 
-const AfishaContainer = styled.div``;
+const AfishaContainer = styled.div`
+  width: 100%;
+  padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
+  padding-bottom: ${({ $paddingBottom }) =>
+    $paddingBottom ? `${$paddingBottom}` : "0"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+`;
 
 const AfishaWrapper = styled.div`
-  max-width: ${AFISHA_THEME.containerMaxWidth};
+  max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
   margin: 0 auto;
 `;
 
