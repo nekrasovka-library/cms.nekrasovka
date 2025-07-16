@@ -112,11 +112,11 @@ const Settings = () => {
       <SettingsTitleLabel>Настройки элемента</SettingsTitleLabel>
       {renderSettingsComponent(Tracks, "tracks")}
       {renderSettingsComponent(Color, "color")}
+      {renderSettingsComponent(ElementFontSize, "elementFontSize")}
       {renderSettingsComponent(
         ElementBackgroundColor,
         "elementBackgroundColor",
       )}
-      {renderSettingsComponent(ElementFontSize, "elementFontSize")}
       {renderSettingsComponent(Opacity, "opacity")}
       {renderSettingsComponent(Radius, "borderRadius")}
       {renderSettingsComponent(Border, "border")}

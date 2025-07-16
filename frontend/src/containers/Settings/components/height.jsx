@@ -10,7 +10,7 @@ const Height = ({ height, handleSettingsChange }) => {
     <RadiusContainer>
       <SettingsLabel>Высота</SettingsLabel>
       <RadiusInput
-        type="number"
+        type="text"
         name="height"
         value={height}
         onChange={handleSettingsChange}
