@@ -36,7 +36,6 @@ const Button = ({
           borderRadius={borderRadius}
           height={height}
           textAlign={textAlign}
-          blockId={blockId}
         />
       ) : (
         <ButtonConstructor
