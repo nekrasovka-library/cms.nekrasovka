@@ -31,11 +31,11 @@ const Button = styled.div`
     border-color: ${({ $border }) => $border.color};
     border-radius: ${({ $borderRadius }) => $borderRadius}px;
     background-color: ${({ $backgroundColor }) => $backgroundColor};
-    height: ${({ $height }) => $height}px;
+    height: ${({ $height }) => $height};
     padding-left: 15px;
     padding-right: 15px;
     font-weight: 700;
-    font-size: 14px;
+    font-size: ${({ $elementFontSize }) => $elementFontSize};
     cursor: pointer;
     display: inline-flex;
     align-items: center;

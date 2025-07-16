@@ -10,6 +10,7 @@ const ButtonPreview = ({
   borderRadius,
   height,
   textAlign,
+  elementFontSize,
 }) => {
   return (
     <ButtonComponent $maxWidth={maxWidth} $textAlign={textAlign}>
@@ -19,6 +20,7 @@ const ButtonPreview = ({
         $color={color}
         $borderRadius={borderRadius}
         $height={height}
+        $elementFontSize={elementFontSize}
         dangerouslySetInnerHTML={{ __html: text }}
       />
     </ButtonComponent>

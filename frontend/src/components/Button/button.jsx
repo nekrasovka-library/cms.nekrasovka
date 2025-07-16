@@ -14,6 +14,7 @@ const Button = ({
   blockId,
   backgroundColor,
   elementBackgroundColor,
+  elementFontSize,
   maxWidth,
   paddingTop,
   paddingBottom,
@@ -36,6 +37,7 @@ const Button = ({
           borderRadius={borderRadius}
           height={height}
           textAlign={textAlign}
+          elementFontSize={elementFontSize}
         />
       ) : (
         <ButtonConstructor
@@ -48,6 +50,7 @@ const Button = ({
           height={height}
           textAlign={textAlign}
           blockId={blockId}
+          elementFontSize={elementFontSize}
         />
       )}
     </ButtonContainer>

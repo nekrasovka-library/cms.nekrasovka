@@ -108,6 +108,7 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
       paddingTop: styles.paddingTop,
       paddingBottom: styles.paddingBottom,
       elementBackgroundColor: styles.elementBackgroundColor,
+      elementFontSize: styles.elementFontSize,
       backgroundColor: styles.backgroundColor,
     };
   }

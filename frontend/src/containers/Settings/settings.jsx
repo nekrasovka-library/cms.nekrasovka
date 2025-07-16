@@ -13,6 +13,7 @@ import Gap from "./components/gap.jsx";
 import Height from "./components/height.jsx";
 import Border from "./components/border.jsx";
 import ElementBackgroundColor from "./components/element-background-color.jsx";
+import ElementFontSize from "./components/fontSize";
 import Tracks from "./components/tracks.jsx";
 
 const Settings = () => {
@@ -115,6 +116,7 @@ const Settings = () => {
         ElementBackgroundColor,
         "elementBackgroundColor",
       )}
+      {renderSettingsComponent(ElementFontSize, "elementFontSize")}
       {renderSettingsComponent(Opacity, "opacity")}
       {renderSettingsComponent(Radius, "borderRadius")}
       {renderSettingsComponent(Border, "border")}

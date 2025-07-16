@@ -15,7 +15,7 @@ const ImageComponent = styled.div`
 
   img {
     width: 100%;
-    height: ${({ $height }) => $height}px;
+    height: ${({ $height }) => $height};
     border-radius: ${({ $borderRadius }) => $borderRadius}px;
     object-fit: cover;
   }

@@ -30,6 +30,7 @@ const ButtonConstructor = ({
   height,
   textAlign,
   blockId,
+  elementFontSize,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const { isSettingsOpen } = useSelector((state) => state.settings);
@@ -118,6 +119,7 @@ const ButtonConstructor = ({
         $color={color}
         $borderRadius={borderRadius}
         $height={height}
+        $elementFontSize={elementFontSize}
         onClick={handleToggleEditing}
         dangerouslySetInnerHTML={{ __html: text }}
       />
