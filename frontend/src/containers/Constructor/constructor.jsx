@@ -47,26 +47,26 @@ const Constructor = () => {
     afisha: Afisha,
   };
 
-  const renderBlocks = () => {
-    return blocks.map(({ id, items, styles }, blockIndex) => (
-      <Block
-        key={id}
-        blockId={id}
-        blockIndex={blockIndex}
-        items={items}
-        styles={styles}
-        isItems={!!items}
-        totalBlocks={totalBlocks}
-        CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
-      />
-    ));
-  };
-
   return (
     <AnimatePresence mode="wait">
       <Transition key={pageId}>
         <ConstructorContainer onClick={handleContainerClick}>
-          {hasBlocks ? renderBlocks() : <Block blockIndex={0} />}
+          {hasBlocks ? (
+            blocks.map(({ id, items, styles }, blockIndex) => (
+              <Block
+                key={id}
+                blockId={id}
+                blockIndex={blockIndex}
+                items={items}
+                styles={styles}
+                isItems={!!items}
+                totalBlocks={totalBlocks}
+                CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
+              />
+            ))
+          ) : (
+            <Block />
+          )}
         </ConstructorContainer>
       </Transition>
     </AnimatePresence>

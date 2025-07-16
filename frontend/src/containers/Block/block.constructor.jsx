@@ -73,7 +73,7 @@ const BlockConstructor = ({
       onMouseOver={handleMouseOver}
     >
       {isItems &&
-        items.map(({ text, type, id }) => {
+        items.map(({ text, type, id }, itemIndex) => {
           const ItemComponent = CONSTRUCTOR_COMPONENTS[type];
           const params = getComponentParams({
             type,
@@ -83,7 +83,7 @@ const BlockConstructor = ({
             text,
           });
 
-          return <ItemComponent key={id} {...params} />;
+          return <ItemComponent key={itemIndex} {...params} />;
         })}
 
       {isItems && (

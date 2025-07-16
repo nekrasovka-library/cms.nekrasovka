@@ -16,20 +16,20 @@ const Block = ({
 
   return isPreview ? (
     <BlockPreview
+      blockId={blockId}
+      items={items}
+      styles={styles}
+      isItems={isItems}
+      CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
+    />
+  ) : (
+    <BlockConstructor
       blockIndex={blockIndex}
       blockId={blockId}
       items={items}
       styles={styles}
       isItems={isItems}
       totalBlocks={totalBlocks}
-      CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
-    />
-  ) : (
-    <BlockConstructor
-      blockId={blockId}
-      items={items}
-      styles={styles}
-      isItems={isItems}
       CONSTRUCTOR_COMPONENTS={CONSTRUCTOR_COMPONENTS}
     />
   );
