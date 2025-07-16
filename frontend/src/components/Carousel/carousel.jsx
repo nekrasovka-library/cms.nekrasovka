@@ -15,7 +15,7 @@ import ImagePreview from "../Image/image.preview";
 import ImageConstructor from "../Image/image.constructor";
 import { useSelector } from "react-redux";
 
-const DEFAULT_MAX_WIDTH = 600;
+const DEFAULT_MAX_WIDTH = 1200;
 const DEFAULT_AUTO_SCROLL = 0;
 const DEFAULT_OVERHANG = 0;
 const DEFAULT_GAP = 0;
@@ -93,7 +93,7 @@ const Carousel = ({
   blockId,
   borderRadius = DEFAULT_BORDER_RADIUS,
   tracks = DEFAULT_TRACKS,
-  height = "550",
+  height = "550px",
   backgroundColor,
   maxWidth = DEFAULT_MAX_WIDTH,
   paddingTop,

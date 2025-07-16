@@ -18,40 +18,66 @@ const CarouselComponent = styled.div`
 `;
 
 const CarouselWrapper = styled.div`
-  overflow: hidden;
   width: 100%;
   max-width: ${({ $maxWidth }) => $maxWidth}px;
   text-align: center;
   position: relative;
+  overflow: hidden;
 `;
 
 const CarouselTrack = styled.div`
   display: flex;
-  column-gap: ${({ $gap }) => $gap}px;
-  transition: transform 0.4s ease-in-out;
-  transform: ${({ $offset }) => `translateX(-${$offset}px)`};
+
+  @media (min-width: 769px) {
+    column-gap: ${({ $gap }) => $gap}px;
+    transition: transform 0.4s ease-in-out;
+    transform: ${({ $offset }) => `translateX(-${$offset}px)`};
+  }
+
+  @media (max-width: 768px) {
+    column-gap: 15px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 `;
 
 const CarouselItem = styled.div`
-  flex: 0 0 calc(100% - ${calculateTotalWidth}px);
+  @media (min-width: 769px) {
+    flex: 0 0 calc(100% - ${calculateTotalWidth}px);
 
-  &:first-child {
-    margin-left: ${calculateTotalMargin}px;
+    &:first-child {
+      margin-left: ${calculateTotalMargin}px;
+    }
+
+    &:last-child {
+      margin-right: ${calculateTotalMargin}px;
+    }
   }
 
-  &:last-child {
-    margin-right: ${calculateTotalMargin}px;
+  @media (max-width: 768px) {
+    img {
+      width: 248px;
+      height: 248px;
+    }
   }
 `;
 
 const DotContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  column-gap: 5px;
-  margin-top: 15px;
-  position: absolute;
-  right: 30px;
-  bottom: 30px;
+  @media (min-width: 769px) {
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+    margin-top: 15px;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Dot = styled.div`
@@ -72,9 +98,15 @@ const Dot = styled.div`
 `;
 
 const CarouselButton = styled.div`
-  position: absolute;
-  top: calc(50% - 20px);
-  z-index: 100;
+  @media (min-width: 769px) {
+    position: absolute;
+    top: calc(50% - 20px);
+    z-index: 100;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const CarouselButtonLeft = styled(CarouselButton)`
