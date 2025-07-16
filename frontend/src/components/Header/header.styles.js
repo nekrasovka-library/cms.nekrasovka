@@ -18,6 +18,11 @@ const HeaderComponent = styled.div`
   justify-content: space-between;
   max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    row-gap: 15px;
+  }
 `;
 
 const LogoSection = styled.section`
@@ -38,14 +43,14 @@ const LogoSection = styled.section`
 `;
 
 const WorkingHoursSection = styled.section`
-  @media (min-width: 769px) {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-  }
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
 
   @media (max-width: 768px) {
-    display: none;
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 5px;
   }
 `;
 
