@@ -84,7 +84,7 @@ const AfishaHeaderTitleStyled = styled.span`
   font-weight: ${AFISHA_THEME.fontWeightMedium};
 `;
 
-const AfishaHeaderLinkStyled = styled.a`
+const AfishaHeaderLinkStyled = styled.div`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -160,281 +160,21 @@ const EventsContainerStyled = styled.div`
   }
 `;
 
-const EventCardStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-radius: ${AFISHA_THEME.borderRadius};
-  background-image: ${(props) =>
-    props.$backgroundImage !== "none"
-      ? `url('${props.$backgroundImage}')`
-      : "none"};
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  color: ${AFISHA_THEME.primaryColor};
-  box-sizing: border-box;
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  ${(props) =>
-    props.$isError &&
-    `
-    position: relative;
-    
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      opacity: ${AFISHA_THEME.overlayOpacity};
-      border-radius: ${AFISHA_THEME.borderRadius};
-      z-index: 1;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-    }
-
-    > * {
-      position: relative;
-      z-index: 2;
-    }
-  `};
-
-  /* Desktop and tablet shared styles */
-  @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
-    height: 400px;
-    min-width: 380px;
-    max-width: 380px;
-    padding: ${AFISHA_THEME.spacingLg};
-  }
-
-  /* Tablet styles */
-  @media (max-width: ${AFISHA_THEME.breakpointLarge}) and (min-width: ${AFISHA_THEME.breakpointTablet}) {
-    &:first-child {
-      margin-left: ${AFISHA_THEME.spacingLg};
-    }
-
-    &:last-child {
-      margin-right: ${AFISHA_THEME.spacingLg};
-    }
-  }
-
-  /* Mobile styles */
-  @media (max-width: ${AFISHA_THEME.breakpointMobile}) {
-    height: 248px;
-    min-width: 248px;
-    max-width: 248px;
-    padding: ${AFISHA_THEME.spacingSm};
-
-    &:first-child {
-      margin-left: ${AFISHA_THEME.spacingMd};
-    }
-
-    &:last-child {
-      margin-right: ${AFISHA_THEME.spacingMd};
-    }
-  }
-`;
-
-const SkeletonCardStyled = styled(EventCardStyled)`
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
-    animation: skeleton-loading 2s infinite;
-  }
-
-  @keyframes skeleton-loading {
-    0% {
-      left: -100%;
-    }
-    100% {
-      left: 100%;
-    }
-  }
-`;
-
-const DateTimeSectionStyled = styled.section`
-  display: flex;
-  flex-direction: column;
-  row-gap: ${AFISHA_THEME.spacingXs};
-
-  /* Desktop and tablet shared styles */
-  @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
-    font-size: 18px;
-  }
-
-  /* Mobile styles */
-  @media (max-width: ${AFISHA_THEME.breakpointMobile}) {
-    font-size: 14px;
-  }
-`;
-
-const DateTimeHeaderStyled = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const DateTextStyled = styled.span`
-  font-weight: ${AFISHA_THEME.fontWeightMedium};
-  margin-right: 5px;
-`;
-
-const LocationTextStyled = styled.span`
-  /* Desktop and tablet shared styles */
-  @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
-    font-size: 14px;
-  }
-
-  /* Mobile styles */
-  @media (max-width: ${AFISHA_THEME.breakpointMobile}) {
-    font-size: 12px;
-  }
-`;
-
-const TitleSectionStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: ${AFISHA_THEME.spacingXs};
-  margin-top: ${AFISHA_THEME.spacingXl};
-`;
-
-const EventTitleStyled = styled.span`
-  font-style: normal;
-  font-weight: ${AFISHA_THEME.fontWeightMedium};
-
-  /* Desktop and tablet shared styles */
-  @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
-    font-size: 24px;
-    line-height: 28px;
-  }
-
-  /* Mobile styles */
-  @media (max-width: ${AFISHA_THEME.breakpointMobile}) {
-    font-size: 14px;
-    line-height: 17px;
-  }
-`;
-
-const EventSubtitleStyled = styled.span`
-  font-style: normal;
-  font-weight: ${AFISHA_THEME.fontWeightNormal};
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  /* Desktop and tablet shared styles */
-  @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
-    font-size: 21px;
-    line-height: 25px;
-  }
-
-  /* Mobile styles */
-  @media (max-width: ${AFISHA_THEME.breakpointMobile}) {
-    font-size: 12px;
-    line-height: 14px;
-  }
-`;
-
-const FooterSectionStyled = styled.section`
-  margin-top: auto;
-`;
-
-const PriceTagStyled = styled.div`
-  width: fit-content;
-  padding: ${AFISHA_THEME.spacingSm};
-  border: 1px solid ${AFISHA_THEME.primaryColor};
-  border-radius: ${AFISHA_THEME.borderRadius};
-  font-style: normal;
-  font-weight: ${AFISHA_THEME.fontWeightNormal};
-  font-size: 15px;
-  line-height: 18px;
-  margin-bottom: ${AFISHA_THEME.spacingMd};
-`;
-
-const TagsSectionStyled = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-style: normal;
-  font-weight: ${AFISHA_THEME.fontWeightNormal};
-  line-height: 17px;
-
-  /* Desktop and tablet shared styles */
-  @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
-    font-size: 14px;
-  }
-
-  /* Mobile styles */
-  @media (max-width: ${AFISHA_THEME.breakpointMobile}) {
-    font-size: 12px;
-  }
-`;
-
 const ErrorMessageStyled = styled.div`
   text-align: center;
   padding: ${AFISHA_THEME.spacingXxxl};
   color: ${AFISHA_THEME.errorColor};
 `;
 
-const SkeletonTextStyled = styled.span`
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  color: transparent;
-  filter: blur(1px);
-  animation: skeleton-pulse 1.5s ease-in-out infinite alternate;
-
-  @keyframes skeleton-pulse {
-    0% {
-      opacity: 0.6;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-`;
-
 export {
-  AfishaContainerStyled,
-  AfishaWrapperStyled,
-  AfishaHeaderStyled,
-  AfishaHeaderTitleStyled,
-  AfishaHeaderLinkStyled,
-  AfishaMainStyled,
   AfishaButtonLeftStyled,
   AfishaButtonRightStyled,
-  EventsContainerStyled,
-  EventCardStyled,
-  SkeletonCardStyled,
-  DateTimeSectionStyled,
-  DateTimeHeaderStyled,
-  DateTextStyled,
-  LocationTextStyled,
-  TitleSectionStyled,
-  EventTitleStyled,
-  EventSubtitleStyled,
-  FooterSectionStyled,
-  PriceTagStyled,
-  TagsSectionStyled,
+  AfishaContainerStyled,
+  AfishaHeaderLinkStyled,
+  AfishaHeaderStyled,
+  AfishaHeaderTitleStyled,
+  AfishaMainStyled,
+  AfishaWrapperStyled,
   ErrorMessageStyled,
-  SkeletonTextStyled,
+  EventsContainerStyled,
 };

@@ -9,22 +9,11 @@ import {
   AfishaButtonLeftStyled,
   AfishaButtonRightStyled,
   EventsContainerStyled,
-  EventCardStyled,
-  SkeletonCardStyled,
-  DateTimeSectionStyled,
-  DateTimeHeaderStyled,
-  DateTextStyled,
-  LocationTextStyled,
-  TitleSectionStyled,
-  EventTitleStyled,
-  EventSubtitleStyled,
-  FooterSectionStyled,
-  PriceTagStyled,
-  TagsSectionStyled,
   ErrorMessageStyled,
-  SkeletonTextStyled,
 } from "./afisha.main.styles";
+import EventCard from "../EventCard/event.card";
 import Icon from "../../nekrasovka-ui/Icon/icon";
+import { Link } from "react-router";
 
 // Константы
 const MONTHS = [
@@ -59,7 +48,6 @@ const CONFIG = {
   DESKTOP_BREAKPOINT: 1240,
   ITEMS_PER_PAGE: 3,
   CANCELLED_EVENT_TEXT: "Отменено",
-  CANCELLED_EVENT_MESSAGE: "Мероприятие отменено",
   ERROR_MESSAGE: "Ошибка загрузки событий",
   SKELETON_CARDS_COUNT: 3,
 };
@@ -72,7 +60,35 @@ const AfishaMain = ({
   paddingTop,
   paddingBottom,
 }) => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([
+    {
+      id: 1,
+      date: "2025-07-20 00:00:00",
+      title: "«Бабушкины квадраты». Мастер-класс по вязанию",
+      text: "«Бабушкины квадраты». Мастер-класс по вязанию",
+      geo: "Аудитория 502 / 5 этаж",
+      price: 0,
+      restriction: "12+",
+    },
+    {
+      id: 2,
+      date: "2025-07-20 00:00:00",
+      title: "«Бабушкины квадраты». Мастер-класс по вязанию",
+      text: "«Бабушкины квадраты». Мастер-класс по вязанию",
+      geo: "Аудитория 502 / 5 этаж",
+      price: 0,
+      restriction: "12+",
+    },
+    {
+      id: 3,
+      date: "2025-07-20 00:00:00",
+      title: "«Бабушкины квадраты». Мастер-класс по вязанию",
+      text: "«Бабушкины квадраты». Мастер-класс по вязанию",
+      geo: "Аудитория 502 / 5 этаж",
+      price: 0,
+      restriction: "12+",
+    },
+  ]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [scrollIndex, setScrollIndex] = useState(1);
@@ -115,7 +131,7 @@ const AfishaMain = ({
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
-    return `//nekrasovka.ru/afisha/${day}-${month}-${year}/${id}`;
+    return `afisha/${day}-${month}-${year}/${id}`;
   }, []);
 
   const createBackgroundImageUrl = useCallback((pictureId) => {
@@ -125,111 +141,6 @@ const AfishaMain = ({
   const isEventCancelled = useCallback((event) => {
     return event.geo === CONFIG.CANCELLED_EVENT_TEXT;
   }, []);
-
-  // Компонент скелетона
-  const SkeletonCard = () => (
-    <SkeletonCardStyled>
-      <DateTimeSectionStyled>
-        <DateTimeHeaderStyled>
-          <div>
-            <SkeletonTextStyled as={DateTextStyled}>
-              00 месяца
-            </SkeletonTextStyled>
-            <SkeletonTextStyled>день недели</SkeletonTextStyled>
-          </div>
-          <SkeletonTextStyled as="time">00:00</SkeletonTextStyled>
-        </DateTimeHeaderStyled>
-        <SkeletonTextStyled as={LocationTextStyled}>
-          Место проведения
-        </SkeletonTextStyled>
-      </DateTimeSectionStyled>
-      <TitleSectionStyled>
-        <SkeletonTextStyled as={EventTitleStyled}>
-          Название события
-        </SkeletonTextStyled>
-        <SkeletonTextStyled as={EventSubtitleStyled}>
-          Описание события которое может быть достаточно длинным и занимать
-          несколько строк текста
-        </SkeletonTextStyled>
-      </TitleSectionStyled>
-      <FooterSectionStyled>
-        <TagsSectionStyled>
-          <div></div>
-          <SkeletonTextStyled>0+</SkeletonTextStyled>
-        </TagsSectionStyled>
-      </FooterSectionStyled>
-    </SkeletonCardStyled>
-  );
-
-  // Компонент карточки события
-  const EventCard = ({ event, index }) => {
-    const { dateText, weekday } = formatDate(event.date);
-    const time = formatTime(event.time_start);
-    const url = formatUrl(event.date, event.id);
-    const backgroundImageUrl = createBackgroundImageUrl(event.picture_id);
-    const eventCancelled = isEventCancelled(event);
-    const eventText = event.text.replace(/<[^>]*>/g, "");
-
-    useEffect(() => {
-      if (eventCancelled) {
-        // Добавляем стили для отмененного события
-        const style = document.createElement("style");
-        style.textContent = `.event-card-${index}.error::before { background-image: url('${backgroundImageUrl}'); }`;
-        document.head.appendChild(style);
-
-        return () => {
-          document.head.removeChild(style);
-        };
-      }
-    }, [eventCancelled, backgroundImageUrl, index]);
-
-    return (
-      <EventCardStyled
-        $backgroundImage={eventCancelled ? "none" : backgroundImageUrl}
-        $isError={eventCancelled}
-        className={
-          eventCancelled ? `event-card-${index} error` : `event-card-${index}`
-        }
-      >
-        <DateTimeSectionStyled>
-          <DateTimeHeaderStyled>
-            <div>
-              <DateTextStyled>{dateText}</DateTextStyled>
-              <span>{weekday}</span>
-            </div>
-            <time>{time}</time>
-          </DateTimeHeaderStyled>
-          {eventCancelled ? (
-            <LocationTextStyled $isError={eventCancelled}>
-              {CONFIG.CANCELLED_EVENT_MESSAGE}
-            </LocationTextStyled>
-          ) : (
-            <LocationTextStyled
-              as="a"
-              href={event.geo_link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {event.geo}
-            </LocationTextStyled>
-          )}
-        </DateTimeSectionStyled>
-        <TitleSectionStyled as="a" href={url}>
-          <EventTitleStyled>{event.title}</EventTitleStyled>
-          {!eventCancelled && (
-            <EventSubtitleStyled>{eventText}</EventSubtitleStyled>
-          )}
-        </TitleSectionStyled>
-        <FooterSectionStyled>
-          {!!event.price && <PriceTagStyled>Платное</PriceTagStyled>}
-          <TagsSectionStyled>
-            <div></div>
-            <span>{event.restriction}</span>
-          </TagsSectionStyled>
-        </FooterSectionStyled>
-      </EventCardStyled>
-    );
-  };
 
   // Навигация
   const updateNavigationButtons = useCallback(() => {
@@ -348,7 +259,7 @@ const AfishaMain = ({
       <AfishaWrapperStyled $maxWidth={maxWidth}>
         <AfishaHeaderStyled>
           <AfishaHeaderTitleStyled>Афиша</AfishaHeaderTitleStyled>
-          <AfishaHeaderLinkStyled href="//nekrasovka.ru/afisha">
+          <AfishaHeaderLinkStyled as={Link} to="afisha">
             <span>Все события</span>
             <Icon icon="arrowRightLong" />
           </AfishaHeaderLinkStyled>
@@ -369,13 +280,19 @@ const AfishaMain = ({
             <Icon icon="arrowCarousel" />
           </AfishaButtonRightStyled>
           <EventsContainerStyled ref={eventsContainerRef} $gap={gap}>
-            {loading
-              ? Array.from({ length: CONFIG.SKELETON_CARDS_COUNT }).map(
-                  (_, index) => <SkeletonCard key={index} />,
-                )
-              : events.map((event, index) => (
-                  <EventCard key={event.id} event={event} index={index} />
-                ))}
+            {events.map((event, index) => (
+              <EventCard
+                key={event.id}
+                event={event}
+                loading={loading}
+                index={index}
+                formatDate={formatDate}
+                formatTime={formatTime}
+                formatUrl={formatUrl}
+                createBackgroundImageUrl={createBackgroundImageUrl}
+                isEventCancelled={isEventCancelled}
+              />
+            ))}
           </EventsContainerStyled>
         </AfishaMainStyled>
       </AfishaWrapperStyled>
