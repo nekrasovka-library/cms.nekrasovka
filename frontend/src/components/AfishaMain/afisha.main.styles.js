@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { AFISHA_THEME } from "./afisha.constants.js";
+import { AFISHA_THEME } from "./afisha.main.constants.js";
 
-const AfishaContainer = styled.div`
+const AfishaContainerStyled = styled.div`
   width: 100%;
   padding-top: ${({ $paddingTop }) => ($paddingTop ? `${$paddingTop}` : "0")};
   padding-bottom: ${({ $paddingBottom }) =>
@@ -9,12 +9,12 @@ const AfishaContainer = styled.div`
   background-color: ${({ $backgroundColor }) => $backgroundColor};
 `;
 
-const AfishaWrapper = styled.div`
+const AfishaWrapperStyled = styled.div`
   max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
   margin: 0 auto;
 `;
 
-const AfishaHeader = styled.div`
+const AfishaHeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -79,12 +79,12 @@ const AfishaHeader = styled.div`
   }
 `;
 
-const AfishaHeaderTitle = styled.span`
+const AfishaHeaderTitleStyled = styled.span`
   color: ${AFISHA_THEME.primaryColor};
   font-weight: ${AFISHA_THEME.fontWeightMedium};
 `;
 
-const AfishaHeaderLink = styled.a`
+const AfishaHeaderLinkStyled = styled.a`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -95,11 +95,11 @@ const AfishaHeaderLink = styled.a`
   }
 `;
 
-const AfishaMain = styled.div`
+const AfishaMainStyled = styled.div`
   position: relative;
 `;
 
-const AfishaButton = styled.div`
+const AfishaButtonStyled = styled.div`
   /* Desktop and tablet shared styles */
   @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
     position: absolute;
@@ -115,7 +115,7 @@ const AfishaButton = styled.div`
   }
 `;
 
-const AfishaButtonLeft = styled(AfishaButton)`
+const AfishaButtonLeftStyled = styled(AfishaButtonStyled)`
   @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
     left: -20px;
 
@@ -125,13 +125,13 @@ const AfishaButtonLeft = styled(AfishaButton)`
   }
 `;
 
-const AfishaButtonRight = styled(AfishaButton)`
+const AfishaButtonRightStyled = styled(AfishaButtonStyled)`
   @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
     right: -20px;
   }
 `;
 
-const EventsContainer = styled.div`
+const EventsContainerStyled = styled.div`
   display: flex;
   position: relative;
   overflow-x: auto;
@@ -160,7 +160,7 @@ const EventsContainer = styled.div`
   }
 `;
 
-const EventCard = styled.div`
+const EventCardStyled = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: ${AFISHA_THEME.borderRadius};
@@ -242,7 +242,7 @@ const EventCard = styled.div`
   }
 `;
 
-const SkeletonCard = styled(EventCard)`
+const SkeletonCardStyled = styled(EventCardStyled)`
   position: relative;
   overflow: hidden;
 
@@ -272,7 +272,7 @@ const SkeletonCard = styled(EventCard)`
   }
 `;
 
-const DateTimeSection = styled.section`
+const DateTimeSectionStyled = styled.section`
   display: flex;
   flex-direction: column;
   row-gap: ${AFISHA_THEME.spacingXs};
@@ -288,17 +288,17 @@ const DateTimeSection = styled.section`
   }
 `;
 
-const DateTimeHeader = styled.div`
+const DateTimeHeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const DateText = styled.span`
+const DateTextStyled = styled.span`
   font-weight: ${AFISHA_THEME.fontWeightMedium};
   margin-right: 5px;
 `;
 
-const LocationText = styled.span`
+const LocationTextStyled = styled.span`
   /* Desktop and tablet shared styles */
   @media (min-width: ${AFISHA_THEME.breakpointTablet}) {
     font-size: 14px;
@@ -310,14 +310,14 @@ const LocationText = styled.span`
   }
 `;
 
-const TitleSection = styled.div`
+const TitleSectionStyled = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: ${AFISHA_THEME.spacingXs};
   margin-top: ${AFISHA_THEME.spacingXl};
 `;
 
-const EventTitle = styled.span`
+const EventTitleStyled = styled.span`
   font-style: normal;
   font-weight: ${AFISHA_THEME.fontWeightMedium};
 
@@ -334,7 +334,7 @@ const EventTitle = styled.span`
   }
 `;
 
-const EventSubtitle = styled.span`
+const EventSubtitleStyled = styled.span`
   font-style: normal;
   font-weight: ${AFISHA_THEME.fontWeightNormal};
   display: -webkit-box;
@@ -356,11 +356,11 @@ const EventSubtitle = styled.span`
   }
 `;
 
-const FooterSection = styled.section`
+const FooterSectionStyled = styled.section`
   margin-top: auto;
 `;
 
-const PriceTag = styled.div`
+const PriceTagStyled = styled.div`
   width: fit-content;
   padding: ${AFISHA_THEME.spacingSm};
   border: 1px solid ${AFISHA_THEME.primaryColor};
@@ -372,15 +372,7 @@ const PriceTag = styled.div`
   margin-bottom: ${AFISHA_THEME.spacingMd};
 `;
 
-const SeriesText = styled.span`
-  font-style: normal;
-  font-weight: ${AFISHA_THEME.fontWeightNormal};
-  font-size: 14px;
-  line-height: 17px;
-  margin-bottom: ${AFISHA_THEME.spacingSm};
-`;
-
-const TagsSection = styled.div`
+const TagsSectionStyled = styled.div`
   display: flex;
   justify-content: space-between;
   font-style: normal;
@@ -398,13 +390,13 @@ const TagsSection = styled.div`
   }
 `;
 
-const ErrorMessage = styled.div`
+const ErrorMessageStyled = styled.div`
   text-align: center;
   padding: ${AFISHA_THEME.spacingXxxl};
   color: ${AFISHA_THEME.errorColor};
 `;
 
-const SkeletonText = styled.span`
+const SkeletonTextStyled = styled.span`
   background: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   color: transparent;
@@ -422,28 +414,27 @@ const SkeletonText = styled.span`
 `;
 
 export {
-  AfishaContainer,
-  AfishaWrapper,
-  AfishaHeader,
-  AfishaHeaderTitle,
-  AfishaHeaderLink,
-  AfishaMain,
-  AfishaButtonLeft,
-  AfishaButtonRight,
-  EventsContainer,
-  EventCard,
-  SkeletonCard,
-  DateTimeSection,
-  DateTimeHeader,
-  DateText,
-  LocationText,
-  TitleSection,
-  EventTitle,
-  EventSubtitle,
-  FooterSection,
-  PriceTag,
-  SeriesText,
-  TagsSection,
-  ErrorMessage,
-  SkeletonText,
+  AfishaContainerStyled,
+  AfishaWrapperStyled,
+  AfishaHeaderStyled,
+  AfishaHeaderTitleStyled,
+  AfishaHeaderLinkStyled,
+  AfishaMainStyled,
+  AfishaButtonLeftStyled,
+  AfishaButtonRightStyled,
+  EventsContainerStyled,
+  EventCardStyled,
+  SkeletonCardStyled,
+  DateTimeSectionStyled,
+  DateTimeHeaderStyled,
+  DateTextStyled,
+  LocationTextStyled,
+  TitleSectionStyled,
+  EventTitleStyled,
+  EventSubtitleStyled,
+  FooterSectionStyled,
+  PriceTagStyled,
+  TagsSectionStyled,
+  ErrorMessageStyled,
+  SkeletonTextStyled,
 };

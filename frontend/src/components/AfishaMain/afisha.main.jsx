@@ -1,29 +1,29 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import {
-  AfishaContainer,
-  AfishaWrapper,
-  AfishaHeader,
-  AfishaHeaderTitle,
-  AfishaHeaderLink,
-  AfishaMain,
-  AfishaButtonLeft,
-  AfishaButtonRight,
-  EventsContainer,
-  EventCard,
-  SkeletonCard,
-  DateTimeSection,
-  DateTimeHeader,
-  DateText,
-  LocationText,
-  TitleSection,
-  EventTitle,
-  EventSubtitle,
-  FooterSection,
-  PriceTag,
-  TagsSection,
-  ErrorMessage,
-  SkeletonText,
-} from "./afisha.styles";
+  AfishaContainerStyled,
+  AfishaWrapperStyled,
+  AfishaHeaderStyled,
+  AfishaHeaderTitleStyled,
+  AfishaHeaderLinkStyled,
+  AfishaMainStyled,
+  AfishaButtonLeftStyled,
+  AfishaButtonRightStyled,
+  EventsContainerStyled,
+  EventCardStyled,
+  SkeletonCardStyled,
+  DateTimeSectionStyled,
+  DateTimeHeaderStyled,
+  DateTextStyled,
+  LocationTextStyled,
+  TitleSectionStyled,
+  EventTitleStyled,
+  EventSubtitleStyled,
+  FooterSectionStyled,
+  PriceTagStyled,
+  TagsSectionStyled,
+  ErrorMessageStyled,
+  SkeletonTextStyled,
+} from "./afisha.main.styles";
 import Icon from "../../nekrasovka-ui/Icon/icon";
 
 // Константы
@@ -64,7 +64,7 @@ const CONFIG = {
   SKELETON_CARDS_COUNT: 3,
 };
 
-const Afisha = ({
+const AfishaMain = ({
   gap = CONFIG.DEFAULT_GAP,
   tracks = CONFIG.DEFAULT_TRACKS,
   backgroundColor,
@@ -127,36 +127,42 @@ const Afisha = ({
   }, []);
 
   // Компонент скелетона
-  const SkeletonCardComponent = () => (
-    <SkeletonCard>
-      <DateTimeSection>
-        <DateTimeHeader>
+  const SkeletonCard = () => (
+    <SkeletonCardStyled>
+      <DateTimeSectionStyled>
+        <DateTimeHeaderStyled>
           <div>
-            <SkeletonText as={DateText}>00 месяца</SkeletonText>
-            <SkeletonText>день недели</SkeletonText>
+            <SkeletonTextStyled as={DateTextStyled}>
+              00 месяца
+            </SkeletonTextStyled>
+            <SkeletonTextStyled>день недели</SkeletonTextStyled>
           </div>
-          <SkeletonText as="time">00:00</SkeletonText>
-        </DateTimeHeader>
-        <SkeletonText as={LocationText}>Место проведения</SkeletonText>
-      </DateTimeSection>
-      <TitleSection>
-        <SkeletonText as={EventTitle}>Название события</SkeletonText>
-        <SkeletonText as={EventSubtitle}>
+          <SkeletonTextStyled as="time">00:00</SkeletonTextStyled>
+        </DateTimeHeaderStyled>
+        <SkeletonTextStyled as={LocationTextStyled}>
+          Место проведения
+        </SkeletonTextStyled>
+      </DateTimeSectionStyled>
+      <TitleSectionStyled>
+        <SkeletonTextStyled as={EventTitleStyled}>
+          Название события
+        </SkeletonTextStyled>
+        <SkeletonTextStyled as={EventSubtitleStyled}>
           Описание события которое может быть достаточно длинным и занимать
           несколько строк текста
-        </SkeletonText>
-      </TitleSection>
-      <FooterSection>
-        <TagsSection>
+        </SkeletonTextStyled>
+      </TitleSectionStyled>
+      <FooterSectionStyled>
+        <TagsSectionStyled>
           <div></div>
-          <SkeletonText>0+</SkeletonText>
-        </TagsSection>
-      </FooterSection>
-    </SkeletonCard>
+          <SkeletonTextStyled>0+</SkeletonTextStyled>
+        </TagsSectionStyled>
+      </FooterSectionStyled>
+    </SkeletonCardStyled>
   );
 
   // Компонент карточки события
-  const EventCardComponent = ({ event, index }) => {
+  const EventCard = ({ event, index }) => {
     const { dateText, weekday } = formatDate(event.date);
     const time = formatTime(event.time_start);
     const url = formatUrl(event.date, event.id);
@@ -178,48 +184,50 @@ const Afisha = ({
     }, [eventCancelled, backgroundImageUrl, index]);
 
     return (
-      <EventCard
+      <EventCardStyled
         $backgroundImage={eventCancelled ? "none" : backgroundImageUrl}
         $isError={eventCancelled}
         className={
           eventCancelled ? `event-card-${index} error` : `event-card-${index}`
         }
       >
-        <DateTimeSection>
-          <DateTimeHeader>
+        <DateTimeSectionStyled>
+          <DateTimeHeaderStyled>
             <div>
-              <DateText>{dateText}</DateText>
+              <DateTextStyled>{dateText}</DateTextStyled>
               <span>{weekday}</span>
             </div>
             <time>{time}</time>
-          </DateTimeHeader>
+          </DateTimeHeaderStyled>
           {eventCancelled ? (
-            <LocationText $isError={eventCancelled}>
+            <LocationTextStyled $isError={eventCancelled}>
               {CONFIG.CANCELLED_EVENT_MESSAGE}
-            </LocationText>
+            </LocationTextStyled>
           ) : (
-            <LocationText
+            <LocationTextStyled
               as="a"
               href={event.geo_link}
               target="_blank"
               rel="noopener noreferrer"
             >
               {event.geo}
-            </LocationText>
+            </LocationTextStyled>
           )}
-        </DateTimeSection>
-        <TitleSection as="a" href={url}>
-          <EventTitle>{event.title}</EventTitle>
-          {!eventCancelled && <EventSubtitle>{eventText}</EventSubtitle>}
-        </TitleSection>
-        <FooterSection>
-          {!!event.price && <PriceTag>Платное</PriceTag>}
-          <TagsSection>
+        </DateTimeSectionStyled>
+        <TitleSectionStyled as="a" href={url}>
+          <EventTitleStyled>{event.title}</EventTitleStyled>
+          {!eventCancelled && (
+            <EventSubtitleStyled>{eventText}</EventSubtitleStyled>
+          )}
+        </TitleSectionStyled>
+        <FooterSectionStyled>
+          {!!event.price && <PriceTagStyled>Платное</PriceTagStyled>}
+          <TagsSectionStyled>
             <div></div>
             <span>{event.restriction}</span>
-          </TagsSection>
-        </FooterSection>
-      </EventCard>
+          </TagsSectionStyled>
+        </FooterSectionStyled>
+      </EventCardStyled>
     );
   };
 
@@ -323,60 +331,56 @@ const Afisha = ({
 
   if (error) {
     return (
-      <AfishaContainer>
-        <AfishaWrapper>
-          <ErrorMessage>{error}</ErrorMessage>
-        </AfishaWrapper>
-      </AfishaContainer>
+      <AfishaContainerStyled>
+        <AfishaWrapperStyled>
+          <ErrorMessageStyled>{error}</ErrorMessageStyled>
+        </AfishaWrapperStyled>
+      </AfishaContainerStyled>
     );
   }
 
   return (
-    <AfishaContainer
+    <AfishaContainerStyled
       $backgroundColor={backgroundColor}
       $paddingTop={paddingTop}
       $paddingBottom={paddingBottom}
     >
-      <AfishaWrapper $maxWidth={maxWidth}>
-        <AfishaHeader>
-          <AfishaHeaderTitle>Афиша</AfishaHeaderTitle>
-          <AfishaHeaderLink href="//nekrasovka.ru/afisha">
+      <AfishaWrapperStyled $maxWidth={maxWidth}>
+        <AfishaHeaderStyled>
+          <AfishaHeaderTitleStyled>Афиша</AfishaHeaderTitleStyled>
+          <AfishaHeaderLinkStyled href="//nekrasovka.ru/afisha">
             <span>Все события</span>
             <Icon icon="arrowRightLong" />
-          </AfishaHeaderLink>
-        </AfishaHeader>
-        <AfishaMain>
-          <AfishaButtonLeft
+          </AfishaHeaderLinkStyled>
+        </AfishaHeaderStyled>
+        <AfishaMainStyled>
+          <AfishaButtonLeftStyled
             ref={prevButtonRef}
             onClick={navigateToPrev}
             style={{ display: "none" }}
           >
             <Icon icon="arrowCarousel" />
-          </AfishaButtonLeft>
-          <AfishaButtonRight
+          </AfishaButtonLeftStyled>
+          <AfishaButtonRightStyled
             ref={nextButtonRef}
             onClick={navigateToNext}
             style={{ display: "none" }}
           >
             <Icon icon="arrowCarousel" />
-          </AfishaButtonRight>
-          <EventsContainer ref={eventsContainerRef} $gap={gap}>
+          </AfishaButtonRightStyled>
+          <EventsContainerStyled ref={eventsContainerRef} $gap={gap}>
             {loading
               ? Array.from({ length: CONFIG.SKELETON_CARDS_COUNT }).map(
-                  (_, index) => <SkeletonCardComponent key={index} />,
+                  (_, index) => <SkeletonCard key={index} />,
                 )
               : events.map((event, index) => (
-                  <EventCardComponent
-                    key={event.id}
-                    event={event}
-                    index={index}
-                  />
+                  <EventCard key={event.id} event={event} index={index} />
                 ))}
-          </EventsContainer>
-        </AfishaMain>
-      </AfishaWrapper>
-    </AfishaContainer>
+          </EventsContainerStyled>
+        </AfishaMainStyled>
+      </AfishaWrapperStyled>
+    </AfishaContainerStyled>
   );
 };
 
-export default Afisha;
+export default AfishaMain;

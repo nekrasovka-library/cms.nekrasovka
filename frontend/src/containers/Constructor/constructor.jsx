@@ -8,7 +8,7 @@ import Divider from "../../components/Divider/divider.jsx";
 import Header from "../../components/Header/header.jsx";
 import Footer from "../../components/Footer/footer.jsx";
 import Button from "../../components/Button/button.jsx";
-import Afisha from "../../components/Afisha/afisha.jsx";
+import Afisha from "../../components/AfishaMain/afisha.main";
 import Transition from "../../components/Transition/transition.jsx";
 import Text from "../../components/Text/text";
 import { AnimatePresence } from "framer-motion";
