@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { AFISHA_THEME } from "../AfishaMain/afisha.main.constants";
+import { AFISHA_THEME } from "./event.card.constants";
 
 // Извлеченные переменные для медиа-запросов
 const DESKTOP_TABLET_MEDIA = `@media (min-width: ${AFISHA_THEME.breakpointTablet})`;
-const TABLET_ONLY_MEDIA = `@media (max-width: ${AFISHA_THEME.breakpointLarge}) and (min-width: ${AFISHA_THEME.breakpointTablet})`;
 const MOBILE_MEDIA = `@media (max-width: ${AFISHA_THEME.breakpointMobile})`;
 
 // Извлеченные переменные для анимаций
@@ -116,32 +115,11 @@ const EventCardStyled = styled.div`
   ${SKELETON_PULSE_ANIMATION}
   
   ${DESKTOP_TABLET_MEDIA} {
-    height: 400px;
-    min-width: 380px;
-    max-width: 380px;
     padding: ${AFISHA_THEME.spacingLg};
   }
 
-  ${TABLET_ONLY_MEDIA} {
-    &:first-child {
-      margin-left: ${AFISHA_THEME.spacingLg};
-    }
-    &:last-child {
-      margin-right: ${AFISHA_THEME.spacingLg};
-    }
-  }
-
   ${MOBILE_MEDIA} {
-    height: 248px;
-    min-width: 248px;
-    max-width: 248px;
     padding: ${AFISHA_THEME.spacingSm};
-    &:first-child {
-      margin-left: ${AFISHA_THEME.spacingMd};
-    }
-    &:last-child {
-      margin-right: ${AFISHA_THEME.spacingMd};
-    }
   }
 `;
 

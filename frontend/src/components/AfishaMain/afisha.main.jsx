@@ -14,6 +14,7 @@ import {
 import EventCard from "../EventCard/event.card";
 import Icon from "../../nekrasovka-ui/Icon/icon";
 import { Link } from "react-router";
+import { CONFIG } from "./afisha.main.constants";
 
 // Константы
 const MONTHS = [
@@ -40,17 +41,6 @@ const WEEKDAYS = [
   "пятница",
   "суббота",
 ];
-
-const CONFIG = {
-  API_URL: "https://api.electro.nekrasovka.ru/api/calendars",
-  DEFAULT_TRACKS: 7,
-  DEFAULT_GAP: 30,
-  DESKTOP_BREAKPOINT: 1240,
-  ITEMS_PER_PAGE: 3,
-  CANCELLED_EVENT_TEXT: "Отменено",
-  ERROR_MESSAGE: "Ошибка загрузки событий",
-  SKELETON_CARDS_COUNT: 3,
-};
 
 const AfishaMain = ({
   gap = CONFIG.DEFAULT_GAP,

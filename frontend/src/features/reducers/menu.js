@@ -210,8 +210,8 @@ const initialState = {
       variants: [
         {
           id: 10,
-          image: "afisha.png",
-          type: "afisha",
+          image: "afisha_main.png",
+          type: "afishaMain",
           text: "",
           menuId: 10,
           styles: {
@@ -219,8 +219,21 @@ const initialState = {
             paddingBottom: "60px",
             maxWidth: "12",
             backgroundColor: "#EDEEE9",
-            gap: "30",
             tracks: 7,
+          },
+        },
+        {
+          id: 11,
+          image: "afisha_page.png",
+          type: "afishaPage",
+          text: "",
+          menuId: 10,
+          styles: {
+            paddingTop: "30px",
+            paddingBottom: "30px",
+            maxWidth: "12",
+            backgroundColor: "#EDEEE9",
+            tracks: 9,
           },
         },
       ],

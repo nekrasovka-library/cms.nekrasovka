@@ -147,16 +147,39 @@ const EventsContainerStyled = styled.div`
   /* Large desktop styles */
   @media (min-width: ${AFISHA_THEME.breakpointDesktop}) {
     column-gap: ${({ $gap }) => $gap}px;
+
+    & > div {
+      height: 400px;
+      min-width: 380px;
+    }
   }
 
   /* Tablet styles */
   @media (max-width: ${AFISHA_THEME.breakpointLarge}) and (min-width: ${AFISHA_THEME.breakpointTablet}) {
     column-gap: ${AFISHA_THEME.spacingLg};
+
+    & > div {
+      height: 400px;
+      min-width: 380px;
+    }
   }
 
   /* Mobile styles */
   @media (max-width: ${AFISHA_THEME.breakpointMobile}) {
     column-gap: ${AFISHA_THEME.spacingMd};
+
+    & > div {
+      height: 290px;
+      min-width: 290px;
+
+      &:first-child {
+        margin-left: 15px;
+      }
+
+      &:last-child {
+        margin-right: 15px;
+      }
+    }
   }
 `;
 

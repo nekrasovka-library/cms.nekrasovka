@@ -1,8 +1,3 @@
-export const CONFIG = {
-  CANCELLED_EVENT_TEXT: "Отменено",
-  CANCELLED_EVENT_MESSAGE: "Мероприятие отменено",
-};
-
 export const AFISHA_THEME = {
   // Color palette
   primaryColor: "#346178",

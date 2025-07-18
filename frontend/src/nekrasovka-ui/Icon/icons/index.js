@@ -20,6 +20,8 @@ import telegramRound from "./telegram_round";
 import question from "./question";
 import search from "./search";
 import menu from "./menu";
+import mozaic from "./mozaic";
+import list from "./list";
 
 export default {
   add,
@@ -44,4 +46,6 @@ export default {
   question,
   search,
   menu,
+  mozaic,
+  list,
 };

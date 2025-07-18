@@ -8,7 +8,8 @@ import Divider from "../../components/Divider/divider.jsx";
 import Header from "../../components/Header/header.jsx";
 import Footer from "../../components/Footer/footer.jsx";
 import Button from "../../components/Button/button.jsx";
-import Afisha from "../../components/AfishaMain/afisha.main";
+import AfishaMain from "../../components/AfishaMain/afisha.main";
+import AfishaPage from "../../components/AfishaPage/afisha.page";
 import Transition from "../../components/Transition/transition.jsx";
 import Text from "../../components/Text/text";
 import { AnimatePresence } from "framer-motion";
@@ -44,7 +45,8 @@ const Constructor = () => {
     button: Button,
     header: Header,
     footer: Footer,
-    afisha: Afisha,
+    afishaMain: AfishaMain,
+    afishaPage: AfishaPage,
   };
 
   return (

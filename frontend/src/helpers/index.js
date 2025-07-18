@@ -135,7 +135,7 @@ const getComponentParams = ({ text, type, blockId, styles }) => {
     };
   }
 
-  if (type === "afisha") {
+  if (["afishaPage", "afishaMain"].includes(type)) {
     return {
       blockId,
       text,

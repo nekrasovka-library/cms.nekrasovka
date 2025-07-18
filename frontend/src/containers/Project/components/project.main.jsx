@@ -16,7 +16,7 @@ const ProjectMain = ({ pages, mainPage }) => {
   const handleDeleteProjectPage = (projectId, pageId) => {
     dispatch({ type: "DELETE_PROJECT_PAGE_REQUEST", projectId, pageId });
   };
-
+  console.log("❗", pages);
   return (
     <ProjectMainContainer>
       <ProjectMainContainerHeader>Страницы проекта:</ProjectMainContainerHeader>

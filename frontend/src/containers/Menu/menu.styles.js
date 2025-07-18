@@ -59,8 +59,7 @@ const MainItem2 = styled.div`
   transition-timing-function: cubic-bezier(0, 0, 0.8, 1);
 
   img {
-    max-width: 320px;
-    width: auto;
+    width: 320px;
   }
 
   @media (hover: hover) {
