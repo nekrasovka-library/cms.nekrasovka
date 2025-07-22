@@ -9,6 +9,31 @@ export const CONFIG = {
   SKELETON_CARDS_COUNT: 3,
 };
 
+export const MONTHS = [
+  "января",
+  "февраля",
+  "марта",
+  "апреля",
+  "мая",
+  "июня",
+  "июля",
+  "августа",
+  "сентября",
+  "октября",
+  "ноября",
+  "декабря",
+];
+
+export const WEEKDAYS = [
+  "воскресенье",
+  "понедельник",
+  "вторник",
+  "среда",
+  "четверг",
+  "пятница",
+  "суббота",
+];
+
 // CSS переменные как JavaScript константы
 export const AFISHA_THEME = {
   // Color palette

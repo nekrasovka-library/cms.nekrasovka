@@ -14,6 +14,7 @@ import Transition from "../../components/Transition/transition.jsx";
 import Text from "../../components/Text/text";
 import { AnimatePresence } from "framer-motion";
 import { useParams } from "react-router";
+import EventPage from "../../components/EventPage/event.page";
 
 const Constructor = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Constructor = () => {
     footer: Footer,
     afishaMain: AfishaMain,
     afishaPage: AfishaPage,
+    afishaEvent: EventPage,
   };
 
   return (

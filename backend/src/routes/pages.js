@@ -46,7 +46,7 @@ router.get("/:pageId", (req, res) => {
  * Обновление страницы
  */
 router.post("/update", (req, res) => {
-  const { projectId, pageId, blocks, name } = req.body;
+  const { projectId, pageId, blocks, name, url } = req.body;
 
   try {
     const projects = readDatabase();
@@ -65,6 +65,7 @@ router.post("/update", (req, res) => {
           ...page,
           blocks: blocks || page.blocks,
           name: name || page.name,
+          url: url || page.url,
         };
       }
 

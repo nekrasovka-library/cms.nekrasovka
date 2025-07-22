@@ -1,5 +1,5 @@
 import Menu from "./containers/Menu/menu.jsx";
-import Main from "./containers/Main/main.jsx";
+import Main from "./main.jsx";
 import React, { useEffect } from "react";
 import Settings from "./containers/Settings/settings.jsx";
 import ConstructorHeader from "./containers/ConstructorHeader/constructor.header.jsx";

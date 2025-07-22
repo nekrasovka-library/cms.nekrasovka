@@ -168,16 +168,19 @@ const ProjectMainCardContainer = styled.div`
 
   @media (hover: hover) {
     > :nth-child(1):hover a,
+    > :nth-child(2):hover span,
     > :last-child > div:hover {
       color: #f4846b;
     }
 
-    > :nth-child(1) > div svg:hover {
+    > :nth-child(1) > div svg:hover,
+    > :nth-child(2) > div svg:hover {
       opacity: 1;
     }
 
     &:hover > div:last-child,
-    &:hover > :nth-child(1) > div svg {
+    &:hover > :nth-child(1) > div svg,
+    &:hover > :nth-child(2) > div svg {
       visibility: visible;
     }
   }

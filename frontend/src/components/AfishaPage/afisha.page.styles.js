@@ -76,6 +76,17 @@ const AfishaHeaderTitleStyled = styled.div`
   }
 `;
 
+const AfishaWrapperStyled = styled.div`
+  max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
+  margin: 0 auto;
+`;
+
+const ErrorMessageStyled = styled.div`
+  text-align: center;
+  padding: ${AFISHA_THEME.spacingXxxl};
+  color: ${AFISHA_THEME.errorColor};
+`;
+
 const AfishaMainStyled = styled.div`
   ${({ $view }) =>
     $view === "mozaic" &&
@@ -270,4 +281,6 @@ export {
   AfishaHeaderTagsStyled,
   AfishaHeaderViewStyled,
   TagStyled,
+  AfishaWrapperStyled,
+  ErrorMessageStyled,
 };

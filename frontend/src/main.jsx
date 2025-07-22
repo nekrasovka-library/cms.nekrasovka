@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import Projects from "../Projects/projects.jsx";
-import Page from "../Page/page.jsx";
-import Project from "../Project/project.jsx";
-import AfishaPage from "../../components/AfishaPage/afisha.page";
+import Projects from "./containers/Projects/projects.jsx";
+import Page from "./containers/Page/page.jsx";
+import Project from "./containers/Project/project.jsx";
+import AfishaPage from "./components/AfishaPage/afisha.page";
 
 const Main = () => {
   return (
