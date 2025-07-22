@@ -21,6 +21,8 @@ import {
   RightSectionButtonRegistrationStyled,
   RightSectionButtonCalendarStyled,
   ButtonsCalendarContainerMobileStyled,
+  EventCanceled,
+  EventImageMobileStyled,
 } from "./event.page.styles";
 
 const EventPage = ({
@@ -183,7 +185,12 @@ const EventPage = ({
       $paddingBottom={paddingBottom}
     >
       <EventPageContainerStyled $maxWidth={maxWidth}>
-        <LeftSectionStyled>
+        <LeftSectionStyled $isEventCancelled={isEventCancelled}>
+          {isEventCancelled && (
+            <EventCanceled>
+              Мероприятие отменено. Приносим извинения за возможные неудобства
+            </EventCanceled>
+          )}
           <DateTimeStyled>
             <div>
               <DateTextStyled $loading={loading}>
@@ -207,6 +214,12 @@ const EventPage = ({
               {event.geo}
             </LocationTextStyled>
           )}
+          <EventImageMobileStyled $isEventCancelled={isEventCancelled}>
+            <img
+              src={`//nekrasovka.ru/img/${event.picture_id}/medium`}
+              alt=""
+            />
+          </EventImageMobileStyled>
           <TextStyled>
             <EventTitleStyled $loading={loading}>
               {event.title}
@@ -232,19 +245,36 @@ const EventPage = ({
             Вход свободный по предварительной <a href="">регистрации</a>
           </RegistrationStyled>
         </LeftSectionStyled>
-        <RightSectionStyled>
+        <RightSectionStyled $isEventCancelled={isEventCancelled}>
           <div>
             <img
               src={`//nekrasovka.ru/img/${event.picture_id}/medium`}
               alt=""
             />
           </div>
-          <div>
+          {!isEventCancelled && (
             <div>
-              <RightSectionButtonRegistrationStyled>
-                Регистрация
-              </RightSectionButtonRegistrationStyled>
+              <div>
+                <RightSectionButtonRegistrationStyled>
+                  Регистрация
+                </RightSectionButtonRegistrationStyled>
+              </div>
+              <div>
+                <RightSectionButtonCalendarStyled>
+                  Добавить в Google.Календарь
+                </RightSectionButtonCalendarStyled>
+                <RightSectionButtonCalendarStyled>
+                  Добавить в Яндекс.Календарь
+                </RightSectionButtonCalendarStyled>
+              </div>
             </div>
+          )}
+        </RightSectionStyled>
+        {!isEventCancelled && (
+          <ButtonsCalendarContainerMobileStyled>
+            <RightSectionButtonRegistrationStyled>
+              Регистрация
+            </RightSectionButtonRegistrationStyled>
             <div>
               <RightSectionButtonCalendarStyled>
                 Добавить в Google.Календарь
@@ -253,21 +283,8 @@ const EventPage = ({
                 Добавить в Яндекс.Календарь
               </RightSectionButtonCalendarStyled>
             </div>
-          </div>
-        </RightSectionStyled>
-        <ButtonsCalendarContainerMobileStyled>
-          <RightSectionButtonRegistrationStyled>
-            Регистрация
-          </RightSectionButtonRegistrationStyled>
-          <div>
-            <RightSectionButtonCalendarStyled>
-              Добавить в Google.Календарь
-            </RightSectionButtonCalendarStyled>
-            <RightSectionButtonCalendarStyled>
-              Добавить в Яндекс.Календарь
-            </RightSectionButtonCalendarStyled>
-          </div>
-        </ButtonsCalendarContainerMobileStyled>
+          </ButtonsCalendarContainerMobileStyled>
+        )}
       </EventPageContainerStyled>
     </EventPageStyled>
   );

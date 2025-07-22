@@ -208,18 +208,33 @@ const EventPageStyled = styled.div`
 `;
 
 const RightSectionStyled = styled.section`
-  display: flex;
-  flex-direction: column;
-
-  img {
-    border-radius: 5px;
-    width: 100%;
-  }
-
   ${DESKTOP_TABLET_MEDIA} {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      border-radius: 5px;
+      width: 100%;
+    }
+
     > div {
       &:nth-child(1) {
+        position: relative;
         margin-bottom: 30px;
+
+        ${({ $isEventCancelled }) =>
+          $isEventCancelled &&
+          `&::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #777777;
+      mix-blend-mode: multiply;
+      border-radius: 5px;
+    }`}
       }
 
       &:nth-child(2) {
@@ -240,17 +255,37 @@ const RightSectionStyled = styled.section`
   }
 
   ${MOBILE_MEDIA} {
-    order: 1;
+    display: none;
+  }
+`;
 
-    > div {
-      &:nth-child(1) {
-        margin-bottom: 25px;
-      }
+const EventImageMobileStyled = styled.div`
+  ${DESKTOP_TABLET_MEDIA} {
+    display: none;
+  }
 
-      &:nth-child(2) {
-        display: none;
-      }
+  ${MOBILE_MEDIA} {
+    position: relative;
+    margin: 20px 0;
+
+    img {
+      border-radius: 5px;
+      width: 100%;
     }
+
+    ${({ $isEventCancelled }) =>
+      $isEventCancelled &&
+      `&::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #777777;
+      mix-blend-mode: multiply;
+      border-radius: 5px;
+    }`}
   }
 `;
 
@@ -315,6 +350,29 @@ const LeftSectionStyled = styled.section`
 
   ${MOBILE_MEDIA} {
     order: 2;
+  }
+
+  ${({ $isEventCancelled }) => $isEventCancelled && `* {color: #777777;}`};
+`;
+const EventCanceled = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #922d15;
+  border: 1px solid #922d15;
+  border-radius: 5px;
+
+  ${DESKTOP_TABLET_MEDIA} {
+    height: 50px;
+    font-size: 18px;
+    margin-bottom: 25px;
+  }
+
+  ${MOBILE_MEDIA} {
+    padding: 10px;
+    font-size: 12px;
+    margin-bottom: 20px;
+    text-align: center;
   }
 `;
 
@@ -430,4 +488,6 @@ export {
   RightSectionButtonCalendarStyled,
   RightSectionButtonRegistrationStyled,
   ButtonsCalendarContainerMobileStyled,
+  EventCanceled,
+  EventImageMobileStyled,
 };
