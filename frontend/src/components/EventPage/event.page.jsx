@@ -79,9 +79,7 @@ const EventPage = ({
     return `afisha/${day}-${month}-${year}/${id}`;
   }, []);
 
-  const isEventCancelled = useCallback((event) => {
-    return event.geo === CONFIG.CANCELLED_EVENT_TEXT;
-  }, []);
+  const isEventCancelled = event.geo === CONFIG.CANCELLED_EVENT_TEXT;
 
   const replaceStyles = useCallback((htmlText) => {
     if (!htmlText) return "";
@@ -135,7 +133,7 @@ const EventPage = ({
         setLoading(true);
         const response = await fetch(CONFIG.API_URL);
         const data = await response.json();
-        const eventData = { ...data.response.data.calendars[4] };
+        const eventData = { ...data.response.data.calendars[1] };
 
         const { dateText, weekday } = formatDate(event.date);
         const time = !!event.time_start ? formatTime(event.time_start) : "";
@@ -178,6 +176,8 @@ const EventPage = ({
     );
   }
 
+  console.log("❗", isEventCancelled);
+
   return (
     <EventPageStyled
       $backgroundColor={backgroundColor}
@@ -200,8 +200,9 @@ const EventPage = ({
                 {event.dateText}
               </DateTextStyled>
               <WeekdayStyled $loading={loading}>{event.weekday}</WeekdayStyled>
+              <TimeStyled $loading={loading}>{event.time}</TimeStyled>
             </div>
-            <TimeStyled $loading={loading}>{event.time}</TimeStyled>
+            <span>{event.restriction}</span>
           </DateTimeStyled>
           {loading ? (
             <LocationTextStyled $loading={loading}>

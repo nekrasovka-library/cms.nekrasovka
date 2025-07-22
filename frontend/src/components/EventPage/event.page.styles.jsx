@@ -140,6 +140,7 @@ const TimeStyled = styled.time`
 const WeekdayStyled = styled.span`
   ${({ $loading }) => $loading && SKELETON_BASE_STYLES};
   ${SKELETON_PULSE_ANIMATION}
+  margin-right: 5px;
 `;
 
 const EventTitleStyled = styled.span`
@@ -152,7 +153,7 @@ const EventTitleStyled = styled.span`
   }
 
   ${MOBILE_MEDIA} {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 17px;
   }
 
@@ -266,7 +267,7 @@ const EventImageMobileStyled = styled.div`
 
   ${MOBILE_MEDIA} {
     position: relative;
-    margin: 20px 0;
+    margin: 20px 0 0;
 
     img {
       border-radius: 5px;
