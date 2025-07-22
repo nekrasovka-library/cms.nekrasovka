@@ -216,8 +216,96 @@ const RightSectionStyled = styled.section`
     width: 100%;
   }
 
+  ${DESKTOP_TABLET_MEDIA} {
+    > div {
+      &:nth-child(1) {
+        margin-bottom: 30px;
+      }
+
+      &:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+
+        & > div {
+          display: flex;
+          flex-direction: column;
+
+          &:nth-child(2) {
+            row-gap: 15px;
+          }
+        }
+      }
+    }
+  }
+
   ${MOBILE_MEDIA} {
     order: 1;
+
+    > div {
+      &:nth-child(1) {
+        margin-bottom: 25px;
+      }
+
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+`;
+
+const ButtonsCalendarContainerMobileStyled = styled.div`
+  ${DESKTOP_TABLET_MEDIA} {
+    display: none;
+  }
+
+  ${MOBILE_MEDIA} {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    order: 3;
+    margin-top: 30px;
+
+    > div {
+      &:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+      }
+    }
+  }
+`;
+
+const RightSectionButtonStyled = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 5px;
+
+  ${DESKTOP_TABLET_MEDIA} {
+    height: 50px;
+  }
+
+  ${MOBILE_MEDIA} {
+    height: 40px;
+  }
+`;
+
+const RightSectionButtonRegistrationStyled = styled(RightSectionButtonStyled)`
+  background: #346178;
+  color: #ffff;
+`;
+
+const RightSectionButtonCalendarStyled = styled(RightSectionButtonStyled)`
+  border: 1px solid #346178;
+  color: #346178;
+
+  @media (hover: hover) {
+    &:hover {
+      background: #346178;
+      color: #ffff;
+    }
   }
 `;
 
@@ -339,4 +427,7 @@ export {
   RegistrationStyled,
   EventPageContainerStyled,
   AuthorStyled,
+  RightSectionButtonCalendarStyled,
+  RightSectionButtonRegistrationStyled,
+  ButtonsCalendarContainerMobileStyled,
 };

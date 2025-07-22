@@ -18,6 +18,9 @@ import {
   TimeStyled,
   TextStyled,
   WeekdayStyled,
+  RightSectionButtonRegistrationStyled,
+  RightSectionButtonCalendarStyled,
+  ButtonsCalendarContainerMobileStyled,
 } from "./event.page.styles";
 
 const EventPage = ({
@@ -236,8 +239,35 @@ const EventPage = ({
               alt=""
             />
           </div>
-          <div></div>
+          <div>
+            <div>
+              <RightSectionButtonRegistrationStyled>
+                Регистрация
+              </RightSectionButtonRegistrationStyled>
+            </div>
+            <div>
+              <RightSectionButtonCalendarStyled>
+                Добавить в Google.Календарь
+              </RightSectionButtonCalendarStyled>
+              <RightSectionButtonCalendarStyled>
+                Добавить в Яндекс.Календарь
+              </RightSectionButtonCalendarStyled>
+            </div>
+          </div>
         </RightSectionStyled>
+        <ButtonsCalendarContainerMobileStyled>
+          <RightSectionButtonRegistrationStyled>
+            Регистрация
+          </RightSectionButtonRegistrationStyled>
+          <div>
+            <RightSectionButtonCalendarStyled>
+              Добавить в Google.Календарь
+            </RightSectionButtonCalendarStyled>
+            <RightSectionButtonCalendarStyled>
+              Добавить в Яндекс.Календарь
+            </RightSectionButtonCalendarStyled>
+          </div>
+        </ButtonsCalendarContainerMobileStyled>
       </EventPageContainerStyled>
     </EventPageStyled>
   );
