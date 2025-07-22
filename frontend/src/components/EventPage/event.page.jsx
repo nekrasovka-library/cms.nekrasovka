@@ -27,6 +27,7 @@ import {
 } from "./event.page.styles";
 import TextConstructor from "./event.page.constructor";
 import { useSelector } from "react-redux";
+import Image from "../Image/image";
 
 const EventPage = ({
   backgroundColor,
@@ -44,7 +45,7 @@ const EventPage = ({
     price: 0,
     restriction: "12+",
     og_image: null,
-    picture_id: 13082,
+    picture_id: null,
     dateText: "2025-07-20",
     weekday: "2025-07-20",
     time: "00:00",
@@ -251,10 +252,7 @@ const EventPage = ({
           </TextStyled>
           <AuthorStyled>
             <div>
-              <img
-                src={`//nekrasovka.ru/img/${event.picture_id}/medium`}
-                alt=""
-              />
+              <Image text={`//nekrasovka.ru/img/${event.picture_id}/medium`} />
             </div>
             <div>
               <span>{event.author.name},</span>
@@ -267,10 +265,7 @@ const EventPage = ({
         </LeftSectionStyled>
         <RightSectionStyled $isEventCancelled={isEventCancelled}>
           <div>
-            <img
-              src={`//nekrasovka.ru/img/${event.picture_id}/medium`}
-              alt=""
-            />
+            <Image text={`//nekrasovka.ru/img/${event.picture_id}/medium`} />
           </div>
           {!isEventCancelled && (
             <div>
