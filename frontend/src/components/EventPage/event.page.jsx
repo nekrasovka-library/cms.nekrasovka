@@ -185,7 +185,10 @@ const EventPage = ({
       $paddingBottom={paddingBottom}
     >
       <EventPageContainerStyled $maxWidth={maxWidth}>
-        <LeftSectionStyled $isEventCancelled={isEventCancelled}>
+        <LeftSectionStyled
+          $isEventCancelled={isEventCancelled}
+          $loading={loading}
+        >
           {isEventCancelled && (
             <EventCanceled>
               Мероприятие отменено. Приносим извинения за возможные неудобства

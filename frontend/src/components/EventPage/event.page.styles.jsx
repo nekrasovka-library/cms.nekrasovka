@@ -348,12 +348,10 @@ const LeftSectionStyled = styled.section`
   display: flex;
   flex-direction: column;
 
-  ${MOBILE_MEDIA} {
-    order: 2;
-  }
-
-  ${({ $isEventCancelled }) => $isEventCancelled && `* {color: #777777;}`};
+  ${({ $isEventCancelled, $loading }) =>
+    $isEventCancelled && !$loading && `* {color: #777777;}`};
 `;
+
 const EventCanceled = styled.div`
   display: flex;
   align-items: center;
