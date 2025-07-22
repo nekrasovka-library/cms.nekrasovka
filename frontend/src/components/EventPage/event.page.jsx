@@ -23,13 +23,17 @@ import {
   ButtonsCalendarContainerMobileStyled,
   EventCanceled,
   EventImageMobileStyled,
+  RestrictionStyled,
 } from "./event.page.styles";
+import TextConstructor from "./event.page.constructor";
+import { useSelector } from "react-redux";
 
 const EventPage = ({
   backgroundColor,
   maxWidth,
   paddingTop,
   paddingBottom,
+  blockId,
 }) => {
   const [event, setEvent] = useState({
     id: 1,
@@ -53,6 +57,7 @@ const EventPage = ({
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { isPreview } = useSelector((state) => state.preview);
 
   // Утилиты для форматирования
   const formatDate = useCallback((dateString) => {
@@ -176,8 +181,6 @@ const EventPage = ({
     );
   }
 
-  console.log("❗", isEventCancelled);
-
   return (
     <EventPageStyled
       $backgroundColor={backgroundColor}
@@ -202,7 +205,9 @@ const EventPage = ({
               <WeekdayStyled $loading={loading}>{event.weekday}</WeekdayStyled>
               <TimeStyled $loading={loading}>{event.time}</TimeStyled>
             </div>
-            <span>{event.restriction}</span>
+            <RestrictionStyled $loading={loading}>
+              {event.restriction}
+            </RestrictionStyled>
           </DateTimeStyled>
           {loading ? (
             <LocationTextStyled $loading={loading}>
@@ -225,13 +230,24 @@ const EventPage = ({
             />
           </EventImageMobileStyled>
           <TextStyled>
-            <EventTitleStyled $loading={loading}>
-              {event.title}
-            </EventTitleStyled>
-            <EventTextStyled
-              $loading={loading}
-              dangerouslySetInnerHTML={{ __html: event.text }}
-            />
+            {isPreview ? (
+              <>
+                <EventTitleStyled $loading={loading}>
+                  {event.title}
+                </EventTitleStyled>
+                <EventTextStyled
+                  $loading={loading}
+                  dangerouslySetInnerHTML={{ __html: event.text }}
+                />
+              </>
+            ) : (
+              <TextConstructor
+                text={event.text}
+                backgroundColor={backgroundColor}
+                blockId={blockId}
+                s
+              />
+            )}
           </TextStyled>
           <AuthorStyled>
             <div>

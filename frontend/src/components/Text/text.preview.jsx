@@ -1,18 +1,10 @@
 import React from "react";
 import { TextComponent } from "./text.styles";
 
-const TextPreview = ({
-  text,
-  backgroundColor,
-  textAlign,
-  gap,
-  tracks,
-  maxWidth,
-}) => {
+const TextPreview = ({ text, backgroundColor, gap, tracks, maxWidth }) => {
   return (
     <TextComponent
       $backgroundColor={backgroundColor}
-      $textAlign={textAlign}
       $gap={gap}
       $tracks={tracks}
       $maxWidth={maxWidth}

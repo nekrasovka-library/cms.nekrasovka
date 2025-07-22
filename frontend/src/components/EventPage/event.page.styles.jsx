@@ -116,7 +116,7 @@ const DateTimeStyled = styled.div`
   justify-content: space-between;
 
   ${DESKTOP_TABLET_MEDIA} {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   ${MOBILE_MEDIA} {
@@ -139,7 +139,7 @@ const TimeStyled = styled.time`
 
 const WeekdayStyled = styled.span`
   ${({ $loading }) => $loading && SKELETON_BASE_STYLES};
-  ${SKELETON_PULSE_ANIMATION}
+  ${SKELETON_PULSE_ANIMATION};
   margin-right: 5px;
 `;
 
@@ -158,7 +158,21 @@ const EventTitleStyled = styled.span`
   }
 
   ${({ $loading }) => $loading && SKELETON_BASE_STYLES};
-  ${SKELETON_PULSE_ANIMATION}
+  ${SKELETON_PULSE_ANIMATION};
+`;
+
+const RestrictionStyled = styled.time`
+
+  ${DESKTOP_TABLET_MEDIA} {
+    font-size: 18px;
+
+
+  ${MOBILE_MEDIA} {
+    font-size: 12px;
+  }
+
+  ${({ $loading }) => $loading && SKELETON_BASE_STYLES};
+  ${SKELETON_PULSE_ANIMATION};
 `;
 
 const TextStyled = styled.div`
@@ -489,4 +503,5 @@ export {
   ButtonsCalendarContainerMobileStyled,
   EventCanceled,
   EventImageMobileStyled,
+  RestrictionStyled,
 };
