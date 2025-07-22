@@ -234,7 +234,7 @@ const RightSectionStyled = styled.section`
       background-color: #777777;
       mix-blend-mode: multiply;
       border-radius: 5px;
-    }`}
+    }`};
       }
 
       &:nth-child(2) {
