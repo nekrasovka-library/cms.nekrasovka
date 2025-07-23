@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { ImageComponent } from "./image.styles.js";
 import ImageFile from "./image.file.jsx";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 
 const DEFAULT_IMAGE = `imgfish.jpg`;
@@ -13,9 +12,11 @@ const ImageConstructor = ({
   imgIndex = 0,
   borderRadius = 0,
   maxWidth,
+  updateImage,
 }) => {
   const fileInputRef = useRef(null);
-  const dispatch = useDispatch();
+  const isTextArray = Array.isArray(text);
+  const images = isTextArray ? text : [text];
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -34,16 +35,10 @@ const ImageConstructor = ({
         formData,
       );
 
-      const newText = [...text];
+      const newText = [...images];
       newText[imgIndex] = response.data.file.filename;
 
-      dispatch({
-        type: "UPDATE_BLOCK",
-        payload: {
-          blockId,
-          text: newText,
-        },
-      });
+      updateImage(newText);
     }
   };
 
@@ -54,7 +49,7 @@ const ImageConstructor = ({
       $maxWidth={maxWidth}
     >
       <img
-        src={`${process.env.REACT_APP_IMAGES_URL}${text[imgIndex]}`}
+        src={`${process.env.REACT_APP_IMAGES_URL}${images[imgIndex]}`}
         alt="картинка"
         onClick={handleFileClick}
         onError={(e) => {

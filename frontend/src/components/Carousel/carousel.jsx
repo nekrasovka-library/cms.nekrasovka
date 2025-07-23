@@ -13,7 +13,7 @@ import {
 import Icon from "../../nekrasovka-ui/Icon/icon";
 import ImagePreview from "../Image/image.preview";
 import ImageConstructor from "../Image/image.constructor";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const DEFAULT_MAX_WIDTH = 1200;
 const DEFAULT_AUTO_SCROLL = 0;
@@ -111,6 +111,17 @@ const Carousel = ({
     navigateToPrev,
   } = useCarousel(tracks, autoScrollInterval);
   const { isPreview } = useSelector((state) => state.preview);
+  const dispatch = useDispatch();
+
+  const updateImage = (newText) => {
+    dispatch({
+      type: "UPDATE_BLOCK",
+      payload: {
+        blockId,
+        text: newText,
+      },
+    });
+  };
 
   return (
     <CarouselContainer
@@ -150,6 +161,7 @@ const Carousel = ({
                     imgIndex={index}
                     height={height}
                     borderRadius={borderRadius}
+                    updateImage={updateImage}
                   />
                 )}
               </CarouselItem>

@@ -1,33 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { CONFIG, MONTHS, WEEKDAYS } from "./event.page.constants";
 import {
   AfishaContainerStyled,
   AfishaWrapperStyled,
-  DateTextStyled,
-  DateTimeStyled,
   ErrorMessageStyled,
-  AuthorStyled,
   EventPageContainerStyled,
-  LeftSectionStyled,
-  RightSectionStyled,
   EventPageStyled,
-  RegistrationStyled,
-  EventTextStyled,
-  EventTitleStyled,
-  LocationTextStyled,
-  TimeStyled,
-  TextStyled,
-  WeekdayStyled,
-  RightSectionButtonRegistrationStyled,
-  RightSectionButtonCalendarStyled,
-  ButtonsCalendarContainerMobileStyled,
-  EventCanceled,
-  EventImageMobileStyled,
-  RestrictionStyled,
 } from "./event.page.styles";
-import TextConstructor from "./event.page.constructor";
-import { useSelector } from "react-redux";
-import Image from "../Image/image";
+import EventPagePreview from "./event.page.preview";
+import EventPageConstructor from "./event.page.constructor";
 
 const EventPage = ({
   backgroundColor,
@@ -49,11 +31,10 @@ const EventPage = ({
     dateText: "2025-07-20",
     weekday: "2025-07-20",
     time: "00:00",
+    canceled: false,
     author: {
       img: "https://nekrasovka.ru/img/1/medium",
-      name: "Дмитрий Круглых",
-      about:
-        "выпускник философского факультета МГУ, автор и ведущий youtube-канала «Философское Мнение»",
+      text: "<div>Дмитрий Круглых, выпускник философского факультета МГУ, автор и ведущий youtube-канала «Философское Мнение»</div>",
     },
   });
   const [loading, setLoading] = useState(true);
@@ -85,53 +66,6 @@ const EventPage = ({
     return `afisha/${day}-${month}-${year}/${id}`;
   }, []);
 
-  const isEventCancelled = event.geo === CONFIG.CANCELLED_EVENT_TEXT;
-
-  const replaceStyles = useCallback((htmlText) => {
-    if (!htmlText) return "";
-
-    // Удаляем атрибуты style
-    let cleanedText = htmlText.replace(/\s*style\s*=\s*["'][^"']*["']/gi, "");
-
-    // Удаляем пустые теги и теги с только пробелами, &nbsp;, &emsp;, &ensp;, &thinsp;, &#160; и т.д.
-    const emptyContentPattern =
-      /^\s*(?:&nbsp;|&emsp;|&ensp;|&thinsp;|&#160;|&#8194;|&#8195;|&#8201;|\u00A0|\u2002|\u2003|\u2009)*\s*$/;
-
-    // Повторяем процесс удаления пустых тегов несколько раз для вложенных структур
-    let previousText;
-    do {
-      previousText = cleanedText;
-
-      // Удаляем теги, которые пустые или содержат только различные виды пробелов
-      cleanedText = cleanedText.replace(
-        /<(\w+)([^>]*)>((?:(?!<\/\1>).)*)<\/\1>/gi,
-        (match, tag, attrs, content) => {
-          // Проверяем, является ли содержимое пустым или содержит только пробелы
-          if (emptyContentPattern.test(content)) {
-            return "";
-          }
-          return match;
-        },
-      );
-
-      // Удаляем самозакрывающиеся пустые теги без атрибутов
-      cleanedText = cleanedText.replace(
-        /<(\w+)([^>]*)\s*\/>/gi,
-        (match, tag, attrs) => {
-          if (!attrs || attrs.trim() === "") {
-            return "";
-          }
-          return match;
-        },
-      );
-    } while (cleanedText !== previousText);
-
-    // Удаляем лишние пробелы и переносы строк между тегами
-    cleanedText = cleanedText.replace(/>\s+</g, "><");
-
-    return cleanedText.trim();
-  }, []);
-
   // Загрузка событий
   useEffect(() => {
     const fetchEvents = async () => {
@@ -144,7 +78,6 @@ const EventPage = ({
         const { dateText, weekday } = formatDate(event.date);
         const time = !!event.time_start ? formatTime(event.time_start) : "";
         const url = formatUrl(event.date, event.id);
-        const text = replaceStyles(eventData.text);
 
         setEvent({
           ...eventData,
@@ -152,12 +85,11 @@ const EventPage = ({
           weekday,
           url,
           time,
-          text,
+          text: eventData.text,
+          canceled: event.geo === CONFIG.CANCELLED_EVENT_TEXT,
           author: {
-            img: "https://nekrasovka.ru/img/1/medium",
-            name: "Дмитрий Круглых",
-            about:
-              "выпускник философского факультета МГУ, автор и ведущий youtube-канала «Философское Мнение»",
+            img: "",
+            text: "<div>Дмитрий Круглых, выпускник философского факультета МГУ, автор и ведущий youtube-канала «Философское Мнение»</div>",
           },
         });
         setError(null);
@@ -189,116 +121,22 @@ const EventPage = ({
       $paddingBottom={paddingBottom}
     >
       <EventPageContainerStyled $maxWidth={maxWidth}>
-        <LeftSectionStyled
-          $isEventCancelled={isEventCancelled}
-          $loading={loading}
-        >
-          {isEventCancelled && (
-            <EventCanceled>
-              Мероприятие отменено. Приносим извинения за возможные неудобства
-            </EventCanceled>
-          )}
-          <DateTimeStyled>
-            <div>
-              <DateTextStyled $loading={loading}>
-                {event.dateText}
-              </DateTextStyled>
-              <WeekdayStyled $loading={loading}>{event.weekday}</WeekdayStyled>
-              <TimeStyled $loading={loading}>{event.time}</TimeStyled>
-            </div>
-            <RestrictionStyled $loading={loading}>
-              {event.restriction}
-            </RestrictionStyled>
-          </DateTimeStyled>
-          {loading ? (
-            <LocationTextStyled $loading={loading}>
-              {event.geo}
-            </LocationTextStyled>
-          ) : (
-            <LocationTextStyled
-              as="a"
-              href={event.geo_link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {event.geo}
-            </LocationTextStyled>
-          )}
-          <EventImageMobileStyled $isEventCancelled={isEventCancelled}>
-            <img
-              src={`//nekrasovka.ru/img/${event.picture_id}/medium`}
-              alt=""
-            />
-          </EventImageMobileStyled>
-          <TextStyled>
-            {isPreview ? (
-              <>
-                <EventTitleStyled $loading={loading}>
-                  {event.title}
-                </EventTitleStyled>
-                <EventTextStyled
-                  $loading={loading}
-                  dangerouslySetInnerHTML={{ __html: event.text }}
-                />
-              </>
-            ) : (
-              <TextConstructor
-                text={event.text}
-                backgroundColor={backgroundColor}
-                blockId={blockId}
-                s
-              />
-            )}
-          </TextStyled>
-          <AuthorStyled>
-            <div>
-              <Image text={`//nekrasovka.ru/img/${event.picture_id}/medium`} />
-            </div>
-            <div>
-              <span>{event.author.name},</span>
-              <span>{event.author.about}</span>
-            </div>
-          </AuthorStyled>
-          <RegistrationStyled>
-            Вход свободный по предварительной <a href="">регистрации</a>
-          </RegistrationStyled>
-        </LeftSectionStyled>
-        <RightSectionStyled $isEventCancelled={isEventCancelled}>
-          <div>
-            <Image text={`//nekrasovka.ru/img/${event.picture_id}/medium`} />
-          </div>
-          {!isEventCancelled && (
-            <div>
-              <div>
-                <RightSectionButtonRegistrationStyled>
-                  Регистрация
-                </RightSectionButtonRegistrationStyled>
-              </div>
-              <div>
-                <RightSectionButtonCalendarStyled>
-                  Добавить в Google.Календарь
-                </RightSectionButtonCalendarStyled>
-                <RightSectionButtonCalendarStyled>
-                  Добавить в Яндекс.Календарь
-                </RightSectionButtonCalendarStyled>
-              </div>
-            </div>
-          )}
-        </RightSectionStyled>
-        {!isEventCancelled && (
-          <ButtonsCalendarContainerMobileStyled>
-            <RightSectionButtonRegistrationStyled>
-              Регистрация
-            </RightSectionButtonRegistrationStyled>
-            <div>
-              <RightSectionButtonCalendarStyled>
-                Добавить в Google.Календарь
-              </RightSectionButtonCalendarStyled>
-              <RightSectionButtonCalendarStyled>
-                Добавить в Яндекс.Календарь
-              </RightSectionButtonCalendarStyled>
-            </div>
-          </ButtonsCalendarContainerMobileStyled>
+        {isPreview ? (
+          <EventPagePreview
+            loading={loading}
+            event={event}
+            backgroundColor={backgroundColor}
+          />
+        ) : (
+          <EventPageConstructor
+            blockId={blockId}
+            event={event}
+            setEvent={setEvent}
+            backgroundColor={backgroundColor}
+            formatDate={formatDate}
+            formatTime={formatTime}
+            formatUrl={formatUrl}
+          />
         )}
       </EventPageContainerStyled>
     </EventPageStyled>

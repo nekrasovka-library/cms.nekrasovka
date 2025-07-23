@@ -124,12 +124,25 @@ const DateTimeStyled = styled.div`
   }
 `;
 
+const EditInputStyled = styled.input`
+  margin: 0;
+  border: none;
+  outline: none;
+`;
+
 const LocationTextStyled = styled.span`
   ${RESPONSIVE_FONT_STYLES}
   ${({ $loading }) =>
     $loading ? SKELETON_BASE_STYLES : "color: inherit; text-decoration: none;"};
   ${SKELETON_PULSE_ANIMATION};
   margin-top: 5px;
+`;
+
+const EditSelectStyled = styled(LocationTextStyled)`
+  padding: 0;
+  outline: none;
+  border: none;
+  width: fit-content;
 `;
 
 const TimeStyled = styled.time`
@@ -397,26 +410,8 @@ const AuthorStyled = styled.div`
   padding: 20px;
   margin-top: 25px;
 
-  div {
-    &:nth-child(1) {
-      img {
-        border-radius: 50%;
-      }
-    }
-
-    &:nth-child(2) {
-      span:first-child {
-        font-weight: 500;
-        margin-right: 5px;
-        white-space: nowrap;
-      }
-    }
-  }
-
   ${DESKTOP_TABLET_MEDIA} {
     column-gap: 20px;
-    font-size: 18px;
-    line-height: 22px;
 
     div:nth-child(1) {
       img {
@@ -428,8 +423,6 @@ const AuthorStyled = styled.div`
 
   ${MOBILE_MEDIA} {
     column-gap: 10px;
-    font-size: 12px;
-    line-height: 15px;
 
     div:nth-child(1) {
       img {
@@ -437,15 +430,6 @@ const AuthorStyled = styled.div`
         height: 40px;
       }
     }
-  }
-`;
-
-const RegistrationStyled = styled.div`
-  font-size: 18px;
-  margin-top: 30px;
-
-  a {
-    color: inherit;
   }
 `;
 
@@ -495,7 +479,6 @@ export {
   RightSectionStyled,
   LeftSectionStyled,
   EventTextStyled,
-  RegistrationStyled,
   EventPageContainerStyled,
   AuthorStyled,
   RightSectionButtonCalendarStyled,
@@ -504,4 +487,6 @@ export {
   EventCanceled,
   EventImageMobileStyled,
   RestrictionStyled,
+  EditInputStyled,
+  EditSelectStyled,
 };

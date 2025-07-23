@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ImagePreview from "./image.preview";
 import ImageConstructor from "./image.constructor";
 import { ImageContainer } from "./image.styles";
@@ -17,6 +17,17 @@ const Image = ({
   paddingBottom,
 }) => {
   const { isPreview } = useSelector((state) => state.preview);
+  const dispatch = useDispatch();
+
+  const updateImage = (newText) => {
+    dispatch({
+      type: "UPDATE_BLOCK",
+      payload: {
+        blockId,
+        text: newText,
+      },
+    });
+  };
 
   return (
     <ImageContainer
@@ -41,6 +52,7 @@ const Image = ({
           height={height}
           borderRadius={borderRadius}
           maxWidth={maxWidth}
+          updateImage={updateImage}
         />
       )}
     </ImageContainer>
