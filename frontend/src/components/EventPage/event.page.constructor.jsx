@@ -133,11 +133,7 @@ const EventPageConstructor = ({
             onChange={handleGeoChange}
           >
             {EVENT_GEO_OPTIONS.map((option, index) => (
-              <option
-                key={index}
-                value={option.value}
-                data-geourl={option.geoUrl}
-              >
+              <option key={index} value={option.value}>
                 {option.label}
               </option>
             ))}
