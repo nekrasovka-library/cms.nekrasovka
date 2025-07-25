@@ -23,6 +23,24 @@ import {
 import ImageConstructor from "../Image/image.constructor";
 import Editor from "../Editor/editor";
 
+const EVENT_GEO_OPTIONS = [
+  {
+    value: "",
+    label: "Выберите событие",
+    geoUrl: null,
+  },
+  {
+    value: "Мастер-класс по вязанию",
+    label: "Мастер-класс по вязанию",
+    geoUrl: "https://yandex.ru/maps/-/C6upr42e",
+  },
+  {
+    value: "Философская лекция",
+    label: "Философская лекция",
+    geoUrl: "https://yandex.ru/maps/-/C6upr42e",
+  },
+];
+
 const EventPageConstructor = ({
   setEvent,
   event,
@@ -47,6 +65,19 @@ const EventPageConstructor = ({
 
   const updateText = (newText) => {
     setEvent({ ...event, text: newText });
+  };
+
+  const handleGeoChange = (e) => {
+    const selectedValue = e.target.value;
+    const selectedOption = EVENT_GEO_OPTIONS.find(
+      (option) => option.value === selectedValue,
+    );
+
+    setEvent({
+      ...event,
+      geo: selectedValue ? selectedValue : event.geo,
+      geo_link: selectedOption ? selectedOption.geoUrl : event.geo_link,
+    });
   };
 
   return (
@@ -99,13 +130,17 @@ const EventPageConstructor = ({
             name="geo"
             value={event.geo}
             onBlur={() => setElementFocused(null)}
-            onChange={(e) => setEvent({ ...event, geo: e.target.value })}
+            onChange={handleGeoChange}
           >
-            <option value="">Выберите событие</option>
-            <option value="Мастер-класс по вязанию">
-              Мастер-класс по вязанию
-            </option>
-            <option value="Философская лекция">Философская лекция</option>
+            {EVENT_GEO_OPTIONS.map((option, index) => (
+              <option
+                key={index}
+                value={option.value}
+                data-geourl={option.geoUrl}
+              >
+                {option.label}
+              </option>
+            ))}
           </EditSelectStyled>
         ) : (
           <LocationTextStyled onClick={() => setElementFocused("geo")}>
