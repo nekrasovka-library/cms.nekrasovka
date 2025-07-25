@@ -21,6 +21,7 @@ const TextConstructor = ({
 
   return (
     <Editor
+      type="text"
       text={text}
       blockId={blockId}
       updateText={updateText}

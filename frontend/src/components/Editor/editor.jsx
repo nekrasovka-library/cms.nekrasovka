@@ -8,6 +8,7 @@ import "suneditor/dist/css/suneditor.min.css";
 
 const Editor = ({
   text,
+  type,
   blockId,
   backgroundColor,
   tracks,
@@ -41,7 +42,7 @@ const Editor = ({
   };
 
   const handleEditorFocused = (index) => {
-    dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}` });
+    dispatch({ type: "CHANGE_EDITOR", payload: `${blockId}_${type}_${index}` });
     setBlockFocused(index);
   };
 
@@ -88,12 +89,13 @@ const Editor = ({
   }, [tracks, isProjectLoaded]);
 
   const items = Array.isArray(text) ? text : [text];
-
   return (
     <EditorContainer $gap={gap} $tracks={tracks} $maxWidth={maxWidth}>
       {items.map((item, index) => {
+        console.log("❗", `${blockId}_${type}_${index}`);
         const isEditorFocused =
-          editorFocused === `${blockId}` && blockFocused === index;
+          editorFocused === `${blockId}_${type}_${index}` &&
+          blockFocused === index;
 
         return (
           <EditorComponent
@@ -107,6 +109,7 @@ const Editor = ({
               setContents={item}
               onClick={() => handleEditorFocused(index)}
               onInput={handleContentChange}
+              onBlur={() => dispatch({ type: "RESET_EDITOR" })}
               setOptions={options}
             />
           </EditorComponent>

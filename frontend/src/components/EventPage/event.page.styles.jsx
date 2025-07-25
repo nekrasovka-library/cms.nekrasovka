@@ -222,6 +222,7 @@ const TextStyled = styled.div`
 
 const EventPageContainerStyled = styled.div`
   max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
+  width: 100%;
   margin: 0 auto;
 
   ${DESKTOP_TABLET_MEDIA} {

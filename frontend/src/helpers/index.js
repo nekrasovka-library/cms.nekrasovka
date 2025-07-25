@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { MONTHS, WEEKDAYS } from "../components/EventPage/event.page.constants";
 
 const useIsMobile = (breakpoint = 700) => {
   // Если "window" недоступен (SSR), считается, что ширина неизвестна. Начальное значение false.
@@ -155,9 +156,32 @@ const generateUniqueId = () => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = MONTHS[date.getMonth()];
+  const weekday = WEEKDAYS[date.getDay()];
+  return { dateText: `${day} ${month}`, weekday };
+};
+
+const formatTime = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleTimeString("ru-RU", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
+const formatUrl = (dateString, id) => {
+  return `afisha/${id}`;
+};
+
 export {
   useIsMobile,
   calculateBlockWidth,
   getComponentParams,
   generateUniqueId,
+  formatDate,
+  formatTime,
+  formatUrl,
 };

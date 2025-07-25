@@ -1,6 +1,6 @@
 import React from "react";
 import Block from "../Block/block.jsx";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ConstructorContainer } from "./constructor.styles.js";
 import Image from "../../components/Image/image";
 import Carousel from "../../components/Carousel/carousel.jsx";
@@ -17,49 +17,9 @@ import { useParams } from "react-router";
 import EventPage from "../../components/EventPage/event.page";
 
 const Constructor = () => {
-  const dispatch = useDispatch();
   const { blocks, totalBlocks } = useSelector((state) => state.blocks);
   const hasBlocks = totalBlocks > 0;
   const { pageId } = useParams();
-
-  const EXCLUDED_CLASSES = [
-    "sun-editor",
-    "se-wrapper",
-    "se-container",
-    "se-toolbar",
-    "se-editing-area",
-  ];
-
-  const isExcludedElement = (element) => {
-    if (!element) return false;
-
-    // Проверяем текущий элемент и его родителей
-    let currentElement = element;
-    while (currentElement && currentElement !== document.body) {
-      if (currentElement.classList) {
-        const hasExcludedClass = EXCLUDED_CLASSES.some(
-          (excludedClass) =>
-            currentElement.classList.contains(excludedClass) ||
-            Array.from(currentElement.classList).some((cls) =>
-              cls.includes(excludedClass),
-            ),
-        );
-
-        if (hasExcludedClass) {
-          return true;
-        }
-      }
-      currentElement = currentElement.parentElement;
-    }
-
-    return false;
-  };
-
-  const handleContainerClick = ({ target }) => {
-    if (!isExcludedElement(target)) {
-      dispatch({ type: "RESET_EDITOR" });
-    }
-  };
 
   const CONSTRUCTOR_COMPONENTS = {
     text: Text,
@@ -77,7 +37,7 @@ const Constructor = () => {
   return (
     <AnimatePresence mode="wait">
       <Transition key={pageId}>
-        <ConstructorContainer onClick={handleContainerClick}>
+        <ConstructorContainer>
           {hasBlocks ? (
             blocks.map(({ id, items, styles }, blockIndex) => (
               <Block

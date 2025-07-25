@@ -42,18 +42,7 @@ router.get("/:projectId", (req, res) => {
 
     return res.json({
       success: true,
-      data: {
-        ...project,
-        pages: project.pages.map(
-          ({ name, pageId, position, projectId, url }) => ({
-            name,
-            pageId,
-            position,
-            projectId,
-            url,
-          }),
-        ),
-      },
+      data: project,
     });
   } catch (error) {
     return handleApiError(res, error);

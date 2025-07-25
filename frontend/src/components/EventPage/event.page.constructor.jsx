@@ -26,7 +26,7 @@ import Editor from "../Editor/editor";
 const EVENT_GEO_OPTIONS = [
   {
     value: "",
-    label: "Выберите событие",
+    label: "Выберите местоположение",
     geoUrl: null,
   },
   {
@@ -156,6 +156,7 @@ const EventPageConstructor = ({
         <TextStyled>
           <Editor
             text={event.text}
+            type="text"
             backgroundColor={backgroundColor}
             blockId={blockId}
             updateText={updateText}
@@ -172,6 +173,8 @@ const EventPageConstructor = ({
           />
           <Editor
             text={event.author.text}
+            type="author"
+            backgroundColor={"#ffff"}
             blockId={blockId}
             updateText={updateAuthor}
           />

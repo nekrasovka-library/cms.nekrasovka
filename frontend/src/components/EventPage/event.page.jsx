@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { CONFIG, MONTHS, WEEKDAYS } from "./event.page.constants";
+import { useDispatch, useSelector } from "react-redux";
+import { CONFIG } from "./event.page.constants";
 import {
   AfishaContainerStyled,
   ErrorMessageStyled,
@@ -9,72 +9,52 @@ import {
 } from "./event.page.styles";
 import EventPagePreview from "./event.page.preview";
 import EventPageConstructor from "./event.page.constructor";
+import { useParams } from "react-router";
+import {
+  calculateBlockWidth,
+  formatDate,
+  formatTime,
+  formatUrl,
+} from "../../helpers";
 
-const EventPage = ({
-  backgroundColor,
-  maxWidth,
-  paddingTop,
-  paddingBottom,
-  blockId,
-}) => {
+const EventPage = () => {
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(null);
   const [event, setEvent] = useState({
     id: 1,
-    date: "2025-07-20 00:00:00",
-    title: "«Бабушкины квадраты». Мастер-класс по вязанию",
-    text: '<div><p>Многоцветные бабушкины квадраты — это эффективный способ использовать небольшое количество пряжи, оставшейся от других проектов, а базовые мотивы бабушкиных квадратов не требуют особых навыков для выполнения.</p><p>Название технологии отсылает к изделиям пожилых мастериц, но не всё так просто!</p><p>Модели одежды с использованием бабушкиных квадратов не раз представлялись на неделях высокой моды, печатались в глянцевых журналах и циркулировали в массмаркетах. А квадраты-модули соединяются в юбки, платья, гольфы, пледы и даже в чехлы для табуреток!</p><p>Приходите на мастер-класс, чтобы научиться премудростям техники и хорошо провести время. Чтобы вам было комфортно, желательно иметь хотя бы начальный уровень навыков вязания.</p><p>Если у вас есть крючки и вязаные вещи, которые не жалко распустить, — приносите!</p><p>Ведущая мастер-класса — Наталья Сенаторова, эксперт Санкт-Петербургского культурного форума, основательница бренда вязаных изделий «Блаж Борисовны».<br></p><p class="">Пожалуйста, не забудьте зарегистрироваться на встречу. В случае переноса или отмены мастер-класса мы отправим вам письмо на указанный электронный адрес.</p></div>',
-    geo: "Аудитория 502 / 5 этаж",
+    date: "",
+    text: "<div>Текстовый блок</div>",
+    geo: "Выберите местоположение",
     price: 0,
-    restriction: "12+",
+    restriction: "0+",
     og_image: null,
     picture_id: null,
-    dateText: "2025-07-20",
-    weekday: "2025-07-20",
-    time: "00:00",
+    dateText: formatDate(new Date()).dateText,
+    weekday: formatDate(new Date()).weekday,
+    time: formatTime(new Date()),
     canceled: false,
     author: {
-      img: "https://nekrasovka.ru/img/1/medium",
-      text: "<div>Дмитрий Круглых, выпускник философского факультета МГУ, автор и ведущий youtube-канала «Философское Мнение»</div>",
+      img: "",
+      text: "<div>Текстовый блок</div>",
     },
   });
   const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const { eventId, pageId } = useParams();
   const { isPreview } = useSelector((state) => state.preview);
+  const { isPageLoaded, pageData } = useSelector((state) => state.page);
 
-  // Утилиты для форматирования
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = MONTHS[date.getMonth()];
-    const weekday = WEEKDAYS[date.getDay()];
-    return { dateText: `${day} ${month}`, weekday };
-  };
-
-  const formatTime = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleTimeString("ru-RU", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
-  const formatUrl = (dateString, id) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    return `afisha/${day}-${month}-${year}/${id}`;
-  };
-
-  const fetchEvents = async () => {
+  const fetchEvents = async (id) => {
     try {
       const response = await fetch(CONFIG.API_URL);
       const data = await response.json();
-      const eventData = { ...data.response.data.calendars[1] };
+      const eventData = data.response.data.calendars.find(
+        (calendar) => calendar.id === +id,
+      );
 
       const { dateText, weekday } = formatDate(eventData.date); // Используем eventData.date
-      const time = !!eventData.time_start
-        ? formatTime(eventData.time_start)
-        : "";
+      const time = formatTime(eventData.time_start);
       const url = formatUrl(eventData.date, eventData.id);
 
       setEvent({
@@ -87,7 +67,7 @@ const EventPage = ({
         canceled: eventData.geo === CONFIG.CANCELLED_EVENT_TEXT,
         author: {
           img: "",
-          text: "<div>Дмитрий Круглых, выпускник философского факультета МГУ, автор и ведущий youtube-канала «Философское Мнение»</div>",
+          text: event.author.text,
         },
       });
       setError(null);
@@ -101,8 +81,26 @@ const EventPage = ({
 
   // Загрузка событий
   useEffect(() => {
-    fetchEvents();
-  }, []);
+    if (!!eventId) fetchEvents(eventId);
+  }, [eventId]);
+
+  // Обработка загруженных данных страницы
+  useEffect(() => {
+    if (isPageLoaded) {
+      const { id, styles } = pageData.blocks.find((block) =>
+        block.items.find((item) => item.type === "afishaEvent"),
+      );
+
+      setLoaded(true);
+      setPage({
+        blockId: id,
+        backgroundColor: styles.backgroundColor,
+        paddingTop: styles.paddingTop,
+        paddingBottom: styles.paddingBottom,
+        maxWidth: calculateBlockWidth(styles.maxWidth),
+      });
+    } else dispatch({ type: "GET_PROJECT_PAGE_REQUEST", pageId });
+  }, [isPageLoaded, pageId, dispatch]);
 
   if (error) {
     return (
@@ -113,29 +111,31 @@ const EventPage = ({
   }
 
   return (
-    <EventPageStyled
-      $backgroundColor={backgroundColor}
-      $paddingTop={paddingTop}
-      $paddingBottom={paddingBottom}
-    >
-      <EventPageContainerStyled $maxWidth={maxWidth}>
-        {isPreview ? (
-          <EventPagePreview loading={loading} event={event} />
-        ) : (
-          !loading && (
-            <EventPageConstructor
-              blockId={blockId}
-              event={event}
-              setEvent={setEvent}
-              backgroundColor={backgroundColor}
-              formatDate={formatDate}
-              formatTime={formatTime}
-              formatUrl={formatUrl}
-            />
-          )
-        )}
-      </EventPageContainerStyled>
-    </EventPageStyled>
+    loaded && (
+      <EventPageStyled
+        $backgroundColor={page.backgroundColor}
+        $paddingTop={page.paddingTop}
+        $paddingBottom={page.paddingBottom}
+      >
+        <EventPageContainerStyled $maxWidth={page.maxWidth}>
+          {isPreview ? (
+            <EventPagePreview loading={loading} event={event} />
+          ) : (
+            loaded && (
+              <EventPageConstructor
+                blockId={page.blockId}
+                event={event}
+                setEvent={setEvent}
+                backgroundColor={page.backgroundColor}
+                formatDate={formatDate}
+                formatTime={formatTime}
+                formatUrl={formatUrl}
+              />
+            )
+          )}
+        </EventPageContainerStyled>
+      </EventPageStyled>
+    )
   );
 };
 

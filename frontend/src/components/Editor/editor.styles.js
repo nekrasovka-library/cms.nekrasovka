@@ -10,6 +10,7 @@ const TextComponent = styled.div`
 const EditorContainer = styled(TextComponent)`
   max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
   margin: 0 auto;
+  width: 100%;
 
   .sun-editor,
   .se-submenu {

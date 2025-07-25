@@ -91,11 +91,7 @@ const AfishaMain = ({
   }, []);
 
   const formatUrl = useCallback((dateString, id) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    return `afisha/${day}-${month}-${year}/${id}`;
+    return `afisha/${id}`;
   }, []);
 
   const createBackgroundImageUrl = useCallback((pictureId) => {
