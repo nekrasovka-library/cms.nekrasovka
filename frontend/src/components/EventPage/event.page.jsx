@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { CONFIG, MONTHS, WEEKDAYS } from "./event.page.constants";
 import {
   AfishaContainerStyled,
-  AfishaWrapperStyled,
   ErrorMessageStyled,
   EventPageContainerStyled,
   EventPageStyled,
@@ -42,74 +41,73 @@ const EventPage = ({
   const { isPreview } = useSelector((state) => state.preview);
 
   // Утилиты для форматирования
-  const formatDate = useCallback((dateString) => {
+  const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
     const month = MONTHS[date.getMonth()];
     const weekday = WEEKDAYS[date.getDay()];
     return { dateText: `${day} ${month}`, weekday };
-  }, []);
+  };
 
-  const formatTime = useCallback((dateString) => {
+  const formatTime = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleTimeString("ru-RU", {
       hour: "2-digit",
       minute: "2-digit",
     });
-  }, []);
+  };
 
-  const formatUrl = useCallback((dateString, id) => {
+  const formatUrl = (dateString, id) => {
     const date = new Date(dateString);
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
     return `afisha/${day}-${month}-${year}/${id}`;
-  }, []);
+  };
+
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch(CONFIG.API_URL);
+      const data = await response.json();
+      const eventData = { ...data.response.data.calendars[1] };
+
+      const { dateText, weekday } = formatDate(eventData.date); // Используем eventData.date
+      const time = !!eventData.time_start
+        ? formatTime(eventData.time_start)
+        : "";
+      const url = formatUrl(eventData.date, eventData.id);
+
+      setEvent({
+        ...eventData,
+        dateText,
+        weekday,
+        url,
+        time,
+        text: eventData.text,
+        canceled: eventData.geo === CONFIG.CANCELLED_EVENT_TEXT,
+        author: {
+          img: "",
+          text: "<div>Дмитрий Круглых, выпускник философского факультета МГУ, автор и ведущий youtube-канала «Философское Мнение»</div>",
+        },
+      });
+      setError(null);
+    } catch (error) {
+      console.error(`${CONFIG.ERROR_MESSAGE}:`, error);
+      setError(CONFIG.ERROR_MESSAGE);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Загрузка событий
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(CONFIG.API_URL);
-        const data = await response.json();
-        const eventData = { ...data.response.data.calendars[1] };
-
-        const { dateText, weekday } = formatDate(event.date);
-        const time = !!event.time_start ? formatTime(event.time_start) : "";
-        const url = formatUrl(event.date, event.id);
-
-        setEvent({
-          ...eventData,
-          dateText,
-          weekday,
-          url,
-          time,
-          text: eventData.text,
-          canceled: event.geo === CONFIG.CANCELLED_EVENT_TEXT,
-          author: {
-            img: "",
-            text: "<div>Дмитрий Круглых, выпускник философского факультета МГУ, автор и ведущий youtube-канала «Философское Мнение»</div>",
-          },
-        });
-        setError(null);
-      } catch (error) {
-        console.error(`${CONFIG.ERROR_MESSAGE}:`, error);
-        setError(CONFIG.ERROR_MESSAGE);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchEvents();
   }, []);
 
   if (error) {
     return (
       <AfishaContainerStyled>
-        <AfishaWrapperStyled>
-          <ErrorMessageStyled>{error}</ErrorMessageStyled>
-        </AfishaWrapperStyled>
+        <ErrorMessageStyled>{error}</ErrorMessageStyled>
       </AfishaContainerStyled>
     );
   }
@@ -122,21 +120,19 @@ const EventPage = ({
     >
       <EventPageContainerStyled $maxWidth={maxWidth}>
         {isPreview ? (
-          <EventPagePreview
-            loading={loading}
-            event={event}
-            backgroundColor={backgroundColor}
-          />
+          <EventPagePreview loading={loading} event={event} />
         ) : (
-          <EventPageConstructor
-            blockId={blockId}
-            event={event}
-            setEvent={setEvent}
-            backgroundColor={backgroundColor}
-            formatDate={formatDate}
-            formatTime={formatTime}
-            formatUrl={formatUrl}
-          />
+          !loading && (
+            <EventPageConstructor
+              blockId={blockId}
+              event={event}
+              setEvent={setEvent}
+              backgroundColor={backgroundColor}
+              formatDate={formatDate}
+              formatTime={formatTime}
+              formatUrl={formatUrl}
+            />
+          )
         )}
       </EventPageContainerStyled>
     </EventPageStyled>

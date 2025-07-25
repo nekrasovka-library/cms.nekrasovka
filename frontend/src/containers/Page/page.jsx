@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 import Constructor from "../Constructor/constructor.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -23,9 +23,9 @@ const Page = () => {
   // Ref для хранения предыдущего pageId
   const prevPageIdRef = useRef(null);
 
-  const togglePreview = useCallback(() => {
+  const togglePreview = () => {
     dispatch({ type: TOGGLE_PREVIEW });
-  }, [dispatch]);
+  };
 
   // Загрузка данных страницы только если pageId изменился
   useEffect(() => {

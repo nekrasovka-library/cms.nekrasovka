@@ -78,6 +78,7 @@ router.put("/create", (req, res) => {
       fontFamily: "Roboto",
       backgroundColor: "#fff",
       color: "#000",
+      routes: [],
     };
 
     projects.push(newProject);
@@ -100,6 +101,7 @@ router.post("/update", (req, res) => {
     name,
     href,
     projectId,
+    routes,
   } = req.body;
 
   try {
@@ -128,6 +130,7 @@ router.post("/update", (req, res) => {
           fontFamily: fontFamily || project.fontFamily,
           backgroundColor: backgroundColor || project.backgroundColor,
           color: color || project.color,
+          routes: routes || project.routes,
         };
       } else return project;
     });

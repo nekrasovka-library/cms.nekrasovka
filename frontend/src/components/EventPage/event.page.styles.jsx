@@ -93,11 +93,6 @@ const AfishaContainerStyled = styled.div`
   margin: 0 auto;
 `;
 
-const AfishaWrapperStyled = styled.div`
-  max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
-  margin: 0 auto;
-`;
-
 const ErrorMessageStyled = styled.div`
   text-align: center;
   padding: ${AFISHA_THEME.spacingXxxl};
@@ -124,10 +119,53 @@ const DateTimeStyled = styled.div`
   }
 `;
 
+const RestrictionStyled = styled.div`
+  width: 35px;
+  
+  ${DESKTOP_TABLET_MEDIA} {
+    font-size: 18px;
+
+
+  ${MOBILE_MEDIA} {
+    font-size: 12px;
+  }
+
+  ${({ $loading }) => $loading && SKELETON_BASE_STYLES};
+  ${SKELETON_PULSE_ANIMATION};
+`;
+
+const EditInputComponentStyled = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
+
 const EditInputStyled = styled.input`
   margin: 0;
   border: none;
   outline: none;
+  padding: 0;
+`;
+
+const EditInputRestrictionStyled = styled(EditInputStyled)`
+  width: 35px;
+
+  ${DESKTOP_TABLET_MEDIA} {
+    font-size: 18px;
+  }
+
+  ${MOBILE_MEDIA} {
+    font-size: 12px;
+  }
+`;
+
+const EditInputDateStyled = styled(EditInputStyled)`
+  ${DESKTOP_TABLET_MEDIA} {
+    font-size: 24px;
+  }
+
+  ${MOBILE_MEDIA} {
+    font-size: 14px;
+  }
 `;
 
 const LocationTextStyled = styled.span`
@@ -138,11 +176,13 @@ const LocationTextStyled = styled.span`
   margin-top: 5px;
 `;
 
-const EditSelectStyled = styled(LocationTextStyled)`
+const EditSelectStyled = styled.select`
   padding: 0;
   outline: none;
   border: none;
   width: fit-content;
+  margin-top: 5px;
+  background-color: rgb(255, 255, 255);
 `;
 
 const TimeStyled = styled.time`
@@ -168,20 +208,6 @@ const EventTitleStyled = styled.span`
   ${MOBILE_MEDIA} {
     font-size: 16px;
     line-height: 17px;
-  }
-
-  ${({ $loading }) => $loading && SKELETON_BASE_STYLES};
-  ${SKELETON_PULSE_ANIMATION};
-`;
-
-const RestrictionStyled = styled.time`
-
-  ${DESKTOP_TABLET_MEDIA} {
-    font-size: 18px;
-
-
-  ${MOBILE_MEDIA} {
-    font-size: 12px;
   }
 
   ${({ $loading }) => $loading && SKELETON_BASE_STYLES};
@@ -376,8 +402,11 @@ const LeftSectionStyled = styled.section`
   display: flex;
   flex-direction: column;
 
-  ${({ $isEventCancelled, $loading }) =>
-    $isEventCancelled && !$loading && `* {color: #777777;}`};
+  input,
+  select {
+    font-family: Roboto, sans-serif;
+    line-height: 1;
+  }
 `;
 
 const EventCanceled = styled.div`
@@ -466,7 +495,6 @@ const EventTextStyled = styled.div`
 
 export {
   AfishaContainerStyled,
-  AfishaWrapperStyled,
   ErrorMessageStyled,
   DateTextStyled,
   DateTimeStyled,
@@ -489,4 +517,7 @@ export {
   RestrictionStyled,
   EditInputStyled,
   EditSelectStyled,
+  EditInputDateStyled,
+  EditInputRestrictionStyled,
+  EditInputComponentStyled,
 };

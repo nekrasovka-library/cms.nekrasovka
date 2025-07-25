@@ -69,10 +69,15 @@ const Editor = ({
   useEffect(() => {
     if (isContentChanged && blockFocused !== null) {
       setIsContentChanged(false);
-      const newContents = [...text];
-      newContents[blockFocused] = content;
 
-      updateText(newContents);
+      if (Array.isArray(text)) {
+        const newContents = [...text];
+        newContents[blockFocused] = content;
+
+        updateText(newContents);
+      } else {
+        updateText(content);
+      }
     }
   }, [isContentChanged, blockFocused]);
 
@@ -101,7 +106,7 @@ const Editor = ({
               lang={ru}
               setContents={item}
               onClick={() => handleEditorFocused(index)}
-              onChange={handleContentChange}
+              onInput={handleContentChange}
               setOptions={options}
             />
           </EditorComponent>

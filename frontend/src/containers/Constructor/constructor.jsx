@@ -22,18 +22,41 @@ const Constructor = () => {
   const hasBlocks = totalBlocks > 0;
   const { pageId } = useParams();
 
-  const EXCLUDED_CLASSES = ["se-container", "se-btn-module", "se-wrapper"];
+  const EXCLUDED_CLASSES = [
+    "sun-editor",
+    "se-wrapper",
+    "se-container",
+    "se-toolbar",
+    "se-editing-area",
+  ];
 
-  const isExcludedClass = (classList) => {
-    return EXCLUDED_CLASSES.some((excludedClass) =>
-      classList.value.includes(excludedClass),
-    );
+  const isExcludedElement = (element) => {
+    if (!element) return false;
+
+    // Проверяем текущий элемент и его родителей
+    let currentElement = element;
+    while (currentElement && currentElement !== document.body) {
+      if (currentElement.classList) {
+        const hasExcludedClass = EXCLUDED_CLASSES.some(
+          (excludedClass) =>
+            currentElement.classList.contains(excludedClass) ||
+            Array.from(currentElement.classList).some((cls) =>
+              cls.includes(excludedClass),
+            ),
+        );
+
+        if (hasExcludedClass) {
+          return true;
+        }
+      }
+      currentElement = currentElement.parentElement;
+    }
+
+    return false;
   };
 
   const handleContainerClick = ({ target }) => {
-    const containerElement = target.parentNode?.parentNode?.parentNode;
-
-    if (!isExcludedClass(containerElement.classList)) {
+    if (!isExcludedElement(target)) {
       dispatch({ type: "RESET_EDITOR" });
     }
   };
