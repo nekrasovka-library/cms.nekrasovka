@@ -92,7 +92,6 @@ const Editor = ({
   return (
     <EditorContainer $gap={gap} $tracks={tracks} $maxWidth={maxWidth}>
       {items.map((item, index) => {
-        console.log("❗", `${blockId}_${type}_${index}`);
         const isEditorFocused =
           editorFocused === `${blockId}_${type}_${index}` &&
           blockFocused === index;

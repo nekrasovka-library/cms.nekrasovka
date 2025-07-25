@@ -11,7 +11,7 @@ const ImageContainer = styled.div`
 const ImageComponent = styled.div`
   display: flex;
   max-width: ${({ $maxWidth }) => ($maxWidth ? `${$maxWidth}px` : "100%")};
-  margin: 0 auto;
+  ${({ $maxWidth }) => $maxWidth && `margin: 0 auto;`};
 
   img {
     width: 100%;

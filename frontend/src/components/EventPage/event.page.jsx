@@ -18,19 +18,20 @@ import {
 } from "../../helpers";
 
 const EventPage = () => {
+  const today = new Date();
   const dispatch = useDispatch();
   const [page, setPage] = useState(null);
   const [event, setEvent] = useState({
     id: 1,
-    date: "",
+    date: today,
     text: "<div>Текстовый блок</div>",
     geo: "Выберите местоположение",
     price: 0,
     restriction: "0+",
     og_image: null,
     picture_id: null,
-    dateText: formatDate(new Date()).dateText,
-    weekday: formatDate(new Date()).weekday,
+    dateText: formatDate(today).dateText,
+    weekday: formatDate(today).weekday,
     time: formatTime(new Date()),
     canceled: false,
     author: {
@@ -38,7 +39,7 @@ const EventPage = () => {
       text: "<div>Текстовый блок</div>",
     },
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
   const { eventId, pageId } = useParams();
